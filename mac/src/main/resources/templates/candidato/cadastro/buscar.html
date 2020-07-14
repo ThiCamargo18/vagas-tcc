@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MAC - Barbosa</title>
+
+    <!-- Custom fonts for this template-->
+    <link rel="stylesheet" type="text/css" href="/vendor/fontawesome-free/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">MAC barbosa</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Inicio</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Navegações
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+                <span>Vagas</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="buttons.html">Todas</a>
+                    <a class="collapse-item" href="cards.html">Filtrar</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <span>Entrevista</span>
+            </a>
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="utilities-color.html">Agendada</a>
+                    <a class="collapse-item" href="utilities-color.html">Feedback</a>
+                </div>
+            </div>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Outros
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link" href="/cadastro/gerenciar">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Meu cadastro</span></a>
+        </li>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <i class="fa fa-clipboard" aria-hidden="true"></i>
+                <span>Anexo Documentos</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <!-- Topbar Search -->
+                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar vaga..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
+
+                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                    <li class="nav-item dropdown no-arrow d-sm-none">
+                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                            <form class="form-inline mr-auto w-100 navbar-search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Alerts -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell fa-fw"></i>
+                            <!-- Counter - Alerts -->
+                            <span class="badge badge-danger badge-counter">3+</span>
+                        </a>
+                        <!-- Dropdown - Alerts -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                            <h6 class="dropdown-header">
+                                Alerts Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fas fa-file-alt text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 12, 2019</div>
+                                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-success">
+                                        <i class="fas fa-donate text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 7, 2019</div>
+                                    $290.29 has been deposited into your account!
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-warning">
+                                        <i class="fas fa-exclamation-triangle text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="small text-gray-500">December 2, 2019</div>
+                                    Spending Alert: We've noticed unusually high spending for your account.
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Messages -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-envelope fa-fw"></i>
+                            <!-- Counter - Messages -->
+                            <span class="badge badge-danger badge-counter">8</span>
+                        </a>
+                        <!-- Dropdown - Messages -->
+                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                            <h6 class="dropdown-header">
+                                Message Center
+                            </h6>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
+                                    <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
+                                    <div class="status-indicator"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
+                                    <div class="small text-gray-500">Jae Chun · 1d</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
+                                    <div class="status-indicator bg-warning"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
+                                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-list-image mr-3">
+                                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div>
+                                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
+                                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                </div>
+                            </a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                        </div>
+                    </li>
+
+                    <div class="topbar-divider d-none d-sm-block"></div>
+
+                    <!-- Nav Item - User Information -->
+                    <li class="nav-item dropdown no-arrow">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small" th:utext="${session.usuarioLogado.nome}"></span>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Perfil
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Configurações
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Sair
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </nav>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <div class="container-fluid">
+                <h1 class="mt-4">Cadastro</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Dados pessoais</li>
+                    <div class="col">
+                        <i type="button" class="editarVerde" id="enableDadosPessoais"></i>
+                        <text class="card-text" id="labelPessoais">Editar</text>
+                    </div>
+                </ol>
+                <form class="form-row" action="/dadosPessoais/atualizar" method="POST">
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Nome Completo </label>
+                        <input type="text" class="form-control" th:field="*{dadosPessoais.nomeCompleto}" id="nome" value="" required disabled>
+                        <div class="valid-feedback">
+                            Ok!
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationServer04">Nome mãe</label>
+                        <input type="text" class="form-control" th:field="*{dadosPessoais.nomeMae}" id="nomeMae" required disabled>
+                        <div class="invalid-feedback">
+                            Nome da mãe obrigatório.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="validationServer04">Nome social</label>
+                        <input type="text" class="form-control" th:field="*{dadosPessoais.nomeSocial}" id="nomeSocial" disabled>
+                        <div class="invalid-feedback">
+                            CPF não encontrado! Cadastre o cliente antes, ou digite novamente.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Sexo</label>
+                        <select class="form-control" th:field="*{dadosPessoais.sexo}" id="sexo" required disabled>
+                            <option selected disabled value="">Escolher...</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Feminino">Feminino</option>
+                            <option value="Prefiro não declarar">Prefiro não declarar</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione o sexo.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Estado civil</label>
+                        <select class="form-control" th:field="*{dadosPessoais.estadoCivil}" id="estadoCivil" required disabled>
+                            <option selected disabled value="">Escolher...</option>
+                            <option value="Consultando Orçamento">Solteiro</option>
+                            <option value="Aguardando Peças">Casado</option>
+                            <option value="Reparando Veículo">Divorciado</option>
+                            <option value="Finalizado">Separado</option>
+                            <option value="Finalizado">União estável</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione o estado civil.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer01">Idade</label>
+                        <input type="text" class="form-control" th:field="*{dadosPessoais.idade}" id="idade" required disabled>
+                        <div class="invalid-feedback">
+                            Necessário selecionar a idade.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Naturalidade</label>
+                        <input type="text" class="form-control" th:field="*{dadosPessoais.naturalidade}" id="naturalidade" required disabled>
+                        <div class="invalid-feedback">
+                            Naturalidade obrigatório.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Pretensão salarial</label>
+                        <input type="text" class="form-control" onkeypress="mascarar(this,moeda)" placeholder="0.000" th:field="*{dadosPessoais.pretensaoSalarial}" id="pretensaoSalarial" required disabled>
+                        <div class="invalid-feedback">
+                            Pretensão salarial obrigatória.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Categoria</label>
+                        <select class="form-control" th:field="*{dadosPessoais.categoria}" id="categoria" required disabled>
+                            <option selected disabled value="">Escolher...</option>
+                            <option value="CLT">CLT</option>
+                            <option value="ESTAGIO">ESTAGIO</option>
+                            <option value="JOVEMAPRENDIZ">JOVEM APRENDIZ</option>
+                            <option value="PCD">PCD</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a categoria.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Telefone Fixo</label>
+                        <input type="text" class="form-control" th:field="*{dadosPessoais.telefone}" placeholder="(00) 00000-0000" maxlength="15" onkeypress="mascarar(this,mascaraTel)" id="telefone" disabled>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Celular</label>
+                        <input type="text" class="form-control" placeholder="(00) 000000-0000" maxlength="15" onkeypress="mascarar(this,mascaraTel)" th:field="*{dadosPessoais.celular}" id="celular" required disabled>
+                        <div class="invalid-feedback">
+                            Celular obrigatório, digite uma valor.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Data Nascimento</label>
+                        <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" th:field="*{dadosPessoais.dataNascimento}" id="dataNascimento" required disabled>
+                        <div class="invalid-feedback">
+                            Data de nascimento obrigatório, digite uma valor.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Condução</label>
+                        <select class="form-control" th:field="*{dadosPessoais.tipoConducao}" id="tipoConducao" required disabled>
+                            <option selected disabled value="">Escolher...</option>
+                            <option value="Particular">Particular</option>
+                            <option value="Ônibus">Ônibus</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a condução.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Possui experiência?</label>
+                        <select class="form-control" th:field="*{dadosPessoais.experiencia}" id="experiencia" required disabled>
+                            <option selected disabled value="">Escolher...</option>
+                            <option value="SIM">SIM</option>
+                            <option value="NAO">NÃO</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a experiência.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Formação</label>
+                        <select class="form-control" th:field="*{dadosPessoais.formacao}" id="formacao" required disabled>
+                            <option selected disabled value="">Escolher...</option>
+                            <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
+                            <option value="Ensino Médio Completo">Ensino Médio Completo</option>
+                            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                            <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                            <option value="Pós-graduação Incompleta">Pós-graduação Incompleta</option>
+                            <option value="Pós-graduação Completa">Pós-graduação Completa</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a formação.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Curso </label>
+                        <input type="text" class="form-control" th:field="*{dadosPessoais.curso}" id="curso" value="" required = false disabled>
+                        <div class="invalid-feedback">
+                            Por favor, selecione o curso.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">E-mail </label>
+                        <input type="text" class="form-control" th:field="*{dadosPessoais.email}" id="email" value="" required = false disabled>
+                        <div class="invalid-feedback">
+                            Por favor, selecione o e-mail.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label >Cidade: </label>
+                        <select class="form-control" th:field="*{dadosPessoais.cidade}" id="cidades" required disabled>
+                            <option selected disabled value="">Selecione...</option>
+                            <option value="Campinas">Campinas</option>
+                            <option value="Hortolandia">Hortolândia</option>
+                            <option value="Sumare">Sumaré</option>
+                            <option value="Valinhos">Valinhos</option>
+                            <option value="Vinhedo">Vinhedo</option>
+                            <option value="Louveira">Louveira</option>
+                            <option value="Monte-mor">Monte-mor</option>
+                            <option value="Paulinia">Paulínia</option>
+                            <option value="Indaiatuba">Indaiatuba</option>
+                        </select>
+                    </div>
+                    <div id="divDadosPessoais" style="display: none;">
+                        <button type="submit" class="btn btn-success" id="botaoAtualizar">
+                            Atualizar
+                        </button>
+                    </div>
+                </form>
+                <div class="container-fluid">
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Dados adicionais</li>
+                        <div class="col">
+                            <i type="button" class="editarVerde" id="enableDadosAdicionais"></i>
+                            <text class="card-text" id="labelAdicionais">Editar</text>
+                        </div>
+                    </ol>
+                </div>
+                <form class="form-row" action="/dadosAdicionais/atualizar" method="POST">
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">CEP</label>
+                        <input type="text" class="form-control" th:field="*{dadosAdicionais.cep}" onkeypress="mascarar(this,cepMask)" placeholder="00000-000" id="cep" required disabled>
+                        <div class="invalid-feedback">
+                            CEP obrigatório, digite uma valor.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Estado</label>
+                        <input type="text" class="form-control" th:field="*{dadosAdicionais.estado}" id="estado" required disabled>
+                        <div class="invalid-feedback">
+                            Estado obrigatório, digite uma valor.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label >Cidade: </label>
+                        <select class="form-control" id="cidade" th:field="*{dadosAdicionais.cidade}" required disabled>
+                            <option selected disabled value="">Selecione...</option>
+                            <option value="Campinas">Campinas</option>
+                            <option value="Hortolandia">Hortolândia</option>
+                            <option value="Sumare">Sumaré</option>
+                            <option value="Valinhos">Valinhos</option>
+                            <option value="Vinhedo">Vinhedo</option>
+                            <option value="Louveira">Louveira</option>
+                            <option value="Monte-mor">Monte-mor</option>
+                            <option value="Paulinia">Paulínia</option>
+                            <option value="Indaiatuba">Indaiatuba</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Bairro</label>
+                        <input type="text" class="form-control" th:field="*{dadosAdicionais.bairro}" id="bairro" required disabled>
+                        <div class="invalid-feedback">
+                            Bairro obrigatório, digite uma valor.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Rua </label>
+                        <input type="text" class="form-control" th:field="*{dadosAdicionais.endereco}" id="rua" value="" required disabled>
+                        <div class="invalid-feedback">
+                            Por favor, selecione o endereço.
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationServer04">Número</label>
+                        <input type="text" class="form-control" th:field="*{dadosAdicionais.numero}" id="numero" required disabled>
+                        <div class="invalid-feedback">
+                            Número obrigatório, digite uma valor.
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="validationServer04">Referência</label>
+                        <input type="text" class="form-control" th:field="*{dadosAdicionais.referencia}" id="referencia" disabled>
+                    </div>
+                    <div id="divDadosAdicionais" style="display: none; ">
+                        <button type="submit" class="btn btn-success" id="botaoAtualizar">
+                            Atualizar
+                        </button>
+                    </div>
+                </form>
+                <div class="container-fluid" >
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Identidade</li>
+                        <div class="col">
+                            <i type="button" class="editarVerde" id="enableIdentidade"></i>
+                            <text class="card-text" id="labelIdentidade">Editar</text>
+                        </div>
+                    </ol>
+                </div>
+                <form class="form-row" action="/registro/atualizar" method="POST">
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Número RG</label>
+                        <input type="text" class="form-control" th:field="*{registro.numero}" id="numeroRg" required disabled>
+                        <div class="invalid-feedback">
+                            Número RG obrigatório, digite uma valor.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Órgão Emissor</label>
+                        <input type="text" class="form-control" th:field="*{registro.orgaoEmissor}" id="orgao" required disabled>
+                        <div class="invalid-feedback">
+                            Órgão Emissor obrigatório, digite uma valor.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Data Expedição</label>
+                        <input type="text" class="form-control" th:field="*{registro.dataExpedicao}" id="expedicao" required disabled>
+                        <div class="invalid-feedback">
+                            Data Expedição obrigatória, digite uma valor.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Estado</label>
+                        <input type="text" class="form-control" th:field="*{registro.estado}" id="estadoRg" required disabled>
+                        <div class="invalid-feedback">
+                            Estado obrigatório, digite uma valor.
+                        </div>
+                    </div>
+                    <div id="divDadosIdentidade" style="display: none; ">
+                        <button type="submit" class="btn btn-success" id="botaoAtualizar">
+                            Atualizar
+                        </button>
+                    </div>
+                </form>
+                <div class="container-fluid">
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Experiência</li>
+                        <div class="col">
+                            <i type="button" class="editarVerde" id="enableExperiencia"></i>
+                            <text class="card-text" id="labelExperiencia">Editar</text>
+                        </div>
+                    </ol>
+                </div>
+                <form class="form-row" action="/experiencia/atualizar" method="POST">
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Possui experiência?</label>
+                        <select class="form-control" th:field="*{experiencia.possui}" id="possuiExperiencia" required disabled>
+                            <option selected disabled value="">Escolher...</option>
+                            <option value="SIM">SIM</option>
+                            <option value="NAO">NÃO</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a experiência.
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 mb-3" >
+                        <label for="validationServer01">Cargo </label>
+                        <input type="text" class="form-control" th:field="*{experiencia.cargo}" id="cargo" value="" disabled>
+                    </div>
+
+                    <div class="col-md-2 mb-3" >
+                        <label for="validationServer01">Data Inicio </label>
+                        <input type="text" class="form-control" th:field="*{experiencia.dataInicio}" id="dataInicio" value="" disabled>
+                    </div>
+                    <div class="col-md-2 mb-3" >
+                        <label for="validationServer01">Data Fim </label>
+                        <input type="text" class="form-control" th:field="*{experiencia.dataFim}" id="dataFim" value="" disabled>
+                    </div>
+                    <div class="col-md-2 mb-3" >
+                        <label for="validationServer01">Salário </label>
+                        <input type="text" class="form-control" th:field="*{experiencia.salario}" id="salario" value="" disabled>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer01">Categoria</label>
+                        <select class="form-control" th:field="*{experiencia.categoria}" id="categoriaExperiencia" disabled>
+                            <option selected disabled value="">Escolher...</option>
+                            <option value="CLT">CLT</option>
+                            <option value="ESTAGIO">ESTAGIO</option>
+                            <option value="JOVEMAPRENDIZ">JOVEM APRENDIZ</option>
+                            <option value="PCD">PCD</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a categoria.
+                        </div>
+                    </div>
+                    <div id="divDadosExperiencia" style="display: none; ">
+                        <button type="submit" class="btn btn-success" id="botaoAtualizar">
+                            Atualizar
+                        </button>
+                    </div>
+                </form>
+                <div class="container-fluid">
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Sobre suas habilidades</li>
+                        <div class="col">
+                            <i type="button" class="editarVerde" id="enableHabilidades"></i>
+                            <text class="card-text" id="labelHabilidades">Editar</text>
+                        </div>
+                    </ol>
+                </div>
+                <form class="form-row" action="/habilidades/atualizar" method="POST">
+                    <div class="form-group">
+                        <label for="validationServer04">Resumo profissional</label>
+                        <textarea class="form-control" th:field="*{habilidades.resumoProfissional}" id="resumoProfissional" style="width: 40vh;margin-right: 3px;" rows="3" required disabled></textarea>
+                        <div class="invalid-feedback">
+                            Resumo profissional obrigatório, digite uma valor.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="validationServer04">Objetivos</label>
+                        <textarea class="form-control" th:field="*{habilidades.objetivos}" id="objetivos" style="width: 40vh;" rows="3" required disabled></textarea>
+                        <div class="invalid-feedback">
+                            Objetivos obrigatório, digite uma valor.
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Adidione até 5 habilidades - Conhecimentos/Cursos/Treinamentos</label>
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{habilidades.descricao[0]}" id="validationServer01" value="" disabled>
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{habilidades.descricao[1]}" id="validationServer02" value="" disabled>
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{habilidades.descricao[2]}" id="validationServer03" value="" disabled>
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{habilidades.descricao[3]}" id="validationServer04" value="" disabled>
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{habilidades.descricao[4]}" id="validationServer05" value="" disabled>
+                    </div>
+                    <div id="divDadosHabilidades" style="display: none; ">
+                        <button type="submit" class="btn btn-success" id="botaoAtualizar">
+                            Atualizar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Desenvolvido por Thiago Camargo 2020</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Você tem certeza que deseja sair da sessão atual?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-primary" href="login.html">Sair</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script type="text/javascript" src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script type="text/javascript" src="/js/sb-admin-2.min.js"></script>
+<script type="text/javascript" src="/js/validacoes.js"></script>
+
+<!-- Page level plugins -->
+<script type="text/javascript" src="/vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script type="text/javascript" src="/js/demo/chart-area-demo.js"></script>
+<script type="text/javascript" src="/js/demo/chart-pie-demo.js"></script>
+</body>
+</html>
