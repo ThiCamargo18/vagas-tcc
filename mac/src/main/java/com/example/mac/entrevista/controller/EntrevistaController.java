@@ -6,8 +6,12 @@ import com.example.mac.cliente.service.ClienteService;
 import com.example.mac.entrevista.model.EntrevistaEntrada;
 import com.example.mac.entrevista.model.EntrevistaSaida;
 import com.example.mac.entrevista.service.EntrevistaService;
+import com.example.mac.exception.MyException;
+import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,8 +48,15 @@ public class EntrevistaController {
         return mv;
     }
 
-    @RequestMapping("/criar/{id}")
-    public ModelAndView criar(@PathVariable Long id) throws Exception {
+    @PostMapping("/novaVaga")
+    public HttpStatus nova(@RequestBody EntrevistaEntrada entrevistaEntrada,HttpServletResponse response) throws MyException, IOException {
+        entrevistaService.novaEntrevistaPelaNavbar(entrevistaEntrada);
+
+        return HttpStatus.OK;
+    }
+
+    @RequestMapping("/criar/{id}") //criar
+    public ModelAndView criar(@PathVariable Long id) throws MyException {
         EntrevistaEntrada entrevistaEntrada = new EntrevistaEntrada();
         ModelAndView mv = new ModelAndView("/admin/entrevista/criar");
         ClienteEntity clienteSaida = clienteService.buscarEVerificarExistenciaClientePorIdVaga(id);
@@ -54,18 +65,11 @@ public class EntrevistaController {
         return mv;
     }
 
-    @PostMapping("/criar/{id}")
-    public void criar(@Valid EntrevistaEntrada entrevistaEntrada, @PathVariable Long id,HttpServletResponse response) throws Exception {
-        EntrevistaSaida entrevistaSaida = entrevistaService.criar(entrevistaEntrada,id);
+    @PostMapping("/criar")
+    public HttpStatus criar(@RequestBody EntrevistaEntrada entrevistaEntrada, HttpServletResponse response) throws Exception {
+        EntrevistaSaida entrevistaSaida = entrevistaService.criar(entrevistaEntrada);
 
-        response.sendRedirect("http://localhost:8088/admin");
-    }
-
-    @PostMapping("/nova")
-    public void nova(@Valid EntrevistaEntrada entrevistaEntrada,HttpServletResponse response) throws Exception {
-        entrevistaService.novaEntrevistaPelaNavbar(entrevistaEntrada);
-
-        response.sendRedirect("http://localhost:8088/admin");
+        return HttpStatus.OK;
     }
 
     @GetMapping("/listar")
@@ -84,7 +88,7 @@ public class EntrevistaController {
     }
 
     @RequestMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable long id) throws Exception {
+    public ModelAndView editar(@PathVariable long id) throws MyException {
         EntrevistaSaida entrevistaSaida = entrevistaService.buscar(id);
         ModelAndView modelAndView = new ModelAndView("/admin/entrevista/atualizar");
         modelAndView.addObject("entrevista",entrevistaSaida);
@@ -92,7 +96,7 @@ public class EntrevistaController {
     }
 
     @PostMapping("/atualizar/{id}")
-    public void atualizar(@PathVariable long id,HttpServletResponse response,@Valid EntrevistaEntrada entrevistaEntrada) throws Exception {
+    public void atualizar(@PathVariable long id,HttpServletResponse response,@Valid EntrevistaEntrada entrevistaEntrada) throws MyException, IOException {
         entrevistaService.atualizar(id,entrevistaEntrada);
 
         response.sendRedirect("http://localhost:8088/entrevista/listar");

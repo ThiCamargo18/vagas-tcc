@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>Dashboard - MAC Admin</title>
     <!--        <link href="css/styles.css" rel="stylesheet" />-->
     <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-          crossorigin="anonymous"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
-            crossorigin="anonymous"></script>
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand" href="/admin">MAC Barbosa</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
->
+><!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" action="/vaga/buscarPorNome" method="get">
+        <div class="input-group">
+            <input class="form-control" name="nome" type="text" placeholder="Buscar vaga..." aria-label="Search" aria-describedby="basic-addon2" />
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </form>
     <!-- Navbar-->
     <ul class="navbar-nav ml-auto ml-md-0">
         <li class="nav-item dropdown">
@@ -94,83 +101,77 @@
     <div id="layoutSidenav_content">
         <main>
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <div class="container-fluid" style="margin-top: 10px;">
+            <div class="container-fluid">
+                <h1 class="mt-4">Cadastro Nova Vaga</h1>
                 <ol class="breadcrumb mb-4">
-                    <div class="row">
-                        <span >Vagas encontradas :</span>
-                        <span th:value="${vaga[0].numeroVagasEncontradas}"></span>
-                    </div>
-                    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" action="/vaga/buscarPorNome" method="get">
-                        <div class="input-group">
-                            <input class="form-control" name="nome" type="text" placeholder="Buscar novamente..." aria-label="Search" aria-describedby="basic-addon2" />
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-                            </div>
-                        </div>
-                    </form>
+                    <li class="breadcrumb-item active">Dados necessários</li>
                 </ol>
             </div>
-            <section>
-                <div class="container-md" style="width: 100%;">
-                    <div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="vaga : ${vaga}">
-                        <div class="card-body" >
-                            <div class="row">
-                                <div class="col">
-                                    <a th:href="@{/vaga/buscar/{id}(id=${vaga.id})}">
-                                        <h4 class="card-title"
-                                            style="font-weight: bold; color: blue; padding-top: 3px;">
-                                            <span th:text="${vaga.titulo}"></span></h4>
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <svg class="bi bi-map" width="2em" height="2em" viewBox="0 0 16 16"
-                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                         style="margin-left: 200px;">
-                                        <path fill-rule="evenodd"
-                                              d="M15.817.613A.5.5 0 0 1 16 1v13a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 14.51l-4.902.98A.5.5 0 0 1 0 15V2a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0l4.902.98 4.902-.98a.5.5 0 0 1 .415.103zM10 2.41l-4-.8v11.98l4 .8V2.41zm1 11.98l4-.8V1.61l-4 .8v11.98zm-6-.8V1.61l-4 .8v11.98l4-.8z"/>
-                                    </svg>
-                                    <span style="color:#FF0000;"
-                                          th:utext="${#strings.abbreviate(vaga.cidade,400)} "></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <span style="color:#FF0000;" th:utext="${#strings.abbreviate(vaga.categoria,400)} ">categoria</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p th:utext="${vaga.responsabilidade}">
-
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 8px;">
-                                <div class="col">
-                                    <a th:href="@{/vaga/inscritos/{id}(id=${vaga.id})}">
-                                        <h5 class="card-title"
-                                            style="font-weight: arial; color: blue; padding-top: 3px;">
-                                            <p><span th:text="${vaga.numeroInscritos}"></span> Inscritos</p>
-                                        </h5>
-                                    </a>
-                                </div>
-                                <div class="col">
-                                </div>
-                                <div class="col">
-                                    <button style="margin-left: 80px;" class="btn btn-danger"
-                                            data-toggle="modal" data-target="#modalExcluir"
-                                            th:onclick="'setaDadosModal('+${vaga.id}+')'" >Excluir</button>
-                                </div>
-                                <div class="col">
-                                    <a style="margin-left: 5px;" class="btn btn-info" type="button"
-                                            th:href="@{/vaga/atualizar/{id}(id=${vaga.id})}" >Atualizar</a>
-                                </div>
-                            </div>
+            <form method="post" class="needs-validation"
+                  novalidate style="margin-left: 20px;margin-right: 20px; margin-top: 20px;" id="formAtualizarEmpresa">
+                <div class="form-row">
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Razão Social </label>
+                        <input type="text" class="form-control" th:field="*{empresa.razaoSocial}" id="razaoSocial" value="">
+                        <div class="valid-feedback">
+                            Ok!
                         </div>
                     </div>
                 </div>
-            </section>
-
+                <div class="form-row">
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Cnpj </label>
+                        <input type="text" class="form-control" th:field="*{empresa.cnpj}" id="cnpj" value="">
+                        <div class="valid-feedback">
+                            Ok!
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Representante </label>
+                        <input type="text" class="form-control" th:field="*{empresa.representante}" id="representante" value="">
+                        <div class="valid-feedback">
+                            Ok!
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Telefone </label>
+                        <input type="text" class="form-control" th:field="*{empresa.telefone}" id="telefone" value="">
+                        <div class="valid-feedback">
+                            Ok!
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Rua </label>
+                        <input type="text" class="form-control" th:field="*{empresa.rua}" id="rua" value="">
+                        <div class="valid-feedback">
+                            Ok!
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Bairro </label>
+                        <input type="text" class="form-control" th:field="*{empresa.bairro}" id="bairro" value="">
+                        <div class="valid-feedback">
+                            Ok!
+                        </div>
+                    </div>
+                </div>
+                <div style="display:none">
+                    <input id="esconderVaga" value="false">
+                </div>
+                <button class="btn btn-primary" style="margin-top: 10px;"
+                        type="submit">Salvar
+                </button>
+            </form>
+            <div class="col-sm-7" id="postResultDiv">
+            </div>
         </main>
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
@@ -186,45 +187,15 @@
         </footer>
     </div>
 </div>
-
-<--Modal>
-
-<div id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal fade">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Deseja deletar a vaga mesmo?</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>x</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="panel-body">
-                    <form action="/vaga/deletar" class="search" method="get">
-                        Número vaga: <input id="vaga" name="vaga" type="text" value="vaga" readonly="readonly"/>
-                        <br><br>
-                        <input style="margin-left: 75%;" id="btnBusca" type="submit" value="Deletar" class="btn btn-danger"/>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/validarPostAdmin.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="assets/demo/chart-area-demo.js"></script>
 <script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 <script src="/assets/demo/datatables-demo.js"></script>
-<script>
-    function setaDadosModal(valor) {
-                document.getElementById('vaga').value = valor;
-            }
-</script>
 </body>
 </html>

@@ -8,6 +8,7 @@ import com.example.mac.entrevista.model.EntrevistaEntrada;
 import com.example.mac.entrevista.model.EntrevistaSaida;
 import com.example.mac.entrevista.repository.EntrevistaRepository;
 import com.example.mac.enums.Presenca;
+import com.example.mac.exception.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class EntrevistaService {
     @Autowired
     ClienteService clienteService;
 
-    public EntrevistaSaida criar(EntrevistaEntrada entrevistaEntrada,Long id) throws Exception {
+    public EntrevistaSaida criar(EntrevistaEntrada entrevistaEntrada) throws MyException {
         EntrevistaEntity entrevistaEntity = EntrevistaMapper.INSTANCE.mapToEntity(entrevistaEntrada);
         entrevistaEntity.setPresenca(Presenca.AGENDADO);
 
@@ -42,7 +43,7 @@ public class EntrevistaService {
         return "concluido";
     }
 
-    public EntrevistaSaida novaEntrevistaPelaNavbar(EntrevistaEntrada entrevistaEntrada) throws Exception {
+    public EntrevistaSaida novaEntrevistaPelaNavbar(EntrevistaEntrada entrevistaEntrada) throws MyException {
         EntrevistaEntity entrevistaEntity = EntrevistaMapper.INSTANCE.mapToEntity(entrevistaEntrada);
         entrevistaEntity.setPresenca(Presenca.AGENDADO);
 
@@ -51,7 +52,7 @@ public class EntrevistaService {
         return EntrevistaMapper.INSTANCE.mapToSaida(entrevistaEntity);
     }
 
-    public EntrevistaSaida atualizar(long id, EntrevistaEntrada entrevistaEntrada) throws Exception {
+    public EntrevistaSaida atualizar(long id, EntrevistaEntrada entrevistaEntrada) throws MyException {
         EntrevistaEntity entrevistaEntity = EntrevistaMapper.INSTANCE.mapToEntity(entrevistaEntrada);
 
         entrevistaRepository.save(entrevistaEntity);
@@ -59,11 +60,11 @@ public class EntrevistaService {
         return EntrevistaMapper.INSTANCE.mapToSaida(entrevistaEntity);
     }
 
-    public EntrevistaSaida buscar(long id) throws Exception {
+    public EntrevistaSaida buscar(long id) throws MyException {
         Optional<EntrevistaEntity> entrevistaEntity = entrevistaRepository.findById(id);
 
         if(!entrevistaEntity.isPresent()){
-            throw new Exception("Entrevista não encontrada");
+            throw new MyException("Entrevista não encontrada");
         }
 
         return EntrevistaMapper.INSTANCE.mapToSaida(entrevistaEntity.get());

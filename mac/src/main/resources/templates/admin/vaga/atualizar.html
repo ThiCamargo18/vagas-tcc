@@ -10,6 +10,7 @@
     <!--        <link href="css/styles.css" rel="stylesheet" />-->
     <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -101,74 +102,128 @@
         <main>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <div class="container-fluid">
-                <h1 class="mt-4">Agendar entrevista</h1>
+                <h1 class="mt-4">Cadastro Nova Vaga</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Dados necessários</li>
                 </ol>
             </div>
-            <div class="container-fluid" style="margin-right: 20px; width: 95%;">
-                <form class="input-group mb-3" method="get" action="/entrevista/nova">
-                    <input type="text" name="cpf" class="form-control" placeholder="Caso não seja o candidato, busque novamente.." aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
-                    </div>
-                    <div class="invalid-feedback">
-                        Necessário informar o cpf do candidato.
-                    </div>
-                </form>
-            </div>
-            <form method="post" class="needs-validation" novalidate style="margin-left: 20px;margin-right: 20px; margin-top: 20px;" id="formNovaEntrevista">
-                <div class="container-fluid" style="width: 100%;">
-                    <div class="input-group mb-3" style="width: 100%;">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Candidato</span>
-                        </div>
-                        <input th:value="${cliente.nome}" name="nomeCliente" id="nomeCliente" type="text" class="form-control" readonly="readonly">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">ID</span>
-                        </div>
-                        <input th:value="${cliente.id}" name="idCliente" id="idCliente" type="text" class="form-control" readonly="readonly">
-                    </div>
-                    <div class="input-group mb-3">
-                        <label for="example-time-input" class="col-2 col-form-label">Data</label>
-                        <input class="form-control" type="date" name="data" value="" id="data" required>
-                        <div class="invalid-feedback">
-                            Necessário informar a data.
+            <form method="post" class="needs-validation"
+                  novalidate style="margin-left: 20px;margin-right: 20px; margin-top: 20px;" id="formAtualizarVaga">
+                <div class="form-row">
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Título </label>
+                        <input type="text" class="form-control" th:field="*{vaga.titulo}" id="titulo" value="" required = false>
+                        <div class="valid-feedback">
+                            Ok!
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <label for="example-time-input" class="col-2 col-form-label">Hora</label>
-                        <input class="form-control" type="time" name="horario" value="" id="horario" required>
-                        <div class="invalid-feedback">
-                            Necessário informar o horário.
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <label class="col-2 col-form-label">Local</label>
-                        <div class="col-10">
-                            <input style="margin-left: -10px; width: 104%;" class="form-control" type="text" name="local" id="local">
-                        </div>
-                    </div>
-                    <div style="display:none">
-                        <input id="esconderVaga" value="false">
-                    </div>
-                    <p>Ao clicar em 'Salvar' o candidato receberá um e-mail confirmando data e local</p>
-                    <button class="btn btn-primary" style="margin-top: 10px;"
-                            type="submit">Salvar
-                    </button>
                 </div>
-            </form>
-        </main>
+                <div class="form-row">
+                    <div class="col-md-2 mb-3">
+                        <label for="validationServer04">Quantidade</label>
+                        <input type="text" class="form-control" th:field="*{vaga.quantidade}" id="quantidade" required>
+                        <div class="invalid-feedback">
+                            Digite a quantidade de vagas.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Cidade</label>
+                        <input type="text" class="form-control" th:field="*{vaga.cidade}" id="cidade" required>
+                        <div class="invalid-feedback">
+                            Necessário selecionar a cidade.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer04">Categoria</label>
+                        <select class="form-control" th:field="*{vaga.categoria}" id="categoria" required>
+                            <option selected disabled value="">Escolher...</option>
+                            <option value="CLT">CLT</option>
+                            <option value="ESTAGIO">ESTAGIO</option>
+                            <option value="JOVEMAPRENDIZ">JOVEM APRENDIZ</option>
+                            <option value="PCD">PCD</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a categoria.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label >Formação: </label>
+                        <select class="form-control" id="formacao" th:field="*{vaga.formacao}" required>
+                            <option selected disabled value="">Selecione..</option>
+                            <option value="Ensino Medio Incompleto">Ensino Médio Incompleto</option>
+                            <option value="Ensino Medio Completo">Ensino Médio Completo</option>
+                            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                            <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                            <option value="Pos-graduacao Incompleta">Pós-graduação Incompleta</option>
+                            <option value="Pos-graduacao Completa">Pós-graduação Completa</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a formação.
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationServer04">Salário</label>
+                        <input type="text" class="form-control" th:field="*{vaga.salario}" onkeypress="mascarar(this,moeda)" id="validationSalario">
+                    </div>
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Alguma observação? </label>
+                        <input type="text" class="form-control" th:field="*{vaga.observacao}" id="observacao" value="">
+                        <div class="valid-feedback">
+                            Ok!
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Benefícios</label>
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{vaga.beneficios[0]}"  id="beneficio1" value="" >
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{vaga.beneficios[1]}"  id="beneficio2" value="" >
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{vaga.beneficios[2]}"  id="beneficio3" value="" >
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{vaga.beneficios[3]}"  id="beneficio4" value="" >
+                    </div>
+                    <div class="col-md-6 mb-3" >
+                        <label for="validationServer01">Adidione até 5 habilidades - Conhecimentos/Cursos/Treinamentos</label>
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{vaga.descricaoHabilidades[0]}"  id="habilidade1" value="" >
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{vaga.descricaoHabilidades[1]}" id="habilidade2" value="" >
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{vaga.descricaoHabilidades[2]}" id="habilidade3" value="" >
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{vaga.descricaoHabilidades[3]}" id="habilidade4" value="" >
+                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{vaga.descricaoHabilidades[4]}" id="habilidade5" value="" >
+                    </div>
+                    <div class="col-md-6 mb-4" style="margin-left: 2px;">
+                        <label for="validationServer04">Responsabilidades</label>
+                        <textarea class="form-control" th:field="*{vaga.responsabilidade}" id="responsabilidades" style="width: 40vh;margin-right: 3px;" rows="3"></textarea>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationServer04">Data limite para inscrição</label>
+                            <input type="date" class="form-control" th:field="*{vaga.dataLimite}" id="dataLimite">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationServer04">Turno</label>
+                            <input type="text" class="form-control" th:field="*{vaga.turno}" id="turno">
+                        </div>
+                    </div>
+
+                </div>
+                <div style="display:none">
+                    <input id="esconderVaga" value="false">
+                </div>
+                <div style="display:none">
+                    <input id="numeroInscritos" value="false" th:field="*{vaga.numeroInscritos}">
+                </div>
+                <div style="display:none">
+                    <input id="idVaga" value="false" th:field="*{vaga.id}">
+                </div>
+                <button class="btn btn-primary" style="margin-top: 10px;"
+                        type="submit">Salvar
+                </button>
+            </form>
+            <div class="col-sm-7" id="postResultDiv">
+            </div>
+        </main>
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
                     <div class="text-muted">Copyright &copy; Feito por Thiago Camargo 2020</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
                 </div>
             </div>
         </footer>
@@ -179,7 +234,10 @@
 <script type="text/javascript" src="/js/scripts.js"></script>
 <script type="text/javascript" src="/js/validarPostAdmin.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/chart-area-demo.js"></script>
+<script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="/assets/demo/datatables-demo.js"></script>
 </body>
 </html>

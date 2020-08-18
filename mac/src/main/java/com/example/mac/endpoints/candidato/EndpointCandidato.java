@@ -80,4 +80,14 @@ public class EndpointCandidato {
 
         return mv;
     }
+
+    @RequestMapping("/config")
+    public String configuracoes(){
+        return "Config";
+    }
+
+    @RequestMapping("/logout")
+    public String sair(){
+        return "Sair";
+    }
 }

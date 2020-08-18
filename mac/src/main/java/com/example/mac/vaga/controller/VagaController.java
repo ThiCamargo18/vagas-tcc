@@ -1,13 +1,18 @@
 package com.example.mac.vaga.controller;
 
+import com.example.mac.exception.MyException;
 import com.example.mac.dadosPessoais.model.DadosPessoaisSaida;
 import com.example.mac.vaga.model.VagaEntrada;
 import com.example.mac.vaga.model.VagaSaida;
 import com.example.mac.vaga.service.VagaService;
+import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -27,11 +32,26 @@ public class VagaController {
         return new ModelAndView("/admin/vaga/criar");
     }
 
-    @PostMapping("/criar")
-    public ModelAndView criar(@Valid VagaEntrada entrada) throws Exception {
-        VagaSaida saida = vagaService.criar(entrada);
+    @PostMapping("/criarVaga")
+    public HttpStatus criar(@RequestBody VagaEntrada entrada) throws MyException{
+        vagaService.criar(entrada);
 
-        return new ModelAndView("/admin/index");
+        return HttpStatus.OK;
+    }
+
+    @RequestMapping("/atualizar/{id}")
+    public ModelAndView atualizar(@PathVariable Long id){
+        VagaSaida vagaSaida = vagaService.buscarVaga(id);
+        ModelAndView mv = new ModelAndView("/admin/vaga/atualizar");
+        mv.addObject("vaga",vagaSaida);
+        return mv;
+    }
+
+    @PostMapping("/atualizar")
+    public HttpStatus atualizar(@RequestBody VagaEntrada vagaEntrada){
+        vagaService.atualizar(vagaEntrada);
+
+        return HttpStatus.OK;
     }
 
     @GetMapping("/listar")
@@ -43,21 +63,26 @@ public class VagaController {
     }
 
     @GetMapping("/buscar/{id}")
-    public ModelAndView buscar(@PathVariable Long id) throws Exception {
+    public ModelAndView buscar(@PathVariable Long id) throws MyException {
         VagaSaida vagaSaida = vagaService.buscarVaga(id);
         ModelAndView mv = new ModelAndView("/admin/vaga/buscar");
         List<String> listaHabilidades = vagaSaida.getDescricaoHabilidades();
+        List<String> beneficios = vagaSaida.getBeneficios();
         mv.addObject("vaga",vagaSaida);
         mv.addObject("listaHabilidades",listaHabilidades);
+        mv.addObject("beneficios",beneficios);
         return mv;
     }
 
     @GetMapping("/inscritos/{id}")
     public ModelAndView inscritos(@PathVariable Long id){
         List<DadosPessoaisSaida> dadosPessoaisSaida = vagaService.buscarInscritosPorVaga(id);
+        VagaSaida vagaSaida = new VagaSaida();
+        vagaSaida.setId(id);
 
         ModelAndView mv = new ModelAndView("/admin/vaga/filtroInscritos");
         mv.addObject("cliente",dadosPessoaisSaida);
+        mv.addObject("vaga",vagaSaida);
         return mv;
     }
 

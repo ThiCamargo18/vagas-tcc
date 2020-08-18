@@ -33,4 +33,12 @@ public class DadosPessoaisSaida {
     private String email;
     private String cidade;
     private Long idUsuario;
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
 }

@@ -54,7 +54,8 @@ public class VagaEntity {
     private String salario;
 
     @Column(name = "beneficios")
-    private String beneficios;
+    @ElementCollection(targetClass=String.class)
+    private List<String> beneficios;
 
     @Column(name = "observacao")
     private String observacao;
@@ -154,11 +155,11 @@ public class VagaEntity {
         this.salario = salario;
     }
 
-    public String getBeneficios() {
+    public List<String> getBeneficios() {
         return beneficios;
     }
 
-    public void setBeneficios(String beneficios) {
+    public void setBeneficios(List<String> beneficios) {
         this.beneficios = beneficios;
     }
 

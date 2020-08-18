@@ -32,7 +32,7 @@
             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="/configuracao/alterar">Configurações</a>
-                <a class="dropdown-item" href="/configuracao/perfil">Meu perfil</a>
+                <a class="dropdown-item" href="/empresa/gerenciar">Meu perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/sair">Sair</a>
             </div>
@@ -153,6 +153,10 @@
                                        data-toggle="modal" data-target="#modalExcluir"
                                        th:onclick="'setaDadosModal('+${vaga.id}+')'" >Excluir</button>
                                 </div>
+                                <div class="col">
+                                    <a style="margin-left: 5px;" class="btn btn-info" type="button"
+                                            th:href="@{/vaga/atualizar/{id}(id=${vaga.id})}" >Atualizar</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -164,11 +168,6 @@
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
                     <div class="text-muted">Copyright &copy; Feito por Thiago Camargo 2020</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
                 </div>
             </div>
         </footer>

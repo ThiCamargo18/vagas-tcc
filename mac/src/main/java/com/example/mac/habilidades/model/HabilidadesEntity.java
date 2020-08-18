@@ -24,10 +24,21 @@ public class HabilidadesEntity {
 
     @Column(name = "descricao")
     @ElementCollection(targetClass=String.class)
-    private List<String> descricao; //colocar depois em uma classe
+    private List<String> descricao;
+
+    @Column(name = "nomeUsuario")
+    private String nomeUsuario;
 
     @Column(name = "idUsuario")
     private Long idUsuario;
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
 
     public Long getId() {
         return id;

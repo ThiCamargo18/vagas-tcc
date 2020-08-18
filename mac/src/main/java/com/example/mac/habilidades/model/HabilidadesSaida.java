@@ -16,7 +16,16 @@ public class HabilidadesSaida {
     private String resumoProfissional;
     private String objetivos;
     private List<String> descricao;
+    private String nomeUsuario;
     private Long idUsuario;
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
 
     public Long getId() {
         return id;

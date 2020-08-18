@@ -7,6 +7,8 @@ import com.example.mac.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.mac.dadosPessoais.model.DadosPessoaisEntrada;
 import com.example.mac.dadosPessoais.model.DadosPessoaisSaida;
 import com.example.mac.dadosPessoais.repository.DadosPessoaisRepository;
+import com.example.mac.habilidades.model.HabilidadesEntrada;
+import com.example.mac.habilidades.service.HabilidadesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -20,6 +22,8 @@ import java.util.List;
 public class DadosPessoaisService {
     @Autowired
     DadosPessoaisRepository dadosPessoaisRepository;
+    @Autowired
+    HabilidadesService habilidadesService;
 
     public DadosPessoaisSaida criar(DadosPessoaisEntrada dadosPessoais,Long id) {
         DadosPessoaisEntity dadosPessoaisEntity = DadosPessoaisMapper.INSTANCE.mapToEntity(dadosPessoais);
@@ -36,6 +40,9 @@ public class DadosPessoaisService {
     }
 
     public DadosPessoaisSaida atualizar(DadosPessoaisEntrada dadosPessoaisEntrada, Long id) throws Exception {
+        HabilidadesEntrada habilidadesEntrada = new HabilidadesEntrada();
+        habilidadesEntrada.setNomeUsuario(dadosPessoaisEntrada.getNomeCompleto());
+        habilidadesService.atualizar(id,habilidadesEntrada);
         DadosPessoaisEntity dadosRetornoEntity = dadosPessoaisRepository.findByIdUsuario(id);
         DadosPessoaisEntity dadosPessoaisEntity = DadosPessoaisMapper.INSTANCE.mapToEntity(dadosPessoaisEntrada);
         dadosPessoaisEntity.setId(dadosRetornoEntity.getId());

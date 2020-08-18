@@ -30,7 +30,7 @@
             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="/configuracao/alterar">Configurações</a>
-                <a class="dropdown-item" href="/configuracao/perfil">Meu perfil</a>
+                <a class="dropdown-item" href="/empresa/gerenciar">Meu perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/sair">Sair</a>
             </div>
@@ -131,14 +131,19 @@
                             <p class="card-text">Formação : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(vaga.formacao,400)} "></span></p>
                             <p class="card-text">Responsabilidades : <span style="color:#FF0000;" th:utext="${vaga.responsabilidade} "></span></p>
                             <p class="card-text">Salário : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(vaga.salario,400)} "></span></p>
-                            <p class="card-text">Benefícios : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(vaga.beneficios,400)} "></span></p>
+                            <p>Benefícios :
+                                <div th:each="beneficios : ${beneficios}">
+
+                            <p class="card-text">º <span style="color:#FF0000;" th:utext="${beneficios} "></span></p>
+                            </div>
+                            </p>
                             <p class="card-text">Observação : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(vaga.observacao,400)} "></span></p>
                             <p class="card-text">Data limite para inscrição : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(vaga.dataLimite,400)} "></span></p>
                             <p class="card-text">Número inscritos : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(vaga.numeroInscritos,400)} "></span></p>
                             <p>Habilidades :
                                 <div th:each="listaHabilidades : ${listaHabilidades}">
 
-                                 <p class="card-text">º <span style="color:#FF0000;" th:utext="${#strings.abbreviate(listaHabilidades,400)} "></span></p>
+                                 <p class="card-text">º <span style="color:#FF0000;" th:utext="${listaHabilidades} "></span></p>
                                 </div>
                             </p>
                         </div>

@@ -13,8 +13,17 @@ import java.util.List;
 @NoArgsConstructor
 public class HabilidadesEntrada {
     private Long id;
-    private String resumoProfissional; //
-    private String objetivos; //
-    private List<String> descricao; //
+    private String resumoProfissional;
+    private String objetivos;
+    private List<String> descricao;
+    private String nomeUsuario;
     private Long idUsuario;
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
 }

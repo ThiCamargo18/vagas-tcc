@@ -22,16 +22,32 @@ public class VagaSaida {
     private CategoriaEnum categoria;
     private Experiencia experiencia;
     private String formacao;
-    private List<String> descricaoHabilidades; //Selecionar mesmo nome habildiades no front
+    private List<String> descricaoHabilidades;
     private String responsabilidade;
     private String salario;
-    private String beneficios;
+    private List<String> beneficios; //mudar para lista
     private String observacao;
     private String turno;
     private String dataLimite;
     private Integer numeroInscritos;
     private Integer numeroVagasEncontradas;
     private Long idEmpresa;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<String> getBeneficios() {
+        return beneficios;
+    }
+
+    public void setBeneficios(List<String> beneficios) {
+        this.beneficios = beneficios;
+    }
 
     public List<String> getDescricaoHabilidades() {
         return descricaoHabilidades;

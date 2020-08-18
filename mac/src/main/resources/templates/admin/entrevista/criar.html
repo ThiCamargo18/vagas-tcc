@@ -30,7 +30,7 @@
             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="/configuracao/alterar">Configurações</a>
-                <a class="dropdown-item" href="/configuracao/perfil">Meu perfil</a>
+                <a class="dropdown-item" href="/empresa/gerenciar">Meu perfil</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="/sair">Sair</a>
             </div>
@@ -106,30 +106,32 @@
                     <li class="breadcrumb-item active">Dados necessários</li>
                 </ol>
             </div>
-            <form method="post" class="needs-validation" novalidate style="margin-left: 20px;margin-right: 20px; margin-top: 20px;">
+            <form method="post" class="needs-validation" novalidate style="margin-left: 20px;margin-right: 20px; margin-top: 20px;" id="formCriarEntrevista">
                 <div class="container-fluid" style="width: 100%;">
                     <div class="input-group mb-3" style="width: 100%;">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Candidato</span>
                             </div>
-                            <input type="text" th:value="${cliente.nome}" name="nomeCliente" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly="readonly">
+                            <input type="text" th:value="${cliente.nome}" name="nomeCliente" id="nomeCliente"
+                                   class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly="readonly">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default2">ID</span>
                             </div>
-                            <input type="text" th:value="${cliente.id}" name="idCliente"class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly="readonly">
+                            <input type="text" th:value="${cliente.id}" name="idCliente" id="idCliente" class="form-control" aria-label="Default"
+                                   aria-describedby="inputGroup-sizing-default" readonly="readonly">
                         </div>
                     </div>
                     <div class="input-group mb-3">
                         <label for="example-time-input" class="col-2 col-form-label">Data</label>
-                        <input class="form-control" type="date" name="data" value="" id="example-date-input" required>
+                        <input class="form-control" type="date" name="data" value="" id="data" required>
                         <div class="invalid-feedback">
                             Necessário informar a data.
                         </div>
                     </div>
                     <div class="input-group mb-3">
                         <label for="example-time-input" class="col-2 col-form-label">Time</label>
-                        <input class="form-control" type="time" name="horario" value="" id="example-time-input" required>
+                        <input class="form-control" type="time" name="horario" value="" id="horario" required>
                         <div class="invalid-feedback">
                             Necessário informar o horário.
                         </div>
@@ -137,10 +139,14 @@
                     <div class="input-group mb-3" style="width: 102%;">
                         <label class="col-2 col-form-label">Local</label>
                         <div class="col-10">
-                            <input style="margin-left: -11px; width: 102%;" class="form-control" type="text" name="local" id="example-text-input2">
+                            <input style="margin-left: -11px; width: 102%;" class="form-control" type="text"
+                                   name="local" id="local">
                         </div>
                     </div>
                     <br>
+                    <div style="display:none">
+                        <input id="esconderVaga" value="false">
+                    </div>
                     <p>Ao clicar em 'Salvar' o candidato receberá um e-mail confirmando data e local</p>
                     <button class="btn btn-primary" style="margin-top: 10px;"
                             type="submit">Salvar
@@ -166,6 +172,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/validarPostAdmin.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="assets/demo/chart-area-demo.js"></script>
 <script src="assets/demo/chart-bar-demo.js"></script>

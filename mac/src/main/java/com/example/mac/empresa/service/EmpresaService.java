@@ -44,12 +44,12 @@ public class EmpresaService {
         return EmpresaMapper.INSTANCE.mapToSaida(empresaEntity.get(0));
     }
 
-    public EmpresaSaida atualizar(Long id, EmpresaEntrada empresaEntrada) {
-        Optional<EmpresaEntity> empresaEntityOptional = empresaRepository.findById(id);
-
+    public EmpresaSaida atualizar(EmpresaEntrada empresaEntrada) {
         EmpresaEntity empresaEntity = EmpresaMapper.INSTANCE.mapToEntity(empresaEntrada);
 
-        empresaEntity.setId(empresaEntityOptional.get().getId());
+        empresaEntity.setId(1L);
+
+        empresaRepository.save(empresaEntity);
 
         return EmpresaMapper.INSTANCE.mapToSaida(empresaEntity);
     }

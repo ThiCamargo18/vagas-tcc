@@ -1,8 +1,8 @@
 package com.example.mac.vaga.service;
 
 import com.example.mac.cliente.model.ClienteEntity;
-import com.example.mac.cliente.model.ClienteSaida;
 import com.example.mac.cliente.service.ClienteService;
+import com.example.mac.exception.MyException;
 import com.example.mac.dadosPessoais.mapper.DadosPessoaisMapper;
 import com.example.mac.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.mac.dadosPessoais.model.DadosPessoaisSaida;
@@ -14,6 +14,8 @@ import com.example.mac.vaga.model.VagaEntrada;
 import com.example.mac.vaga.model.VagaSaida;
 import com.example.mac.vaga.repository.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -31,18 +33,13 @@ public class VagaService {
     @Autowired
     DadosPessoaisService dadosPessoaisService;
 
-    public VagaSaida criar(VagaEntrada entrada) throws Exception {
+    public void criar(VagaEntrada entrada) throws MyException {
         VagaEntity vagaEntity = VagaMapper.INSTANCE.mapToEntity(entrada);
 
-        if(empresaService.verificarSeJaFoiCriadoAEmpresa().equals(false)){
-            throw new Exception("Cadastre sua empresa antes de publicar uma vaga");
-        }
         vagaEntity.setNumeroInscritos(0);
         vagaEntity.setIdEmpresa(1L);
 
         vagaRepository.save(vagaEntity);
-
-        return VagaMapper.INSTANCE.mapToSaida(vagaEntity);
     }
 
     public List<VagaSaida> listar() {
@@ -111,11 +108,11 @@ public class VagaService {
         return DadosPessoaisMapper.INSTANCE.mapToSaidaList(dadosPessoaisEntityList);
     }
 
-    public VagaSaida buscarVaga(Long id) throws Exception {
+    public VagaSaida buscarVaga(Long id) throws MyException {
         Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(id);
 
         if(!vagaEntityOptional.isPresent()){
-            throw new Exception("Vaga não encontrada!");
+            throw new MyException("Vaga não encontrada!");
         }
 
         return VagaMapper.INSTANCE.mapToSaida(vagaEntityOptional.get());
@@ -129,5 +126,20 @@ public class VagaService {
         }
 
         return VagaMapper.INSTANCE.mapToSaidaList(vagaEntities);
+    }
+
+    public List<VagaEntity> filtrar(VagaEntity vagaEntity) {
+        Example example = Example.of( vagaEntity,
+                ExampleMatcher.matching()
+                        .withIgnoreCase()
+                        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING) );
+        return vagaRepository.findAll(example);
+    }
+
+    public void atualizar(VagaEntrada vagaEntrada) {
+        VagaEntity vagaEntity = VagaMapper.INSTANCE.mapToEntity(vagaEntrada);
+
+        vagaEntity.setIdEmpresa(1l);
+        vagaRepository.save(vagaEntity);
     }
 }

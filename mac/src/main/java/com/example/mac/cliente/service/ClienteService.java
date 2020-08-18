@@ -6,6 +6,7 @@ import com.example.mac.cliente.model.ClienteEntrada;
 import com.example.mac.cliente.model.ClienteSaida;
 import com.example.mac.cliente.repository.ClienteRepository;
 import com.example.mac.enums.SituacaoConcorrente;
+import com.example.mac.exception.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,11 +35,11 @@ public class ClienteService {
         return clienteRepository.findByCpf(cpf);
     }
 
-    public ClienteEntity buscarEVerificarExistenciaClientePorIdVaga(Long idUsuario) throws Exception {
+    public ClienteEntity buscarEVerificarExistenciaClientePorIdVaga(Long idUsuario) throws MyException {
         Optional<ClienteEntity> clienteEntity = clienteRepository.findById(idUsuario);
 
         if(!clienteEntity.isPresent()){
-            throw new Exception("Candidato não encontrado");
+            throw new MyException("Candidato não encontrado");
         }
 
         return clienteEntity.get();

@@ -4,6 +4,9 @@ import com.example.mac.cliente.model.ClienteSessao;
 import com.example.mac.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.mac.dadosPessoais.model.DadosPessoaisSaida;
 import com.example.mac.enums.CategoriaEnum;
+import com.example.mac.habilidades.model.HabilidadesSaida;
+import com.example.mac.vaga.mapper.VagaMapper;
+import com.example.mac.vaga.model.VagaEntity;
 import com.example.mac.vaga.model.VagaSaida;
 import com.example.mac.vaga.service.VagaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -26,6 +30,14 @@ public class Vaga {
     @GetMapping("/listar")
     public ModelAndView listar(HttpServletRequest request){
         List<VagaSaida> saida = vagaService.listar();
+        int numeroVagasEncontradas = saida.size();
+        if(numeroVagasEncontradas>0){
+            saida.get(0).setNumeroVagasEncontradas(numeroVagasEncontradas);
+        } else{
+            VagaSaida vagaSaida = new VagaSaida();
+            vagaSaida.setNumeroVagasEncontradas(0);
+            saida.add(vagaSaida);
+        }
         ModelAndView mv = new ModelAndView("/candidato/vaga/listar");
         mv.addObject("vaga",saida);
         return mv;
@@ -37,27 +49,32 @@ public class Vaga {
     }
 
     @GetMapping("/filtrar")
-    public ModelAndView filtrar(@RequestParam(value ="experiencia" , required = false) String experiencia,
+    public ModelAndView filtrar(
                                 @RequestParam(value = "formacao", required = false) String formacao,
-                                @RequestParam(value = "endereco", required = false) String endereco,
                                 @RequestParam(value = "categoria", required = false) CategoriaEnum categoria){
 
-        DadosPessoaisEntity entity = new DadosPessoaisEntity();
-        entity.setExperiencia(experiencia);
-        entity.setFormacao(formacao);
-        entity.setCategoria(categoria);
-        entity.setCidade(endereco);
+        VagaEntity vagaEntity = new VagaEntity();
+        vagaEntity.setCategoria(categoria);
+        vagaEntity.setFormacao(formacao);
 
-//        List<DadosPessoaisSaida> listaSaida = dadosPessoaisService.filtrar(entity);
-
-        ModelAndView mv = new ModelAndView("/admin/candidato/perfil");
-//        mv.addObject("cliente",listaSaida);
+        List<VagaEntity> listaEntity = vagaService.filtrar(vagaEntity);
+        List<VagaSaida> listSaida = VagaMapper.INSTANCE.mapToSaidaList(listaEntity);
+        int numeroVagasEncontradas = listSaida.size();
+        if(numeroVagasEncontradas>0){
+            listSaida.get(0).setNumeroVagasEncontradas(numeroVagasEncontradas); //debugar
+        } else {
+            VagaSaida vagaSaida = new VagaSaida();
+            vagaSaida.setNumeroVagasEncontradas(0);
+            listSaida.add(vagaSaida);
+        }
+        ModelAndView mv = new ModelAndView("/candidato/vaga/listar");
+        mv.addObject("vaga",listSaida);
 
         return mv;
     }
 
     @GetMapping("/inscrever/{idVaga}")
-    public VagaSaida inscrever(@PathVariable Long idVaga, HttpServletRequest request) throws Exception {
+    public void inscrever(@PathVariable Long idVaga, HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         ClienteSessao clienteSessao = (ClienteSessao) session.getAttribute("usuarioLogado");
 
@@ -67,11 +84,30 @@ public class Vaga {
 
         VagaSaida vagaSaida = vagaService.inscrever(clienteSessao.getId(),idVaga);
 
-        return vagaSaida;
+        response.sendRedirect("http://localhost:8088/inicio");
     }
 
     @GetMapping("/buscar/{id}")
-    public String buscar(@PathVariable Long id){
-        return "buscado";
+    public ModelAndView buscar(@PathVariable Long id) throws Exception {
+        VagaSaida vagaSaida = vagaService.buscarVaga(id);
+        List<String> listaHabilidades = vagaSaida.getDescricaoHabilidades();
+        List<String> beneficios = vagaSaida.getBeneficios();
+        ModelAndView mv = new ModelAndView("/candidato/vaga/vagaCompleta");
+        mv.addObject("vaga",vagaSaida);
+        mv.addObject("listaHabilidades",listaHabilidades);
+        mv.addObject("beneficios",beneficios);
+        return mv;
+    }
+
+    @GetMapping("/buscarPorNome")
+    public ModelAndView buscarPorNome (@RequestParam String nome) throws Exception {
+        ModelAndView mv = new ModelAndView("/candidato/vaga/listar");
+        List<VagaSaida> vagaSaidas = vagaService.buscarPorNome(nome);
+        int numeroVagasEncontradas = vagaSaidas.size();
+        if(numeroVagasEncontradas>0){
+            vagaSaidas.get(0).setNumeroVagasEncontradas(numeroVagasEncontradas);
+        }
+        mv.addObject("vaga",vagaSaidas);
+        return mv;
     }
 }

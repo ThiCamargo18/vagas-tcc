@@ -224,67 +224,100 @@
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-            <div class="container">
-                <div class="  ">
-                    <div class="card mb-3">
-                        <h3 class="card-header">Filtrar Vagas</h3>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="bs-component">
-                                        <form action="/candidato/vaga/filtrar" method="get">
-                                            <fieldset>
-
-                                                <div class="form-group">
-                                                    <label >Formação: </label>
-                                                    <select class="form-control" id="exampleSelect2" name="formacao">
-                                                        <option selected disabled value="">Selecione..</option>
-                                                        <option value="Ensino Medio Incompleto">Ensino Médio Incompleto</option>
-                                                        <option value="Ensino Medio Completo">Ensino Médio Completo</option>
-                                                        <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
-                                                        <option value="Ensino Superior Completo">Ensino Superior Completo</option>
-                                                        <option value="Pos-graduacao Incompleta">Pós-graduação Incompleta</option>
-                                                        <option value="Pos-graduacao Completa">Pós-graduação Completa</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="validationServer04">Categoria</label>
-                                                    <select class="form-control" name="categoria" id="validationServer04" >
-                                                        <option selected disabled value="">Escolher...</option>
-                                                        <option value="CLT">CLT</option>
-                                                        <option value="ESTAGIO">ESTAGIO</option>
-                                                        <option value="JOVEMAPRENDIZ">JOVEM APRENDIZ</option>
-                                                        <option value="PCD">PCD</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">
-                                                        Por favor, selecione a categoria.
-                                                    </div>
-                                                </div>
-
-                                                <button type="submit" class="btn btn-success">Buscar</button>
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                </div>
+            <div class="container-md" style="width: 100%;">
+                <div class="card shadow mb-4" style="margin-top: 20px;" th:each="vaga : ${vaga}">
+                    <div class="card-header py-3">
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="m-0 font-weight-bold text-primary" th:text="${vaga.titulo}">Recuperdor</h6>
+                            </div>
+                            <div class="col">
+                                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                <span class="m-0 font-weight-bold text-primary"
+                                      th:utext="${vaga.cidade} ">Campinas</span>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-success" th:href="@{/candidato/vaga/inscrever/{id}(id=${vaga.id})}" type="button">
+                                    Inscrever
+                                </a>
                             </div>
                         </div>
                     </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <span class="font-weight-bold">Contrato:</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.categoria} ">CLT</span>
+                            </div>
+                            <div class="col">
+                                <span class="font-weight-bold">Quantidade:</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.quantidade} ">10</span>
+                            </div>
+                            <div class="col">
+                                <span class="font-weight-bold">Salário:</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.salario} ">10</span>
+                            </div>
+                            <div class="col">
+                                <span class="font-weight-bold">Limite Inscrição:</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.dataLimite} ">10</span>
+                            </div>
+                        </div>
+                        <hr class="sidebar-divider">
+                        <div class="row">
+                            <div class="col">
+                                <span class="font-weight-bold">Formação requerida:</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.formacao} ">Superior Completo</span>
+                            </div>
+                            <div class="col">
+                                <span class="font-weight-bold">Observações:</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.formacao} ">Não pode ser estágio</span>
+                            </div>
+                            <div class="col">
+                                <span class="font-weight-bold">Turno:</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.turno} ">Noturno</span>
+                            </div>
+                        </div>
+                        <hr class="sidebar-divider">
+                        <div class="row">
+                            <div class="col">
+                                <span class="font-weight-bold">Responsabilidades:</span>
+                                <p class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.responsabilidade} ">Segundo especialistas, a inadimplência por mais de 90 dias é um estágio que precede a recuperação judicial e "contagia" a cadeia de produção ao afetar diversas empresas em série.</p>
+                            </div>
+                        </div>
+                        <hr class="sidebar-divider">
+
+                            <p class="font-weight-bold">Benefícios:
+                                <div th:each="beneficios : ${beneficios}">
+
+                            <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:utext="${beneficios} ">Teste</span></p>
+                                </div>
+
+                        <hr class="sidebar-divider">
+                            <p class="font-weight-bold">Requisitos:
+                                <div th:each="listaHabilidades : ${listaHabilidades}">
+
+                            <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:utext="${listaHabilidades} ">Teste</span></p>
+                            </div>
+
+                    </div>
+                    </p>
                 </div>
-</div>
-<!-- End of Main Content -->
-
-<!-- Footer -->
-<footer class="sticky-footer bg-white">
-    <div class="container my-auto">
-        <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Desenvolvido por Thiago Camargo 2020</span>
+            </div>
         </div>
-    </div>
-</footer>
-<!-- End of Footer -->
+        <!-- End of Main Content -->
 
-</div>
-<!-- End of Content Wrapper -->
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Desenvolvido por Thiago Camargo 2020</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
 
 </div>
 <!-- End of Page Wrapper -->

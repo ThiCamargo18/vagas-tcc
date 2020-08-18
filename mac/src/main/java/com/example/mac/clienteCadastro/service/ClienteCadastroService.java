@@ -44,7 +44,7 @@ public class ClienteCadastroService {
         DadosAdicionaisSaida dadosAdicionaisSaida = dadosAdicionaisService.criar(entrada.getDadosAdicionais(),idCliente);
         DadosPessoaisSaida dadosPessoaisSaida = dadosPessoaisService.criar(entrada.getDadosPessoais(),idCliente);
         ExperienciaSaida experienciaSaida = experienciaService.criar(entrada.getExperiencia(),idCliente);
-        HabilidadesSaida habilidadesSaida = habilidadesService.criar(entrada.getHabilidades(),idCliente);
+        HabilidadesSaida habilidadesSaida = habilidadesService.criar(entrada.getHabilidades(),idCliente,dadosPessoaisSaida.getNomeCompleto());
         RegistroSaida registroSaida = registroNacionalService.criar(entrada.getRegistro(),idCliente );
 
         return ClienteCadastroMapper.INSTANCE.mapToSaida(clienteSaida,dadosAdicionaisSaida,
