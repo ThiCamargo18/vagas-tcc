@@ -95,7 +95,7 @@ public class VagaService {
     }
 
 
-    public List<DadosPessoaisSaida> buscarInscritosPorVaga(Long id) {
+    public List<DadosPessoaisSaida> buscarInscritosPorVaga(Long id) throws Exception {
         List<DadosPessoaisEntity> dadosPessoaisEntityList = new ArrayList<>();
         Optional<VagaEntity> vagaEntity = vagaRepository.findById(id);
         List<ClienteEntity> clienteEntityList = vagaEntity.get().getClientes();
@@ -108,11 +108,11 @@ public class VagaService {
         return DadosPessoaisMapper.INSTANCE.mapToSaidaList(dadosPessoaisEntityList);
     }
 
-    public VagaSaida buscarVaga(Long id) throws MyException {
+    public VagaSaida buscarVaga(Long id) throws Exception {
         Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(id);
 
         if(!vagaEntityOptional.isPresent()){
-            throw new MyException("Vaga não encontrada!");
+            throw new Exception("Vaga não encontrada!");
         }
 
         return VagaMapper.INSTANCE.mapToSaida(vagaEntityOptional.get());
@@ -120,10 +120,6 @@ public class VagaService {
 
     public List<VagaSaida> buscarPorNome(String nome) throws Exception {
         List<VagaEntity> vagaEntities = vagaRepository.findByTituloContainingIgnoreCase(nome);
-
-        if(vagaEntities.isEmpty()){
-            throw new Exception("Nenhuma vaga com esse nome, busque novamente");
-        }
 
         return VagaMapper.INSTANCE.mapToSaidaList(vagaEntities);
     }

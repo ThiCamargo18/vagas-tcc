@@ -33,6 +33,14 @@ public class VagaSaida {
     private Integer numeroVagasEncontradas;
     private Long idEmpresa;
 
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
     public Long getId() {
         return id;
     }

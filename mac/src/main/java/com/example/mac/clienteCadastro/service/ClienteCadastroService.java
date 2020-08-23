@@ -42,7 +42,7 @@ public class ClienteCadastroService {
     public ClienteCadastroSaida criar(ClienteCadastroEntrada entrada, Long idCliente) throws Exception {
         ClienteSaida clienteSaida = clienteService.atualizarPrimeiroAcesso(idCliente);
         DadosAdicionaisSaida dadosAdicionaisSaida = dadosAdicionaisService.criar(entrada.getDadosAdicionais(),idCliente);
-        DadosPessoaisSaida dadosPessoaisSaida = dadosPessoaisService.criar(entrada.getDadosPessoais(),idCliente);
+        DadosPessoaisSaida dadosPessoaisSaida = dadosPessoaisService.criar(entrada.getDadosPessoais(),idCliente,dadosAdicionaisSaida.getCidade());
         ExperienciaSaida experienciaSaida = experienciaService.criar(entrada.getExperiencia(),idCliente);
         HabilidadesSaida habilidadesSaida = habilidadesService.criar(entrada.getHabilidades(),idCliente,dadosPessoaisSaida.getNomeCompleto());
         RegistroSaida registroSaida = registroNacionalService.criar(entrada.getRegistro(),idCliente );

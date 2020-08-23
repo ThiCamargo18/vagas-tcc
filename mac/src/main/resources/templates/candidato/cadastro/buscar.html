@@ -346,17 +346,6 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="validationServer04">Possui experiência?</label>
-                        <select class="form-control" th:field="*{dadosPessoais.experiencia}" id="experiencia" required disabled>
-                            <option selected disabled value="">Escolher...</option>
-                            <option value="SIM">SIM</option>
-                            <option value="NAO">NÃO</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Por favor, selecione a experiência.
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
                         <label for="validationServer04">Formação</label>
                         <select class="form-control" th:field="*{dadosPessoais.formacao}" id="formacao" required disabled>
                             <option selected disabled value="">Escolher...</option>
@@ -384,21 +373,6 @@
                         <div class="invalid-feedback">
                             Por favor, selecione o e-mail.
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label >Cidade: </label>
-                        <select class="form-control" th:field="*{dadosPessoais.cidade}" id="cidades" required disabled>
-                            <option selected disabled value="">Selecione...</option>
-                            <option value="Campinas">Campinas</option>
-                            <option value="Hortolandia">Hortolândia</option>
-                            <option value="Sumare">Sumaré</option>
-                            <option value="Valinhos">Valinhos</option>
-                            <option value="Vinhedo">Vinhedo</option>
-                            <option value="Louveira">Louveira</option>
-                            <option value="Monte-mor">Monte-mor</option>
-                            <option value="Paulinia">Paulínia</option>
-                            <option value="Indaiatuba">Indaiatuba</option>
-                        </select>
                     </div>
                     <div id="divDadosPessoais" style="display: none;">
                         <button type="submit" class="btn btn-success" id="botaoAtualizar">
@@ -503,7 +477,7 @@
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="validationServer04">Data Expedição</label>
-                        <input type="text" class="form-control" th:field="*{registro.dataExpedicao}" id="expedicao" required disabled>
+                        <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" th:field="*{registro.dataExpedicao}" id="expedicao" required disabled>
                         <div class="invalid-feedback">
                             Data Expedição obrigatória, digite uma valor.
                         </div>
@@ -531,17 +505,6 @@
                     </ol>
                 </div>
                 <form class="form-row" action="/experiencia/atualizar" method="POST">
-                    <div class="col-md-3 mb-3">
-                        <label for="validationServer04">Possui experiência?</label>
-                        <select class="form-control" th:field="*{experiencia.possui}" id="possuiExperiencia" required disabled>
-                            <option selected disabled value="">Escolher...</option>
-                            <option value="SIM">SIM</option>
-                            <option value="NAO">NÃO</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Por favor, selecione a experiência.
-                        </div>
-                    </div>
 
                     <div class="col-md-5 mb-3" >
                         <label for="validationServer01">Cargo </label>
@@ -550,15 +513,15 @@
 
                     <div class="col-md-2 mb-3" >
                         <label for="validationServer01">Data Inicio </label>
-                        <input type="text" class="form-control" th:field="*{experiencia.dataInicio}" id="dataInicio" value="" disabled>
+                        <input type="text" class="form-control"  onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" th:field="*{experiencia.dataInicio}" id="dataInicio" value="" disabled>
                     </div>
                     <div class="col-md-2 mb-3" >
                         <label for="validationServer01">Data Fim </label>
-                        <input type="text" class="form-control" th:field="*{experiencia.dataFim}" id="dataFim" value="" disabled>
+                        <input type="text" class="form-control"  onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" th:field="*{experiencia.dataFim}" id="dataFim" value="" disabled>
                     </div>
                     <div class="col-md-2 mb-3" >
                         <label for="validationServer01">Salário </label>
-                        <input type="text" class="form-control" th:field="*{experiencia.salario}" id="salario" value="" disabled>
+                        <input type="text" class="form-control" onkeypress="mascarar(this,moeda)" placeholder="0.000" th:field="*{experiencia.salario}" id="salario" value="" disabled>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="validationServer01">Categoria</label>

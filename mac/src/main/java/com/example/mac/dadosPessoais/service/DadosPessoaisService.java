@@ -25,18 +25,25 @@ public class DadosPessoaisService {
     @Autowired
     HabilidadesService habilidadesService;
 
-    public DadosPessoaisSaida criar(DadosPessoaisEntrada dadosPessoais,Long id) {
+
+    public DadosPessoaisSaida criar(DadosPessoaisEntrada dadosPessoais,Long id,String cidade) {
         DadosPessoaisEntity dadosPessoaisEntity = DadosPessoaisMapper.INSTANCE.mapToEntity(dadosPessoais);
 
         dadosPessoaisEntity.setIdUsuario(id);
-
+        dadosPessoaisEntity.setCidade(cidade);
         dadosPessoaisRepository.save(dadosPessoaisEntity);
 
         return DadosPessoaisMapper.INSTANCE.mapToSaida(dadosPessoaisEntity);
     }
 
-    public DadosPessoaisEntity buscarPorIdCliente(long id) {
-        return dadosPessoaisRepository.findByIdUsuario(id);
+    public DadosPessoaisEntity buscarPorIdCliente(long id) throws Exception {
+        DadosPessoaisEntity dadosPessoaisEntity =  dadosPessoaisRepository.findByIdUsuario(id);
+
+        if(dadosPessoaisEntity.equals(null)){
+            throw new Exception("Candidato não encontrado!");
+        }
+
+        return dadosPessoaisEntity;
     }
 
     public DadosPessoaisSaida atualizar(DadosPessoaisEntrada dadosPessoaisEntrada, Long id) throws Exception {
@@ -46,7 +53,7 @@ public class DadosPessoaisService {
         DadosPessoaisEntity dadosRetornoEntity = dadosPessoaisRepository.findByIdUsuario(id);
         DadosPessoaisEntity dadosPessoaisEntity = DadosPessoaisMapper.INSTANCE.mapToEntity(dadosPessoaisEntrada);
         dadosPessoaisEntity.setId(dadosRetornoEntity.getId());
-        dadosPessoaisEntity.setIdUsuario(id);
+        dadosPessoaisEntity.setIdUsuario(dadosRetornoEntity.getIdUsuario());
 
         dadosPessoaisRepository.save(dadosPessoaisEntity);
 
@@ -63,5 +70,15 @@ public class DadosPessoaisService {
 
     public List<DadosPessoaisEntity> buscarPorNome(String nome) {
         return dadosPessoaisRepository.findByNomeCompletoContainingIgnoreCase(nome);
+    }
+
+    public void atualizarCidade(Object o, Long id, String cidade) throws Exception {
+        DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisRepository.findByIdUsuario(id);
+
+        if(dadosPessoaisEntity.equals(null)){
+            throw new Exception("Candidato não encontrado na base de dados!");
+        }
+        dadosPessoaisEntity.setCidade(cidade);
+        dadosPessoaisRepository.save(dadosPessoaisEntity);
     }
 }

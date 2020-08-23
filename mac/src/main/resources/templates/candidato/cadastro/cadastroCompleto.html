@@ -300,7 +300,7 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationServer04">Pretensão salarial</label>
-                            <input type="text" class="form-control" name="dadosPessoais.pretensaoSalarial" id="validationPretensao" required>
+                            <input type="text" class="form-control" onkeypress="mascarar(this,moeda)" placeholder="0.000" name="dadosPessoais.pretensaoSalarial" id="validationPretensao" required>
                             <div class="invalid-feedback">
                                 Pretensão salarial obrigatória.
                             </div>
@@ -320,18 +320,18 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationServer04">Telefone Fixo</label>
-                            <input type="text" class="form-control" name="dadosPessoais.telefone" id="validationTelefone">
+                            <input type="text" class="form-control" name="dadosPessoais.telefone" placeholder="(00) 00000-0000" maxlength="15" onkeypress="mascarar(this,mascaraTel)" id="validationTelefone">
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationServer04">Celular</label>
-                            <input type="text" class="form-control" name="dadosPessoais.celular" id="validationCelular" required>
+                            <input type="text" class="form-control" name="dadosPessoais.celular" placeholder="(00) 00000-0000" maxlength="15" onkeypress="mascarar(this,mascaraTel)" id="validationCelular" required>
                             <div class="invalid-feedback">
                                 Celular obrigatório, digite uma valor.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationServer04">Data Nascimento</label>
-                            <input type="text" class="form-control" name="dadosPessoais.dataNascimento" id="validationData" required>
+                            <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" name="dadosPessoais.dataNascimento" id="validationData" required>
                             <div class="invalid-feedback">
                                 Data de nascimento obrigatório, digite uma valor.
                             </div>
@@ -345,17 +345,6 @@
                             </select>
                             <div class="invalid-feedback">
                                 Por favor, selecione a condução.
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Possui experiência?</label>
-                            <select class="form-control" name="dadosPessoais.experiencia" id="validationExperiencia" required>
-                                <option selected disabled value="">Escolher...</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NAO">NÃO</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Por favor, selecione a experiência.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
@@ -387,21 +376,6 @@
                                 Por favor, selecione o e-mail.
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label >Cidade: </label>
-                            <select class="form-control" id="exampleSelect3" name="dadosPessoais.cidade" required>
-                                <option selected disabled value="">Selecione...</option>
-                                <option value="Campinas">Campinas</option>
-                                <option value="Hortolandia">Hortolândia</option>
-                                <option value="Sumare">Sumaré</option>
-                                <option value="Valinhos">Valinhos</option>
-                                <option value="Vinhedo">Vinhedo</option>
-                                <option value="Louveira">Louveira</option>
-                                <option value="Monte-mor">Monte-mor</option>
-                                <option value="Paulinia">Paulínia</option>
-                                <option value="Indaiatuba">Indaiatuba</option>
-                            </select>
-                        </div>
                         <div class="container-fluid">
                             <ol class="breadcrumb mb-4">
                                 <li class="breadcrumb-item active">Dados adicionais</li>
@@ -410,7 +384,7 @@
 
                         <div class="col-md-3 mb-3">
                             <label for="validationServer04">CEP</label>
-                            <input type="text" class="form-control" name="dadosAdicionais.cep" id="validationCep" required>
+                            <input type="text" class="form-control" onkeypress="mascarar(this,cepMask)" placeholder="00000-000" maxlength="9" name="dadosAdicionais.cep" id="validationCep" required>
                             <div class="invalid-feedback">
                                 CEP obrigatório, digite uma valor.
                             </div>
@@ -486,7 +460,7 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationServer04">Data Expedição</label>
-                            <input type="text" class="form-control" name="registro.dataExpedicao" id="validationDataExpedicao" required>
+                            <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" name="registro.dataExpedicao" id="validationDataExpedicao" required>
                             <div class="invalid-feedback">
                                 Data Expedição obrigatória, digite uma valor.
                             </div>
@@ -505,18 +479,6 @@
                             </ol>
                         </div>
 
-                        <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Possui experiência?</label>
-                            <select class="form-control" name="experiencia.possui" id="validationExperiencia3" required>
-                                <option selected disabled value="">Escolher...</option>
-                                <option value="SIM">SIM</option>
-                                <option value="NAO">NÃO</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Por favor, selecione a experiência.
-                            </div>
-                        </div>
-
                         <div class="col-md-5 mb-3" >
                             <label for="validationServer01">Cargo </label>
                             <input type="text" class="form-control" name="experiencia.cargo" id="validationCargo" value="" >
@@ -524,15 +486,15 @@
 
                         <div class="col-md-2 mb-3" >
                             <label for="validationServer01">Data Inicio </label>
-                            <input type="text" class="form-control" name="experiencia.dataInicio" id="validationDataInicio" value="" >
+                            <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" name="experiencia.dataInicio" id="validationDataInicio" value="" >
                         </div>
                         <div class="col-md-2 mb-3" >
                             <label for="validationServer01">Data Fim </label>
-                            <input type="text" class="form-control" name="experiencia.dataFim" id="validationDataFim" value="" >
+                            <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" name="experiencia.dataFim" id="validationDataFim" value="" >
                         </div>
                         <div class="col-md-2 mb-3" >
                             <label for="validationServer01">Salário </label>
-                            <input type="text" class="form-control" name="experiencia.salario" id="validationSalario" value="" >
+                            <input type="text" class="form-control" onkeypress="mascarar(this,moeda)" placeholder="0.000" name="experiencia.salario" id="validationSalario" value="" >
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationServer01">Categoria</label>

@@ -19,4 +19,12 @@ public class DadosAdicionaisSaida {
     private Integer numero;
     private String referencia;
     private Long idUsuario;
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
 }

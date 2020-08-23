@@ -54,6 +54,7 @@ public class EntrevistaService {
 
     public EntrevistaSaida atualizar(long id, EntrevistaEntrada entrevistaEntrada) throws MyException {
         EntrevistaEntity entrevistaEntity = EntrevistaMapper.INSTANCE.mapToEntity(entrevistaEntrada);
+        entrevistaEntity.setId(id);
 
         entrevistaRepository.save(entrevistaEntity);
 

@@ -10,6 +10,7 @@ import com.example.mac.dadosAdicionais.model.DadosAdicionaisEntrada;
 import com.example.mac.dadosAdicionais.model.DadosAdicionaisSaida;
 import com.example.mac.dadosAdicionais.repository.DadosAdicionaisRepository;
 import com.example.mac.dadosPessoais.mapper.DadosPessoaisMapper;
+import com.example.mac.dadosPessoais.service.DadosPessoaisService;
 import org.hibernate.annotations.LazyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Service;
 public class DadosAdicionaisService {
     @Autowired
     DadosAdicionaisRepository dadosAdicionaisRepository;
+    @Autowired
+    DadosPessoaisService dadosPessoaisService;
 
     public DadosAdicionaisSaida criar(DadosAdicionaisEntrada dadosAdicionais,Long id) {
         DadosAdicionaisEntity dadosAdicionaisEntity = DadosAdicionaisMapper.INSTANCE.mapToEntity(dadosAdicionais);
@@ -33,11 +36,12 @@ public class DadosAdicionaisService {
 
 
     public DadosAdicionaisSaida atualizar(DadosAdicionaisEntrada dadosAdicionaisEntrada, Long id) throws Exception {
+        dadosPessoaisService.atualizarCidade(null,id,dadosAdicionaisEntrada.getCidade());
         DadosAdicionaisEntity entity = dadosAdicionaisRepository.findByIdUsuario(id);
 
         DadosAdicionaisEntity dadosAdicionaisEntity = DadosAdicionaisMapper.INSTANCE.mapToEntity(dadosAdicionaisEntrada);
         dadosAdicionaisEntity.setId(entity.getId());
-        dadosAdicionaisEntity.setIdUsuario(id);
+        dadosAdicionaisEntity.setIdUsuario(entity.getIdUsuario());
 
         dadosAdicionaisRepository.save(dadosAdicionaisEntity);
 

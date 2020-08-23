@@ -103,7 +103,15 @@
         <main>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <section>
-                <div class="container-md" style="width: 100%;">
+                <div class="container-md" style="width: 100%; margin-top:10px;">
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">
+                            <div class="row">
+                                <span class="font-weight-bold">Vagas encontradas: </span>
+                                <span class="font-weight-bold" th:utext="${vagaFiltro.numeroVagasEncontradas} "></span>
+                            </div>
+                        </li>
+                    </ol>
                     <div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="vaga : ${vaga}">
                         <div class="card-body" >
                             <div class="row">
@@ -149,13 +157,24 @@
                                 <div class="col">
                                 </div>
                                 <div class="col">
-                                    <button style="margin-left: 80px;" class="btn btn-danger"
-                                       data-toggle="modal" data-target="#modalExcluir"
-                                       th:onclick="'setaDadosModal('+${vaga.id}+')'" >Excluir</button>
+                                    <button class="btn btn-danger"
+                                            data-toggle="modal" data-target="#modalExcluir"
+                                            th:onclick="'setaDadosModal('+${vaga.id}+')'" >
+                                        Excluir
+                                    </button>
+                                    <a style="margin-left: 5px;" class="btn btn-info" type="button"
+                                       th:href="@{/vaga/atualizar/{id}(id=${vaga.id})}" >Atualizar
+                                    </a>
                                 </div>
                                 <div class="col">
-                                    <a style="margin-left: 5px;" class="btn btn-info" type="button"
-                                            th:href="@{/vaga/atualizar/{id}(id=${vaga.id})}" >Atualizar</a>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio1" name="ativa" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio1">Ativa</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="customRadio2" name="desativa" class="custom-control-input">
+                                        <label class="custom-control-label" for="customRadio2">Desativa</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>

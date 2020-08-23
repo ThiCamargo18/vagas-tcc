@@ -37,7 +37,7 @@ public class RegistroNacionalService {
         RegistroEntity registroEntity = RegistroNacionalMapper.INSTANCE.mapToEntity(registroEntrada);
 
         registroEntity.setId(registroEntityBanco.getId());
-        registroEntity.setIdUsuario(id);
+        registroEntity.setIdUsuario(registroEntityBanco.getIdUsuario());
         registroNacionalRepository.save(registroEntity);
 
         return RegistroNacionalMapper.INSTANCE.mapToSaida(registroEntity);

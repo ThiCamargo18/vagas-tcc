@@ -29,17 +29,14 @@ public class Vaga {
 
     @GetMapping("/listar")
     public ModelAndView listar(HttpServletRequest request){
-        List<VagaSaida> saida = vagaService.listar();
-        int numeroVagasEncontradas = saida.size();
-        if(numeroVagasEncontradas>0){
-            saida.get(0).setNumeroVagasEncontradas(numeroVagasEncontradas);
-        } else{
-            VagaSaida vagaSaida = new VagaSaida();
-            vagaSaida.setNumeroVagasEncontradas(0);
-            saida.add(vagaSaida);
-        }
+        List<VagaSaida> vagaSaidaList = vagaService.listar();
+        VagaSaida vagaSaida = new VagaSaida();
+        int numeroVagasEncontradas = vagaSaidaList.size();
+        vagaSaida.setNumeroVagasEncontradas(numeroVagasEncontradas);
+
         ModelAndView mv = new ModelAndView("/candidato/vaga/listar");
-        mv.addObject("vaga",saida);
+        mv.addObject("vaga",vagaSaidaList);
+        mv.addObject("vagaFiltro",vagaSaida);
         return mv;
     }
 
@@ -101,13 +98,14 @@ public class Vaga {
 
     @GetMapping("/buscarPorNome")
     public ModelAndView buscarPorNome (@RequestParam String nome) throws Exception {
+        List<VagaSaida> vagaSaidaList = vagaService.buscarPorNome(nome);
+        VagaSaida vagaSaida = new VagaSaida();
+        int numeroVagasEncontradas = vagaSaidaList.size();
+        vagaSaida.setNumeroVagasEncontradas(numeroVagasEncontradas);
+
         ModelAndView mv = new ModelAndView("/candidato/vaga/listar");
-        List<VagaSaida> vagaSaidas = vagaService.buscarPorNome(nome);
-        int numeroVagasEncontradas = vagaSaidas.size();
-        if(numeroVagasEncontradas>0){
-            vagaSaidas.get(0).setNumeroVagasEncontradas(numeroVagasEncontradas);
-        }
-        mv.addObject("vaga",vagaSaidas);
+        mv.addObject("vagaFiltro",vagaSaida);
+        mv.addObject("vaga",vagaSaidaList);
         return mv;
     }
 }

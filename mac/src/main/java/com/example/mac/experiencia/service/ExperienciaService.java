@@ -34,8 +34,9 @@ public class ExperienciaService {
     public ExperienciaSaida atualizar(Long id, ExperienciaEntrada experienciaEntrada) throws Exception {
         ExperienciaEntity entity = experienciaRepository.findByIdUsuario(id);
         ExperienciaEntity experienciaEntity = ExperienciaMapper.INSTANCE.mapToEntity(experienciaEntrada);
+
         experienciaEntity.setId(entity.getId());
-        experienciaEntity.setIdUsuario(id);
+        experienciaEntity.setIdUsuario(entity.getIdUsuario());
         experienciaRepository.save(experienciaEntity);
 
         return ExperienciaMapper.INSTANCE.mapToSaida(experienciaEntity);
