@@ -36,6 +36,7 @@ public class VagaService {
     public void criar(VagaEntrada entrada) throws MyException {
         VagaEntity vagaEntity = VagaMapper.INSTANCE.mapToEntity(entrada);
 
+        vagaEntity.setStatus("ATIVA");
         vagaEntity.setNumeroInscritos(0);
         vagaEntity.setIdEmpresa(1L);
 
@@ -46,20 +47,6 @@ public class VagaService {
         List<VagaEntity> vagaEntities = vagaRepository.findAll();
 
         return VagaMapper.INSTANCE.mapToSaidaList(vagaEntities);
-    }
-
-    public Boolean atualizarNumeroInscritosVaga(Long id) throws Exception {
-        Optional<VagaEntity> vagaEntity = vagaRepository.findById(id);
-
-        if(!vagaEntity.isPresent()){
-            return false;
-        }
-
-        VagaEntity vaga = vagaEntity.get();
-        vaga.setNumeroInscritos(vaga.getNumeroInscritos()+1);
-        vagaRepository.save(vaga);
-
-        return true;
     }
 
     public VagaSaida inscrever(Long idUsuario, Long idVaga) throws Exception {
@@ -136,6 +123,20 @@ public class VagaService {
         VagaEntity vagaEntity = VagaMapper.INSTANCE.mapToEntity(vagaEntrada);
 
         vagaEntity.setIdEmpresa(1l);
+        vagaRepository.save(vagaEntity);
+    }
+
+    public void atualizarStatus(VagaEntrada vagaEntrada) throws Exception {
+        Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(vagaEntrada.getId());
+
+        if(!vagaEntityOptional.isPresent()){
+            throw new Exception("Vaga não encontrada, busque novamente");
+        }
+
+        VagaEntity vagaEntity = vagaEntityOptional.get();
+        vagaEntity.setStatus(vagaEntrada.getStatus());
+
+
         vagaRepository.save(vagaEntity);
     }
 }

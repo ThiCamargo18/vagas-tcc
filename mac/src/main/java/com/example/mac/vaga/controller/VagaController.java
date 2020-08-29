@@ -48,7 +48,7 @@ public class VagaController {
     }
 
     @PostMapping("/atualizar")
-    public HttpStatus atualizar(@RequestBody VagaEntrada vagaEntrada){ //Id ja vem do front
+    public HttpStatus atualizar(@RequestBody VagaEntrada vagaEntrada){ //TODO Id ja vem do front
         vagaService.atualizar(vagaEntrada);
 
         return HttpStatus.OK;
@@ -112,5 +112,12 @@ public class VagaController {
         mv.addObject("vagaFiltro",vagaSaida);
         mv.addObject("vaga",vagaSaidaList);
         return mv;
+    }
+
+    @PostMapping("/atualizarStatus")
+    public HttpStatus atualizarStatus(@RequestBody VagaEntrada vagaEntrada) throws Exception { //TODO Id da vaga vem do front
+        vagaService.atualizarStatus(vagaEntrada);
+
+        return HttpStatus.OK;
     }
 }

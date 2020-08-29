@@ -111,7 +111,7 @@
                   novalidate style="margin-left: 20px;margin-right: 20px; margin-top: 20px;" id="formVaga">
                 <div class="form-row">
                     <div class="col-md-6 mb-3" >
-                        <label for="validationServer01">Título </label>
+                        <label for="titulo">Título </label>
                         <input type="text" class="form-control" name="titulo" id="titulo" value="" required = false>
                         <div class="valid-feedback">
                             Ok!
@@ -120,21 +120,21 @@
                 </div>
                 <div class="form-row">
                     <div class="col-md-2 mb-3">
-                        <label for="validationServer04">Quantidade</label>
+                        <label for="quantidade">Quantidade</label>
                         <input type="text" class="form-control" name="quantidade" id="quantidade" required>
                         <div class="invalid-feedback">
                             Digite a quantidade de vagas.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="validationServer04">Cidade</label>
+                        <label for="cidade">Cidade</label>
                         <input type="text" class="form-control" name="cidade" id="cidade" required>
                         <div class="invalid-feedback">
                             Necessário selecionar a cidade.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="validationServer04">Categoria</label>
+                        <label for="categoria">Categoria</label>
                         <select class="form-control" name="categoria" id="categoria" required>
                             <option selected disabled value="">Escolher...</option>
                             <option value="CLT">CLT</option>
@@ -162,25 +162,25 @@
                         </div>
                     </div>
                     <div class="col-md-2 mb-3">
-                        <label for="validationServer04">Salário</label>
+                        <label for="validationSalario">Salário</label>
                         <input type="text" class="form-control" name="salario" onkeypress="mascarar(this,moeda)" id="validationSalario">
                     </div>
                     <div class="col-md-6 mb-3" >
-                        <label for="validationServer01">Alguma observação? </label>
+                        <label for="observacao">Alguma observação? </label>
                         <input type="text" class="form-control" name="observacao" id="observacao" value="">
                         <div class="valid-feedback">
                             Ok!
                         </div>
                     </div>
                     <div class="col-md-6 mb-3" >
-                        <label for="validationServer01">Benefícios</label>
+                        <label for="beneficio1">Benefícios</label>
                         <input style="margin-top: 3px;"type="text" class="form-control" name="beneficios[0]" id="beneficio1" value="" >
                         <input style="margin-top: 3px;"type="text" class="form-control" name="beneficios[1]" id="beneficio2" value="" >
                         <input style="margin-top: 3px;"type="text" class="form-control" name="beneficios[2]" id="beneficio3" value="" >
                         <input style="margin-top: 3px;"type="text" class="form-control" name="beneficios[3]" id="beneficio4" value="" >
                     </div>
                     <div class="col-md-6 mb-3" >
-                        <label for="validationServer01">Adidione até 5 habilidades - Conhecimentos/Cursos/Treinamentos</label>
+                        <label for="habilidade1">Adidione até 5 habilidades - Conhecimentos/Cursos/Treinamentos</label>
                         <input style="margin-top: 3px;"type="text" class="form-control" name="descricaoHabilidades[0]" id="habilidade1" value="" >
                         <input style="margin-top: 3px;"type="text" class="form-control" name="descricaoHabilidades[1]" id="habilidade2" value="" >
                         <input style="margin-top: 3px;"type="text" class="form-control" name="descricaoHabilidades[2]" id="habilidade3" value="" >
@@ -188,17 +188,17 @@
                         <input style="margin-top: 3px;"type="text" class="form-control" name="descricaoHabilidades[4]" id="habilidade5" value="" >
                     </div>
                     <div class="col-md-6 mb-4" style="margin-left: 2px;">
-                        <label for="validationServer04">Responsabilidades</label>
+                        <label for="responsabilidades">Responsabilidades</label>
                         <textarea class="form-control" name="responsabilidade" id="responsabilidades" style="width: 40vh;margin-right: 3px;" rows="3"></textarea>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="validationServer04">Data limite para inscrição</label>
+                            <label for="dataLimite">Data limite para inscrição</label>
                             <input type="date" class="form-control" name="dataLimite" id="dataLimite">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="validationServer04">Turno</label>
+                            <label for="turno">Turno</label>
                             <input type="text" class="form-control" name="turno" id="turno">
                         </div>
                     </div>

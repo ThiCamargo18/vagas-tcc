@@ -130,14 +130,14 @@
                         <input th:value="${cliente.id}" name="idCliente" id="idCliente" type="text" class="form-control" readonly="readonly">
                     </div>
                     <div class="input-group mb-3">
-                        <label for="example-time-input" class="col-2 col-form-label">Data</label>
+                        <label for="data" class="col-2 col-form-label">Data</label>
                         <input class="form-control" type="date" name="data" value="" id="data" required>
                         <div class="invalid-feedback">
                             Necessário informar a data.
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <label for="example-time-input" class="col-2 col-form-label">Hora</label>
+                        <label for="horario" class="col-2 col-form-label">Hora</label>
                         <input class="form-control" type="time" name="horario" value="" id="horario" required>
                         <div class="invalid-feedback">
                             Necessário informar o horário.
@@ -148,6 +148,36 @@
                         <div class="col-10">
                             <input style="margin-left: -10px; width: 104%;" class="form-control" type="text" name="local" id="local">
                         </div>
+                    </div>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Preenchimento e-mail</li>
+                    </ol>
+                    <div class="input-group mb-3">
+                        <label class="col-2 col-form-label">Descrição remetente</label>
+                        <div class="col-10">
+                            <input style="margin-left: -11px; width: 102%;" class="form-control" type="text"
+                                   name="mensagemEmail.remetente" id="remetente">
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="col-2 col-form-label">Assunto</label>
+                        <div class="col-10">
+                            <input style="margin-left: -11px; width: 102%;" class="form-control" type="text"
+                                   name="mensagemEmail.assunto" id="assunto">
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="col-2 col-form-label">Corpo</label>
+                        <div class="col-10">
+                            <textarea id="summernote" type="text" class="form-control" name="mensagemEmail.corpo" placeholder="Texto *"></textarea>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Destinatário</span>
+                        </div>
+                        <input type="text" th:value="${email.destinatarios[0]}" name="mensagemEmail.destinatarios" id="destinatarios"
+                               class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" readonly="readonly">
                     </div>
                     <div style="display:none">
                         <input id="esconderVaga" value="false">

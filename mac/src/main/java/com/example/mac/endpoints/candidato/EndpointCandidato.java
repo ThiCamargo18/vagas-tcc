@@ -61,7 +61,7 @@ public class EndpointCandidato {
         clienteSessao.setNome(clienteEntity.getNome());
         clienteSessao.setPrimeiroAcesso(clienteEntity.getPrimeiroAcesso());
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(); //TODO caso nao tenha uma sessão eu instancio ooutra
         session.setAttribute("usuarioLogado",clienteSessao);
 
         ModelAndView mv = new ModelAndView("/candidato/index");

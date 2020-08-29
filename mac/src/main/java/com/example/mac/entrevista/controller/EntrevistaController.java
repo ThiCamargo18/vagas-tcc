@@ -3,10 +3,12 @@ package com.example.mac.entrevista.controller;
 import com.example.mac.cliente.model.ClienteEntity;
 import com.example.mac.cliente.model.ClienteSaida;
 import com.example.mac.cliente.service.ClienteService;
+import com.example.mac.dadosPessoais.service.DadosPessoaisService;
 import com.example.mac.entrevista.model.EntrevistaEntrada;
 import com.example.mac.entrevista.model.EntrevistaSaida;
 import com.example.mac.entrevista.service.EntrevistaService;
 import com.example.mac.exception.MyException;
+import com.example.mac.mail.Mensagem;
 import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -30,6 +33,8 @@ public class EntrevistaController {
     EntrevistaService entrevistaService;
     @Autowired
     ClienteService clienteService;
+    @Autowired
+    DadosPessoaisService dadosPessoaisService;
 
     @RequestMapping("/selecionar")
     public ModelAndView selecionar(){
@@ -38,30 +43,38 @@ public class EntrevistaController {
 
     @RequestMapping("/nova")
     public ModelAndView novaEntrevista(@RequestParam String cpf) throws Exception {
-        ClienteEntity cliente = clienteService.buscarEVerificarExistenciaClientePorCpf(cpf);
+        ClienteEntity cliente = clienteService.buscarEVerificarExistenciaClientePorCpf(cpf); //TODO usar @Query e remover cpf do ClienteEntity
 
         if(cliente==null){
             throw new Exception("Candidato não encontrado");
         }
+
+        String emailUsuario = dadosPessoaisService.buscarEmailUsuarioPorIdNovaVaga(cliente.getId());
+        Mensagem dadosEmail = new Mensagem(null, Arrays.asList(emailUsuario),null,null);
+
         ModelAndView mv = new ModelAndView("/admin/entrevista/nova"); //Tem 2 métodos iguais, mas esse é para navbar
         mv.addObject("cliente",cliente);
+        mv.addObject("email",dadosEmail);
         return mv;
     }
 
     @PostMapping("/novaVaga")
-    public HttpStatus nova(@RequestBody EntrevistaEntrada entrevistaEntrada,HttpServletResponse response) throws MyException, IOException {
+    public HttpStatus nova(@RequestBody EntrevistaEntrada entrevistaEntrada,HttpServletResponse response) throws Exception {
         entrevistaService.novaEntrevistaPelaNavbar(entrevistaEntrada);
 
         return HttpStatus.OK;
     }
 
     @RequestMapping("/criar/{id}") //criar
-    public ModelAndView criar(@PathVariable Long id) throws MyException {
+    public ModelAndView criar(@PathVariable Long id) throws Exception {
         EntrevistaEntrada entrevistaEntrada = new EntrevistaEntrada();
         ModelAndView mv = new ModelAndView("/admin/entrevista/criar");
         ClienteEntity clienteSaida = clienteService.buscarEVerificarExistenciaClientePorIdVaga(id);
+        String emailUsuario = dadosPessoaisService.buscarEmailUsuarioPorId(clienteSaida.getId());
+        Mensagem dadosEmail = new Mensagem(null, Arrays.asList(emailUsuario),null,null);
         mv.addObject("cliente",clienteSaida);
         mv.addObject("entrevista",entrevistaEntrada);
+        mv.addObject("email",dadosEmail);
         return mv;
     }
 
@@ -88,7 +101,7 @@ public class EntrevistaController {
     }
 
     @RequestMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable long id) throws MyException {
+    public ModelAndView editar(@PathVariable long id) throws Exception {
         EntrevistaSaida entrevistaSaida = entrevistaService.buscar(id);
         ModelAndView modelAndView = new ModelAndView("/admin/entrevista/atualizar");
         modelAndView.addObject("entrevista",entrevistaSaida);
@@ -96,7 +109,7 @@ public class EntrevistaController {
     }
 
     @PostMapping("/atualizar/{id}")
-    public void atualizar(@PathVariable long id,HttpServletResponse response,@Valid EntrevistaEntrada entrevistaEntrada) throws MyException, IOException {
+    public void atualizar(@PathVariable long id,HttpServletResponse response,@Valid EntrevistaEntrada entrevistaEntrada) throws Exception {
         entrevistaService.atualizar(id,entrevistaEntrada);
 
         response.sendRedirect("http://localhost:8088/entrevista/listar");

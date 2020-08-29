@@ -69,23 +69,20 @@ public class Filtros {
 
     @GetMapping("/palavraChave/{id}")
     public ModelAndView filtrarPorPalavraChaveResumoProfissional(@RequestParam(value = "chave1",required = false) String chave1,
-                                                                 @RequestParam(value = "chave2",required = false) String chave2,
-                                                                 @RequestParam(value = "chave3",required = false) String chave3,
-                                                                 @RequestParam(value = "chave4",required = false) String chave4,
                                                                  @PathVariable(value = "id",required = true) Long idVaga) throws Exception {
+        String parametro=null;
 
-        List<String> listaParametros = new ArrayList<>();
-        if(chave1 != "") listaParametros.add(chave1);
-        if(chave2 != "") listaParametros.add(chave2);
-        if(chave3 != "") listaParametros.add(chave3);
-        if(chave4 != "") listaParametros.add(chave4);
+        if(chave1 != ""){
+            parametro = chave1;
+        }
+
         Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(idVaga);
 
         if(!vagaEntityOptional.isPresent()){
             throw new Exception("Vaga não encontrada, busque novamente!");
         }
 
-        List<HabilidadesSaida> cliente = habilidadesService.filtrarPorResumoProfissional(idVaga,listaParametros,vagaEntityOptional.get());
+        List<HabilidadesSaida> cliente = habilidadesService.filtrarPorResumoProfissional(idVaga,parametro,vagaEntityOptional.get());
 
         if(cliente == null){
             HabilidadesSaida clienteNull = new HabilidadesSaida();
@@ -95,6 +92,7 @@ public class Filtros {
             mv.addObject("vaga",vagaEntityOptional.get());
             return mv;
         }
+
         ModelAndView mv = new ModelAndView("/admin/candidato/buscarPorPalavraChave");
         mv.addObject("cliente",cliente);
         mv.addObject("vaga",vagaEntityOptional.get());

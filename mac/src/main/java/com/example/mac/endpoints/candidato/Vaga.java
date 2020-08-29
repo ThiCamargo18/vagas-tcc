@@ -49,24 +49,20 @@ public class Vaga {
     public ModelAndView filtrar(
                                 @RequestParam(value = "formacao", required = false) String formacao,
                                 @RequestParam(value = "categoria", required = false) CategoriaEnum categoria){
-
+        VagaSaida vagaSaida = new VagaSaida();
         VagaEntity vagaEntity = new VagaEntity();
         vagaEntity.setCategoria(categoria);
         vagaEntity.setFormacao(formacao);
 
         List<VagaEntity> listaEntity = vagaService.filtrar(vagaEntity);
         List<VagaSaida> listSaida = VagaMapper.INSTANCE.mapToSaidaList(listaEntity);
+
         int numeroVagasEncontradas = listSaida.size();
-        if(numeroVagasEncontradas>0){
-            listSaida.get(0).setNumeroVagasEncontradas(numeroVagasEncontradas); //debugar
-        } else {
-            VagaSaida vagaSaida = new VagaSaida();
-            vagaSaida.setNumeroVagasEncontradas(0);
-            listSaida.add(vagaSaida);
-        }
+        vagaSaida.setNumeroVagasEncontradas(numeroVagasEncontradas);
+        
         ModelAndView mv = new ModelAndView("/candidato/vaga/listar");
         mv.addObject("vaga",listSaida);
-
+        mv.addObject("vagaFiltro",vagaSaida);
         return mv;
     }
 

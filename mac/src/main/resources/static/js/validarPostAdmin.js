@@ -122,6 +122,15 @@
 
                 function criarEntrevistaPost(){
 
+                    var listDestinatarios = [];
+                    listDestinatarios[0] = $("#destinatarios").val();
+                    var dadosEmail = {
+                            remetente : $("#remetente").val(),
+                            destinatarios: listDestinatarios,
+                            assunto :$("#assunto").val(),
+                            corpo: $("#summernote").val(),
+                    }
+
                     // PREPARE FORM DATA
                     var formEntrevistaCriar = {
                     nomeCliente : $("#nomeCliente").val(),
@@ -129,6 +138,7 @@
                     data : $("#data").val(),
                     horario : $("#horario").val(),
                     local : $("#local").val(),
+                    mensagemEmail : dadosEmail,
                     }
 
                     // DO POST
@@ -149,6 +159,15 @@
 
                 function novaEntrevistaPost(){
 
+                     var listDestinatarios = [];
+                     listDestinatarios[0] = $("#destinatarios").val();
+                     var dadosEmail = {
+                     remetente : $("#remetente").val(),
+                     destinatarios: listDestinatarios,
+                     assunto :$("#assunto").val(),
+                     corpo: $("#summernote").val(),
+                     }
+
                      // PREPARE FORM DATA
                      var formEntrevistaNova = {
                      nomeCliente : $("#nomeCliente").val(),
@@ -156,6 +175,7 @@
                      data : $("#data").val(),
                      horario : $("#horario").val(),
                      local : $("#local").val(),
+                     mensagemEmail : dadosEmail,
                      }
 
                      // DO POST

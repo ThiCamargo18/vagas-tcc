@@ -17,6 +17,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +58,7 @@ public class HabilidadesService {
         return HabilidadesMapper.INSTANCE.mapToSaida(habilidadesEntity);
     }
 
-    public List<HabilidadesSaida> filtrarPorResumoProfissional(Long idVaga,List<String> listaParametros,VagaEntity vaga) throws Exception {
+    public List<HabilidadesSaida> filtrarPorResumoProfissional(Long idVaga,String param,VagaEntity vaga) throws Exception {
 
         List<HabilidadesEntity> habilidades = new ArrayList<>();
         List<HabilidadesEntity> habilidadesSelecionadas = new ArrayList<>();
@@ -69,6 +70,10 @@ public class HabilidadesService {
             HabilidadesEntity habilidadesEntityOptional = habilidadesRepository.findByIdUsuario(cliente.getId());
             habilidades.add(habilidadesEntityOptional);
         }
+
+        String[] res = param.split(",");
+
+        List<String> listaParametros = Arrays.asList(res);
 
         for(int i=0;i<habilidades.size();i++){
             String resumoProfissional = habilidades.get(i).getResumoProfissional().toUpperCase();

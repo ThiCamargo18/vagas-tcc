@@ -12,6 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "dadosPessoais")
+@NamedQuery(name = "DadosPessoaisEntity.findEmailByIdUsuario",
+        query = "select u.idUsuario from dadosPessoais u where u.idUsuario = ?1")
 public class DadosPessoaisEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

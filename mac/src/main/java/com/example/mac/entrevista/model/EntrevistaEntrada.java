@@ -1,6 +1,7 @@
 package com.example.mac.entrevista.model;
 
 import com.example.mac.enums.Presenca;
+import com.example.mac.mail.Mensagem;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class EntrevistaEntrada {
     private Presenca presenca;
     private String cpfCliente;
     private Long idCliente;
+    private Mensagem mensagemEmail;
 
     public String getData() {
         return data;
@@ -83,5 +85,13 @@ public class EntrevistaEntrada {
 
     public void setPresenca(Presenca presenca) {
         this.presenca = presenca;
+    }
+
+    public Mensagem getMensagemEmail() {
+        return mensagemEmail;
+    }
+
+    public void setMensagemEmail(Mensagem mensagemEmail) {
+        this.mensagemEmail = mensagemEmail;
     }
 }

@@ -16,6 +16,7 @@ import java.util.Optional;
 public class ClienteService {
     @Autowired
     ClienteRepository clienteRepository;
+
     public ClienteSaida criar(ClienteEntrada cliente) throws Exception {
         ClienteEntity clienteEntityOptional = clienteRepository.findByCpf(cliente.getCpf());
 

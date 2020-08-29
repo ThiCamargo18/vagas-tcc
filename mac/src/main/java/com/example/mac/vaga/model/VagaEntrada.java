@@ -30,5 +30,22 @@ public class VagaEntrada {
     private String turno;
     private String dataLimite;
     private Integer numeroInscritos;
+    private String status;
     private Long idEmpresa;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

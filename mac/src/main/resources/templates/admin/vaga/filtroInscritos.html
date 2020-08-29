@@ -108,11 +108,8 @@
                 <form method="get" th:action="@{/filtro/palavraChave/{id}(id=${vaga.id})}">
                     <fieldset>
                         <div class="form-group">
-                            <label>Digite até 4 palavras chave - Utilize pontuação</label>
+                            <label>Você pode enviar mais de uma palvra, mas separe por vírgula (sem espaço) e utilize pontução (Ç,~,´)</label>
                             <input type="text" name="chave1" class="form-control" placeholder="Digite a palavra chave 1" style="margin-top: 4px;">
-                            <input type="text" name="chave2" class="form-control" placeholder="Digite a palavra chave 2" style="margin-top: 4px;">
-                            <input type="text" name="chave3" class="form-control" placeholder="Digite a palavra chave 3"style="margin-top: 4px;">
-                            <input type="text" name="chave4" class="form-control" placeholder="Digite a palavra chave 4"style="margin-top: 4px;">
                             <div class="form-group" style="margin-top: 7px; margin-left: 30%;">
                                 <button class="btn btn-success" type="submit">Filtrar pelas palavras-chave</button>
                             </div>

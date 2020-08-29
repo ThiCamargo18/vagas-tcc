@@ -81,4 +81,28 @@ public class DadosPessoaisService {
         dadosPessoaisEntity.setCidade(cidade);
         dadosPessoaisRepository.save(dadosPessoaisEntity);
     }
+
+    public String buscarEmailUsuarioPorId(Long idUsuario) throws Exception {
+        Object dadosPessoaisEntity = dadosPessoaisRepository.getEmailByIdUser(idUsuario);
+
+        if(dadosPessoaisEntity == null){
+            throw new Exception("Não foi possivel localizar o e-mail do usuario!");
+        }
+
+        String emailUsuario = dadosPessoaisEntity.toString();
+
+        return emailUsuario;
+    }
+
+    public String buscarEmailUsuarioPorIdNovaVaga(long idUsuario) throws Exception {
+        Object dadosPessoaisEntity = dadosPessoaisRepository.getEmailByIdUser(idUsuario);
+
+        if(dadosPessoaisEntity == null){
+            throw new Exception("Não foi possivel localizar o e-mail do usuario! Pois o mesmo ainda não fez o cadastro completo.");
+        }
+
+        String emailUsuario = dadosPessoaisEntity.toString();
+
+        return emailUsuario;
+    }
 }

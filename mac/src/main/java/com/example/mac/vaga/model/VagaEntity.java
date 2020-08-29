@@ -72,6 +72,9 @@ public class VagaEntity {
     @Column(name = "idEmpresa")
     private Long idEmpresa;
 
+    @Column(name = "status")
+    private String status;
+
     @ManyToMany(cascade = CascadeType.ALL)
     private List<ClienteEntity> clientes;
 
@@ -209,6 +212,14 @@ public class VagaEntity {
 
     public void setClientes(List<ClienteEntity> clientes) {
         this.clientes = clientes;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
 
