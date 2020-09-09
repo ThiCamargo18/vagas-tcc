@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 public interface DadosPessoaisRepository extends JpaRepository<DadosPessoaisEntity,Long> {
@@ -13,8 +14,8 @@ public interface DadosPessoaisRepository extends JpaRepository<DadosPessoaisEnti
 
     public List<DadosPessoaisEntity> findByNomeCompletoContainingIgnoreCase(String nome);
 
-    @Query("select s.email from dadosPessoais s where s.idUsuario = :idUsuario")
-    Object getEmailByIdUser(@Param("idUsuario") Long idUsuario);
-
     public DadosPessoaisEntity findEmailByIdUsuario(Long idUsuario);
+
+    @Query("select s.idUsuario,s.nomeCompleto from dadosPessoais s where s.cpf = :cpf")
+    String getCandidatoByCpf(@Param("cpf") String cpf);
 }

@@ -42,7 +42,8 @@ public class ClienteCadastroController {
         ClienteSessao clienteSessao = (ClienteSessao) session.getAttribute("usuarioLogado");
 
         ClienteCadastroSaida saida = clienteCadastroService.criar(entrada,clienteSessao.getId());
-        clienteSessao.setPrimeiroAcesso(saida.getCliente().getPrimeiroAcesso()); //NULL
+
+        clienteSessao.setPrimeiroAcesso(saida.getCliente().getPrimeiroAcesso());
 
         session.setAttribute("usuarioLogado",clienteSessao);
 
@@ -90,7 +91,7 @@ public class ClienteCadastroController {
     }
 
     @GetMapping("/procurar")
-    public ModelAndView buscar(HttpServletRequest request) throws Exception {
+    public ModelAndView procurar(HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         ClienteSessao clienteSessao = (ClienteSessao) session.getAttribute("usuarioLogado");
 

@@ -137,7 +137,7 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="cliente : ${cliente}">
-                                            <th th:utext="${#strings.abbreviate(cliente.nomeUsuario,400)} "></th>
+                                            <th th:utext="${cliente.nomeUsuario} "></th>
                                             <td> <a class="btn btn-info"
                                                     th:href="@{/cadastro/buscar/{id}(id=${cliente.idUsuario})}"
                                                     role="button"

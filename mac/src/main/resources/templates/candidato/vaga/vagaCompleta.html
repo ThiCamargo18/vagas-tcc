@@ -220,11 +220,17 @@
 
             <!-- Begin Page Content -->
             <div class="container-md" style="width: 100%;">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                        <li class="breadcrumb-item"><a href="/candidato/vaga/listar">Vagas</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Vaga atual</li>
+                    </ol>
+                </nav>
                 <div class="card shadow mb-4" style="margin-top: 20px;" th:each="vaga : ${vaga}">
                     <div class="card-header py-3">
                         <div class="row">
                             <div class="col">
-                                <h6 class="m-0 font-weight-bold text-primary" th:text="${vaga.titulo}">Recuperdor</h6>
+                                <h6 class="m-0 font-weight-bold text-primary" th:text="${vaga.titulo}"></h6>
                             </div>
                             <div class="col">
                                 <i class="fa fa-location-arrow" aria-hidden="true"></i>
@@ -233,7 +239,7 @@
                             </div>
                             <div class="col">
                                 <a class="btn btn-success" th:href="@{/candidato/vaga/inscrever/{id}(id=${vaga.id})}" type="button">
-                                    Inscrever
+                                    Candidate-se agora
                                 </a>
                             </div>
                         </div>
@@ -242,41 +248,41 @@
                         <div class="row">
                             <div class="col">
                                 <span class="font-weight-bold">Contrato:</span>
-                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.categoria} ">CLT</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.categoria} "></span>
                             </div>
                             <div class="col">
                                 <span class="font-weight-bold">Quantidade:</span>
-                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.quantidade} ">10</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.quantidade} "></span>
                             </div>
                             <div class="col">
                                 <span class="font-weight-bold">Salário:</span>
-                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.salario} ">10</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.salario} "></span>
                             </div>
                             <div class="col">
                                 <span class="font-weight-bold">Limite Inscrição:</span>
-                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.dataLimite} ">10</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.dataLimite} "></span>
                             </div>
                         </div>
                         <hr class="sidebar-divider">
                         <div class="row">
                             <div class="col">
                                 <span class="font-weight-bold">Formação requerida:</span>
-                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.formacao} ">Superior Completo</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.formacao} "></span>
                             </div>
                             <div class="col">
                                 <span class="font-weight-bold">Observações:</span>
-                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.formacao} ">Não pode ser estágio</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.formacao} "></span>
                             </div>
                             <div class="col">
                                 <span class="font-weight-bold">Turno:</span>
-                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.turno} ">Noturno</span>
+                                <span class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.turno} "></span>
                             </div>
                         </div>
                         <hr class="sidebar-divider">
                         <div class="row">
                             <div class="col">
                                 <span class="font-weight-bold">Responsabilidades:</span>
-                                <p class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.responsabilidade} ">Segundo especialistas, a inadimplência por mais de 90 dias é um estágio que precede a recuperação judicial e "contagia" a cadeia de produção ao afetar diversas empresas em série.</p>
+                                <p class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.responsabilidade} "></p>
                             </div>
                         </div>
                         <hr class="sidebar-divider">
@@ -284,14 +290,14 @@
                             <p class="font-weight-bold">Benefícios:
                                 <div th:each="beneficios : ${beneficios}">
 
-                            <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:utext="${beneficios} ">Teste</span></p>
+                            <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:utext="${beneficios} "></span></p>
                                 </div>
 
                         <hr class="sidebar-divider">
                             <p class="font-weight-bold">Requisitos:
                                 <div th:each="listaHabilidades : ${listaHabilidades}">
 
-                            <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:utext="${listaHabilidades} ">Teste</span></p>
+                            <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:utext="${listaHabilidades} "></span></p>
                             </div>
 
                     </div>

@@ -1,12 +1,14 @@
 package com.example.mac.registroNacional.service;
 
 import com.example.mac.cliente.service.ClienteService;
+import com.example.mac.dadosPessoais.service.DadosPessoaisService;
 import com.example.mac.registroNacional.mapper.RegistroNacionalMapper;
 import com.example.mac.registroNacional.model.RegistroEntity;
 import com.example.mac.registroNacional.model.RegistroEntrada;
 import com.example.mac.registroNacional.model.RegistroSaida;
 import com.example.mac.registroNacional.repository.RegistroNacionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,13 +19,19 @@ public class RegistroNacionalService {
     @Autowired
     RegistroNacionalRepository registroNacionalRepository;
     @Autowired
-    ClienteService clienteService;
+    DadosPessoaisService dadosPessoaisService;
 
-    public RegistroSaida criar(RegistroEntrada registroEntrada,Long id){
+    public RegistroSaida criar(RegistroEntrada registroEntrada,Long id) throws Exception {
         RegistroEntity registroEntity = RegistroNacionalMapper.INSTANCE.mapToEntity(registroEntrada);
 
         registroEntity.setIdUsuario(id);
-        registroNacionalRepository.save(registroEntity);
+        try {
+            registroNacionalRepository.save(registroEntity);
+        }catch (DataIntegrityViolationException e){
+            String mensagem = dadosPessoaisService.pegarOCampoComIdUnique(e.getMessage());
+
+            throw new Exception("Já existe um candidato com o mesmo número de RG cadastrado");
+        }
 
         return RegistroNacionalMapper.INSTANCE.mapToSaida(registroEntity);
     }
@@ -38,7 +46,13 @@ public class RegistroNacionalService {
 
         registroEntity.setId(registroEntityBanco.getId());
         registroEntity.setIdUsuario(registroEntityBanco.getIdUsuario());
-        registroNacionalRepository.save(registroEntity);
+        try {
+            registroNacionalRepository.save(registroEntity);
+        }catch (DataIntegrityViolationException e){
+            String mensagem = dadosPessoaisService.pegarOCampoComIdUnique(e.getMessage());
+
+            throw new Exception("Já existe um candidato com o mesmo(a) "+mensagem);
+        }
 
         return RegistroNacionalMapper.INSTANCE.mapToSaida(registroEntity);
     }

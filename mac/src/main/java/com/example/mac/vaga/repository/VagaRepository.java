@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface VagaRepository extends JpaRepository<VagaEntity,Long> {
     public  List<VagaEntity> findByTituloContainingIgnoreCase(String nome);
+
+    List<VagaEntity> findAllByStatus(String status);
 }

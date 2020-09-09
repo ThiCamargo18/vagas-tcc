@@ -16,14 +16,14 @@ public class ClienteController {
     ClienteService clienteService;
 
     @PutMapping("/atualizar/{id}")
-    public ClienteSaida atualizar(@PathVariable Long id, @RequestBody ClienteEntrada clienteEntrada){
+    public ClienteSaida atualizar(@PathVariable Long id, @RequestBody ClienteEntrada clienteEntrada) throws Exception {
         ClienteSaida saida = clienteService.atualizar(clienteEntrada,id);
 
         return saida;
     }
 
     @PutMapping("/atualizarSenha/{id}")
-    public ClienteSaida atualizarSenha(@PathVariable Long id, @RequestBody ClienteEntrada clienteEntrada){
+    public ClienteSaida atualizarSenha(@PathVariable Long id, @RequestBody ClienteEntrada clienteEntrada) throws Exception {
         ClienteSaida saida = clienteService.atualizarSenha(clienteEntrada,id);
 
         return saida;

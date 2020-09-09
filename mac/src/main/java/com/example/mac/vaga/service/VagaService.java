@@ -139,4 +139,10 @@ public class VagaService {
 
         vagaRepository.save(vagaEntity);
     }
+
+    public List<VagaSaida> listarVagasAtivas() {
+        List<VagaEntity> vagaEntityList = vagaRepository.findAllByStatus("ATIVA");
+
+        return VagaMapper.INSTANCE.mapToSaidaList(vagaEntityList);
+    }
 }

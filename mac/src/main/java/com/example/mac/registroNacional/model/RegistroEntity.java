@@ -27,7 +27,7 @@ public class RegistroEntity {
     @Column(name = "dataExpedicao")
     private String dataExpedicao;
 
-    @Column(name = "numero")
+    @Column(name = "numero",unique = true)
     private String numero;
 
     @Column(name = "idUsuario")

@@ -29,7 +29,7 @@ public class Vaga {
 
     @GetMapping("/listar")
     public ModelAndView listar(HttpServletRequest request){
-        List<VagaSaida> vagaSaidaList = vagaService.listar();
+        List<VagaSaida> vagaSaidaList = vagaService.listarVagasAtivas();
         VagaSaida vagaSaida = new VagaSaida();
         int numeroVagasEncontradas = vagaSaidaList.size();
         vagaSaida.setNumeroVagasEncontradas(numeroVagasEncontradas);
@@ -53,6 +53,7 @@ public class Vaga {
         VagaEntity vagaEntity = new VagaEntity();
         vagaEntity.setCategoria(categoria);
         vagaEntity.setFormacao(formacao);
+        vagaEntity.setStatus("ATIVA");
 
         List<VagaEntity> listaEntity = vagaService.filtrar(vagaEntity);
         List<VagaSaida> listSaida = VagaMapper.INSTANCE.mapToSaidaList(listaEntity);

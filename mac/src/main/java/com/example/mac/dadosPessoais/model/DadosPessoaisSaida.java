@@ -28,9 +28,9 @@ public class DadosPessoaisSaida {
     private String experiencia;
     private String curso;
     private CategoriaEnum categoria;
-    private Double pretensaoSalarial;
+    private String pretensaoSalarial;
     private String tipoConducao;
-    private String email;
+    private String cpf;
     private String cidade;
     private Long idUsuario;
 

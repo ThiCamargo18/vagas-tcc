@@ -47,10 +47,10 @@ public class EndpointCandidato {
 
     @PostMapping("/efetuaLogin")
     public ModelAndView efetuaLogin(@Valid ClienteEntrada clienteEntrada, HttpServletRequest request) throws Exception {
-        ClienteEntity clienteEntity = clienteService.buscarEVerificarExistenciaClientePorCpf(clienteEntrada.getCpf());
+        ClienteEntity clienteEntity = clienteService.buscarEVerificarExistenciaClientePorCpf(clienteEntrada.getEmail());
 
         if(clienteEntity == null){
-            throw new Exception("CPF não encontrado");
+            throw new Exception("E-mail não cadastrado");
         }
         if(!clienteEntrada.getSenha().equals(clienteEntity.getSenha())){
             throw new Exception("Senha incorreta");

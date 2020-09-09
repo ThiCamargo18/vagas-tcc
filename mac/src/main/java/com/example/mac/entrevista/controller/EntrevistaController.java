@@ -43,7 +43,7 @@ public class EntrevistaController {
 
     @RequestMapping("/nova")
     public ModelAndView novaEntrevista(@RequestParam String cpf) throws Exception {
-        ClienteEntity cliente = clienteService.buscarEVerificarExistenciaClientePorCpf(cpf); //TODO usar @Query e remover cpf do ClienteEntity
+        ClienteEntity cliente = dadosPessoaisService.buscarEVerificarExistenciaClientePorCpf(cpf);
 
         if(cliente==null){
             throw new Exception("Candidato não encontrado");
@@ -109,9 +109,9 @@ public class EntrevistaController {
     }
 
     @PostMapping("/atualizar/{id}")
-    public void atualizar(@PathVariable long id,HttpServletResponse response,@Valid EntrevistaEntrada entrevistaEntrada) throws Exception {
+    public ModelAndView atualizar(@PathVariable long id,HttpServletResponse response,@Valid EntrevistaEntrada entrevistaEntrada) throws Exception {
         entrevistaService.atualizar(id,entrevistaEntrada);
 
-        response.sendRedirect("http://localhost:8088/entrevista/listar");
+        return listar();
     }
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClienteEntrada {
-    private String cpf;
+    private String email;
     private String senha;
     private String login;
     private String nome;
@@ -34,12 +34,12 @@ public class ClienteEntrada {
         this.login = login;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {

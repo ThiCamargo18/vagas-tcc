@@ -32,7 +32,7 @@ public class ExperienciaEntity {
     private String dataFim;
 
     @Column(name = "salario")
-    private Double salario;
+    private String salario;
 
     @Column(name = "categoria")
     @Enumerated(EnumType.STRING)
@@ -89,11 +89,11 @@ public class ExperienciaEntity {
         this.dataFim = dataFim;
     }
 
-    public Double getSalario() {
+    public String getSalario() {
         return salario;
     }
 
-    public void setSalario(Double salario) {
+    public void setSalario(String salario) {
         this.salario = salario;
     }
 

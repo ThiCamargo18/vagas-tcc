@@ -5,66 +5,75 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "dadosPessoais")
-@NamedQuery(name = "DadosPessoaisEntity.findEmailByIdUsuario",
-        query = "select u.idUsuario from dadosPessoais u where u.idUsuario = ?1")
 public class DadosPessoaisEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "nomeCompleto")
     private String nomeCompleto;
+
     @Column(name = "idade")
     private Integer idade;
+
     @Column(name = "dataNascimento")
     private String dataNascimento;
+
     @Column(name = "sexo")
     private String sexo;
+
     @Column(name = "nomeSocial")
     private String nomeSocial;
+
     @Column(name = "estadoCivil")
     private String estadoCivil;
+
     @Column(name = "nomeMae")
     private String nomeMae;
+
     @Column(name = "naturalidade")
     private String naturalidade;
+
     @Column(name = "telefone")
     private String telefone;
+
     @Column(name = "celular")
     private String celular;
+
     @Column(name = "formacao")
     private String formacao;
+
     @Column(name = "curso")
     private String curso;
+
     @Column(name = "categoria")
     @Enumerated(EnumType.STRING)
     private CategoriaEnum categoria;
+
     @Column(name = "pretensaoSalarial")
-    private Double pretensaoSalarial;
+    private String pretensaoSalarial;
+
     @Column(name = "tipoConducao")
     private String tipoConducao;
-    @Column(name = "email")
-    private String email;
+
+    @CPF(message = "Esse CPF não é válido")
+    @Column(name = "cpf",unique = true)
+    private String cpf;
+
     @Column(name = "idUsuario")
     private Long idUsuario;
-    @Column(name = "experiencia")
-    private String experiencia;
+
     @Column(name = "cidade")
     private String cidade;
-
-    public String getExperiencia() {
-        return experiencia;
-    }
-
-    public void setExperiencia(String experiencia) {
-        this.experiencia = experiencia;
-    }
 
     public String getCidade() {
         return cidade;
@@ -186,11 +195,11 @@ public class DadosPessoaisEntity {
         this.categoria = categoria;
     }
 
-    public Double getPretensaoSalarial() {
+    public String getPretensaoSalarial() {
         return pretensaoSalarial;
     }
 
-    public void setPretensaoSalarial(Double pretensaoSalarial) {
+    public void setPretensaoSalarial(String pretensaoSalarial) {
         this.pretensaoSalarial = pretensaoSalarial;
     }
 
@@ -202,12 +211,12 @@ public class DadosPessoaisEntity {
         this.tipoConducao = tipoConducao;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public Long getIdUsuario() {

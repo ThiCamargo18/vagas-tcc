@@ -92,11 +92,11 @@ public class VagaController {
     }
 
     @GetMapping("/deletar")
-    public void deletar(@RequestParam Long vaga, HttpServletResponse response) throws Exception {
+    public ModelAndView deletar(@RequestParam Long vaga, HttpServletResponse response) throws Exception {
         String resultado = vagaService.deletar(vaga);
 
         if(resultado.equals("concluido")){
-            response.sendRedirect("http://localhost:8088/vaga/listar");
+            return listar();
         }else{
             throw new Exception("Não foi possivel excluir a vaga, tente novamente");
         }

@@ -19,7 +19,7 @@ public class ExperienciaSaida {
     private String cargo;
     private String dataInicio;
     private String dataFim;
-    private Double salario;
+    private String salario;
     private CategoriaEnum categoria;
     private Long idUsuario;
 }

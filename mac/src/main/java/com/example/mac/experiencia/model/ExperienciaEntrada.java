@@ -15,12 +15,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ExperienciaEntrada {
     private Long id;
-    private Experiencia possui; //
-    private String cargo; //
-    private String dataInicio; //
-    private String dataFim; //
-    private Double salario;
-    private CategoriaEnum categoria; //
+    private Experiencia possui;
+    private String cargo;
+    private String dataInicio;
+    private String dataFim;
+    private String salario;
+    private CategoriaEnum categoria;
     private Long idUsuario;
 
     public String getDataInicio() {

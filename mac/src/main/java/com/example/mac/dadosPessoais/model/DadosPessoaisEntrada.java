@@ -13,23 +13,23 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DadosPessoaisEntrada {
     private Long id;
-    private String nomeCompleto; //
-    private Integer idade; //
-    private String dataNascimento; //
-    private String sexo; //
-    private String nomeSocial; //
-    private String estadoCivil; //
-    private String nomeMae;  //
-    private String naturalidade; //
-    private String telefone; //
-    private String celular; //
-    private String experiencia; //
-    private String formacao; //
-    private String curso;//
-    private CategoriaEnum categoria; //Verificar duplicado!
-    private Double pretensaoSalarial; //
+    private String nomeCompleto;
+    private Integer idade;
+    private String dataNascimento;
+    private String sexo;
+    private String nomeSocial;
+    private String estadoCivil;
+    private String nomeMae;
+    private String naturalidade;
+    private String telefone;
+    private String celular;
+    private String experiencia;
+    private String formacao;
+    private String curso;
+    private CategoriaEnum categoria;
+    private String pretensaoSalarial;
     private String tipoConducao;
-    private String email; //
+    private String cpf;
     private String cidade;
     private Long idUsuario;
 
@@ -162,11 +162,11 @@ public class DadosPessoaisEntrada {
         this.categoria = categoria;
     }
 
-    public Double getPretensaoSalarial() {
+    public String getPretensaoSalarial() {
         return pretensaoSalarial;
     }
 
-    public void setPretensaoSalarial(Double pretensaoSalarial) {
+    public void setPretensaoSalarial(String pretensaoSalarial) {
         this.pretensaoSalarial = pretensaoSalarial;
     }
 
@@ -178,12 +178,12 @@ public class DadosPessoaisEntrada {
         this.tipoConducao = tipoConducao;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public Long getIdUsuario() {

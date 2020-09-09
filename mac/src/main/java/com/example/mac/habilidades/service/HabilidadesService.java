@@ -33,6 +33,7 @@ public class HabilidadesService {
         HabilidadesEntity habilidadesEntity = HabilidadesMapper.INSTANCE.mapToEntity(habilidades);
         habilidadesEntity.setIdUsuario(id);
         habilidadesEntity.setNomeUsuario(nomeCompleto);
+
         habilidadesRepository.save(habilidadesEntity);
 
         return HabilidadesMapper.INSTANCE.mapToSaida(habilidadesEntity);

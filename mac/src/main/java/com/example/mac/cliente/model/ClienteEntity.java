@@ -16,8 +16,8 @@ public class ClienteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "cpf")
-    private String cpf;
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "senha")
     private String senha;
@@ -61,12 +61,12 @@ public class ClienteEntity {
         this.id = id;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {

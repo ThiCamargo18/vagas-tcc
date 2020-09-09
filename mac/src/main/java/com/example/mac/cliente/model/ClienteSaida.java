@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ClienteSaida {
     private long id;
-    private String cpf;
+    private String email;
     private String senha;
     private String login;
     private String nome;
@@ -42,12 +42,12 @@ public class ClienteSaida {
         this.id = id;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSenha() {

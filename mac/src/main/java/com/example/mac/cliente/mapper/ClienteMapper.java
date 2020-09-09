@@ -18,7 +18,7 @@ public interface ClienteMapper {
 
     @Mappings({
             @Mapping(source = "clienteEntrada.senha",target = "senha"),
-            @Mapping(source = "clienteEntity.cpf",target = "cpf"),
+            @Mapping(source = "clienteEntity.email",target = "email"),
             @Mapping(source = "clienteEntity.login",target = "login"),
             @Mapping(source = "clienteEntity.nome",target = "nome"),
             @Mapping(source = "clienteEntity.primeiroAcesso",target = "primeiroAcesso"),
