@@ -366,7 +366,7 @@
                         </div>
                         <div class="col-md-4 mb-3" >
                             <label for="validationServer01">CPF </label>
-                            <input type="text" class="form-control" name="dadosPessoais.cpf" id="validationEmail" value="" required = false>
+                            <input type="text" class="form-control" onkeypress="mascarar(this,cpf)" maxlength="14" name="dadosPessoais.cpf" id="validationEmail" value="" required = false>
                             <div class="invalid-feedback">
                                 Por favor, selecione o Cpf.
                             </div>
