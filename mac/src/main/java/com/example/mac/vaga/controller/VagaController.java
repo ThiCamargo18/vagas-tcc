@@ -114,10 +114,10 @@ public class VagaController {
         return mv;
     }
 
-    @PostMapping("/atualizarStatus")
-    public HttpStatus atualizarStatus(@RequestBody VagaEntrada vagaEntrada) throws Exception { //TODO Id da vaga vem do front
-        vagaService.atualizarStatus(vagaEntrada);
+    @GetMapping("/status/{id}")
+    public ModelAndView atualizarStatus(@PathVariable Long id) throws Exception {
+        vagaService.atualizarStatus(id);
 
-        return HttpStatus.OK;
+        return listar();
     }
 }

@@ -36,10 +36,6 @@ public class VagaEntity {
     @Enumerated(EnumType.STRING)
     private CategoriaEnum categoria;
 
-    @Column(name = "experiencia")
-    @Enumerated(EnumType.STRING)
-    private Experiencia experiencia;
-
     @Column(name = "formacao")
     private String formacao;
 
@@ -128,13 +124,7 @@ public class VagaEntity {
         this.categoria = categoria;
     }
 
-    public Experiencia getExperiencia() {
-        return experiencia;
-    }
 
-    public void setExperiencia(Experiencia experiencia) {
-        this.experiencia = experiencia;
-    }
 
     public List<String> getDescricaoHabilidades() {
         return descricaoHabilidades;

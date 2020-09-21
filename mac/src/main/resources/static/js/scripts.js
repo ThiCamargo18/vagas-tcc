@@ -7,7 +7,7 @@
                 "use strict";
 
                 // Add active state to sidbar nav links
-                var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+            var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
                     $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function() {
                         if (this.href === path) {
                             $(this).addClass("active");
@@ -27,11 +27,16 @@
                 setTimeout("execmascara()",1)
             }
             function execmascara(){
-                v_obj.value=v_fun(v_obj.value)
+                v_obj.value=v_fun(v_obj.value);
             }
 
             function id( el ){
                 return document.getElementById( el );
+            }
+
+            function removeEspaco(v){
+                v=v.replace(/\D/g,"");
+                return v;
             }
 
             function mascaraCpf(v){
@@ -41,7 +46,7 @@
                     v=v.replace(/(\d{3})(\d{1,2})/, '$1-$2');
                     v=v.replace(/(-\d{2})\d+?$/, '$1');
                     return v;
-                }
+            }
 
             function mascaraTel(v){
                     v=v.replace(/\D/g,""); //Remove tudo o que não é dígito
@@ -61,7 +66,7 @@
                 return v
                 }
 
-            function cpf(v){
+            function mascaraDoCpf(v){
                 v=v.replace(/\D/g,"") //Remove tudo o que não é dígito
                 v=v.replace(/(\d{3})(\d)/,"$1.$2") //Coloca um ponto entre o terceiro e o quarto dígitos
                 v=v.replace(/(\d{3})(\d)/,"$1.$2") //Coloca um ponto entre o terceiro e o quarto dígitos
@@ -95,13 +100,13 @@
                 return v
                 }
 
-            function data(v){
+            function mascaraData(v){
                 v=v.replace(/\D/g,"") //Remove tudo o que não é dígito
                 v=v.replace(/^(\d{2})(\d)/,"$1/$2") //Coloca ponto entre o segundo e o terceiro dígitos
-                v=v.replace(/.(\d{2})(\d)/,".$1/$2") //Coloca uma barra entre o oitavo e o nono dígitos
+                v=v.replace(/.(\d{2})(\d)/,"$1/$2") //Coloca uma barra entre o oitavo e o nono dígitos
                 v=v.replace(/(\d{2})(\d)/,"$1/$2") //Coloca um hífen depois do bloco de quatro dígitos
                 return v
-                }
+            }
 
             function moeda(v){
                 v=v.replace(/\D/g,"") // permite digitar apenas numero

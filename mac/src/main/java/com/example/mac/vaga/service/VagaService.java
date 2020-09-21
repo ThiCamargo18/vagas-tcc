@@ -18,6 +18,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +41,7 @@ public class VagaService {
         vagaEntity.setStatus("ATIVA");
         vagaEntity.setNumeroInscritos(0);
         vagaEntity.setIdEmpresa(1L);
+        vagaEntity.setDataLimite(dataParaDDMMAAA(vagaEntity.getDataLimite()));
 
         vagaRepository.save(vagaEntity);
     }
@@ -123,26 +126,60 @@ public class VagaService {
         VagaEntity vagaEntity = VagaMapper.INSTANCE.mapToEntity(vagaEntrada);
 
         vagaEntity.setIdEmpresa(1l);
+        vagaEntity.setDataLimite(dataParaDDMMAAA(vagaEntity.getDataLimite()));
+
         vagaRepository.save(vagaEntity);
     }
 
-    public void atualizarStatus(VagaEntrada vagaEntrada) throws Exception {
-        Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(vagaEntrada.getId());
+    public String atualizarStatus(Long idVaga) throws Exception {
+        Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(idVaga);
 
         if(!vagaEntityOptional.isPresent()){
             throw new Exception("Vaga não encontrada, busque novamente");
         }
-
         VagaEntity vagaEntity = vagaEntityOptional.get();
-        vagaEntity.setStatus(vagaEntrada.getStatus());
-
+        if(vagaEntity.getStatus().equals("ATIVA")) vagaEntity.setStatus("OCULTA");
+        else vagaEntity.setStatus("ATIVA");
 
         vagaRepository.save(vagaEntity);
+
+        return "sucesso";
     }
 
     public List<VagaSaida> listarVagasAtivas() {
         List<VagaEntity> vagaEntityList = vagaRepository.findAllByStatus("ATIVA");
 
         return VagaMapper.INSTANCE.mapToSaidaList(vagaEntityList);
+    }
+
+    public VagaSaida validarInscricao(VagaSaida vagaSaida,Long idUsuario) throws Exception {
+        ClienteEntity clienteEntity = clienteService.buscarEVerificarExistenciaClientePorIdVaga(idUsuario);
+        VagaEntity vagaEntity = vagaRepository.findById(vagaSaida.getId()).get();
+
+        List<ClienteEntity> clientesCadastrados = vagaEntity.getClientes();
+
+        for(ClienteEntity cliente : clientesCadastrados){
+            if(cliente.getId()==clienteEntity.getId()){
+                vagaSaida.setInscrito("SIM");
+            }
+        }
+
+        return vagaSaida;
+    }
+
+    public String dataParaDDMMAAA(String data){
+        if(data.equals("")) return data;
+
+        String validador1 = String.valueOf(data.charAt(2));
+        String validador2 = String.valueOf(data.charAt(4));
+
+        if(validador1.equals("/") || validador2.equals("/")) return data; //Já está formatado, se entrar no localDate quebra
+
+        LocalDate localDate = LocalDate.parse(data);
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        data = dateTimeFormatter.format(localDate);
+
+        return data;
     }
 }

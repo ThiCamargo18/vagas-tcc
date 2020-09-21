@@ -281,7 +281,7 @@
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="validationServer01">Idade</label>
-                            <input type="text" class="form-control" name="dadosPessoais.idade" required>
+                            <input type="text" class="form-control" name="dadosPessoais.idade" onkeypress="mascarar(this,soNumeros)" required>
                             <div class="invalid-feedback">
                                 Necessário selecionar a idade.
                             </div>
@@ -423,7 +423,7 @@
                         </div>
                         <div class="col-md-2 mb-3">
                             <label for="validationServer04">Número</label>
-                            <input type="text" class="form-control" name="dadosAdicionais.numero" id="validationNumero" required>
+                            <input type="text" class="form-control" name="dadosAdicionais.numero" id="validationNumero" onkeypress="mascarar(this,soNumeros)" required>
                             <div class="invalid-feedback">
                                 Número obrigatório, digite uma valor.
                             </div>

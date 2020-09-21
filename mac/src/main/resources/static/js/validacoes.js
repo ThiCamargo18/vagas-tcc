@@ -51,7 +51,7 @@
 
                         function soNumeros(v){
                             return v.replace(/\D/g,"")
-                            }
+                        }
 
                         function telefone(v){
                             v=v.replace(/\D/g,"") //Remove tudo o que não é dígito

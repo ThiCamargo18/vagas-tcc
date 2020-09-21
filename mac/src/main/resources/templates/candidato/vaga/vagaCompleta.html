@@ -231,9 +231,10 @@
                     <div class="card-header py-3">
                         <div class="row">
                             <div class="col">
-                                <a class="btn btn-success" th:href="@{/candidato/vaga/inscrever/{id}(id=${vaga.id})}" type="button">
-                                    Candidate-se agora
-                                </a>
+                                <div th:switch="${vaga.inscrito}">
+                                    <a th:case="'NAO'" class="btn btn-success" th:href="@{/candidato/vaga/inscrever/{id}(id=${vaga.id})}" type="button">Candidate-se agora</a>
+                                    <h5 th:case="'SIM'" class="card-title">Você já se inscreveu nessa vaga</h5>
+                                </div>
                             </div>
                         </div>
                         <div class="row" style="margin-top:5px">

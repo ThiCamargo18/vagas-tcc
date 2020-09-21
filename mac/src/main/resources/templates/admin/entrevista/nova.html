@@ -108,9 +108,10 @@
             </div>
             <div class="container-fluid" style="margin-right: 20px; width: 95%;">
                 <form class="input-group mb-3" method="get" action="/entrevista/nova">
-                    <input type="text" name="cpf" class="form-control" placeholder="Caso não seja o candidato, busque novamente.." aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input type="text" name="cpf" class="form-control" placeholder="Caso não seja o candidato, busque novamente.."
+                           onkeypress="mascarar(this,mascaraDoCpf)" maxlength="14">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+                        <button class="btn btn-outline-secondary" type="submit">Buscar</button>
                     </div>
                     <div class="invalid-feedback">
                         Necessário informar o cpf do candidato.
@@ -131,7 +132,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <label for="data" class="col-2 col-form-label">Data</label>
-                        <input class="form-control" type="date" name="data" value="" id="data" required>
+                        <input class="form-control" type="date" name="data" pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}" value="" id="data" required>
                         <div class="invalid-feedback">
                             Necessário informar a data.
                         </div>

@@ -15,6 +15,8 @@ import com.example.mac.mail.Mensagem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +31,7 @@ public class EntrevistaService {
     public EntrevistaSaida criar(EntrevistaEntrada entrevistaEntrada) throws Exception {
         EntrevistaEntity entrevistaEntity = EntrevistaMapper.INSTANCE.mapToEntity(entrevistaEntrada);
         entrevistaEntity.setPresenca(Presenca.AGENDADO);
+        entrevistaEntity.setData(dataParaDDMMAAA(entrevistaEntity.getData()));
 
         entrevistaRepository.save(entrevistaEntity);
 
@@ -57,6 +60,7 @@ public class EntrevistaService {
     public EntrevistaSaida novaEntrevistaPelaNavbar(EntrevistaEntrada entrevistaEntrada) throws Exception {
         EntrevistaEntity entrevistaEntity = EntrevistaMapper.INSTANCE.mapToEntity(entrevistaEntrada);
         entrevistaEntity.setPresenca(Presenca.AGENDADO);
+        entrevistaEntity.setData(dataParaDDMMAAA(entrevistaEntity.getData()));
 
         entrevistaRepository.save(entrevistaEntity);
 
@@ -65,14 +69,34 @@ public class EntrevistaService {
                 entrevistaEntrada.getMensagemEmail().getAssunto(),
                 entrevistaEntrada.getMensagemEmail().getCorpo());
 
-        mailService.enviar(mensagem);
+        if(!mensagem.getRemetente().equals("") && !mensagem.getAssunto().equals("") && !mensagem.getCorpo().equals("")){
+            mailService.enviar(mensagem);
+        }
+
 
         return EntrevistaMapper.INSTANCE.mapToSaida(entrevistaEntity);
+    }
+
+    public String dataParaDDMMAAA(String data){
+        if(data.equals("")) return data;
+
+        String validador1 = String.valueOf(data.charAt(2));
+        String validador2 = String.valueOf(data.charAt(4));
+
+        if(validador1.equals("/") || validador2.equals("/")) return data; //Já está formatado, se entrar no localDate quebra
+
+        LocalDate localDate = LocalDate.parse(data);
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        data = dateTimeFormatter.format(localDate);
+
+        return data;
     }
 
     public EntrevistaSaida atualizar(long id, EntrevistaEntrada entrevistaEntrada) throws Exception {
         EntrevistaEntity entrevistaEntity = EntrevistaMapper.INSTANCE.mapToEntity(entrevistaEntrada);
         entrevistaEntity.setId(id);
+        entrevistaEntity.setData(dataParaDDMMAAA(entrevistaEntity.getData()));
 
         entrevistaRepository.save(entrevistaEntity);
 

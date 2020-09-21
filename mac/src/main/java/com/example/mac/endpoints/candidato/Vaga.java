@@ -82,8 +82,12 @@ public class Vaga {
     }
 
     @GetMapping("/buscar/{id}")
-    public ModelAndView buscar(@PathVariable Long id) throws Exception {
+    public ModelAndView buscar(@PathVariable Long id,HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession();
+        ClienteSessao clienteSessao = (ClienteSessao) session.getAttribute("usuarioLogado");
+
         VagaSaida vagaSaida = vagaService.buscarVaga(id);
+        vagaSaida = vagaService.validarInscricao(vagaSaida,clienteSessao.getId());
         List<String> listaHabilidades = vagaSaida.getDescricaoHabilidades();
         List<String> beneficios = vagaSaida.getBeneficios();
         ModelAndView mv = new ModelAndView("/candidato/vaga/vagaCompleta");

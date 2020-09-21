@@ -20,7 +20,6 @@ public class VagaSaida {
     private Integer quantidade;
     private String cidade;
     private CategoriaEnum categoria;
-    private Experiencia experiencia;
     private String formacao;
     private List<String> descricaoHabilidades;
     private String responsabilidade;
@@ -31,7 +30,17 @@ public class VagaSaida {
     private String dataLimite;
     private Integer numeroInscritos;
     private Integer numeroVagasEncontradas;
+    private String inscrito = "NAO";
+    private String status;
     private Long idEmpresa;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -71,5 +80,13 @@ public class VagaSaida {
 
     public void setNumeroVagasEncontradas(Integer numeroVagasEncontradas) {
         this.numeroVagasEncontradas = numeroVagasEncontradas;
+    }
+
+    public String getInscrito() {
+        return inscrito;
+    }
+
+    public void setInscrito(String inscrito) {
+        this.inscrito = inscrito;
     }
 }

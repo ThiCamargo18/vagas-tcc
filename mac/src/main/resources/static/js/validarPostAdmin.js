@@ -11,7 +11,6 @@
                                 event.preventDefault();
                                 event.stopPropagation();
                                 document.getElementById("esconderVaga").value = 'false';
-                                console.log('Entro th');
              }if (form.checkValidity() === true){
                                 document.getElementById("esconderVaga").value = 'true';
              }
@@ -116,6 +115,7 @@
                   },
                   error : function(e) {
                         alert("ERRO!! Causa: "+ e.responseText);
+                        $("#titulo").val() = '';
                   }
                   });
                 }
@@ -276,6 +276,7 @@
                           beneficios : beneficios,
                           responsabilidade: $("#responsabilidades").val(),
                           salario: $("#validationSalario").val(),
+                          status: $("#status").val(),
                           observacao: $("#observacao").val(),
                           turno: $("#turno").val(),
                           dataLimite: $("#dataLimite").val(),
@@ -298,4 +299,6 @@
                         }
                         });
                         }
+
+
             })

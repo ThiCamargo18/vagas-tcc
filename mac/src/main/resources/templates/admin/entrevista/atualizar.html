@@ -101,21 +101,10 @@
         <main>
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <div class="container-fluid">
-                <h1 class="mt-4">Agendar entrevista</h1>
+                <h1 class="mt-4">Editar entrevista agendada</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Dados necessários</li>
                 </ol>
-            </div>
-            <div class="container-fluid" style="margin-right: 20px; width: 95%;">
-                <form class="input-group mb-3" method="get" action="/entrevista/nova">
-                    <input type="text" name="cpf" class="form-control" placeholder="Se não encontrou, busque novamente pelo CPF.." aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
-                    </div>
-                    <div class="invalid-feedback">
-                        Necessário informar o cpf do candidato.
-                    </div>
-                </form>
             </div>
             <form method="post" th:action="@{/entrevista/atualizar/{id}(id=${entrevista.id})}"
                   class="needs-validation" novalidate style="margin-left: 20px;margin-right: 20px; margin-top: 20px;">
@@ -132,7 +121,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <label for="example-time-input" class="col-2 col-form-label">Data</label>
-                        <input class="form-control" th:field="*{entrevista.data}" type="date" value="" id="example-date-input" required>
+                        <input type="text" class="form-control" onkeypress="mascarar(this,mascaraData)" maxlength="10" th:field="*{entrevista.data}"  id="example-date-input" required>
                         <div class="invalid-feedback">
                             Necessário informar a data.
                         </div>
@@ -187,9 +176,8 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/validarPostAdmin.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-<script src="assets/demo/chart-area-demo.js"></script>
-<script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 <script src="/assets/demo/datatables-demo.js"></script>

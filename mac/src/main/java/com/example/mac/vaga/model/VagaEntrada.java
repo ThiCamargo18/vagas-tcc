@@ -20,7 +20,6 @@ public class VagaEntrada {
     private Integer quantidade;//
     private String cidade;//
     private CategoriaEnum categoria; //
-    private Experiencia experiencia;
     private String formacao; //
     private List<String> descricaoHabilidades;
     private String responsabilidade;

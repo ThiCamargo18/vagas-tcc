@@ -124,13 +124,13 @@
                     </div>
                     <div class="input-group mb-3">
                         <label for="data" class="col-2 col-form-label">Data</label>
-                        <input class="form-control" type="date" name="data" value="" id="data" required>
+                        <input class="form-control" type="date" pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}" name="data" value="" id="data" required>
                         <div class="invalid-feedback">
                             Necessário informar a data.
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <label for="horario" class="col-2 col-form-label">Time</label>
+                        <label for="horario" class="col-2 col-form-label">Horário</label>
                         <input class="form-control" type="time" name="horario" value="" id="horario" required>
                         <div class="invalid-feedback">
                             Necessário informar o horário.

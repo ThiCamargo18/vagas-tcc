@@ -55,6 +55,15 @@ public class DadosPessoaisService {
         return DadosPessoaisMapper.INSTANCE.mapToSaida(dadosPessoaisEntity);
     }
 
+    public String dataParaDDMMAAA(String data){
+        LocalDate localDate = LocalDate.parse(data);
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        data = dateTimeFormatter.format(localDate);
+
+        return data;
+    }
+
     public String pegarOCampoComIdUnique(String mensagem){
         int inicio=0,fim=0,i=0;
         boolean verificador = true;
