@@ -1,6 +1,5 @@
 package com.example.mac.dadosPessoais.mapper;
 
-import com.example.mac.dadosAdicionais.model.DadosAdicionaisSaida;
 import com.example.mac.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.mac.dadosPessoais.model.DadosPessoaisEntrada;
 import com.example.mac.dadosPessoais.model.DadosPessoaisSaida;

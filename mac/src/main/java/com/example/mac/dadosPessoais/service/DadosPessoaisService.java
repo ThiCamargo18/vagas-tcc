@@ -125,7 +125,7 @@ public class DadosPessoaisService {
     public void atualizarCidade(Object o, Long id, String cidade) throws Exception {
         DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisRepository.findByIdUsuario(id);
 
-        if(dadosPessoaisEntity.equals(null)){
+        if(dadosPessoaisEntity == null){
             throw new Exception("Candidato não encontrado na base de dados!");
         }
         dadosPessoaisEntity.setCidade(cidade);
@@ -139,9 +139,7 @@ public class DadosPessoaisService {
             throw new Exception("Não foi possivel localizar o e-mail do usuario!");
         }
 
-        String emailUsuario = dadosPessoaisEntity.toString();
-
-        return emailUsuario;
+        return dadosPessoaisEntity.toString();
     }
 
     public String buscarEmailUsuarioPorIdNovaVaga(long idUsuario) throws Exception {

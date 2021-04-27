@@ -125,7 +125,7 @@ public class VagaService {
     public void atualizar(VagaEntrada vagaEntrada) {
         VagaEntity vagaEntity = VagaMapper.INSTANCE.mapToEntity(vagaEntrada);
 
-        vagaEntity.setIdEmpresa(1l);
+        vagaEntity.setIdEmpresa(1L);
         vagaEntity.setDataLimite(dataParaDDMMAAA(vagaEntity.getDataLimite()));
 
         vagaRepository.save(vagaEntity);

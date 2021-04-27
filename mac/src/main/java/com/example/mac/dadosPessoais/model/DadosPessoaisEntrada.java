@@ -1,7 +1,6 @@
 package com.example.mac.dadosPessoais.model;
 
 import com.example.mac.enums.CategoriaEnum;
-import com.example.mac.enums.Experiencia;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,7 +39,6 @@ public class DadosPessoaisEntrada {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-
 
     public Long getId() {
         return id;

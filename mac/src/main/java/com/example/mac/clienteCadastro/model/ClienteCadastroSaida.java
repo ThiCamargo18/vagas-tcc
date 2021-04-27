@@ -1,20 +1,12 @@
 package com.example.mac.clienteCadastro.model;
 
-import com.example.mac.cliente.model.ClienteEntity;
 import com.example.mac.cliente.model.ClienteSaida;
-import com.example.mac.dadosAdicionais.model.DadosAdicionaisEntity;
 import com.example.mac.dadosAdicionais.model.DadosAdicionaisSaida;
-import com.example.mac.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.mac.dadosPessoais.model.DadosPessoaisSaida;
-import com.example.mac.experiencia.model.ExperienciaEntity;
 import com.example.mac.experiencia.model.ExperienciaSaida;
-import com.example.mac.habilidades.model.HabilidadesEntity;
 import com.example.mac.habilidades.model.HabilidadesSaida;
 import com.example.mac.registroNacional.model.RegistroSaida;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 public class ClienteCadastroSaida {
