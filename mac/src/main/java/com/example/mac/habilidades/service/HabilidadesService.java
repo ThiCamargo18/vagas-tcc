@@ -1,7 +1,6 @@
 package com.example.mac.habilidades.service;
 
 import com.example.mac.cliente.model.ClienteEntity;
-import com.example.mac.cliente.service.ClienteService;
 import com.example.mac.habilidades.mapper.HabilidadesMapper;
 import com.example.mac.habilidades.model.HabilidadesEntity;
 import com.example.mac.habilidades.model.HabilidadesEntrada;
@@ -9,17 +8,12 @@ import com.example.mac.habilidades.model.HabilidadesSaida;
 import com.example.mac.habilidades.repository.HabilidadesRepository;
 import com.example.mac.vaga.model.VagaEntity;
 import com.example.mac.vaga.repository.VagaRepository;
-import com.example.mac.vaga.service.VagaService;
-import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class HabilidadesService {

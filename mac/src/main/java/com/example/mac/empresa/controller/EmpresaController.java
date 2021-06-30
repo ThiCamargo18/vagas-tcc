@@ -1,7 +1,5 @@
 package com.example.mac.empresa.controller;
 
-import com.example.mac.cliente.model.ClienteSessao;
-import com.example.mac.empresa.model.EmpresaEntity;
 import com.example.mac.empresa.model.EmpresaEntrada;
 import com.example.mac.empresa.model.EmpresaSaida;
 import com.example.mac.empresa.service.EmpresaService;
@@ -10,11 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "empresa", produces = "application/json")

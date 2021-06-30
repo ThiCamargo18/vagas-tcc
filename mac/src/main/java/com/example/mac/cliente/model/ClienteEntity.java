@@ -1,11 +1,12 @@
 package com.example.mac.cliente.model;
 
-import com.example.mac.enums.SituacaoConcorrente;
+import com.example.mac.role.RoleEntity;
 import com.example.mac.vaga.model.VagaEntity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @AllArgsConstructor
@@ -36,6 +37,15 @@ public class ClienteEntity {
 
     @ManyToMany(mappedBy = "clientes")
     private List<VagaEntity> vagas;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<RoleEntity> roles;
 
     public String getNome() {
         return nome;
@@ -99,5 +109,13 @@ public class ClienteEntity {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public Collection<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<RoleEntity> roles) {
+        this.roles = roles;
     }
 }

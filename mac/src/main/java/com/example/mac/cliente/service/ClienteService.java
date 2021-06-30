@@ -43,7 +43,7 @@ public class ClienteService {
         return ClienteMapper.INSTANCE.mapToSaida(clienteEntity);
     }
 
-    public ClienteEntity buscarEVerificarExistenciaClientePorCpf(String email) {
+    public ClienteEntity buscarEVerificarExistenciaClientePorEmail(String email) {
         return clienteRepository.findByEmail(email);
     }
 

@@ -48,7 +48,7 @@ public class VagaController {
     }
 
     @PostMapping("/atualizar")
-    public HttpStatus atualizar(@RequestBody VagaEntrada vagaEntrada){ //TODO Id ja vem do front
+    public HttpStatus atualizar(@RequestBody VagaEntrada vagaEntrada){ //Id ja vem do front
         vagaService.atualizar(vagaEntrada);
 
         return HttpStatus.OK;

@@ -41,7 +41,7 @@ public class VagaEntity {
 
     @Column(name = "descricaoHabilidades")
     @ElementCollection(targetClass=String.class)
-    private List<String> descricaoHabilidades; //Selecionar mesmo nome habildiades no front
+    private List<String> descricaoHabilidades;
 
     @Lob
     @Column(name = "responsabilidade")

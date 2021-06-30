@@ -1,26 +1,20 @@
 package com.example.mac.entrevista.controller;
 
 import com.example.mac.cliente.model.ClienteEntity;
-import com.example.mac.cliente.model.ClienteSaida;
 import com.example.mac.cliente.service.ClienteService;
 import com.example.mac.dadosPessoais.service.DadosPessoaisService;
 import com.example.mac.entrevista.model.EntrevistaEntrada;
 import com.example.mac.entrevista.model.EntrevistaSaida;
 import com.example.mac.entrevista.service.EntrevistaService;
-import com.example.mac.exception.MyException;
 import com.example.mac.mail.Mensagem;
-import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 

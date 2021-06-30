@@ -1,21 +1,37 @@
 package com.example.mac.cliente.model;
 
-import com.example.mac.enums.CategoriaEnum;
-import com.example.mac.enums.SituacaoConcorrente;
+import com.example.mac.constraint.FieldMatch;
+import com.example.mac.role.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@FieldMatch.List({
+        @FieldMatch(first = "senha", second = "confirmacaoSenha", message = "As senhas devem ser iguais"),
+        @FieldMatch(first = "email", second = "confirmacaoEmail", message = "Os e-mails devem ser iguais")
+})
 public class ClienteEntrada {
+    @Email
     private String email;
+    @Email
+    private String repetirEmail;
+    @NotEmpty
     private String senha;
-    private String login;
+    @NotEmpty
+    private String repetirSenha;
+    @NotEmpty
     private String nome;
+
+    private List<RoleEntity> roles;
     private Boolean primeiroAcesso;
     private String situacao;
 
@@ -25,13 +41,6 @@ public class ClienteEntrada {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getEmail() {
@@ -64,5 +73,13 @@ public class ClienteEntrada {
 
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    public List<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleEntity> roles) {
+        this.roles = roles;
     }
 }
