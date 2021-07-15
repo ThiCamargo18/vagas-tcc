@@ -3,11 +3,14 @@ package com.example.mac.endpoints.candidato;
 import com.example.mac.cliente.model.ClienteEntity;
 import com.example.mac.cliente.model.ClienteEntrada;
 import com.example.mac.cliente.model.ClienteSessao;
-import com.example.mac.cliente.service.ClienteAutenticacaoService;
+import com.example.mac.security.service.ClienteAutenticacaoService;
 import com.example.mac.cliente.service.ClienteService;
-import com.example.mac.role.RoleEntity;
+import com.example.mac.security.model.RoleEntity;
+import com.example.mac.security.service.ClienteValidacao;
+import com.example.mac.security.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,26 +29,37 @@ public class EndpointCandidato {
     private ClienteService clienteService;
     @Autowired
     private ClienteAutenticacaoService clienteAutenticacaoService;
+    @Autowired
+    private ClienteValidacao clienteValidacao;
+    @Autowired
+    private SecurityService securityService;
 
     @RequestMapping("/")
     public ModelAndView paginaInicial(){
         return new ModelAndView("/index");
     }
 
-    @RequestMapping("/login")
-    public ModelAndView login(){
-        return new ModelAndView("/login/login");
+    @GetMapping("/login")
+    public ModelAndView login(Model model, String error, String logout) {
+        if (securityService.isAuthenticated()) {
+            return null;
+        }
+
+        if (error != null)
+            model.addAttribute("error", "Your username and password is invalid.");
+
+        if (logout != null)
+            model.addAttribute("message", "You have been logged out successfully.");
+
+        ModelAndView mv = new ModelAndView("/login/login");
+
+        return mv;
     }
 
-//    @PostMapping("/efetuaLogin")
+//    @PostMapping("/login")
 //    public ModelAndView efetuaLogin(@Valid ClienteEntrada clienteEntrada, HttpServletRequest request) throws Exception {
-//        ClienteEntity clienteEntity = clienteService.buscarEVerificarExistenciaClientePorEmail(clienteEntrada.getEmail());
-//
-//        if(clienteEntity == null){
-//            throw new Exception("E-mail não cadastrado");
-//        }
-//        if(!clienteEntrada.getSenha().equals(clienteEntity.getSenha())){
-//            throw new Exception("Senha incorreta");
+//        if (securityService.isAuthenticated()) {
+//            return null;
 //        }
 //
 //        ClienteSessao clienteSessao = new ClienteSessao();
@@ -64,22 +78,26 @@ public class EndpointCandidato {
 
     @RequestMapping("/registrar")
     public ModelAndView registrar(){
+        if (securityService.isAuthenticated()) {
+            return null;
+        }
+
         return new ModelAndView("/login/registrar");
     }
 
     @PostMapping("/registrar")
     public ModelAndView registrar(@Valid ClienteEntrada clienteEntrada, BindingResult result) throws Exception {
-        ClienteEntity cliente = clienteAutenticacaoService.findByEmail(clienteEntrada.getEmail());
-        if (cliente != null){
-            result.rejectValue("email", null, "Já existe um candidato cadastrado com esse mesmo e-mail!");
-        }
+        clienteValidacao.validate(clienteEntrada, result);
 
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             return new ModelAndView("/login/registrar");
         }
 
         clienteEntrada.setRoles(Arrays.asList(new RoleEntity("CANDIDATO")));
+
         clienteAutenticacaoService.save(clienteEntrada);
+
+        securityService.autoLogin(clienteEntrada.getEmail(), clienteEntrada.getRepetirSenha());
 
         return new ModelAndView("/login/login");
     }

@@ -1,10 +1,9 @@
-package com.example.mac.cliente.service;
+package com.example.mac.security.service;
 
 import com.example.mac.cliente.model.ClienteEntity;
 import com.example.mac.cliente.model.ClienteEntrada;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface ClienteAutenticacaoService extends UserDetailsService {
+public interface ClienteAutenticacaoService {
     ClienteEntity findByEmail(String email);
 
     ClienteEntity save(ClienteEntrada clienteEntrada);

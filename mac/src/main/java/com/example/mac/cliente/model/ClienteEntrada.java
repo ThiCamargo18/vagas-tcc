@@ -1,7 +1,7 @@
 package com.example.mac.cliente.model;
 
 import com.example.mac.constraint.FieldMatch;
-import com.example.mac.role.RoleEntity;
+import com.example.mac.security.model.RoleEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

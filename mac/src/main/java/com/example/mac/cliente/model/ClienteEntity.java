@@ -1,13 +1,13 @@
 package com.example.mac.cliente.model;
 
-import com.example.mac.role.RoleEntity;
+import com.example.mac.security.model.RoleEntity;
 import com.example.mac.vaga.model.VagaEntity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +20,7 @@ public class ClienteEntity {
     @Column(name = "email")
     private String email;
 
+    @Transient
     @Column(name = "senha")
     private String senha;
 
@@ -38,14 +39,8 @@ public class ClienteEntity {
     @ManyToMany(mappedBy = "clientes")
     private List<VagaEntity> vagas;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id"))
-    private Collection<RoleEntity> roles;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<RoleEntity> roles;
 
     public String getNome() {
         return nome;
@@ -111,11 +106,11 @@ public class ClienteEntity {
         this.situacao = situacao;
     }
 
-    public Collection<RoleEntity> getRoles() {
+    public List<RoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<RoleEntity> roles) {
+    public void setRoles(List<RoleEntity> roles) {
         this.roles = roles;
     }
 }
