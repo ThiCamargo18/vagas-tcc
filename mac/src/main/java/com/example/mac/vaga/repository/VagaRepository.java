@@ -1,6 +1,5 @@
 package com.example.mac.vaga.repository;
 
-import com.example.mac.cliente.model.ClienteEntity;
 import com.example.mac.vaga.model.VagaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

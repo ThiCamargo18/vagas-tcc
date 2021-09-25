@@ -1,6 +1,6 @@
 package com.example.mac.habilidades.controller;
 
-import com.example.mac.cliente.model.ClienteSessao;
+import com.example.mac.candidato.model.CandidatoSessao;
 import com.example.mac.clienteCadastro.controller.ClienteCadastroController;
 import com.example.mac.habilidades.model.HabilidadesEntrada;
 import com.example.mac.habilidades.model.HabilidadesSaida;
@@ -28,12 +28,12 @@ public class HabilidadesController {
     public ModelAndView atualizar(@Valid HabilidadesEntrada habilidadesEntrada, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
 
-        ClienteSessao clienteSessao = (ClienteSessao) session.getAttribute("usuarioLogado");
+        CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
 
-        if(clienteSessao.equals(null)){
+        if(candidatoSessao.equals(null)){
             throw new Exception("Você ainda não fez login, faça antes de fazer as alterações!");
         }
-        HabilidadesSaida saida = habilidadesService.atualizar(clienteSessao.getId(),habilidadesEntrada);
+        HabilidadesSaida saida = habilidadesService.atualizar(candidatoSessao.getId(),habilidadesEntrada);
 
         return clienteCadastroController.procurar(request);
     }

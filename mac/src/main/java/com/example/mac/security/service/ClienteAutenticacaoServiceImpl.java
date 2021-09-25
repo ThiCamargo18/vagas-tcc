@@ -1,58 +1,35 @@
 package com.example.mac.security.service;
 
-import com.example.mac.cliente.mapper.ClienteMapper;
-import com.example.mac.cliente.model.ClienteEntity;
-import com.example.mac.cliente.model.ClienteEntrada;
-import com.example.mac.cliente.repository.ClienteRepository;
-import com.example.mac.security.model.RoleEntity;
+import com.example.mac.candidato.mapper.CandidatoMapper;
+import com.example.mac.candidato.model.CandidatoEntity;
+import com.example.mac.candidato.model.CandidatoEntrada;
+import com.example.mac.candidato.repository.CandidatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.HashSet;
 
 @Service
 public class ClienteAutenticacaoServiceImpl implements ClienteAutenticacaoService {
     @Autowired
-    private ClienteRepository clienteRepository;
+    private CandidatoRepository candidatoRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-//    @Override
-//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-//        ClienteEntity clienteEntity = clienteRepository.findByEmail(email);
-//        if (clienteEntity == null){
-//            throw new UsernameNotFoundException("Invalid username or password.");
-//        }
-//        return new org.springframework.security.core.userdetails.User(clienteEntity.getEmail(),
-//                clienteEntity.getSenha(),
-//                mapRolesToAuthorities(clienteEntity.getRoles()));
-//    }
-
     @Override
-    public ClienteEntity findByEmail(String email) {
-        return clienteRepository.findByEmail(email);
+    public CandidatoEntity findByEmail(String email) {
+        return candidatoRepository.findByEmail(email);
     }
 
     @Override
-    public ClienteEntity save(ClienteEntrada clienteEntrada) {
-        ClienteEntity clienteEntity = ClienteMapper.INSTANCE.mapToEntity(clienteEntrada);
-        clienteEntity.setSenha(passwordEncoder.encode(clienteEntrada.getSenha()));
-        clienteEntity.setPrimeiroAcesso(true);
-        clienteEntity.setSituacao("CONCORRENDO");
-        clienteEntity.setRoles(clienteEntrada.getRoles());
+    public CandidatoEntity save(CandidatoEntrada candidatoEntrada) {
+        CandidatoEntity candidatoEntity = CandidatoMapper.INSTANCE.mapToEntity(candidatoEntrada);
+        candidatoEntity.setSenha(passwordEncoder.encode(candidatoEntrada.getSenha()));
+        candidatoEntity.setPrimeiroAcesso(true);
+        candidatoEntity.setSituacao("CONCORRENDO");
+        candidatoEntity.setRoles(new HashSet<>(candidatoEntrada.getRoles()));
 
-        return clienteRepository.save(clienteEntity);
+        return candidatoRepository.save(candidatoEntity);
     }
-
-//    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<RoleEntity> roles){
-//        return roles.stream()
-//                .map(role -> new SimpleGrantedAuthority(role.getName()))
-//                .collect(Collectors.toList());
-//    }
 }

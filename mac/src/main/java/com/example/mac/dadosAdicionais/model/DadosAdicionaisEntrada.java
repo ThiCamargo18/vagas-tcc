@@ -11,20 +11,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DadosAdicionaisEntrada {
     private long id;
-    private String cep; //
-    private String estado;//
-    private String cidade;//
-    private String bairro;//
-    private String endereco;//
-    private Integer numero;//
-    private String referencia;//
+    private String cep;
+    private String estado;
+    private String cidade;
+    private String bairro;
+    private String endereco;
+    private Integer numero;
+    private String referencia;
     private Long idUsuario;
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
 }

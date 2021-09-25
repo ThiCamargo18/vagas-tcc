@@ -1,8 +1,8 @@
 package com.example.mac.clienteCadastro.service;
 
-import com.example.mac.cliente.model.ClienteEntity;
-import com.example.mac.cliente.model.ClienteSaida;
-import com.example.mac.cliente.service.ClienteService;
+import com.example.mac.candidato.model.CandidatoEntity;
+import com.example.mac.candidato.model.CandidatoSaida;
+import com.example.mac.candidato.service.CandidatoService;
 import com.example.mac.clienteCadastro.mapper.ClienteCadastroMapper;
 import com.example.mac.clienteCadastro.model.ClienteCadastroEntrada;
 import com.example.mac.clienteCadastro.model.ClienteCadastroSaida;
@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClienteCadastroService {
     @Autowired
-    ClienteService clienteService;
+    CandidatoService candidatoService;
     @Autowired
     DadosAdicionaisService dadosAdicionaisService;
     @Autowired
@@ -40,26 +40,26 @@ public class ClienteCadastroService {
     RegistroNacionalService registroNacionalService;
 
     public ClienteCadastroSaida criar(ClienteCadastroEntrada entrada, Long idCliente) throws Exception {
-        ClienteSaida clienteSaida = clienteService.atualizarPrimeiroAcesso(idCliente);
+        CandidatoSaida candidatoSaida = candidatoService.atualizarPrimeiroAcesso(idCliente);
         DadosAdicionaisSaida dadosAdicionaisSaida = dadosAdicionaisService.criar(entrada.getDadosAdicionais(),idCliente);
         DadosPessoaisSaida dadosPessoaisSaida = dadosPessoaisService.criar(entrada.getDadosPessoais(),idCliente,dadosAdicionaisSaida.getCidade());
         ExperienciaSaida experienciaSaida = experienciaService.criar(entrada.getExperiencia(),idCliente);
         HabilidadesSaida habilidadesSaida = habilidadesService.criar(entrada.getHabilidades(),idCliente,dadosPessoaisSaida.getNomeCompleto());
         RegistroSaida registroSaida = registroNacionalService.criar(entrada.getRegistro(),idCliente );
 
-        return ClienteCadastroMapper.INSTANCE.mapToSaida(clienteSaida,dadosAdicionaisSaida,
+        return ClienteCadastroMapper.INSTANCE.mapToSaida(candidatoSaida,dadosAdicionaisSaida,
                 dadosPessoaisSaida,experienciaSaida,habilidadesSaida,registroSaida);
     }
 
     public ClienteCadastroSaida buscar(Long id) throws Exception {
-        ClienteEntity clienteEntity = clienteService.buscarEVerificarExistenciaClientePorIdVaga(id);
-        DadosAdicionaisEntity dadosAdicionaisEntity = dadosAdicionaisService.buscarPorIdCliente(clienteEntity.getId());
-        DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisService.buscarPorIdCliente(clienteEntity.getId());
-        ExperienciaEntity experienciaEntity = experienciaService.buscarPorIdCliente(clienteEntity.getId());
-        HabilidadesEntity habilidadesEntity = habilidadesService.buscarPorIdCLiente(clienteEntity.getId());
-        RegistroEntity registroEntity = registroNacionalService.buscarPorIdCliente(clienteEntity.getId());
+        CandidatoEntity candidatoEntity = candidatoService.buscarEVerificarExistenciaClientePorIdVaga(id);
+        DadosAdicionaisEntity dadosAdicionaisEntity = dadosAdicionaisService.buscarPorIdCliente(candidatoEntity.getId());
+        DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisService.buscarPorIdCliente(candidatoEntity.getId());
+        ExperienciaEntity experienciaEntity = experienciaService.buscarPorIdCliente(candidatoEntity.getId());
+        HabilidadesEntity habilidadesEntity = habilidadesService.buscarPorIdCLiente(candidatoEntity.getId());
+        RegistroEntity registroEntity = registroNacionalService.buscarPorIdCliente(candidatoEntity.getId());
 
-        return ClienteCadastroMapper.INSTANCE.mapToSaidaFromEntity(clienteEntity,dadosAdicionaisEntity,
+        return ClienteCadastroMapper.INSTANCE.mapToSaidaFromEntity(candidatoEntity,dadosAdicionaisEntity,
                 dadosPessoaisEntity,experienciaEntity,habilidadesEntity,registroEntity);
     }
 

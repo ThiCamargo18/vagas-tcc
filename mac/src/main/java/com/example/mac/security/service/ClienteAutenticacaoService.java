@@ -1,10 +1,10 @@
 package com.example.mac.security.service;
 
-import com.example.mac.cliente.model.ClienteEntity;
-import com.example.mac.cliente.model.ClienteEntrada;
+import com.example.mac.candidato.model.CandidatoEntity;
+import com.example.mac.candidato.model.CandidatoEntrada;
 
 public interface ClienteAutenticacaoService {
-    ClienteEntity findByEmail(String email);
+    CandidatoEntity findByEmail(String email);
 
-    ClienteEntity save(ClienteEntrada clienteEntrada);
+    CandidatoEntity save(CandidatoEntrada candidatoEntrada);
 }

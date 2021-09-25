@@ -18,12 +18,4 @@ public class RegistroEntrada {
     private String dataExpedicao;
     private String numero;
     private Long idUsuario;
-
-    public String getDataExpedicao() {
-        return dataExpedicao;
-    }
-
-    public void setDataExpedicao(String dataExpedicao) {
-        this.dataExpedicao = dataExpedicao;
-    }
 }

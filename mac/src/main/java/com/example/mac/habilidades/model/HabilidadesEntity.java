@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "habilidades")
@@ -32,52 +34,4 @@ public class HabilidadesEntity {
 
     @Column(name = "idUsuario")
     private Long idUsuario;
-
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getResumoProfissional() {
-        return resumoProfissional;
-    }
-
-    public void setResumoProfissional(String resumoProfissional) {
-        this.resumoProfissional = resumoProfissional;
-    }
-
-    public String getObjetivos() {
-        return objetivos;
-    }
-
-    public void setObjetivos(String objetivos) {
-        this.objetivos = objetivos;
-    }
-
-    public List<String> getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(List<String> descricao) {
-        this.descricao = descricao;
-    }
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
-    }
 }

@@ -1,6 +1,6 @@
 package com.example.mac.endpoints.candidato;
 
-import com.example.mac.cliente.model.ClienteSessao;
+import com.example.mac.candidato.model.CandidatoSessao;
 import com.example.mac.entrevista.model.EntrevistaSaida;
 import com.example.mac.entrevista.service.EntrevistaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,8 @@ public class Entrevista {
     public ModelAndView buscar(HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
 
-        ClienteSessao clienteSessao = (ClienteSessao) session.getAttribute("usuarioLogado");
-        EntrevistaSaida entrevistaSaida = entrevistaService.buscarPorIdCandidato(clienteSessao.getId());
+        CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
+        EntrevistaSaida entrevistaSaida = entrevistaService.buscarPorIdCandidato(candidatoSessao.getId());
 
         ModelAndView mv = new ModelAndView("/candidato/entrevista/buscar");
 

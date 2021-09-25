@@ -1,6 +1,6 @@
 package com.example.mac.dadosAdicionais.controller;
 
-import com.example.mac.cliente.model.ClienteSessao;
+import com.example.mac.candidato.model.CandidatoSessao;
 import com.example.mac.clienteCadastro.controller.ClienteCadastroController;
 import com.example.mac.dadosAdicionais.model.DadosAdicionaisEntrada;
 import com.example.mac.dadosAdicionais.model.DadosAdicionaisSaida;
@@ -33,13 +33,13 @@ public class DadosAdicionaisController {
                                   HttpServletResponse response, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
 
-        ClienteSessao clienteSessao = (ClienteSessao) session.getAttribute("usuarioLogado");
+        CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
 
-        if(clienteSessao.equals(null)){
+        if(candidatoSessao.equals(null)){
             throw new Exception("Você ainda não fez login, faça antes de fazer as alterações!");
         }
 
-        DadosAdicionaisSaida saida = dadosAdicionaisService.atualizar(dadosAdicionaisEntrada,clienteSessao.getId());
+        DadosAdicionaisSaida saida = dadosAdicionaisService.atualizar(dadosAdicionaisEntrada, candidatoSessao.getId());
 
         return clienteCadastroController.procurar(request);
     }

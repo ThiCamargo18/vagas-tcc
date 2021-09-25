@@ -1,7 +1,7 @@
 package com.example.mac.vaga.service;
 
-import com.example.mac.cliente.model.ClienteEntity;
-import com.example.mac.cliente.service.ClienteService;
+import com.example.mac.candidato.model.CandidatoEntity;
+import com.example.mac.candidato.service.CandidatoService;
 import com.example.mac.exception.MyException;
 import com.example.mac.dadosPessoais.mapper.DadosPessoaisMapper;
 import com.example.mac.dadosPessoais.model.DadosPessoaisEntity;
@@ -31,7 +31,7 @@ public class VagaService {
     @Autowired
     EmpresaService empresaService;
     @Autowired
-    ClienteService clienteService;
+    CandidatoService candidatoService;
     @Autowired
     DadosPessoaisService dadosPessoaisService;
 
@@ -59,18 +59,18 @@ public class VagaService {
             throw new Exception("Vaga não encontrada");
         }
 
-        ClienteEntity clienteEntity = clienteService.buscarEVerificarExistenciaClientePorIdVaga(idUsuario);
+        CandidatoEntity candidatoEntity = candidatoService.buscarEVerificarExistenciaClientePorIdVaga(idUsuario);
         VagaEntity vagaEntity = vagaEntityOptional.get();
 
-        List<ClienteEntity> clientesCadastrados = vagaEntity.getClientes();
+        List<CandidatoEntity> clientesCadastrados = vagaEntity.getClientes();
 
-        for(ClienteEntity cliente : clientesCadastrados){
-            if(cliente.getId()==clienteEntity.getId()){
+        for(CandidatoEntity cliente : clientesCadastrados){
+            if(cliente.getId()== candidatoEntity.getId()){
                 throw new Exception("Você já se inscreveu nessa vaga!");
             }
         }
 
-        clientesCadastrados.add(clienteEntity);
+        clientesCadastrados.add(candidatoEntity);
         vagaEntity.setClientes(clientesCadastrados);
         vagaEntity.setNumeroInscritos(vagaEntity.getNumeroInscritos()+1);
         vagaRepository.save(vagaEntity);
@@ -88,9 +88,9 @@ public class VagaService {
     public List<DadosPessoaisSaida> buscarInscritosPorVaga(Long id) throws Exception {
         List<DadosPessoaisEntity> dadosPessoaisEntityList = new ArrayList<>();
         Optional<VagaEntity> vagaEntity = vagaRepository.findById(id);
-        List<ClienteEntity> clienteEntityList = vagaEntity.get().getClientes();
+        List<CandidatoEntity> candidatoEntityList = vagaEntity.get().getClientes();
 
-        for(ClienteEntity cliente : clienteEntityList){
+        for(CandidatoEntity cliente : candidatoEntityList){
             DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisService.buscarPorIdCliente(cliente.getId());
             dadosPessoaisEntityList.add(dadosPessoaisEntity);
         }
@@ -153,13 +153,13 @@ public class VagaService {
     }
 
     public VagaSaida validarInscricao(VagaSaida vagaSaida,Long idUsuario) throws Exception {
-        ClienteEntity clienteEntity = clienteService.buscarEVerificarExistenciaClientePorIdVaga(idUsuario);
+        CandidatoEntity candidatoEntity = candidatoService.buscarEVerificarExistenciaClientePorIdVaga(idUsuario);
         VagaEntity vagaEntity = vagaRepository.findById(vagaSaida.getId()).get();
 
-        List<ClienteEntity> clientesCadastrados = vagaEntity.getClientes();
+        List<CandidatoEntity> clientesCadastrados = vagaEntity.getClientes();
 
-        for(ClienteEntity cliente : clientesCadastrados){
-            if(cliente.getId()==clienteEntity.getId()){
+        for(CandidatoEntity cliente : clientesCadastrados){
+            if(cliente.getId()== candidatoEntity.getId()){
                 vagaSaida.setInscrito("SIM");
             }
         }

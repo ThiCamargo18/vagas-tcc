@@ -16,11 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 public class VagaEntrada {
     private Long id;
-    private String titulo; //
-    private Integer quantidade;//
-    private String cidade;//
-    private CategoriaEnum categoria; //
-    private String formacao; //
+    private String titulo;
+    private Integer quantidade;
+    private String cidade;
+    private CategoriaEnum categoria;
+    private String formacao;
     private List<String> descricaoHabilidades;
     private String responsabilidade;
     private String salario;
@@ -31,20 +31,4 @@ public class VagaEntrada {
     private Integer numeroInscritos;
     private String status;
     private Long idEmpresa;
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

@@ -1,10 +1,7 @@
 package com.example.mac.endpoints.candidato;
 
-import com.example.mac.cliente.model.ClienteSessao;
-import com.example.mac.dadosPessoais.model.DadosPessoaisEntity;
-import com.example.mac.dadosPessoais.model.DadosPessoaisSaida;
+import com.example.mac.candidato.model.CandidatoSessao;
 import com.example.mac.enums.CategoriaEnum;
-import com.example.mac.habilidades.model.HabilidadesSaida;
 import com.example.mac.vaga.mapper.VagaMapper;
 import com.example.mac.vaga.model.VagaEntity;
 import com.example.mac.vaga.model.VagaSaida;
@@ -70,13 +67,13 @@ public class Vaga {
     @GetMapping("/inscrever/{idVaga}")
     public void inscrever(@PathVariable Long idVaga, HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
-        ClienteSessao clienteSessao = (ClienteSessao) session.getAttribute("usuarioLogado");
+        CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
 
-        if(clienteSessao.getPrimeiroAcesso().equals(true)){
+        if(candidatoSessao.getPrimeiroAcesso().equals(true)){
             throw new Exception("Você deve realizar seu cadastro completo antes de se candidatar a uma vaga!");
         }
 
-        VagaSaida vagaSaida = vagaService.inscrever(clienteSessao.getId(),idVaga);
+        VagaSaida vagaSaida = vagaService.inscrever(candidatoSessao.getId(),idVaga);
 
         response.sendRedirect("http://localhost:8088/inicio");
     }
@@ -84,10 +81,10 @@ public class Vaga {
     @GetMapping("/buscar/{id}")
     public ModelAndView buscar(@PathVariable Long id,HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
-        ClienteSessao clienteSessao = (ClienteSessao) session.getAttribute("usuarioLogado");
+        CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
 
         VagaSaida vagaSaida = vagaService.buscarVaga(id);
-        vagaSaida = vagaService.validarInscricao(vagaSaida,clienteSessao.getId());
+        vagaSaida = vagaService.validarInscricao(vagaSaida, candidatoSessao.getId());
         List<String> listaHabilidades = vagaSaida.getDescricaoHabilidades();
         List<String> beneficios = vagaSaida.getBeneficios();
         ModelAndView mv = new ModelAndView("/candidato/vaga/vagaCompleta");

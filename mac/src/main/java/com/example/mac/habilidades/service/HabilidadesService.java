@@ -1,6 +1,6 @@
 package com.example.mac.habilidades.service;
 
-import com.example.mac.cliente.model.ClienteEntity;
+import com.example.mac.candidato.model.CandidatoEntity;
 import com.example.mac.habilidades.mapper.HabilidadesMapper;
 import com.example.mac.habilidades.model.HabilidadesEntity;
 import com.example.mac.habilidades.model.HabilidadesEntrada;
@@ -59,9 +59,9 @@ public class HabilidadesService {
         List<HabilidadesEntity> habilidadesSelecionadas = new ArrayList<>();
 
 
-        List<ClienteEntity> clienteEntity = vaga.getClientes();
+        List<CandidatoEntity> candidatoEntity = vaga.getClientes();
 
-        for(ClienteEntity cliente: clienteEntity){
+        for(CandidatoEntity cliente: candidatoEntity){
             HabilidadesEntity habilidadesEntityOptional = habilidadesRepository.findByIdUsuario(cliente.getId());
             habilidades.add(habilidadesEntityOptional);
         }

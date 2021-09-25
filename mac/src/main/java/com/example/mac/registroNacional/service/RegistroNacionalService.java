@@ -1,6 +1,5 @@
 package com.example.mac.registroNacional.service;
 
-import com.example.mac.cliente.service.ClienteService;
 import com.example.mac.dadosPessoais.service.DadosPessoaisService;
 import com.example.mac.registroNacional.mapper.RegistroNacionalMapper;
 import com.example.mac.registroNacional.model.RegistroEntity;
@@ -10,9 +9,6 @@ import com.example.mac.registroNacional.repository.RegistroNacionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Service
 public class RegistroNacionalService {

@@ -1,9 +1,8 @@
 package com.example.mac.security.model;
 
-import com.example.mac.cliente.model.ClienteEntity;
+import com.example.mac.candidato.model.CandidatoEntity;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,7 +15,7 @@ public class RoleEntity {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private List<ClienteEntity> users;
+    private Set<CandidatoEntity> users;
 
     public RoleEntity() {
     }
@@ -41,11 +40,11 @@ public class RoleEntity {
         this.name = name;
     }
 
-    public List<ClienteEntity> getUsers() {
+    public Set<CandidatoEntity> getUsers() {
         return users;
     }
 
-    public void setUsers(List<ClienteEntity> users) {
+    public void setUsers(Set<CandidatoEntity> users) {
         this.users = users;
     }
 }

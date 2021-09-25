@@ -1,7 +1,7 @@
 package com.example.mac.security.service;
 
-import com.example.mac.cliente.model.ClienteEntity;
-import com.example.mac.cliente.repository.ClienteRepository;
+import com.example.mac.candidato.model.CandidatoEntity;
+import com.example.mac.candidato.repository.CandidatoRepository;
 import com.example.mac.security.model.RoleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,12 +18,12 @@ import java.util.Set;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
-    private ClienteRepository userRepository;
+    private CandidatoRepository userRepository;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        ClienteEntity user = userRepository.findByEmail(username);
+        CandidatoEntity user = userRepository.findByEmail(username);
         if (user == null) throw new UsernameNotFoundException(username);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();

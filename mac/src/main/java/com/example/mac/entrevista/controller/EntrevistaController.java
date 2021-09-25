@@ -1,7 +1,7 @@
 package com.example.mac.entrevista.controller;
 
-import com.example.mac.cliente.model.ClienteEntity;
-import com.example.mac.cliente.service.ClienteService;
+import com.example.mac.candidato.model.CandidatoEntity;
+import com.example.mac.candidato.service.CandidatoService;
 import com.example.mac.dadosPessoais.service.DadosPessoaisService;
 import com.example.mac.entrevista.model.EntrevistaEntrada;
 import com.example.mac.entrevista.model.EntrevistaSaida;
@@ -26,7 +26,7 @@ public class EntrevistaController {
     @Autowired
     EntrevistaService entrevistaService;
     @Autowired
-    ClienteService clienteService;
+    CandidatoService candidatoService;
     @Autowired
     DadosPessoaisService dadosPessoaisService;
 
@@ -37,7 +37,7 @@ public class EntrevistaController {
 
     @RequestMapping("/nova")
     public ModelAndView novaEntrevista(@RequestParam String cpf) throws Exception {
-        ClienteEntity cliente = dadosPessoaisService.buscarEVerificarExistenciaClientePorCpf(cpf);
+        CandidatoEntity cliente = dadosPessoaisService.buscarEVerificarExistenciaClientePorCpf(cpf);
 
         if(cliente==null){
             throw new Exception("Candidato não encontrado");
@@ -63,7 +63,7 @@ public class EntrevistaController {
     public ModelAndView criar(@PathVariable Long id) throws Exception {
         EntrevistaEntrada entrevistaEntrada = new EntrevistaEntrada();
         ModelAndView mv = new ModelAndView("/admin/entrevista/criar");
-        ClienteEntity clienteSaida = clienteService.buscarEVerificarExistenciaClientePorIdVaga(id);
+        CandidatoEntity clienteSaida = candidatoService.buscarEVerificarExistenciaClientePorIdVaga(id);
         String emailUsuario = dadosPessoaisService.buscarEmailUsuarioPorId(clienteSaida.getId());
         Mensagem dadosEmail = new Mensagem(null, Arrays.asList(emailUsuario),null,null);
         mv.addObject("cliente",clienteSaida);

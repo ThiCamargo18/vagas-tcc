@@ -1,31 +1,22 @@
 package com.example.mac.dadosPessoais.service;
 
-import com.example.mac.cliente.model.ClienteEntity;
-import com.example.mac.cliente.service.ClienteService;
-import com.example.mac.dadosAdicionais.model.DadosAdicionaisEntity;
+import com.example.mac.candidato.model.CandidatoEntity;
+import com.example.mac.candidato.service.CandidatoService;
 import com.example.mac.dadosPessoais.mapper.DadosPessoaisMapper;
 import com.example.mac.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.mac.dadosPessoais.model.DadosPessoaisEntrada;
 import com.example.mac.dadosPessoais.model.DadosPessoaisSaida;
 import com.example.mac.dadosPessoais.repository.DadosPessoaisRepository;
-import com.example.mac.exception.MyException;
 import com.example.mac.habilidades.model.HabilidadesEntrada;
 import com.example.mac.habilidades.service.HabilidadesService;
-import org.hibernate.JDBCException;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.sql.SQLNonTransientException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -35,7 +26,7 @@ public class DadosPessoaisService {
     @Autowired
     HabilidadesService habilidadesService;
     @Autowired
-    ClienteService clienteService;
+    CandidatoService candidatoService;
 
 
     public DadosPessoaisSaida criar(DadosPessoaisEntrada dadosPessoais,Long id,String cidade) throws Exception {
@@ -133,7 +124,7 @@ public class DadosPessoaisService {
     }
 
     public String buscarEmailUsuarioPorId(Long idUsuario) throws Exception {
-        Object dadosPessoaisEntity = clienteService.buscarEmailUsuarioPorId(idUsuario);
+        Object dadosPessoaisEntity = candidatoService.buscarEmailUsuarioPorId(idUsuario);
 
         if(dadosPessoaisEntity == null){
             throw new Exception("Não foi possivel localizar o e-mail do usuario!");
@@ -143,7 +134,7 @@ public class DadosPessoaisService {
     }
 
     public String buscarEmailUsuarioPorIdNovaVaga(long idUsuario) throws Exception {
-        Object dadosPessoaisEntity = clienteService.buscarEmailUsuarioPorId(idUsuario);
+        Object dadosPessoaisEntity = candidatoService.buscarEmailUsuarioPorId(idUsuario);
 
         if(dadosPessoaisEntity == null){
             throw new Exception("Não foi possivel localizar o e-mail do usuario! Pois o mesmo ainda não fez o cadastro completo.");
@@ -154,7 +145,7 @@ public class DadosPessoaisService {
         return emailUsuario;
     }
 
-    public ClienteEntity buscarEVerificarExistenciaClientePorCpf(String cpf) throws Exception {
+    public CandidatoEntity buscarEVerificarExistenciaClientePorCpf(String cpf) throws Exception {
         String resultado = dadosPessoaisRepository.getCandidatoByCpf(cpf);
 
         if(resultado == null) {
@@ -162,10 +153,10 @@ public class DadosPessoaisService {
         }
 
         String[] split = resultado.split(",");
-        ClienteEntity clienteEntity = new ClienteEntity();
-        clienteEntity.setId(Long.parseLong(split[0]));
-        clienteEntity.setNome(split[1]);
+        CandidatoEntity candidatoEntity = new CandidatoEntity();
+        candidatoEntity.setId(Long.parseLong(split[0]));
+        candidatoEntity.setNome(split[1]);
 
-        return clienteEntity;
+        return candidatoEntity;
     }
 }

@@ -1,15 +1,11 @@
 package com.example.mac.entrevista.service;
 
-import com.example.mac.cliente.model.ClienteEntity;
-import com.example.mac.cliente.service.ClienteService;
-import com.example.mac.dadosPessoais.service.DadosPessoaisService;
 import com.example.mac.entrevista.mapper.EntrevistaMapper;
 import com.example.mac.entrevista.model.EntrevistaEntity;
 import com.example.mac.entrevista.model.EntrevistaEntrada;
 import com.example.mac.entrevista.model.EntrevistaSaida;
 import com.example.mac.entrevista.repository.EntrevistaRepository;
 import com.example.mac.enums.Presenca;
-import com.example.mac.exception.MyException;
 import com.example.mac.mail.MailService;
 import com.example.mac.mail.Mensagem;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.example.mac.endpoints.admin;
 
-import com.example.mac.cliente.repository.ClienteRepository;
+import com.example.mac.candidato.repository.CandidatoRepository;
 import com.example.mac.endpoints.model.AdminIndex;
 import com.example.mac.entrevista.repository.EntrevistaRepository;
 import com.example.mac.vaga.repository.VagaRepository;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 @CrossOrigin
 public class EndpointAdmin {
     @Autowired
-    ClienteRepository clienteRepository;
+    CandidatoRepository candidatoRepository;
     @Autowired
     EntrevistaRepository entrevistaRepository;
     @Autowired
@@ -25,7 +25,7 @@ public class EndpointAdmin {
 
     @RequestMapping("/admin")
     public ModelAndView index(){
-        long numeroClientes = clienteRepository.count();
+        long numeroClientes = candidatoRepository.count();
         long numeroEntrevistas = entrevistaRepository.count();
         long numeroVagas = vagaRepository.count();
         ModelAndView mv = new ModelAndView("/admin/index");
