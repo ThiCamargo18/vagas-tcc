@@ -1,10 +1,10 @@
 package com.example.apicandidato.security;
 
-import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apicandidato.candidato.model.CandidatoEntrada;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 @Component
@@ -14,12 +14,12 @@ public class CandidatoValidacao implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return CandidatoEntity.class.equals(aClass);
+        return CandidatoEntrada.class.equals(aClass);
     }
 
     @Override
-    public void validate(Object o, Errors errors) {
-        CandidatoEntrada user = (CandidatoEntrada) o;
+    public void validate(Object object, Errors errors) {
+        CandidatoEntrada user = (CandidatoEntrada) object;
 
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
 //        if (user.getEmail().length() < 6 || user.getEmail().length() > 32) {

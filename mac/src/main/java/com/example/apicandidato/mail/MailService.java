@@ -1,11 +1,13 @@
 package com.example.apicandidato.mail;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class MailService {
 
     @Autowired
@@ -23,7 +25,7 @@ public class MailService {
         try{
             javaMailSender.send(simpleMailMessage);
         } catch (Exception e){
-            throw new Exception("Não foi possivel encaminhar o e-mail!");
+            log.error("Não foi possivel encaminhar o e-mail!");
         }
 
     }

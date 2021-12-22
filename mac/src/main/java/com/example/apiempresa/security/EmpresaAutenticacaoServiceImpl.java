@@ -32,7 +32,6 @@ public class EmpresaAutenticacaoServiceImpl implements EmpresaAutenticacaoServic
         EmpresaEntity empresaEntity = EmpresaMapper.INSTANCE.mapToEntity(empresaEntrada);
         empresaEntity.setSenha(passwordEncoder.encode(empresaEntrada.getSenha()));
 
-        EmpresaEntity entity = empresaRepository.save(empresaEntity);
-        return entity;
+        return empresaRepository.save(empresaEntity);
     }
 }

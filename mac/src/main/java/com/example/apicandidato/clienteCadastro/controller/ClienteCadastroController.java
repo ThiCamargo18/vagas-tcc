@@ -11,6 +11,7 @@ import com.example.apicandidato.experiencia.model.ExperienciaSaida;
 import com.example.apicandidato.habilidades.model.HabilidadesSaida;
 import com.example.apicandidato.registroNacional.model.RegistroSaida;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping(path = "cadastro", produces = "application/json")
 public class ClienteCadastroController {
     @Autowired
@@ -32,7 +33,7 @@ public class ClienteCadastroController {
     }
 
     @PostMapping("/criar")
-    public void criar(@Valid ClienteCadastroEntrada entrada, HttpServletRequest request,HttpServletResponse response) throws Exception {
+    public String criar(@Valid ClienteCadastroEntrada entrada, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
         CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
 
@@ -42,7 +43,7 @@ public class ClienteCadastroController {
 
         session.setAttribute("usuarioLogado", candidatoSessao);
 
-        response.sendRedirect("http://localhost:8088/inicio");
+        return "redirect:cadastro/criar";
     }
 
     @RequestMapping("/gerenciar")
@@ -91,7 +92,9 @@ public class ClienteCadastroController {
         CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
 
         ModelAndView mv = new ModelAndView("/candidato/cadastro/buscar");
+
         ClienteCadastroSaida saida = clienteCadastroService.buscar(candidatoSessao.getId());
+
         CandidatoSaida cliente = saida.getCliente();
         DadosPessoaisSaida dadosPessoais = saida.getDadosPessoais();
         DadosAdicionaisSaida dadosAdicionais = saida.getDadosAdicionais();

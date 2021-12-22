@@ -2,8 +2,8 @@ package com.example.apiempresa.endpoints;
 
 import com.example.apicandidato.candidato.repository.CandidatoRepository;
 import com.example.apiempresa.model.AdminIndex;
-import com.example.apicandidato.entrevista.repository.EntrevistaRepository;
-import com.example.apicandidato.vaga.repository.VagaRepository;
+import com.example.apiempresa.entrevista.repository.EntrevistaRepository;
+import com.example.apiempresa.vaga.repository.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.CrossOrigin;

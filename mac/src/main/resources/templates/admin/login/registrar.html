@@ -33,7 +33,7 @@
                 <div class="col-lg-7">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Crie sua conta!</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Crie sua conta para sua Empresa!</h1>
                         </div>
                         <form method="post" th:action="@{/registrarEmpresa}">
                             <div class="form-row">
@@ -44,8 +44,6 @@
                                         Ok!
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="col-md-6 mb-3" >
                                     <label for="razaoSocial">Razão Social </label>
                                     <input type="text" class="form-control" name="razaoSocial" id="razaoSocial" value="" required>
@@ -62,8 +60,6 @@
                                         Ok!
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="col-md-6 mb-3" >
                                     <label for="representante">Representante </label>
                                     <input type="text" class="form-control" name="representante" id="representante" value="">
@@ -80,8 +76,6 @@
                                         Ok!
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="col-md-6 mb-3" >
                                     <label for="rua">Rua </label>
                                     <input type="text" class="form-control" name="rua" id="rua" value="" required>
@@ -101,16 +95,14 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6 mb-3" >
-                                    <label for="bairro">Bairro </label>
+                                    <label for="bairro">Senha </label>
                                     <input type="password" class="form-control" name="senha" id="senha" value="" required>
                                     <div class="valid-feedback">
                                         Ok!
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="col-md-6 mb-3" >
-                                    <label for="bairro">Bairro </label>
+                                    <label for="bairro">Confirmar Senha </label>
                                     <input type="password" class="form-control" name="confirmarSenha" id="confirmarSenha" value="" required>
                                     <div class="valid-feedback">
                                         Ok!
@@ -124,17 +116,19 @@
                         </form>
                         <hr>
                         <div class="text-center">
-                            <a class="small" href="/login">Esqueceu sua senha?</a>
-                        </div>
-                        <div class="text-center">
-                            <a class="small" href="/login">Já possui uma conta? Login!</a>
+                            <a class="small" href="/loginEmpresa">Já possui uma conta? Login!</a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
+            </div>
+
+        </div>
+
+    </div>
+    <a type="button" href="/login" class="btn btn-primary btn-lg btn-block">Candidato</a>
+    <a type="button" href="/loginEmpresa" class="btn btn-secondary btn-lg btn-block">Empresa</a>
+    <br>
 </div>
 
 <!-- Bootstrap core JavaScript-->

@@ -1,7 +1,7 @@
 package com.example.apicandidato.candidato.model;
 
 import com.example.security.model.RoleEntity;
-import com.example.apicandidato.vaga.model.VagaEntity;
+import com.example.apiempresa.vaga.model.VagaEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +24,6 @@ public class CandidatoEntity {
     @Column(name = "email")
     private String email;
 
-    @Transient
     @Column(name = "senha")
     private String senha;
 

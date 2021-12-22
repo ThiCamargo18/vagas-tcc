@@ -39,7 +39,7 @@ public class LoginCandidato {
 
         model.addAttribute("userForm", new CandidatoEntrada());
 
-        return "/login/registrar";
+        return "/candidato/login/registrar";
     }
 
     @PostMapping("/registrar")
@@ -82,6 +82,6 @@ public class LoginCandidato {
         if (logout != null)
             model.addAttribute("message", "Loggout realizado com sucesso.");
 
-        return "/login/login";
+        return "/candidato/login/login";
     }
 }

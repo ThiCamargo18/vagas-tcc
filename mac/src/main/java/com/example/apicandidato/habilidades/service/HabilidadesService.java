@@ -6,8 +6,8 @@ import com.example.apicandidato.habilidades.model.HabilidadesEntity;
 import com.example.apicandidato.habilidades.model.HabilidadesEntrada;
 import com.example.apicandidato.habilidades.model.HabilidadesSaida;
 import com.example.apicandidato.habilidades.repository.HabilidadesRepository;
-import com.example.apicandidato.vaga.model.VagaEntity;
-import com.example.apicandidato.vaga.repository.VagaRepository;
+import com.example.apiempresa.vaga.model.VagaEntity;
+import com.example.apiempresa.vaga.repository.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

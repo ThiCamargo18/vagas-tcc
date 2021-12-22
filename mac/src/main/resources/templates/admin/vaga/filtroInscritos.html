@@ -126,7 +126,6 @@
                                 <tr>
                                     <th>Nome</th>
                                     <th>Idade</th>
-                                    <th>Experiência</th>
                                     <th>Curso</th>
                                     <th>Categoria</th>
                                     <th>Cidade</th>
@@ -134,23 +133,10 @@
                                     <th>Entrevista</th>
                                 </tr>
                                 </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Idade</th>
-                                    <th>Experiência</th>
-                                    <th>Curso</th>
-                                    <th>Categoria</th>
-                                    <th>Cidade</th>
-                                    <th>Cadastro</th>
-                                    <th>Entrevista</th>
-                                </tr>
-                                </tfoot>
                                 <tbody>
                                 <tr th:each="cliente : ${cliente}">
                                     <td th:utext="${#strings.abbreviate(cliente.nomeCompleto,400)} "></td>
                                     <td th:utext="${#strings.abbreviate(cliente.idade,400)} "></td>
-                                    <td th:utext="${#strings.abbreviate(cliente.experiencia,400)} "></td>
                                     <td th:utext="${#strings.abbreviate(cliente.curso,400)} "></td>
                                     <td th:utext="${#strings.abbreviate(cliente.categoria,400)} "></td>
                                     <td th:utext="${#strings.abbreviate(cliente.cidade,400)} "></td>

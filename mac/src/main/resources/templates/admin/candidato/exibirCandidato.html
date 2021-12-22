@@ -133,7 +133,6 @@
                                         <tr>
                                             <th scope="col">Nome</th>
                                             <th scope="col">Idade</th>
-                                            <th scope="col">Experiência</th>
                                             <th scope="col">Curso</th>
                                             <th scope="col">Categoria</th>
                                             <th scope="col">Cidade</th>
@@ -145,7 +144,6 @@
                                         <tr th:each="cliente : ${cliente}">
                                             <th th:utext="${#strings.abbreviate(cliente.nomeCompleto,400)} "></th>
                                             <td th:utext="${#strings.abbreviate(cliente.idade,400)} "></td>
-                                            <td th:utext="${#strings.abbreviate(cliente.experiencia,400)} "></td>
                                             <td th:utext="${#strings.abbreviate(cliente.curso,400)} "></td>
                                             <td th:utext="${#strings.abbreviate(cliente.categoria,400)} "></td>
                                             <td th:utext="${#strings.abbreviate(cliente.cidade,400)} "></td>
