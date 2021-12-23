@@ -3,9 +3,9 @@ package com.example.apicandidato.autenticacao;
 import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apicandidato.candidato.model.CandidatoEntrada;
 import com.example.apicandidato.candidato.model.CandidatoSessao;
-import com.example.security.model.RoleEntity;
 import com.example.apicandidato.security.CandidatoAutenticacaoService;
 import com.example.apicandidato.security.CandidatoValidacao;
+import com.example.security.model.RoleEntity;
 import com.example.security.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -43,7 +42,7 @@ public class LoginCandidato {
     }
 
     @PostMapping("/registrar")
-    public ModelAndView registration(@ModelAttribute("userForm") CandidatoEntrada userForm, BindingResult bindingResult, HttpServletRequest request) {
+    public String registration(@ModelAttribute("userForm") CandidatoEntrada userForm, BindingResult bindingResult, HttpServletRequest request) {
         //userValidator.validate(userForm, bindingResult);
 
 //        if (bindingResult.hasErrors()) {
@@ -57,24 +56,18 @@ public class LoginCandidato {
         securityService.autoLogin(userForm.getEmail(), userForm.getSenha());
 
         CandidatoSessao candidatoSessao = new CandidatoSessao();
-        candidatoSessao.setId(1L);
+        candidatoSessao.setId(save.getId());
         candidatoSessao.setNome(userForm.getNome());
-        candidatoSessao.setPrimeiroAcesso(true);
 
         HttpSession session = request.getSession();
         session.setAttribute("usuarioLogado", candidatoSessao);
 
-        ModelAndView mv = new ModelAndView("/candidato/index");
-        mv.addObject("candidato", candidatoSessao);
-
-        return mv;
+        return "redirect:/";
     }
 
     @GetMapping("/login")
     public String login(Model model, String error, String logout) {
-        if (securityService.isAuthenticated()) {
-            return "redirect:/";
-        }
+        if (securityService.isAuthenticated()) return "redirect:/";
 
         if (error != null)
             model.addAttribute("error", "Usuario ou senha invalidos.");

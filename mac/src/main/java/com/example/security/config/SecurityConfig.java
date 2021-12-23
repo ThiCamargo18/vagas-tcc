@@ -1,5 +1,6 @@
 package com.example.security.config;
 
+import com.example.security.service.AuthenticationSuccessHandlerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("candidatoDetailsServiceImpl")
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private AuthenticationSuccessHandlerImpl authenticationSuccessHandler;
 
     private static final String[] LISTA_AUTORIZACAO_CANDIDATO = {
             "/cliente/**",
@@ -66,6 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                     .loginPage("/login")
                     .permitAll()
+                    .successHandler(authenticationSuccessHandler)
                     .and()
                 .logout()
                     .permitAll()

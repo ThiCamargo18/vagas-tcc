@@ -29,7 +29,7 @@ public class DadosPessoaisService {
     CandidatoService candidatoService;
 
 
-    public DadosPessoaisSaida criar(DadosPessoaisEntrada dadosPessoais,Long id,String cidade) throws Exception {
+    public DadosPessoaisSaida criar(DadosPessoaisEntrada dadosPessoais, Long id, String cidade) throws Exception {
         DadosPessoaisEntity dadosPessoaisEntity = DadosPessoaisMapper.INSTANCE.mapToEntity(dadosPessoais);
 
         dadosPessoaisEntity.setIdUsuario(id);
@@ -37,16 +37,16 @@ public class DadosPessoaisService {
 
         try {
             dadosPessoaisRepository.save(dadosPessoaisEntity);
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             String mensagem = pegarOCampoComIdUnique(e.getMessage());
 
-            throw new Exception("Já existe um candidato com o mesmo(a) "+mensagem);
+            throw new Exception("Já existe um candidato com o mesmo(a) " + mensagem);
         }
 
         return DadosPessoaisMapper.INSTANCE.mapToSaida(dadosPessoaisEntity);
     }
 
-    public String dataParaDDMMAAA(String data){
+    public String dataParaDDMMAAA(String data) {
         LocalDate localDate = LocalDate.parse(data);
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -55,26 +55,26 @@ public class DadosPessoaisService {
         return data;
     }
 
-    public String pegarOCampoComIdUnique(String mensagem){
-        int inicio=0,fim=0,i=0;
+    public String pegarOCampoComIdUnique(String mensagem) {
+        int inicio = 0, fim = 0, i = 0;
         boolean verificador = true;
-        while(verificador == true){
+        while (verificador) {
             String letraAtual = String.valueOf(mensagem.charAt(i));
-            if(letraAtual.equals("(")) inicio = i+1;
-            if(letraAtual.equals(")")) fim = i;
+            if (letraAtual.equals("(")) inicio = i + 1;
+            if (letraAtual.equals(")")) fim = i;
             i++;
 
-            if(inicio != 0 && fim !=0) verificador = false;
+            if (inicio != 0 && fim != 0) verificador = false;
         }
-        String res = mensagem.substring(inicio,fim);
+        String res = mensagem.substring(inicio, fim);
 
         return res;
     }
 
     public DadosPessoaisEntity buscarPorIdCliente(long id) throws Exception {
-        DadosPessoaisEntity dadosPessoaisEntity =  dadosPessoaisRepository.findByIdUsuario(id);
+        DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisRepository.findByIdUsuario(id);
 
-        if(dadosPessoaisEntity == null){
+        if (dadosPessoaisEntity == null) {
             throw new Exception("Candidato não encontrado!");
         }
 
@@ -84,7 +84,7 @@ public class DadosPessoaisService {
     public DadosPessoaisSaida atualizar(DadosPessoaisEntrada dadosPessoaisEntrada, Long id) throws Exception {
         HabilidadesEntrada habilidadesEntrada = new HabilidadesEntrada();
         habilidadesEntrada.setNomeUsuario(dadosPessoaisEntrada.getNomeCompleto());
-        habilidadesService.atualizar(id,habilidadesEntrada);
+        habilidadesService.atualizar(id, habilidadesEntrada);
         DadosPessoaisEntity dadosRetornoEntity = dadosPessoaisRepository.findByIdUsuario(id);
         DadosPessoaisEntity dadosPessoaisEntity = DadosPessoaisMapper.INSTANCE.mapToEntity(dadosPessoaisEntrada);
         dadosPessoaisEntity.setId(dadosRetornoEntity.getId());
@@ -92,20 +92,20 @@ public class DadosPessoaisService {
 
         try {
             dadosPessoaisRepository.save(dadosPessoaisEntity);
-        }catch (DataIntegrityViolationException e){
+        } catch (DataIntegrityViolationException e) {
             String mensagem = pegarOCampoComIdUnique(e.getMessage());
 
-            throw new Exception("Já existe um candidato com o mesmo(a) "+mensagem);
+            throw new Exception("Já existe um candidato com o mesmo(a) " + mensagem);
         }
 
         return DadosPessoaisMapper.INSTANCE.mapToSaida(dadosPessoaisEntity);
     }
 
     public List<DadosPessoaisSaida> filtrar(DadosPessoaisEntity entrada) {
-        Example example = Example.of( entrada,
+        Example example = Example.of(entrada,
                 ExampleMatcher.matching()
                         .withIgnoreCase()
-                        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING) );
+                        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
         return dadosPessoaisRepository.findAll(example);
     }
 
@@ -116,7 +116,7 @@ public class DadosPessoaisService {
     public void atualizarCidade(Object o, Long id, String cidade) throws Exception {
         DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisRepository.findByIdUsuario(id);
 
-        if(dadosPessoaisEntity == null){
+        if (dadosPessoaisEntity == null) {
             throw new Exception("Candidato não encontrado na base de dados!");
         }
         dadosPessoaisEntity.setCidade(cidade);
@@ -126,7 +126,7 @@ public class DadosPessoaisService {
     public String buscarEmailUsuarioPorId(Long idUsuario) throws Exception {
         Object dadosPessoaisEntity = candidatoService.buscarEmailUsuarioPorId(idUsuario);
 
-        if(dadosPessoaisEntity == null){
+        if (dadosPessoaisEntity == null) {
             throw new Exception("Não foi possivel localizar o e-mail do usuario!");
         }
 
@@ -136,7 +136,7 @@ public class DadosPessoaisService {
     public String buscarEmailUsuarioPorIdNovaVaga(long idUsuario) throws Exception {
         Object dadosPessoaisEntity = candidatoService.buscarEmailUsuarioPorId(idUsuario);
 
-        if(dadosPessoaisEntity == null){
+        if (dadosPessoaisEntity == null) {
             throw new Exception("Não foi possivel localizar o e-mail do usuario! Pois o mesmo ainda não fez o cadastro completo.");
         }
 
@@ -148,7 +148,7 @@ public class DadosPessoaisService {
     public CandidatoEntity buscarEVerificarExistenciaClientePorCpf(String cpf) throws Exception {
         String resultado = dadosPessoaisRepository.getCandidatoByCpf(cpf);
 
-        if(resultado == null) {
+        if (resultado == null) {
             throw new Exception("CPF não encontrado");
         }
 

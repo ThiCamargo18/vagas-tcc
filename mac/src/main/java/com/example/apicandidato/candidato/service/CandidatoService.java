@@ -20,36 +20,10 @@ public class CandidatoService {
     @Autowired
     DadosPessoaisService dadosPessoaisService;
 
-    public CandidatoSaida criar(CandidatoEntrada cliente) throws Exception {
-        CandidatoEntity candidatoEntityOptional = candidatoRepository.findByEmail(cliente.getEmail());
-
-        if(candidatoEntityOptional != null){
-            throw new Exception("Já existe um candidato com esse E-mail cadastrado!");
-        }
-        CandidatoEntity candidatoEntity = CandidatoMapper.INSTANCE.mapToEntity(cliente);
-        candidatoEntity.setPrimeiroAcesso(true);
-        candidatoEntity.setSituacao("CONCORRENDO");
-
-        try{
-            candidatoRepository.save(candidatoEntity);
-        } catch (DataIntegrityViolationException e){
-            String mensagem = dadosPessoaisService.pegarOCampoComIdUnique(e.getMessage());
-
-            throw new Exception("Já existe um candidato com o mesmo(a) "+mensagem);
-        }
-
-
-        return CandidatoMapper.INSTANCE.mapToSaida(candidatoEntity);
-    }
-
-    public CandidatoEntity buscarEVerificarExistenciaClientePorEmail(String email) {
-        return candidatoRepository.findByEmail(email);
-    }
-
     public CandidatoEntity buscarEVerificarExistenciaClientePorIdVaga(Long idUsuario) throws MyException {
         Optional<CandidatoEntity> clienteEntity = candidatoRepository.findById(idUsuario);
 
-        if(!clienteEntity.isPresent()){
+        if(clienteEntity.isEmpty()){
             throw new MyException("Candidato não encontrado");
         }
 
@@ -89,20 +63,14 @@ public class CandidatoService {
         return CandidatoMapper.INSTANCE.mapToSaida(candidatoEntity);
     }
 
-    public CandidatoSaida atualizarPrimeiroAcesso(Long id) throws Exception {
+    public CandidatoSaida atualizarPrimeiroAcesso(Long id) {
         Optional<CandidatoEntity> clienteEntityOptional = candidatoRepository.findById(id);
 
         CandidatoEntity candidatoEntity = clienteEntityOptional.get();
 
         candidatoEntity.setPrimeiroAcesso(false);
 
-        try{
-            candidatoRepository.save(candidatoEntity);
-        } catch (DataIntegrityViolationException e){
-            String mensagem = dadosPessoaisService.pegarOCampoComIdUnique(e.getMessage());
-
-            throw new Exception("Já existe um candidato com o mesmo(a) "+mensagem);
-        }
+        candidatoRepository.save(candidatoEntity);
 
         return CandidatoMapper.INSTANCE.mapToSaida(candidatoEntity);
     }
@@ -111,4 +79,17 @@ public class CandidatoService {
         return candidatoRepository.getEmailByIdUser(id);
     }
 
+    public String isPrimeiroAcesso(long id) throws Exception {
+        Optional<CandidatoEntity> clienteEntityOptional = candidatoRepository.findById(id);
+
+        if (clienteEntityOptional.isEmpty())
+            throw new Exception("Candidato não encontrado no sistema");
+
+        CandidatoEntity candidatoEntity = clienteEntityOptional.get();
+
+        if (candidatoEntity.getPrimeiroAcesso().equals(true))
+            return "true";
+        else
+            return "false";
+    }
 }

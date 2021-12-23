@@ -27,9 +27,6 @@ public class CandidatoEntity {
     @Column(name = "senha")
     private String senha;
 
-    @Column(name = "login")
-    private String login;
-
     @Column(name = "nome")
     private String nome;
 

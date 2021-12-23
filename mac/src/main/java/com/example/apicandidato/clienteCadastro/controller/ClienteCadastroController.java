@@ -2,6 +2,7 @@ package com.example.apicandidato.clienteCadastro.controller;
 
 import com.example.apicandidato.candidato.model.CandidatoSaida;
 import com.example.apicandidato.candidato.model.CandidatoSessao;
+import com.example.apicandidato.candidato.service.CandidatoService;
 import com.example.apicandidato.clienteCadastro.model.ClienteCadastroEntrada;
 import com.example.apicandidato.clienteCadastro.model.ClienteCadastroSaida;
 import com.example.apicandidato.clienteCadastro.service.ClienteCadastroService;
@@ -25,7 +26,9 @@ import java.util.List;
 @RequestMapping(path = "cadastro", produces = "application/json")
 public class ClienteCadastroController {
     @Autowired
-    ClienteCadastroService clienteCadastroService;
+    private ClienteCadastroService clienteCadastroService;
+    @Autowired
+    private CandidatoService candidatoService;
 
     @RequestMapping(value = "/criar")
     public ModelAndView criar(){
@@ -34,33 +37,19 @@ public class ClienteCadastroController {
 
     @PostMapping("/criar")
     public String criar(@Valid ClienteCadastroEntrada entrada, HttpServletRequest request) throws Exception {
-        HttpSession session = request.getSession();
-        CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
-
-        ClienteCadastroSaida saida = clienteCadastroService.criar(entrada, candidatoSessao.getId());
-
-        candidatoSessao.setPrimeiroAcesso(saida.getCliente().getPrimeiroAcesso());
-
-        session.setAttribute("usuarioLogado", candidatoSessao);
+        clienteCadastroService.criar(entrada, CandidatoSessao.getId(request));
 
         return "redirect:cadastro/criar";
     }
 
     @RequestMapping("/gerenciar")
-    public void gerenciarCadastro(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession();
-        CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
-
-        if(candidatoSessao == null){
-            throw new Exception("Você ainda não possui uma conta! Vá até o menu e cadastre uma.");
+    public String gerenciarCadastro(HttpServletRequest request) throws Exception {
+        switch (candidatoService.isPrimeiroAcesso(CandidatoSessao.getId(request))){
+            case "true" : return "redirect:cadastro/criar";
+            case "false" : return "redirect:/cadastro/procurar";
         }
 
-        switch (candidatoSessao.getPrimeiroAcesso().toString()){
-            case "true" : response.sendRedirect("http://localhost:8088/cadastro/criar");
-                break;
-            case "false" : response.sendRedirect("http://localhost:8088/cadastro/procurar");
-                break;
-        }
+        return "redirect:/";
     }
 
     @GetMapping("/buscar/{id}")
@@ -88,12 +77,9 @@ public class ClienteCadastroController {
 
     @GetMapping("/procurar")
     public ModelAndView procurar(HttpServletRequest request) throws Exception {
-        HttpSession session = request.getSession();
-        CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
-
         ModelAndView mv = new ModelAndView("/candidato/cadastro/buscar");
 
-        ClienteCadastroSaida saida = clienteCadastroService.buscar(candidatoSessao.getId());
+        ClienteCadastroSaida saida = clienteCadastroService.buscar(CandidatoSessao.getId(request));
 
         CandidatoSaida cliente = saida.getCliente();
         DadosPessoaisSaida dadosPessoais = saida.getDadosPessoais();

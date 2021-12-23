@@ -1,14 +1,18 @@
 package com.example.apicandidato.vaga;
 
 import com.example.apicandidato.candidato.model.CandidatoSessao;
+import com.example.apicandidato.candidato.service.CandidatoService;
 import com.example.apicandidato.enums.CategoriaEnum;
 import com.example.apiempresa.vaga.mapper.VagaMapper;
 import com.example.apiempresa.vaga.model.VagaEntity;
 import com.example.apiempresa.vaga.model.VagaSaida;
 import com.example.apiempresa.vaga.service.VagaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,20 +20,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping(path = "candidato/vaga", produces = "application/json")
-@Configuration
-@CrossOrigin
 public class Vaga {
     @Autowired
-    VagaService vagaService;
+    private VagaService vagaService;
+    @Autowired
+    private CandidatoService candidatoService;
 
     @GetMapping("/listar")
-    public ModelAndView listar(HttpServletRequest request){
+    public ModelAndView listar(){
         List<VagaSaida> vagaSaidaList = vagaService.listarVagasAtivas();
+
         VagaSaida vagaSaida = new VagaSaida();
-        int numeroVagasEncontradas = vagaSaidaList.size();
-        vagaSaida.setNumeroVagasEncontradas(numeroVagasEncontradas);
+        vagaSaida.setNumeroVagasEncontradas(vagaSaidaList.size());
 
         ModelAndView mv = new ModelAndView("/candidato/vaga/listar");
         mv.addObject("vaga",vagaSaidaList);
@@ -65,28 +69,26 @@ public class Vaga {
     }
 
     @GetMapping("/inscrever/{idVaga}")
-    public void inscrever(@PathVariable Long idVaga, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession();
-        CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
+    public String inscrever(@PathVariable Long idVaga, HttpServletRequest request) throws Exception {
+        String primeiroAcesso = candidatoService.isPrimeiroAcesso(CandidatoSessao.getId(request));
 
-        if(candidatoSessao.getPrimeiroAcesso().equals(true)){
-            throw new Exception("Você deve realizar seu cadastro completo antes de se candidatar a uma vaga!");
-        }
+        if (primeiroAcesso.equals("true"))
+            return "redirect:cadastro/gerenciar";
 
-        VagaSaida vagaSaida = vagaService.inscrever(candidatoSessao.getId(),idVaga);
+        vagaService.inscrever(CandidatoSessao.getId(request),idVaga);
 
-        response.sendRedirect("http://localhost:8088/inicio");
+        return "redirect:/";
     }
 
     @GetMapping("/buscar/{id}")
     public ModelAndView buscar(@PathVariable Long id,HttpServletRequest request) throws Exception {
-        HttpSession session = request.getSession();
-        CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
-
         VagaSaida vagaSaida = vagaService.buscarVaga(id);
-        vagaSaida = vagaService.validarInscricao(vagaSaida, candidatoSessao.getId());
+
+        vagaSaida = vagaService.validarInscricao(vagaSaida, CandidatoSessao.getId(request));
+
         List<String> listaHabilidades = vagaSaida.getDescricaoHabilidades();
         List<String> beneficios = vagaSaida.getBeneficios();
+
         ModelAndView mv = new ModelAndView("/candidato/vaga/vagaCompleta");
         mv.addObject("vaga",vagaSaida);
         mv.addObject("listaHabilidades",listaHabilidades);
@@ -97,9 +99,9 @@ public class Vaga {
     @GetMapping("/buscarPorNome")
     public ModelAndView buscarPorNome (@RequestParam String nome) throws Exception {
         List<VagaSaida> vagaSaidaList = vagaService.buscarPorNome(nome);
+
         VagaSaida vagaSaida = new VagaSaida();
-        int numeroVagasEncontradas = vagaSaidaList.size();
-        vagaSaida.setNumeroVagasEncontradas(numeroVagasEncontradas);
+        vagaSaida.setNumeroVagasEncontradas(vagaSaidaList.size());
 
         ModelAndView mv = new ModelAndView("/candidato/vaga/listar");
         mv.addObject("vagaFiltro",vagaSaida);

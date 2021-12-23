@@ -15,7 +15,7 @@
 	<description>Projeto Mac Barbosa</description>
 
 	<properties>
-		<java.version>17</java.version>
+		<java.version>11</java.version>
 		<org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
 		<spring-cloud.version>Hoxton.SR5</spring-cloud.version>
 	</properties>
