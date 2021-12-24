@@ -11221,31 +11221,3 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
-
-.editarVerde {
-    background-color: #318f05;
-    font-size: 16px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    padding: 8px 18px;
-    transition-duration: 0.4s;
-    color: white;
-    margin-left: 3%;
-}
-
-.cancelarVermelho {
-    background-color: #f44336;
-    font-size: 16px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    padding: 8px 18px;
-    transition-duration: 0.4s;
-    color: white;
-    margin-right:3%;
-}
-
-#botaoAtualizar{
-    margin-top : 10px;
-    margin-bottom: 30px;
-    margin-left: 630px;
-}

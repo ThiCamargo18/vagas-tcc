@@ -31,7 +31,7 @@ public class ClienteCadastroController {
     private CandidatoService candidatoService;
 
     @RequestMapping(value = "/criar")
-    public ModelAndView criar(){
+    public ModelAndView criar() {
         return new ModelAndView("/candidato/cadastro/cadastroCompleto");
     }
 
@@ -39,14 +39,16 @@ public class ClienteCadastroController {
     public String criar(@Valid ClienteCadastroEntrada entrada, HttpServletRequest request) throws Exception {
         clienteCadastroService.criar(entrada, CandidatoSessao.getId(request));
 
-        return "redirect:cadastro/criar";
+        return "redirect:gerenciar";
     }
 
     @RequestMapping("/gerenciar")
     public String gerenciarCadastro(HttpServletRequest request) throws Exception {
-        switch (candidatoService.isPrimeiroAcesso(CandidatoSessao.getId(request))){
-            case "true" : return "redirect:cadastro/criar";
-            case "false" : return "redirect:/cadastro/procurar";
+        switch (candidatoService.isPrimeiroAcesso(CandidatoSessao.getId(request))) {
+            case "true":
+                return "redirect:criar";
+            case "false":
+                return "redirect:procurar";
         }
 
         return "redirect:/";
@@ -55,22 +57,16 @@ public class ClienteCadastroController {
     @GetMapping("/buscar/{id}")
     public ModelAndView buscar(@PathVariable Long id) throws Exception {
         ModelAndView mv = new ModelAndView("/admin/candidato/cadastroCompleto");
-        ClienteCadastroSaida saida = clienteCadastroService.buscar(id);
-        CandidatoSaida cliente = saida.getCliente();
-        DadosPessoaisSaida dadosPessoais = saida.getDadosPessoais();
-        DadosAdicionaisSaida dadosAdicionais = saida.getDadosAdicionais();
-        RegistroSaida registro = saida.getRegistro();
-        HabilidadesSaida habilidades = saida.getHabilidades();
-        ExperienciaSaida experiencia = saida.getExperiencia();
-        List<String> listaHabilidades = habilidades.getDescricao();
 
-        mv.addObject("cliente",cliente);
-        mv.addObject("dadosPessoais",dadosPessoais);
-        mv.addObject("dadosAdicionais",dadosAdicionais);
-        mv.addObject("registro",registro);
-        mv.addObject("habilidades",habilidades);
-        mv.addObject("listaHabilidades",listaHabilidades);
-        mv.addObject("experiencia",experiencia);
+        ClienteCadastroSaida saida = clienteCadastroService.buscar(id);
+
+        mv.addObject("cliente", saida.getCliente());
+        mv.addObject("dadosPessoais", saida.getDadosPessoais());
+        mv.addObject("dadosAdicionais", saida.getDadosAdicionais());
+        mv.addObject("registro", saida.getRegistro());
+        mv.addObject("habilidades", saida.getHabilidades());
+        mv.addObject("listaHabilidades", saida.getHabilidades().getDescricao());
+        mv.addObject("experiencia", saida.getExperiencia());
 
         return mv;
     }
@@ -81,21 +77,13 @@ public class ClienteCadastroController {
 
         ClienteCadastroSaida saida = clienteCadastroService.buscar(CandidatoSessao.getId(request));
 
-        CandidatoSaida cliente = saida.getCliente();
-        DadosPessoaisSaida dadosPessoais = saida.getDadosPessoais();
-        DadosAdicionaisSaida dadosAdicionais = saida.getDadosAdicionais();
-        RegistroSaida registro = saida.getRegistro();
-        HabilidadesSaida habilidades = saida.getHabilidades();
-        ExperienciaSaida experiencia = saida.getExperiencia();
-        List<String> listaHabilidades = habilidades.getDescricao();
-
-        mv.addObject("cliente",cliente);
-        mv.addObject("dadosPessoais",dadosPessoais);
-        mv.addObject("dadosAdicionais",dadosAdicionais);
-        mv.addObject("registro",registro);
-        mv.addObject("habilidades",habilidades);
-        mv.addObject("listaHabilidades",listaHabilidades);
-        mv.addObject("experiencia",experiencia);
+        mv.addObject("cliente", saida.getCliente());
+        mv.addObject("dadosPessoais", saida.getDadosPessoais());
+        mv.addObject("dadosAdicionais", saida.getDadosAdicionais());
+        mv.addObject("registro", saida.getRegistro());
+        mv.addObject("habilidades", saida.getHabilidades());
+        mv.addObject("listaHabilidades", saida.getHabilidades().getDescricao());
+        mv.addObject("experiencia", saida.getExperiencia());
 
         return mv;
     }

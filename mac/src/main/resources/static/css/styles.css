@@ -10212,17 +10212,3 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
 }
-
-#sucesso{
-      margin-top: 15px;
-      width: 50%;
-      margin-left: 20px;
-      display:none;
-}
-
-#erro{
-      margin-top: 15px;
-      width: 50%;
-      margin-left: 20px;
-      display:none;
-}
