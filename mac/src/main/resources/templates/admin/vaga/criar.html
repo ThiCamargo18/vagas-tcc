@@ -1,103 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Dashboard - MAC Admin</title>
-    <!--        <link href="css/styles.css" rel="stylesheet" />-->
-    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
-</head>
+
+<div th:replace="admin/fragments/fragment :: cabecalho"></div>
+
 <body class="sb-nav-fixed">
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="/admin">MAC Barbosa</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
-><!-- Navbar Search-->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" action="/vaga/buscarPorNome" method="get">
-        <div class="input-group">
-            <input class="form-control" name="nome" type="text" placeholder="Buscar vaga..." aria-label="Search" aria-describedby="basic-addon2" />
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-            </div>
-        </div>
-    </form>
-    <!-- Navbar-->
-    <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/configuracao/alterar">Configurações</a>
-                <a class="dropdown-item" href="/empresa/gerenciar">Meu perfil</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/sair">Sair</a>
-            </div>
-        </li>
-    </ul>
-</nav>
+
+<div th:replace="admin/fragments/fragment :: navbar"></div>
+
 <div id="layoutSidenav">
-    <div id="layoutSidenav_nav">
-        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
-                <div class="nav">
-                    <div class="sb-sidenav-menu-heading">Inicio</div>
-                    <a class="nav-link" href="/admin"
-                    ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Dashboard</a
-                    >
-                    <div class="sb-sidenav-menu-heading">Menu</div>
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Candidatos
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                        ></a>
-                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/filtro/buscarNome">Buscar</a>
-                            <a class="nav-link" href="/filtro/selecionar">Filtrar</a>
-                        </nav>
-                    </div>
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVaga" aria-expanded="false" aria-controls="collapsePages"
-                    ><div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        Vagas
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                        ></a>
-                    <div class="collapse" id="collapseVaga" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/vaga/criar">Cadastrar</a>
-                            <a class="nav-link" href="/vaga/listar">Painel</a>
-                        </nav>
-                    </div>
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEntrevista" aria-expanded="false" aria-controls="collapsePages"
-                    ><div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        Entrevistas
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                        ></a>
-                    <div class="collapse" id="collapseEntrevista" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/entrevista/selecionar">Agendar</a>
-                            <a class="nav-link" href="/entrevista/listar">Agendadas</a>
-                        </nav>
-                    </div>
-                    <div class="sb-sidenav-menu-heading">Filtros</div>
-                    <a class="nav-link" href="/vaga/listar"
-                    ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                        Vagas</a
-                    ><a class="nav-link" href="/entrevista/listar"
-                ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                    Entrevistas</a
-                >
-                </div>
-            </div>
-            <div class="sb-sidenav-footer">
-                <div class="small">Login por:</div>
-                MAC Barbosa
-            </div>
-        </nav>
-    </div>
+
+    <div th:replace="admin/fragments/fragment :: sidenav"></div>
+
     <div id="layoutSidenav_content">
         <main>
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -110,9 +23,9 @@
             <form method="post" class="needs-validation"
                   novalidate style="margin-left: 20px;margin-right: 20px; margin-top: 20px;" id="formVaga">
                 <div class="form-row">
-                    <div class="col-md-6 mb-3" >
+                    <div class="col-md-6 mb-3">
                         <label for="titulo">Título </label>
-                        <input type="text" class="form-control" name="titulo" id="titulo" value="" required = false>
+                        <input type="text" class="form-control" name="titulo" id="titulo" value="" required=false>
                         <div class="valid-feedback">
                             Ok!
                         </div>
@@ -147,7 +60,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label >Formação: </label>
+                        <label>Formação: </label>
                         <select class="form-control" id="formacao" name="formacao" required>
                             <option selected disabled value="">Selecione..</option>
                             <option value="Ensino Medio Incompleto">Ensino Médio Incompleto</option>
@@ -163,33 +76,44 @@
                     </div>
                     <div class="col-md-2 mb-3">
                         <label for="validationSalario">Salário</label>
-                        <input type="text" class="form-control" name="salario" onkeypress="mascarar(this,moeda)" id="validationSalario">
+                        <input type="text" class="form-control" name="salario" onkeypress="mascarar(this,moeda)"
+                               id="validationSalario">
                     </div>
-                    <div class="col-md-6 mb-3" >
+                    <div class="col-md-6 mb-3">
                         <label for="observacao">Alguma observação? </label>
                         <input type="text" class="form-control" name="observacao" id="observacao" value="">
                         <div class="valid-feedback">
                             Ok!
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3" >
+                    <div class="col-md-6 mb-3">
                         <label for="beneficio1">Benefícios</label>
-                        <input style="margin-top: 3px;"type="text" class="form-control" name="beneficios[0]" id="beneficio1" value="" >
-                        <input style="margin-top: 3px;"type="text" class="form-control" name="beneficios[1]" id="beneficio2" value="" >
-                        <input style="margin-top: 3px;"type="text" class="form-control" name="beneficios[2]" id="beneficio3" value="" >
-                        <input style="margin-top: 3px;"type="text" class="form-control" name="beneficios[3]" id="beneficio4" value="" >
+                        <input style="margin-top: 3px;" type="text" class="form-control" name="beneficios[0]"
+                               id="beneficio1" value="">
+                        <input style="margin-top: 3px;" type="text" class="form-control" name="beneficios[1]"
+                               id="beneficio2" value="">
+                        <input style="margin-top: 3px;" type="text" class="form-control" name="beneficios[2]"
+                               id="beneficio3" value="">
+                        <input style="margin-top: 3px;" type="text" class="form-control" name="beneficios[3]"
+                               id="beneficio4" value="">
                     </div>
-                    <div class="col-md-6 mb-3" >
+                    <div class="col-md-6 mb-3">
                         <label for="habilidade1">Adidione até 5 habilidades - Conhecimentos/Cursos/Treinamentos</label>
-                        <input style="margin-top: 3px;"type="text" class="form-control" name="descricaoHabilidades[0]" id="habilidade1" value="" >
-                        <input style="margin-top: 3px;"type="text" class="form-control" name="descricaoHabilidades[1]" id="habilidade2" value="" >
-                        <input style="margin-top: 3px;"type="text" class="form-control" name="descricaoHabilidades[2]" id="habilidade3" value="" >
-                        <input style="margin-top: 3px;"type="text" class="form-control" name="descricaoHabilidades[3]" id="habilidade4" value="" >
-                        <input style="margin-top: 3px;"type="text" class="form-control" name="descricaoHabilidades[4]" id="habilidade5" value="" >
+                        <input style="margin-top: 3px;" type="text" class="form-control" name="descricaoHabilidades[0]"
+                               id="habilidade1" value="">
+                        <input style="margin-top: 3px;" type="text" class="form-control" name="descricaoHabilidades[1]"
+                               id="habilidade2" value="">
+                        <input style="margin-top: 3px;" type="text" class="form-control" name="descricaoHabilidades[2]"
+                               id="habilidade3" value="">
+                        <input style="margin-top: 3px;" type="text" class="form-control" name="descricaoHabilidades[3]"
+                               id="habilidade4" value="">
+                        <input style="margin-top: 3px;" type="text" class="form-control" name="descricaoHabilidades[4]"
+                               id="habilidade5" value="">
                     </div>
                     <div class="col-md-6 mb-4" style="margin-left: 2px;">
                         <label for="responsabilidades">Responsabilidades</label>
-                        <textarea class="form-control" name="responsabilidade" id="responsabilidades" style="width: 40vh;margin-right: 3px;" ></textarea>
+                        <textarea class="form-control" name="responsabilidade" id="responsabilidades"
+                                  style="width: 40vh;margin-right: 3px;"></textarea>
                     </div>
 
                     <div class="row">
@@ -220,22 +144,13 @@
 
             </div>
         </main>
-        <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Feito por Thiago Camargo 2020</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+
+        <div th:replace="admin/fragments/fragment :: footer"></div>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="/js/scripts.js"></script>
 <script type="text/javascript" src="/js/validarPostAdmin.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

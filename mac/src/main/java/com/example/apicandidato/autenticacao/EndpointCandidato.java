@@ -16,4 +16,9 @@ public class EndpointCandidato {
     public String configuracoes(){
         return "Config";
     }
+
+    @RequestMapping("/multiple")
+    public String multiple(){
+        return "teste";
+    }
 }

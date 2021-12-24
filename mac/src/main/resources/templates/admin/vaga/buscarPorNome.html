@@ -1,96 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-    <title>Dashboard - MAC Admin</title>
-    <!--        <link href="css/styles.css" rel="stylesheet" />-->
-    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-          crossorigin="anonymous"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
-            crossorigin="anonymous"></script>
-</head>
+
+<div th:replace="admin/fragments/fragment :: cabecalho"></div>
+
 <body class="sb-nav-fixed">
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="/admin">MAC Barbosa</a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button
->
-    <!-- Navbar-->
-    <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/configuracao/alterar">Configurações</a>
-                <a class="dropdown-item" href="/empresa/gerenciar">Meu perfil</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/sair">Sair</a>
-            </div>
-        </li>
-    </ul>
-</nav>
+
+<div th:replace="admin/fragments/fragment :: navbar"></div>
+
 <div id="layoutSidenav">
-    <div id="layoutSidenav_nav">
-        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
-                <div class="nav">
-                    <div class="sb-sidenav-menu-heading">Inicio</div>
-                    <a class="nav-link" href="/admin"
-                    ><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Dashboard</a
-                    >
-                    <div class="sb-sidenav-menu-heading">Menu</div>
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                        Candidatos
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                        ></a>
-                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/filtro/buscarNome">Buscar</a>
-                            <a class="nav-link" href="/filtro/selecionar">Filtrar</a>
-                        </nav>
-                    </div>
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVaga" aria-expanded="false" aria-controls="collapsePages"
-                    ><div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        Vagas
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                        ></a>
-                    <div class="collapse" id="collapseVaga" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/vaga/criar">Cadastrar</a>
-                            <a class="nav-link" href="/vaga/listar">Painel</a>
-                        </nav>
-                    </div>
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEntrevista" aria-expanded="false" aria-controls="collapsePages"
-                    ><div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                        Entrevistas
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div
-                        ></a>
-                    <div class="collapse" id="collapseEntrevista" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="/entrevista/selecionar">Agendar</a>
-                            <a class="nav-link" href="/entrevista/listar">Agendadas</a>
-                        </nav>
-                    </div>
-                    <div class="sb-sidenav-menu-heading">Filtros</div>
-                    <a class="nav-link" href="/vaga/listar"
-                    ><div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                        Vagas</a
-                    ><a class="nav-link" href="/entrevista/listar"
-                ><div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                    Entrevistas</a
-                >
-                </div>
-            </div>
-            <div class="sb-sidenav-footer">
-                <div class="small">Login por:</div>
-                MAC Barbosa
-            </div>
-        </nav>
-    </div>
+
+    <div th:replace="admin/fragments/fragment :: sidenav"></div>
+
     <div id="layoutSidenav_content">
         <main>
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -100,9 +20,11 @@
                         <span class="font-weight-bold">Vagas encontradas: </span>
                         <span class="font-weight-bold" th:utext="${vagaFiltro.numeroVagasEncontradas} "></span>
                     </div>
-                    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" action="/vaga/buscarPorNome" method="get">
+                    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"
+                          action="/vaga/buscarPorNome" method="get">
                         <div class="input-group">
-                            <input class="form-control" name="nome" type="text" placeholder="Buscar novamente..." aria-label="Search" aria-describedby="basic-addon2" />
+                            <input class="form-control" name="nome" type="text" placeholder="Buscar novamente..."
+                                   aria-label="Search" aria-describedby="basic-addon2"/>
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                             </div>
@@ -113,7 +35,7 @@
             <section>
                 <div class="container-md" style="width: 100%;">
                     <div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="vaga : ${vaga}">
-                        <div class="card-body" >
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col">
                                     <a th:href="@{/vaga/buscar/{id}(id=${vaga.id})}">
@@ -159,11 +81,11 @@
                                 <div class="col">
                                     <button class="btn btn-danger"
                                             data-toggle="modal" data-target="#modalExcluir"
-                                            th:onclick="'setaDadosModal('+${vaga.id}+')'" >
+                                            th:onclick="'setaDadosModal('+${vaga.id}+')'">
                                         Excluir
                                     </button>
                                     <a style="margin-left: 5px;" class="btn btn-info" type="button"
-                                       th:href="@{/vaga/atualizar/{id}(id=${vaga.id})}" >Atualizar
+                                       th:href="@{/vaga/atualizar/{id}(id=${vaga.id})}">Atualizar
                                     </a>
                                 </div>
                                 <div class="col">
@@ -172,7 +94,8 @@
                                         <label class="custom-control-label" for="customRadio1">Ativa</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio2" name="desativa" class="custom-control-input">
+                                        <input type="radio" id="customRadio2" name="desativa"
+                                               class="custom-control-input">
                                         <label class="custom-control-label" for="customRadio2">Desativa</label>
                                     </div>
                                 </div>
@@ -183,18 +106,8 @@
             </section>
 
         </main>
-        <footer class="py-4 bg-light mt-auto">
-            <div class="container-fluid">
-                <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Feito por Thiago Camargo 2020</div>
-                    <div>
-                        <a href="#">Privacy Policy</a>
-                        &middot;
-                        <a href="#">Terms &amp; Conditions</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+
+        <div th:replace="admin/fragments/fragment :: footer"></div>
     </div>
 </div>
 
@@ -214,7 +127,8 @@
                     <form action="/vaga/deletar" class="search" method="get">
                         Número vaga: <input id="vaga" name="vaga" type="text" value="vaga" readonly="readonly"/>
                         <br><br>
-                        <input style="margin-left: 75%;" id="btnBusca" type="submit" value="Deletar" class="btn btn-danger"/>
+                        <input style="margin-left: 75%;" id="btnBusca" type="submit" value="Deletar"
+                               class="btn btn-danger"/>
                     </form>
                 </div>
             </div>
@@ -232,10 +146,5 @@
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 <script src="/assets/demo/datatables-demo.js"></script>
-<script>
-    function setaDadosModal(valor) {
-                document.getElementById('vaga').value = valor;
-            }
-</script>
 </body>
 </html>
