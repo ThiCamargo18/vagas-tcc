@@ -28,10 +28,10 @@
                 <div class="container-fluid">
                     <h1 class="mt-4">Cadastro</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Experiência</li>
-                        <button type="button" style="margin-left: 20px" class="btn btn-outline-info btn-sm"
-                                data-toggle="modal" data-target="#experienciaModal">Adicionar
+                        <button type="button" style="margin-right: 20px" class="btn btn-outline-info btn-sm"
+                                data-toggle="modal" data-target="#experienciaModal">+
                         </button>
+                        <li class="breadcrumb-item active">Experiência</li>
                     </ol>
                 </div>
 
@@ -68,10 +68,10 @@
 
                 <div class="container-fluid">
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Sobre suas habilidades</li>
-                        <button type="button" style="margin-left: 20px" class="btn btn-outline-info btn-sm"
-                                data-toggle="modal" data-target="#habilidadeModal">Adicionar
+                        <button type="button" style="margin-right: 20px" class="btn btn-outline-info btn-sm"
+                                data-toggle="modal" data-target="#habilidadeModal">+
                         </button>
+                        <li class="breadcrumb-item active">Objetivos</li>
                     </ol>
                 </div>
 
@@ -106,10 +106,10 @@
 
                 <div class="container-fluid">
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Projetos que você participou</li>
-                        <button type="button" style="margin-left: 20px" class="btn btn-outline-info btn-sm"
-                                data-toggle="modal" data-target="#projetosModal">Adicionar
+                        <button type="button" style="margin-right: 20px; " class="btn btn-outline-info btn-sm"
+                                data-toggle="modal" data-target="#projetosModal">+
                         </button>
+                        <li class="breadcrumb-item active">Projetos</li>
                     </ol>
                 </div>
 
@@ -129,6 +129,73 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="container-fluid">
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Sobre seu cargo e seus conhecimentos</li>
+                    </ol>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="col-md-3 mb-3">
+                        <label for="validationFormacao">Cargo</label>
+                        <select class="form-control" name="dadosPessoais.formacao" id="validationFormacao" >
+                            <option selected disabled value="">Escolher...</option>
+                            <option th:each="cargo : ${cargo}" th:value="${cargo.nome}" th:text="${cargo.nome}"></option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a formação.
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-header">
+                                    <h5 class="card-title" >Tecnologias</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group" th:each="tecnologia : ${cargo[0].tecnologias}">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" th:value="${tecnologia.nome}" th:utext="${tecnologia.nome}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-header">
+                                    <h5 class="card-title" >Frameworks</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group" th:each="framework : ${cargo[0].frameworks}">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" th:value="${framework.nome}" th:utext="${framework.nome}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-header">
+                                    <h5 class="card-title" >Ferramentas</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group" th:each="ferramenta : ${cargo[0].ferramentas}">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" th:value="${ferramenta.nome}" th:utext="${ferramenta.nome}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </main>
             <!-- /.container-fluid -->
@@ -294,7 +361,7 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="descricao">Objetivos</label>
+                            <label for="descricao">Descrição do Projeto</label>
                             <textarea class="form-control" name="descricao" id="descricaoProjeto" style="width: 40vh;margin-right: 3px;" rows="4"></textarea>
                         </div>
                     </div>

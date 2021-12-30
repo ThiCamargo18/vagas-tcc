@@ -2,6 +2,8 @@ package com.example.apicandidato.clienteCadastro.controller;
 
 import com.example.apicandidato.candidato.model.CandidatoSessao;
 import com.example.apicandidato.candidato.service.CandidatoService;
+import com.example.apicandidato.cargo.model.CargoEntity;
+import com.example.apicandidato.cargo.service.CargoService;
 import com.example.apicandidato.clienteCadastro.model.ClienteCadastroEntrada;
 import com.example.apicandidato.clienteCadastro.model.ClienteCadastroSaida;
 import com.example.apicandidato.clienteCadastro.service.ClienteCadastroService;
@@ -32,6 +34,8 @@ public class ClienteCadastroController {
     private HabilidadesService habilidadesService;
     @Autowired
     private ProjetoService projetoService;
+    @Autowired
+    private CargoService cargoService;
 
     @RequestMapping(value = "/criar")
     public ModelAndView criar() {
@@ -52,6 +56,7 @@ public class ClienteCadastroController {
         modelAndView.addObject("experiencia", experienciaService.buscarPorIdCliente(CandidatoSessao.getId(request)));
         modelAndView.addObject("habilidade", habilidadesService.buscarPorIdCLiente(CandidatoSessao.getId(request)));
         modelAndView.addObject("projeto", projetoService.buscarPorIdCLiente(CandidatoSessao.getId(request)));
+        modelAndView.addObject("cargo", cargoService.buscarPorIdCliente());
 
         return modelAndView;
     }

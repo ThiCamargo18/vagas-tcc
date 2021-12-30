@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjetoEntrada {
+    private Long id;
     private String nome;
     private String descricao;
     private Long idUsuario;

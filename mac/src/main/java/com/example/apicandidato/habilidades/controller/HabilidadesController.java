@@ -15,7 +15,7 @@ import javax.validation.Valid;
 @RequestMapping(path = "habilidades", produces = "application/json")
 public class HabilidadesController {
     @Autowired
-    HabilidadesService habilidadesService;
+    private HabilidadesService habilidadesService;
 
     @PostMapping("/atualizar")
     public String atualizar(@Valid HabilidadesEntrada habilidadesEntrada, HttpServletRequest request) throws Exception {
