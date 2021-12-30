@@ -63,12 +63,12 @@ public class CandidatoService {
         return CandidatoMapper.INSTANCE.mapToSaida(candidatoEntity);
     }
 
-    public CandidatoSaida atualizarPrimeiroAcesso(Long id) {
+    public CandidatoSaida atualizarCadastroBasico(Long id) {
         Optional<CandidatoEntity> clienteEntityOptional = candidatoRepository.findById(id);
 
         CandidatoEntity candidatoEntity = clienteEntityOptional.get();
 
-        candidatoEntity.setPrimeiroAcesso(false);
+        candidatoEntity.setCadastroBasicoRealizado(true);
 
         candidatoRepository.save(candidatoEntity);
 
@@ -79,17 +79,20 @@ public class CandidatoService {
         return candidatoRepository.getEmailByIdUser(id);
     }
 
-    public String isPrimeiroAcesso(long id) throws Exception {
+    public boolean cadastroBasicoRealizado(long id) throws Exception {
         Optional<CandidatoEntity> clienteEntityOptional = candidatoRepository.findById(id);
-
-        if (clienteEntityOptional.isEmpty())
-            throw new Exception("Candidato não encontrado no sistema");
 
         CandidatoEntity candidatoEntity = clienteEntityOptional.get();
 
-        if (candidatoEntity.getPrimeiroAcesso().equals(true))
-            return "true";
-        else
-            return "false";
+        return candidatoEntity.getCadastroBasicoRealizado();
+    }
+
+
+    public boolean cadastroAdicionalRealizado(Long id) {
+        Optional<CandidatoEntity> clienteEntityOptional = candidatoRepository.findById(id);
+
+        CandidatoEntity candidatoEntity = clienteEntityOptional.get();
+
+        return candidatoEntity.getCadastroAdicionalRealizado();
     }
 }

@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -70,9 +68,9 @@ public class Vaga {
 
     @GetMapping("/inscrever/{idVaga}")
     public String inscrever(@PathVariable Long idVaga, HttpServletRequest request) throws Exception {
-        String primeiroAcesso = candidatoService.isPrimeiroAcesso(CandidatoSessao.getId(request));
+        boolean primeiroAcesso = candidatoService.cadastroBasicoRealizado(CandidatoSessao.getId(request));
 
-        if (primeiroAcesso.equals("true"))
+        if (!primeiroAcesso)
             return "redirect:cadastro/gerenciar";
 
         vagaService.inscrever(CandidatoSessao.getId(request),idVaga);

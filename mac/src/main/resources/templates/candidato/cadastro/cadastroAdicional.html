@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<div th:replace="candidato/fragments/fragment :: cabecalho"></div>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="candidato/fragments/fragment :: sidebar"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div th:replace="candidato/fragments/fragment :: topbar"></div>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <main>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <div class="container-fluid">
+                    <h1 class="mt-4">Cadastro</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Experiência</li>
+                        <button type="button" style="margin-left: 20px" class="btn btn-outline-info btn-sm"
+                                data-toggle="modal" data-target="#experienciaModal">Adicionar
+                        </button>
+                    </ol>
+                </div>
+
+                <div class="container-sm">
+                    <div class="card shadow mb-3" style="margin-top: 20px;" th:each="experiencia : ${experiencia}">
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <h6 class="m-0 font-weight-bold text-primary" th:utext="${experiencia.cargo}"></h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold" th:utext="${experiencia.dataInicio}"></span>
+                                    <span class="font-weight-bold"> - </span>
+                                    <span class="font-weight-bold" th:utext="${experiencia.dataFim}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold">Empresa: </span>
+                                    <span class="font-weight-bold" th:utext="${experiencia.nomeEmpresa}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold">Descrição cargo: </span>
+                                    <span class="font-weight-bold" th:utext="${experiencia.descricao}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Sobre suas habilidades</li>
+                        <button type="button" style="margin-left: 20px" class="btn btn-outline-info btn-sm"
+                                data-toggle="modal" data-target="#habilidadeModal">Adicionar
+                        </button>
+                    </ol>
+                </div>
+
+                <div class="container-sm">
+                    <div class="card shadow mb-3" style="margin-top: 20px;" th:each="habilidade : ${habilidade}">
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <h6 class="m-0 font-weight-bold text-primary">Resumo Profissional</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold" th:utext="${habilidade.resumoProfissional}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <h6 class="m-0 font-weight-bold text-primary">Objetivos</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold" th:utext="${habilidade.objetivos}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Projetos que você participou</li>
+                        <button type="button" style="margin-left: 20px" class="btn btn-outline-info btn-sm"
+                                data-toggle="modal" data-target="#projetosModal">Adicionar
+                        </button>
+                    </ol>
+                </div>
+
+                <div class="container-sm">
+                    <div class="card shadow mb-3" style="margin-top: 20px;" th:each="projeto : ${projeto}">
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <h6 class="m-0 font-weight-bold text-primary" th:utext="${projeto.nome}"></h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold" th:utext="${projeto.descricao}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <div th:replace="candidato/fragments/fragment :: footer"></div>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="candidato/fragments/fragment :: modalSair"></div>
+
+<!-- Experiencia Modal-->
+<div class="modal fade" id="experienciaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar Nova Experiência</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/experiencia/atualizar" method="POST">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-5">
+                            <label for="cargo">Cargo </label>
+                            <input type="text" class="form-control" name="cargo" id="cargo" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="dataInicio">Data Inicio </label>
+                            <input type="text" class="form-control" onkeypress="mascarar(this,data)"
+                                   placeholder="dd/mm/aaaa" maxlength="10" name="dataInicio" id="dataInicio"
+                                   value="">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="dataFim">Data Fim </label>
+                            <input type="text" class="form-control" onkeypress="mascarar(this,data)"
+                                   placeholder="dd/mm/aaaa" maxlength="10" name="dataFim" id="dataFim"
+                                   value="">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="salario">Salário </label>
+                            <input type="text" class="form-control" onkeypress="mascarar(this,moeda)"
+                                   placeholder="0.000" name="salario" id="salario" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12 mb-5">
+                            <label for="categoriaExperiencia">Categoria</label>
+                            <select class="form-control" name="categoria" id="categoriaExperiencia">
+                                <option selected disabled value="">Escolher...</option>
+                                <option value="CLT">CLT</option>
+                                <option value="ESTAGIO">ESTAGIO</option>
+                                <option value="JOVEMAPRENDIZ">JOVEM APRENDIZ</option>
+                                <option value="PCD">PCD</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor, selecione a categoria.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-10 mb-5">
+                            <label for="nomeEmpresa">Nome Empresa </label>
+                            <input type="text" class="form-control" name="nomeEmpresa" id="nomeEmpresa" value="">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="descricao">Descrição</label>
+                            <textarea class="form-control" name="descricao" id="descricao"
+                                      style="width: 40vh;margin-right: 3px;" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" id="botaoAtualizar5">
+                        Salvar
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Habilidade Modal-->
+<div class="modal fade" id="habilidadeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Adicionar Resumo Profissinal</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/habilidades/atualizar" method="POST">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="resumoProfissional">Resumo Profissional</label>
+                            <textarea class="form-control" name="resumoProfissional" id="resumoProfissional" style="width: 40vh;margin-right: 3px;" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="objetivos">Objetivos</label>
+                            <textarea class="form-control" name="objetivos" id="objetivos" style="width: 40vh;margin-right: 3px;" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Projeto Modal-->
+<div class="modal fade" id="projetosModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Adicionar Projeto</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/projeto/atualizar" method="POST">
+                    <div class="form-row">
+                        <div class="col-md-12 mb-5">
+                            <label for="nome">Nome</label>
+                            <input type="text" class="form-control" name="nome" id="nome" value="">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="descricao">Objetivos</label>
+                            <textarea class="form-control" name="descricao" id="descricaoProjeto" style="width: 40vh;margin-right: 3px;" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript-->
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script type="text/javascript" src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script type="text/javascript" src="/js/sb-admin-2.min.js"></script>
+<script type="text/javascript" src="/js/validacoes.js"></script>
+
+<!-- Page level plugins -->
+<script type="text/javascript" src="/vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script type="text/javascript" src="/js/demo/chart-area-demo.js"></script>
+<script type="text/javascript" src="/js/demo/chart-pie-demo.js"></script>
+
+</body>
+</html>

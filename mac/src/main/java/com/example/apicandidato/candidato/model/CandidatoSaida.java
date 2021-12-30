@@ -15,6 +15,7 @@ public class CandidatoSaida {
     private String senha;
     private String login;
     private String nome;
-    private Boolean primeiroAcesso;
+    private Boolean cadastroBasicoRealizado;
+    private Boolean cadastroAdicionalRealizado;
     private String situacao;
 }

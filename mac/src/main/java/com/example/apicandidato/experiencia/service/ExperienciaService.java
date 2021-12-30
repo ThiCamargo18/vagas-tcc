@@ -9,33 +9,30 @@ import com.example.apicandidato.experiencia.repository.ExperienciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ExperienciaService {
     @Autowired
     ExperienciaRepository experienciaRepository;
     @Autowired
     CandidatoService candidatoService;
-    public ExperienciaSaida criar(ExperienciaEntrada experiencia,Long id) {
-        ExperienciaEntity experienciaEntity = ExperienciaMapper.INSTANCE.mapToEntity(experiencia);
 
-        experienciaEntity.setIdUsuario(id);
+    public ExperienciaSaida atualizar(ExperienciaEntrada experienciaEntrada, Long id) {
+        ExperienciaEntity experienciaEntity = ExperienciaMapper.INSTANCE.mapToEntity(experienciaEntrada, id);
+
+        if (experienciaEntrada.getId() != null) {
+            Optional<ExperienciaEntity> experienciaSalva = experienciaRepository.findById(experienciaEntrada.getId());
+            experienciaSalva.ifPresent(entity -> experienciaEntity.setId(entity.getId()));
+        }
+
         experienciaRepository.save(experienciaEntity);
 
         return ExperienciaMapper.INSTANCE.mapToSaida(experienciaEntity);
     }
 
-    public ExperienciaEntity buscarPorIdCliente(long id) {
-        return experienciaRepository.findByIdUsuario(id);
-    }
-
-    public ExperienciaSaida atualizar(Long id, ExperienciaEntrada experienciaEntrada) throws Exception {
-        ExperienciaEntity entity = experienciaRepository.findByIdUsuario(id);
-        ExperienciaEntity experienciaEntity = ExperienciaMapper.INSTANCE.mapToEntity(experienciaEntrada);
-
-        experienciaEntity.setId(entity.getId());
-        experienciaEntity.setIdUsuario(entity.getIdUsuario());
-        experienciaRepository.save(experienciaEntity);
-
-        return ExperienciaMapper.INSTANCE.mapToSaida(experienciaEntity);
+    public List<ExperienciaEntity> buscarPorIdCliente(long id) {
+        return experienciaRepository.findAllByIdUsuario(id);
     }
 }

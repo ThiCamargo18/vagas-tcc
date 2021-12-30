@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,21 +16,17 @@ import lombok.Setter;
 public class DadosPessoaisSaida {
     private Long id;
     private String nomeCompleto;
+    private LocalDate dataNascimento;
     private Integer idade;
-    private String dataNascimento;
     private String sexo;
     private String nomeSocial;
-    private String estadoCivil;
-    private String nomeMae;
     private String naturalidade;
-    private String telefone;
     private String celular;
     private String formacao;
     private String curso;
     private CategoriaEnum categoria;
     private String pretensaoSalarial;
-    private String tipoConducao;
     private String cpf;
-    private Long idUsuario;
     private String cidade;
+    private Long idUsuario;
 }

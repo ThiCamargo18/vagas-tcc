@@ -19,10 +19,6 @@ public class ExperienciaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "possui")
-    @Enumerated(EnumType.STRING)
-    private Experiencia possui;
-
     @Column(name = "cargo")
     private String cargo;
 
@@ -34,6 +30,12 @@ public class ExperienciaEntity {
 
     @Column(name = "salario")
     private String salario;
+
+    @Column(name = "nomeEmpresa")
+    private String nomeEmpresa;
+
+    @Column(name = "descricao")
+    private String descricao;
 
     @Column(name = "categoria")
     @Enumerated(EnumType.STRING)

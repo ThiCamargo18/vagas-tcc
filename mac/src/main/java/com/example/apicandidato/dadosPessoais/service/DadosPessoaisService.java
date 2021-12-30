@@ -34,6 +34,7 @@ public class DadosPessoaisService {
 
         dadosPessoaisEntity.setIdUsuario(id);
         dadosPessoaisEntity.setCidade(cidade);
+        dadosPessoaisEntity.setIdade(dadosPessoaisEntity.getDataNascimento());
 
         try {
             dadosPessoaisRepository.save(dadosPessoaisEntity);
@@ -44,15 +45,6 @@ public class DadosPessoaisService {
         }
 
         return DadosPessoaisMapper.INSTANCE.mapToSaida(dadosPessoaisEntity);
-    }
-
-    public String dataParaDDMMAAA(String data) {
-        LocalDate localDate = LocalDate.parse(data);
-
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        data = dateTimeFormatter.format(localDate);
-
-        return data;
     }
 
     public String pegarOCampoComIdUnique(String mensagem) {
@@ -82,10 +74,8 @@ public class DadosPessoaisService {
     }
 
     public DadosPessoaisSaida atualizar(DadosPessoaisEntrada dadosPessoaisEntrada, Long id) throws Exception {
-        HabilidadesEntrada habilidadesEntrada = new HabilidadesEntrada();
-        habilidadesEntrada.setNomeUsuario(dadosPessoaisEntrada.getNomeCompleto());
-        habilidadesService.atualizar(id, habilidadesEntrada);
         DadosPessoaisEntity dadosRetornoEntity = dadosPessoaisRepository.findByIdUsuario(id);
+
         DadosPessoaisEntity dadosPessoaisEntity = DadosPessoaisMapper.INSTANCE.mapToEntity(dadosPessoaisEntrada);
         dadosPessoaisEntity.setId(dadosRetornoEntity.getId());
         dadosPessoaisEntity.setIdUsuario(dadosRetornoEntity.getIdUsuario());

@@ -26,7 +26,8 @@ public class CandidatoAutenticacaoServiceImpl implements CandidatoAutenticacaoSe
     public CandidatoEntity save(CandidatoEntrada candidatoEntrada) {
         CandidatoEntity candidatoEntity = CandidatoMapper.INSTANCE.mapToEntity(candidatoEntrada);
         candidatoEntity.setSenha(passwordEncoder.encode(candidatoEntrada.getSenha()));
-        candidatoEntity.setPrimeiroAcesso(true);
+        candidatoEntity.setCadastroBasicoRealizado(false);
+        candidatoEntity.setCadastroAdicionalRealizado(false);
         candidatoEntity.setSituacao("CONCORRENDO");
         candidatoEntity.setRoles(new HashSet<>(candidatoEntrada.getRoles()));
 

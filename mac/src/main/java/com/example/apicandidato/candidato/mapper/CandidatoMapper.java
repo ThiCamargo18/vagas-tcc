@@ -21,7 +21,6 @@ public interface CandidatoMapper {
             @Mapping(source = "candidatoEntity.email",target = "email"),
             @Mapping(source = "candidatoEntity.roles",target = "roles"),
             @Mapping(source = "candidatoEntity.nome",target = "nome"),
-            @Mapping(source = "candidatoEntity.primeiroAcesso",target = "primeiroAcesso"),
             @Mapping(source = "candidatoEntity.situacao",target = "situacao"),
     })
     CandidatoEntity mapToEntityAtualizar(CandidatoEntrada candidatoEntrada, CandidatoEntity candidatoEntity);

@@ -1,18 +1,16 @@
-package com.example.apicandidato.habilidades.model;
+package com.example.apicandidato.projetos.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class HabilidadesEntrada {
-    private String resumoProfissional;
-    private String objetivos;
+public class ProjetoEntrada {
+    private String nome;
+    private String descricao;
     private Long idUsuario;
 }

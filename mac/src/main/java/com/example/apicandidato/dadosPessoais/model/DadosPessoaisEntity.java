@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -22,11 +24,11 @@ public class DadosPessoaisEntity {
     @Column(name = "nomeCompleto")
     private String nomeCompleto;
 
+    @Column(name = "dataNascimento")
+    private LocalDate dataNascimento;
+
     @Column(name = "idade")
     private Integer idade;
-
-    @Column(name = "dataNascimento")
-    private String dataNascimento;
 
     @Column(name = "sexo")
     private String sexo;
@@ -34,17 +36,8 @@ public class DadosPessoaisEntity {
     @Column(name = "nomeSocial")
     private String nomeSocial;
 
-    @Column(name = "estadoCivil")
-    private String estadoCivil;
-
-    @Column(name = "nomeMae")
-    private String nomeMae;
-
     @Column(name = "naturalidade")
     private String naturalidade;
-
-    @Column(name = "telefone")
-    private String telefone;
 
     @Column(name = "celular")
     private String celular;
@@ -62,9 +55,6 @@ public class DadosPessoaisEntity {
     @Column(name = "pretensaoSalarial")
     private String pretensaoSalarial;
 
-    @Column(name = "tipoConducao")
-    private String tipoConducao;
-
     @CPF(message = "Esse CPF não é válido")
     @Column(name = "cpf",unique = true)
     private String cpf;
@@ -74,4 +64,11 @@ public class DadosPessoaisEntity {
 
     @Column(name = "cidade")
     private String cidade;
+
+    public void setIdade(LocalDate dataNascimento) {
+        int anoAtual = LocalDate.now().getYear();
+        int anoNascimentoCandidato = dataNascimento.getYear();
+
+        this.idade = anoAtual - anoNascimentoCandidato;
+    }
 }

@@ -84,7 +84,6 @@ public class Filtros {
 
         if(cliente == null){
             HabilidadesSaida clienteNull = new HabilidadesSaida();
-            clienteNull.setNomeUsuario("Nenhum candidato encontrado");
             ModelAndView mv = new ModelAndView("/admin/candidato/buscarPorPalavraChave");
             mv.addObject("cliente",clienteNull);
             mv.addObject("vaga",vagaEntityOptional.get());

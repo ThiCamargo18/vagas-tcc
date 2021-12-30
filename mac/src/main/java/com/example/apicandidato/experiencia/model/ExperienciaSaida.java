@@ -13,11 +13,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ExperienciaSaida {
     private Long id;
-    private Experiencia possui;
     private String cargo;
     private String dataInicio;
     private String dataFim;
     private String salario;
+    private String nomeEmpresa;
+    private String descricao;
     private CategoriaEnum categoria;
     private Long idUsuario;
 }

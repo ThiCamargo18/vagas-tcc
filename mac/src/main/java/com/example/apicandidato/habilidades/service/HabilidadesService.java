@@ -22,11 +22,13 @@ public class HabilidadesService {
     @Autowired
     VagaRepository vagaRepository;
 
+    public HabilidadesSaida atualizar(HabilidadesEntrada habilidadesEntrada, Long idUsuario) {
+        HabilidadesEntity habilidadeSalva = habilidadesRepository.findByIdUsuario(idUsuario);
 
-    public HabilidadesSaida criar(HabilidadesEntrada habilidades,Long id,String nomeCompleto) {
-        HabilidadesEntity habilidadesEntity = HabilidadesMapper.INSTANCE.mapToEntity(habilidades);
-        habilidadesEntity.setIdUsuario(id);
-        habilidadesEntity.setNomeUsuario(nomeCompleto);
+        HabilidadesEntity habilidadesEntity = HabilidadesMapper.INSTANCE.mapToEntity(habilidadesEntrada, idUsuario);
+
+        if (habilidadeSalva != null)
+            habilidadesEntity.setId(habilidadeSalva.getId());
 
         habilidadesRepository.save(habilidadesEntity);
 
@@ -35,22 +37,6 @@ public class HabilidadesService {
 
     public HabilidadesEntity buscarPorIdCLiente(long id) {
         return habilidadesRepository.findByIdUsuario(id);
-    }
-
-    public HabilidadesSaida atualizar(Long id, HabilidadesEntrada habilidadesEntrada) throws Exception {
-        HabilidadesEntity habilidadesEntityBanco = habilidadesRepository.findByIdUsuario(id);
-        HabilidadesEntity habilidadesEntity = HabilidadesMapper.INSTANCE.mapToEntity(habilidadesEntrada);
-
-        if(habilidadesEntity.equals(null)){
-            throw new Exception("Candidato não encontrado! Faça login novamente.");
-        }
-
-        habilidadesEntity.setId(habilidadesEntityBanco.getId());
-        habilidadesEntity.setIdUsuario(habilidadesEntityBanco.getIdUsuario());
-        habilidadesEntity.setNomeUsuario(habilidadesEntrada.getNomeUsuario());
-        habilidadesRepository.save(habilidadesEntity);
-
-        return HabilidadesMapper.INSTANCE.mapToSaida(habilidadesEntity);
     }
 
     public List<HabilidadesSaida> filtrarPorResumoProfissional(Long idVaga,String param,VagaEntity vaga) throws Exception {

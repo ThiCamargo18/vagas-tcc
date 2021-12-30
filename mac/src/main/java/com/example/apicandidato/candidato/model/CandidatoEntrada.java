@@ -27,6 +27,5 @@ public class CandidatoEntrada {
     private String nome;
 
     private List<RoleEntity> roles;
-    private Boolean primeiroAcesso;
     private String situacao;
 }

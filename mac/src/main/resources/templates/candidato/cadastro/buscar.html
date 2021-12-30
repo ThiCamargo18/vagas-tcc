@@ -42,13 +42,6 @@
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="validationServer04">Nome mãe</label>
-                        <input type="text" class="form-control" th:field="*{dadosPessoais.nomeMae}" id="nomeMae" required disabled>
-                        <div class="invalid-feedback">
-                            Nome da mãe obrigatório.
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
                         <label for="validationServer04">Nome social</label>
                         <input type="text" class="form-control" th:field="*{dadosPessoais.nomeSocial}" id="nomeSocial" disabled>
                         <div class="invalid-feedback">
@@ -65,20 +58,6 @@
                         </select>
                         <div class="invalid-feedback">
                             Por favor, selecione o sexo.
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="validationServer04">Estado civil</label>
-                        <select class="form-control" th:field="*{dadosPessoais.estadoCivil}" id="estadoCivil" required disabled>
-                            <option selected disabled value="">Escolher...</option>
-                            <option value="Consultando Orçamento">Solteiro</option>
-                            <option value="Aguardando Peças">Casado</option>
-                            <option value="Reparando Veículo">Divorciado</option>
-                            <option value="Finalizado">Separado</option>
-                            <option value="Finalizado">União estável</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Por favor, selecione o estado civil.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
@@ -116,10 +95,6 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="validationServer04">Telefone Fixo</label>
-                        <input type="text" class="form-control" th:field="*{dadosPessoais.telefone}" placeholder="(00) 00000-0000" maxlength="15" onkeypress="mascarar(this,mascaraTel)" id="telefone" disabled>
-                    </div>
-                    <div class="col-md-3 mb-3">
                         <label for="validationServer04">Celular</label>
                         <input type="text" class="form-control" placeholder="(00) 000000-0000" maxlength="15" onkeypress="mascarar(this,mascaraTel)" th:field="*{dadosPessoais.celular}" id="celular" required disabled>
                         <div class="invalid-feedback">
@@ -131,17 +106,6 @@
                         <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" th:field="*{dadosPessoais.dataNascimento}" id="dataNascimento" required disabled>
                         <div class="invalid-feedback">
                             Data de nascimento obrigatório, digite uma valor.
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="validationServer04">Condução</label>
-                        <select class="form-control" th:field="*{dadosPessoais.tipoConducao}" id="tipoConducao" required disabled>
-                            <option selected disabled value="">Escolher...</option>
-                            <option value="Particular">Particular</option>
-                            <option value="Ônibus">Ônibus</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Por favor, selecione a condução.
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
@@ -174,7 +138,7 @@
                         </div>
                     </div>
                     <div id="divDadosPessoais" style="display: none;">
-                        <button type="submit" class="btn btn-success" id="botaoAtualizar">
+                        <button type="submit" class="btn btn-success" id="botaoAtualizar2">
                             Atualizar
                         </button>
                     </div>
@@ -245,7 +209,7 @@
                         <input type="text" class="form-control" th:field="*{dadosAdicionais.referencia}" id="referencia" disabled>
                     </div>
                     <div id="divDadosAdicionais" style="display: none; ">
-                        <button type="submit" class="btn btn-success" id="botaoAtualizar">
+                        <button type="submit" class="btn btn-success" id="botaoAtualizar3">
                             Atualizar
                         </button>
                     </div>
@@ -289,7 +253,7 @@
                         </div>
                     </div>
                     <div id="divDadosIdentidade" style="display: none; ">
-                        <button type="submit" class="btn btn-success" id="botaoAtualizar">
+                        <button type="submit" class="btn btn-success" id="botaoAtualizar4">
                             Atualizar
                         </button>
                     </div>
@@ -336,7 +300,7 @@
                         </div>
                     </div>
                     <div id="divDadosExperiencia" style="display: none; ">
-                        <button type="submit" class="btn btn-success" id="botaoAtualizar">
+                        <button type="submit" class="btn btn-success" id="botaoAtualizar5">
                             Atualizar
                         </button>
                     </div>

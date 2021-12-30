@@ -30,8 +30,11 @@ public class CandidatoEntity {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "primeiroAcesso")
-    private Boolean primeiroAcesso;
+    @Column(name = "cadastroBasicoRealizado")
+    private Boolean cadastroBasicoRealizado;
+
+    @Column(name = "cadastroAdicionalRealizado")
+    private Boolean cadastroAdicionalRealizado;
 
     @Column(name = "situacao")
     private String situacao;

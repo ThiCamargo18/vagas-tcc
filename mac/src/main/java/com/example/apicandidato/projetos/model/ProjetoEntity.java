@@ -1,4 +1,4 @@
-package com.example.apicandidato.habilidades.model;
+package com.example.apicandidato.projetos.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,25 +6,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "habilidades")
-public class HabilidadesEntity {
+@Entity(name = "projetos")
+public class ProjetoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
-    @Column(name = "resumoProfissional")
-    private String resumoProfissional;
+    @Column(name = "nome")
+    private String nome;
 
     @Lob
-    @Column(name = "objetivos")
-    private String objetivos;
+    @Column(name = "descricao")
+    private String descricao;
 
     @Column(name = "idUsuario")
     private Long idUsuario;

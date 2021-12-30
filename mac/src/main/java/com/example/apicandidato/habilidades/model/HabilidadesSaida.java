@@ -15,7 +15,5 @@ public class HabilidadesSaida {
     private Long id;
     private String resumoProfissional;
     private String objetivos;
-    private List<String> descricao;
-    private String nomeUsuario;
     private Long idUsuario;
 }

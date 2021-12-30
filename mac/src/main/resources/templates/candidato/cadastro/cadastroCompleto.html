@@ -35,30 +35,23 @@
                 <form method="post" class="needs-validation" novalidate style="margin-left: 20px;margin-right: 20px; margin-top: 20px;">
                     <div class="form-row">
                         <div class="col-md-6 mb-3" >
-                            <label for="validationServer01">Nome Completo </label>
+                            <label for="validationNome">Nome Completo </label>
                             <input type="text" class="form-control" name="dadosPessoais.nomeCompleto" id="validationNome" value="" required = false>
                             <div class="valid-feedback">
                                 Ok!
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="validationServer04">Nome mãe</label>
-                            <input type="text" class="form-control" name="dadosPessoais.nomeMae" id="validationNomeMae" required>
-                            <div class="invalid-feedback">
-                                Nome da mãe obrigatório.
-                            </div>
-                        </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="validationServer04">Nome social</label>
+                            <label for="validationNomeSocial">Nome social</label>
                             <input type="text" class="form-control" name="dadosPessoais.nomeSocial" id="validationNomeSocial">
                             <div class="invalid-feedback">
                                 CPF não encontrado! Cadastre o cliente antes, ou digite novamente.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Sexo</label>
+                            <label for="validationSexo">Sexo</label>
                             <select class="form-control" name="dadosPessoais.sexo" id="validationSexo" required>
                                 <option selected disabled value="">Escolher...</option>
                                 <option value="Masculino">Masculino</option>
@@ -70,42 +63,21 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Estado civil</label>
-                            <select class="form-control" name="dadosPessoais.estadoCivil" id="validationEstado" required>
-                                <option selected disabled value="">Escolher...</option>
-                                <option value="Consultando Orçamento">Solteiro</option>
-                                <option value="Aguardando Peças">Casado</option>
-                                <option value="Reparando Veículo">Divorciado</option>
-                                <option value="Finalizado">Separado</option>
-                                <option value="Finalizado">União estável</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Por favor, selecione o estado civil.
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="validationServer01">Idade</label>
-                            <input type="text" class="form-control" name="dadosPessoais.idade" onkeypress="mascarar(this,soNumeros)" required>
-                            <div class="invalid-feedback">
-                                Necessário selecionar a idade.
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Naturalidade</label>
+                            <label for="validationNaturalidade">Naturalidade</label>
                             <input type="text" class="form-control" name="dadosPessoais.naturalidade" id="validationNaturalidade" required>
                             <div class="invalid-feedback">
                                 Naturalidade obrigatório.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Pretensão salarial</label>
+                            <label for="validationPretensao">Pretensão salarial</label>
                             <input type="text" class="form-control" onkeypress="mascarar(this,moeda)" placeholder="0.000" name="dadosPessoais.pretensaoSalarial" id="validationPretensao" required>
                             <div class="invalid-feedback">
                                 Pretensão salarial obrigatória.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Categoria</label>
+                            <label for="validationCategoria">Categoria</label>
                             <select class="form-control" name="dadosPessoais.categoria" id="validationCategoria" required>
                                 <option selected disabled value="">Escolher...</option>
                                 <option value="CLT">CLT</option>
@@ -118,36 +90,21 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Telefone Fixo</label>
-                            <input type="text" class="form-control" name="dadosPessoais.telefone" placeholder="(00) 00000-0000" maxlength="15" onkeypress="mascarar(this,mascaraTel)" id="validationTelefone">
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Celular</label>
+                            <label for="validationCelular">Celular</label>
                             <input type="text" class="form-control" name="dadosPessoais.celular" placeholder="(00) 00000-0000" maxlength="15" onkeypress="mascarar(this,mascaraTel)" id="validationCelular" required>
                             <div class="invalid-feedback">
                                 Celular obrigatório, digite uma valor.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Data Nascimento</label>
+                            <label for="validationData">Data Nascimento</label>
                             <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" name="dadosPessoais.dataNascimento" id="validationData" required>
                             <div class="invalid-feedback">
                                 Data de nascimento obrigatório, digite uma valor.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Condução</label>
-                            <select class="form-control" name="dadosPessoais.tipoConducao" id="validationConducao" required>
-                                <option selected disabled value="">Escolher...</option>
-                                <option value="Particular">Particular</option>
-                                <option value="Ônibus">Ônibus</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Por favor, selecione a condução.
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Formação</label>
+                            <label for="validationFormacao">Formação</label>
                             <select class="form-control" name="dadosPessoais.formacao" id="validationFormacao" required>
                                 <option selected disabled value="">Escolher...</option>
                                 <option value="Ensino Médio Incompleto">Ensino Médio Incompleto</option>
@@ -162,14 +119,14 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-3" >
-                            <label for="validationServer01">Curso </label>
+                            <label for="validationCurso">Curso </label>
                             <input type="text" class="form-control" name="dadosPessoais.curso" id="validationCurso" value="" required = false>
                             <div class="invalid-feedback">
                                 Por favor, selecione o curso.
                             </div>
                         </div>
                         <div class="col-md-4 mb-3" >
-                            <label for="validationServer01">CPF </label>
+                            <label for="validationEmail">CPF </label>
                             <input type="text" class="form-control" onkeypress="mascarar(this,cpf)" maxlength="14" name="dadosPessoais.cpf" id="validationEmail" value="" required = false>
                             <div class="invalid-feedback">
                                 Por favor, selecione o Cpf.
@@ -182,14 +139,14 @@
                         </div>
 
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">CEP</label>
+                            <label for="validationCep">CEP</label>
                             <input type="text" class="form-control" onkeypress="mascarar(this,cepMask)" placeholder="00000-000" maxlength="9" name="dadosAdicionais.cep" id="validationCep" required>
                             <div class="invalid-feedback">
                                 CEP obrigatório, digite uma valor.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Estado</label>
+                            <label for="validationEstado1">Estado</label>
                             <input type="text" class="form-control" name="dadosAdicionais.estado" id="validationEstado1" required>
                             <div class="invalid-feedback">
                                 Estado obrigatório, digite uma valor.
@@ -211,7 +168,7 @@
                             </select>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Bairro</label>
+                            <label for="validationBairro">Bairro</label>
                             <input type="text" class="form-control" name="dadosAdicionais.bairro" id="validationBairro" required>
                             <div class="invalid-feedback">
                                 Bairro obrigatório, digite uma valor.
@@ -219,21 +176,21 @@
                         </div>
 
                         <div class="col-md-6 mb-3" >
-                            <label for="validationServer01">Rua </label>
+                            <label for="validationEndereco">Rua </label>
                             <input type="text" class="form-control" name="dadosAdicionais.endereco" id="validationEndereco" value="" required>
                             <div class="invalid-feedback">
                                 Por favor, selecione o endereço.
                             </div>
                         </div>
                         <div class="col-md-2 mb-3">
-                            <label for="validationServer04">Número</label>
+                            <label for="validationNumero">Número</label>
                             <input type="text" class="form-control" name="dadosAdicionais.numero" id="validationNumero" onkeypress="mascarar(this,soNumeros)" required>
                             <div class="invalid-feedback">
                                 Número obrigatório, digite uma valor.
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="validationServer04">Referência</label>
+                            <label for="validationReferencia">Referência</label>
                             <input type="text" class="form-control" name="dadosAdicionais.referencia" id="validationReferencia">
                         </div>
 
@@ -244,105 +201,100 @@
                         </div>
 
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Número RG</label>
+                            <label for="validationRg">Número RG</label>
                             <input type="text" class="form-control" name="registro.numero" id="validationRg" required>
                             <div class="invalid-feedback">
                                 Número RG obrigatório, digite uma valor.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Órgão Emissor</label>
+                            <label for="validationOrgao">Órgão Emissor</label>
                             <input type="text" class="form-control" name="registro.orgaoEmissor" id="validationOrgao" required>
                             <div class="invalid-feedback">
                                 Órgão Emissor obrigatório, digite uma valor.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Data Expedição</label>
+                            <label for="validationDataExpedicao">Data Expedição</label>
                             <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" name="registro.dataExpedicao" id="validationDataExpedicao" required>
                             <div class="invalid-feedback">
                                 Data Expedição obrigatória, digite uma valor.
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="validationServer04">Estado</label>
+                            <label for="validationEstado2">Estado</label>
                             <input type="text" class="form-control" name="registro.estado" id="validationEstado2" required>
                             <div class="invalid-feedback">
                                 Estado obrigatório, digite uma valor.
                             </div>
                         </div>
 
-                        <div class="container-fluid">
-                            <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item active">Experiência</li>
-                            </ol>
-                        </div>
+<!--                        <div class="container-fluid">-->
+<!--                            <ol class="breadcrumb mb-4">-->
+<!--                                <li class="breadcrumb-item active">Experiência</li>-->
+<!--                                <button type="button" style="margin-left: 20px" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#experienciaModal">Adicionar</button>-->
+<!--                            </ol>-->
+<!--                        </div>-->
 
-                        <div class="col-md-5 mb-3" >
-                            <label for="validationServer01">Cargo </label>
-                            <input type="text" class="form-control" name="experiencia.cargo" id="validationCargo" value="" >
-                        </div>
+<!--                        <div class="container-md">-->
+<!--                            <div class="card shadow mb-3" style="margin-top: 20px;" th:each="experiencia : ${experiencia}">-->
+<!--                                <div class="card-header py-3">-->
+<!--                                    <div class="row">-->
+<!--                                        <h6 class="m-0 font-weight-bold text-primary" >Teste</h6>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="card-body">-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col">-->
+<!--                                            <span class="font-weight-bold">Contrato -</span>-->
+<!--                                            <span class="font-weight-bold" ></span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col">-->
 
-                        <div class="col-md-2 mb-3" >
-                            <label for="validationServer01">Data Inicio </label>
-                            <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" name="experiencia.dataInicio" id="validationDataInicio" value="" >
-                        </div>
-                        <div class="col-md-2 mb-3" >
-                            <label for="validationServer01">Data Fim </label>
-                            <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" name="experiencia.dataFim" id="validationDataFim" value="" >
-                        </div>
-                        <div class="col-md-2 mb-3" >
-                            <label for="validationServer01">Salário </label>
-                            <input type="text" class="form-control" onkeypress="mascarar(this,moeda)" placeholder="0.000" name="experiencia.salario" id="validationSalario" value="" >
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="validationServer01">Categoria</label>
-                            <select class="form-control" name="experiencia.categoria" id="validationCategoria2">
-                                <option selected disabled value="">Escolher...</option>
-                                <option value="CLT">CLT</option>
-                                <option value="ESTAGIO">ESTAGIO</option>
-                                <option value="JOVEMAPRENDIZ">JOVEM APRENDIZ</option>
-                                <option value="PCD">PCD</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Por favor, selecione a categoria.
-                            </div>
-                        </div>
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
-                        <div class="container-fluid">
-                            <ol class="breadcrumb mb-4">
-                                <li class="breadcrumb-item active">Sobre suas habilidades</li>
-                            </ol>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="validationServer04">Resumo profissional</label>
-                            <textarea class="form-control" name="habilidades.resumoProfissional" id="exampleFormControlTextarea1" style="width: 40vh;margin-right: 3px;" rows="3" required></textarea>
-                            <div class="invalid-feedback">
-                                Resumo profissional obrigatório, digite uma valor.
-                            </div>
-                        </div>
+<!--                        <div class="container-fluid">-->
+<!--                            <ol class="breadcrumb mb-4">-->
+<!--                                <li class="breadcrumb-item active">Sobre suas habilidades</li>-->
+<!--                            </ol>-->
+<!--                        </div>-->
 
-                        <div class="form-group">
-                            <label for="validationServer04">Objetivos</label>
-                            <textarea class="form-control" name="habilidades.objetivos" id="exampleFormControlTextarea2" style="width: 40vh;" rows="3" required></textarea>
-                            <div class="invalid-feedback">
-                                Objetivos obrigatório, digite uma valor.
-                            </div>
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="validationServer04">Resumo profissional</label>-->
+<!--                            <textarea class="form-control" name="habilidades.resumoProfissional" id="exampleFormControlTextarea1" style="width: 40vh;margin-right: 3px;" rows="3" required></textarea>-->
+<!--                            <div class="invalid-feedback">-->
+<!--                                Resumo profissional obrigatório, digite uma valor.-->
+<!--                            </div>-->
+<!--                        </div>-->
 
-                        <div class="col-md-6 mb-3" >
-                            <label for="validationServer01">Adidione até 5 habilidades - Conhecimentos/Cursos/Treinamentos</label>
-                            <input style="margin-top: 3px;"type="text" class="form-control" name="habilidades.descricao[0]" id="validationServer01" value="" >
-                            <input style="margin-top: 3px;"type="text" class="form-control" name="habilidades.descricao[1]" id="validationServer02" value="" >
-                            <input style="margin-top: 3px;"type="text" class="form-control" name="habilidades.descricao[2]" id="validationServer03" value="" >
-                            <input style="margin-top: 3px;"type="text" class="form-control" name="habilidades.descricao[3]" id="validationServer04" value="" >
-                            <input style="margin-top: 3px;"type="text" class="form-control" name="habilidades.descricao[4]" id="validationServer05" value="" >
-                        </div>
-                    </div>
+<!--                        <div class="form-group">-->
+<!--                            <label for="validationServer04">Objetivos</label>-->
+<!--                            <textarea class="form-control" name="habilidades.objetivos" id="exampleFormControlTextarea2" style="width: 40vh;" rows="3" required></textarea>-->
+<!--                            <div class="invalid-feedback">-->
+<!--                                Objetivos obrigatório, digite uma valor.-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="col-md-6 mb-3" >-->
+<!--                            <label for="validationServer01">Adidione até 5 habilidades - Conhecimentos/Cursos/Treinamentos</label>-->
+<!--                            <input style="margin-top: 3px;"type="text" class="form-control" name="habilidades.descricao[0]" id="validationServer01" value="" >-->
+<!--                            <input style="margin-top: 3px;"type="text" class="form-control" name="habilidades.descricao[1]" id="validationServer02" value="" >-->
+<!--                            <input style="margin-top: 3px;"type="text" class="form-control" name="habilidades.descricao[2]" id="validationServer03" value="" >-->
+<!--                            <input style="margin-top: 3px;"type="text" class="form-control" name="habilidades.descricao[3]" id="validationServer04" value="" >-->
+<!--                            <input style="margin-top: 3px;"type="text" class="form-control" name="habilidades.descricao[4]" id="validationServer05" value="" >-->
+<!--                        </div>-->
+<!--                    </div>-->
                     <button class="btn btn-primary" style="margin-top: 10px;"
                             type="submit">Salvar
                     </button>
+                    </div>
                 </form>
             </main>
             <!-- /.container-fluid -->
