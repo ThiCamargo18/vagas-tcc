@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<div th:replace="candidato/fragments/fragment :: cabecalho"></div>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="candidato/fragments/fragment :: sidebar"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div th:replace="candidato/fragments/fragment :: topbar"></div>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <main>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <div class="container-fluid">
+                    <h1 class="mt-4">Cargo e Conhecimentos</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active"></li>
+                    </ol>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="col-md-3 mb-3">
+                        <form th:action="@{/cadasto/criar/cadastroCargo}" method="get">
+                            <label>Cargo</label>
+                            <select class="form-control" th:name="idCargo">
+                                <option selected disabled value="">Escolher...</option>
+                                <option th:each="cargo : ${cargo.cargo}" th:value="${cargo.id}" th:text="${cargo.nome}"></option>
+                            </select>
+                            <button type="submit" class="btn btn-success" style="margin-top: 15px">Buscar</button>
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-header">
+                                    <h5 class="card-title" >Tecnologias</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group" th:each="tecnologia : ${cargo.tecnologias}">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" th:value="${tecnologia.nome}" th:utext="${tecnologia.nome}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-header">
+                                    <h5 class="card-title" >Frameworks</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group" th:each="framework : ${cargo.frameworks}">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" th:value="${framework.nome}" th:utext="${framework.nome}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-header">
+                                    <h5 class="card-title" >Ferramentas</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group" th:each="ferramenta : ${cargo.ferramentas}">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox" th:value="${ferramenta.nome}" th:utext="${ferramenta.nome}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </main>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <div th:replace="candidato/fragments/fragment :: footer"></div>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="candidato/fragments/fragment :: modalSair"></div>
+
+<!-- Bootstrap core JavaScript-->
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script type="text/javascript" src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script type="text/javascript" src="/js/sb-admin-2.min.js"></script>
+<script type="text/javascript" src="/js/validacoes.js"></script>
+
+<!-- Page level plugins -->
+<script type="text/javascript" src="/vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script type="text/javascript" src="/js/demo/chart-area-demo.js"></script>
+<script type="text/javascript" src="/js/demo/chart-pie-demo.js"></script>
+
+</body>
+</html>

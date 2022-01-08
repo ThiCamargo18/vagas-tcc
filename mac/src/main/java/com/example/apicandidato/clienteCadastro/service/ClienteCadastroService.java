@@ -12,7 +12,6 @@ import com.example.apicandidato.dadosAdicionais.service.DadosAdicionaisService;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisSaida;
 import com.example.apicandidato.dadosPessoais.service.DadosPessoaisService;
-import com.example.apicandidato.experiencia.model.ExperienciaEntity;
 import com.example.apicandidato.experiencia.service.ExperienciaService;
 import com.example.apicandidato.habilidades.model.HabilidadesEntity;
 import com.example.apicandidato.habilidades.service.HabilidadesService;
@@ -38,7 +37,7 @@ public class ClienteCadastroService {
     RegistroNacionalService registroNacionalService;
 
     public ClienteCadastroSaida criar(ClienteCadastroEntrada entrada, Long idCliente) throws Exception {
-        CandidatoSaida candidatoSaida = candidatoService.atualizarCadastroBasico(idCliente);
+        CandidatoSaida candidatoSaida = candidatoService.atualizarCadastro(idCliente, 1);
         DadosAdicionaisSaida dadosAdicionaisSaida = dadosAdicionaisService.criar(entrada.getDadosAdicionais(), idCliente);
         DadosPessoaisSaida dadosPessoaisSaida = dadosPessoaisService.criar(entrada.getDadosPessoais(), idCliente, dadosAdicionaisSaida.getCidade());
         RegistroSaida registroSaida = registroNacionalService.criar(entrada.getRegistro(), idCliente);

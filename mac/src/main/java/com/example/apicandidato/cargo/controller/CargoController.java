@@ -1,6 +1,7 @@
 package com.example.apicandidato.cargo.controller;
 
 import com.example.apicandidato.cargo.model.CargoEntity;
+import com.example.apicandidato.cargo.model.CargoSaida2;
 import com.example.apicandidato.cargo.service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,5 +22,10 @@ public class CargoController {
     @GetMapping("/buscar")
     public CargoEntity buscar(@RequestParam("id") Long idCargo){
         return cargoService.buscar(idCargo);
+    }
+
+    @GetMapping("/teste")
+    public CargoSaida2 teste(){
+        return cargoService.buscarEMapear(1L);
     }
 }

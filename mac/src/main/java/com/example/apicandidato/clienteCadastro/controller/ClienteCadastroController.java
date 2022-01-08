@@ -12,10 +12,8 @@ import com.example.apicandidato.habilidades.service.HabilidadesService;
 import com.example.apicandidato.projetos.service.ProjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,35 +48,54 @@ public class ClienteCadastroController {
     }
 
     @RequestMapping("/criar/cadastroAdicional")
-    public ModelAndView criarCadastroAdicional(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView("/candidato/cadastro/cadastroAdicional");
+    public String criarCadastroAdicional(HttpServletRequest request, Model model) {
+        if (candidatoService.cadastroBasicoRealizado(CandidatoSessao.getId(request)) != 1)
+            return "redirect:/cadastro/gerenciar";
 
-        modelAndView.addObject("experiencia", experienciaService.buscarPorIdCliente(CandidatoSessao.getId(request)));
-        modelAndView.addObject("habilidade", habilidadesService.buscarPorIdCLiente(CandidatoSessao.getId(request)));
-        modelAndView.addObject("projeto", projetoService.buscarPorIdCLiente(CandidatoSessao.getId(request)));
-        modelAndView.addObject("cargo", cargoService.buscarPorIdCliente());
+        model.addAttribute("experiencia", experienciaService.buscarPorIdCliente(CandidatoSessao.getId(request)));
+        model.addAttribute("habilidade", habilidadesService.buscarPorIdCLiente(CandidatoSessao.getId(request)));
+        model.addAttribute("projeto", projetoService.buscarPorIdCLiente(CandidatoSessao.getId(request)));
+
+        return "/candidato/cadastro/cadastroAdicional";
+    }
+
+    @PostMapping("/criar/cadastroAdicional")
+    public String salvarCadastroAdicional(HttpServletRequest request) {
+        if (candidatoService.cadastroBasicoRealizado(CandidatoSessao.getId(request)) != 1)
+            return "redirect:gerenciar";
+
+        candidatoService.atualizarCadastro(CandidatoSessao.getId(request), 2);
+
+        return "redirect:/cadastro/gerenciar";
+    }
+
+    @GetMapping("/criar/cadastroCargo")
+    public ModelAndView criarCadastroCargo(@RequestParam(value = "idCargo", required = false) long idCargo) {
+//        if (candidatoService.cadastroBasicoRealizado(CandidatoSessao.getId(request)) != 2)
+//            return "redirect:/cadastro/gerenciar";
+
+        ModelAndView modelAndView = new ModelAndView("/candidato/cadastro/cadastroCargo");
+
+        modelAndView.addObject("cargo", cargoService.buscarEMapear(idCargo));
 
         return modelAndView;
     }
 
-    @PostMapping("/criar/cadastroAdicional")
-    public String criarCadastroAdicional(@Valid ClienteCadastroEntrada entrada, HttpServletRequest request) throws Exception {
-        clienteCadastroService.criar(entrada, CandidatoSessao.getId(request));
+    @PostMapping("/criar/cadastroCargo")
+    public String salvarCadastroCargo(@Valid CargoEntity cargoEntity, HttpServletRequest request){
 
-        return "redirect:gerenciar";
+        return "";
     }
 
     @RequestMapping("/gerenciar")
     public String gerenciarCadastro(HttpServletRequest request) throws Exception {
-        Long idCandidato = CandidatoSessao.getId(request);
+        int nivelCadastroRealizado = candidatoService.cadastroBasicoRealizado(CandidatoSessao.getId(request));
 
-        boolean cadastroBasicoRealizado = candidatoService.cadastroBasicoRealizado(idCandidato);
+        if (nivelCadastroRealizado == 0) return "redirect:criar";
 
-        if (!cadastroBasicoRealizado) return "redirect:criar";
+        if (nivelCadastroRealizado == 1) return "redirect:criar/cadastroAdicional";
 
-        boolean cadastroAdicionalRealizado = candidatoService.cadastroAdicionalRealizado(idCandidato);
-
-        if (!cadastroAdicionalRealizado) return "redirect:criar/cadastroAdicional";
+        if (nivelCadastroRealizado == 2) return "redirect:criar/cadastroCargo";
 
         return "redirect:procurar";
     }

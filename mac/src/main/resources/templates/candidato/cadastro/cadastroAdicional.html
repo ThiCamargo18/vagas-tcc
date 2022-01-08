@@ -26,7 +26,17 @@
             <main>
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <div class="container-fluid">
-                    <h1 class="mt-4">Cadastro</h1>
+                    <div class="row">
+                        <div class="col">
+                            <h1 class="mt-4">Cadastro Adicional</h1>
+                        </div>
+                        <div class="col">
+                            <form method="post">
+                                <button class="btn btn-success" type="submit">Salvar</button>
+                            </form>
+                        </div>
+                    </div>
+
                     <ol class="breadcrumb mb-4">
                         <button type="button" style="margin-right: 20px" class="btn btn-outline-info btn-sm"
                                 data-toggle="modal" data-target="#experienciaModal">+
@@ -130,71 +140,71 @@
                     </div>
                 </div>
 
-                <div class="container-fluid">
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Sobre seu cargo e seus conhecimentos</li>
-                    </ol>
-                </div>
+<!--                <div class="container-fluid">-->
+<!--                    <ol class="breadcrumb mb-4">-->
+<!--                        <li class="breadcrumb-item active">Sobre seu cargo e seus conhecimentos</li>-->
+<!--                    </ol>-->
+<!--                </div>-->
 
-                <div class="container-fluid">
-                    <div class="col-md-3 mb-3">
-                        <label for="validationFormacao">Cargo</label>
-                        <select class="form-control" name="dadosPessoais.formacao" id="validationFormacao" >
-                            <option selected disabled value="">Escolher...</option>
-                            <option th:each="cargo : ${cargo}" th:value="${cargo.nome}" th:text="${cargo.nome}"></option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Por favor, selecione a formação.
-                        </div>
-                    </div>
+<!--                <div class="container-fluid">-->
+<!--                    <div class="col-md-3 mb-3">-->
+<!--                        <label for="validationFormacao">Cargo</label>-->
+<!--                        <select class="form-control" name="dadosPessoais.formacao" id="validationFormacao" >-->
+<!--                            <option selected disabled value="">Escolher...</option>-->
+<!--                            <option th:each="cargo : ${cargo}" th:value="${cargo.nome}" th:text="${cargo.nome}"></option>-->
+<!--                        </select>-->
+<!--                        <div class="invalid-feedback">-->
+<!--                            Por favor, selecione a formação.-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-header">
-                                    <h5 class="card-title" >Tecnologias</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="list-group" th:each="tecnologia : ${cargo[0].tecnologias}">
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" th:value="${tecnologia.nome}" th:utext="${tecnologia.nome}">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-3 mb-3">-->
+<!--                            <div class="card border-left-warning shadow h-100 py-2">-->
+<!--                                <div class="card-header">-->
+<!--                                    <h5 class="card-title" >Tecnologias</h5>-->
+<!--                                </div>-->
+<!--                                <div class="card-body">-->
+<!--                                    <div class="list-group" th:each="tecnologia : ${cargo[0].tecnologias}">-->
+<!--                                        <label class="list-group-item">-->
+<!--                                            <input class="form-check-input me-1" type="checkbox" th:value="${tecnologia.nome}" th:utext="${tecnologia.nome}">-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
-                        <div class="col-md-3 mb-3">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-header">
-                                    <h5 class="card-title" >Frameworks</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="list-group" th:each="framework : ${cargo[0].frameworks}">
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" th:value="${framework.nome}" th:utext="${framework.nome}">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div class="col-md-3 mb-3">-->
+<!--                            <div class="card border-left-warning shadow h-100 py-2">-->
+<!--                                <div class="card-header">-->
+<!--                                    <h5 class="card-title" >Frameworks</h5>-->
+<!--                                </div>-->
+<!--                                <div class="card-body">-->
+<!--                                    <div class="list-group" th:each="framework : ${cargo[0].frameworks}">-->
+<!--                                        <label class="list-group-item">-->
+<!--                                            <input class="form-check-input me-1" type="checkbox" th:value="${framework.nome}" th:utext="${framework.nome}">-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
-                        <div class="col-md-3 mb-3">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-header">
-                                    <h5 class="card-title" >Ferramentas</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="list-group" th:each="ferramenta : ${cargo[0].ferramentas}">
-                                        <label class="list-group-item">
-                                            <input class="form-check-input me-1" type="checkbox" th:value="${ferramenta.nome}" th:utext="${ferramenta.nome}">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                        <div class="col-md-3 mb-3">-->
+<!--                            <div class="card border-left-warning shadow h-100 py-2">-->
+<!--                                <div class="card-header">-->
+<!--                                    <h5 class="card-title" >Ferramentas</h5>-->
+<!--                                </div>-->
+<!--                                <div class="card-body">-->
+<!--                                    <div class="list-group" th:each="ferramenta : ${cargo[0].ferramentas}">-->
+<!--                                        <label class="list-group-item">-->
+<!--                                            <input class="form-check-input me-1" type="checkbox" th:value="${ferramenta.nome}" th:utext="${ferramenta.nome}">-->
+<!--                                        </label>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
 
             </main>

@@ -68,9 +68,9 @@ public class Vaga {
 
     @GetMapping("/inscrever/{idVaga}")
     public String inscrever(@PathVariable Long idVaga, HttpServletRequest request) throws Exception {
-        boolean primeiroAcesso = candidatoService.cadastroBasicoRealizado(CandidatoSessao.getId(request));
+        int nivelCadastro = candidatoService.cadastroBasicoRealizado(CandidatoSessao.getId(request));
 
-        if (!primeiroAcesso)
+        if (nivelCadastro < 3)
             return "redirect:cadastro/gerenciar";
 
         vagaService.inscrever(CandidatoSessao.getId(request),idVaga);

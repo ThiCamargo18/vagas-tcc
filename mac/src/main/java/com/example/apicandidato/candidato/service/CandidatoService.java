@@ -63,12 +63,12 @@ public class CandidatoService {
         return CandidatoMapper.INSTANCE.mapToSaida(candidatoEntity);
     }
 
-    public CandidatoSaida atualizarCadastroBasico(Long id) {
+    public CandidatoSaida atualizarCadastro(Long id, int nivelCadastro) {
         Optional<CandidatoEntity> clienteEntityOptional = candidatoRepository.findById(id);
 
         CandidatoEntity candidatoEntity = clienteEntityOptional.get();
 
-        candidatoEntity.setCadastroBasicoRealizado(true);
+        candidatoEntity.setNivelCadastroRealizado(nivelCadastro);
 
         candidatoRepository.save(candidatoEntity);
 
@@ -79,20 +79,12 @@ public class CandidatoService {
         return candidatoRepository.getEmailByIdUser(id);
     }
 
-    public boolean cadastroBasicoRealizado(long id) throws Exception {
+    public Integer cadastroBasicoRealizado(long id) {
         Optional<CandidatoEntity> clienteEntityOptional = candidatoRepository.findById(id);
 
         CandidatoEntity candidatoEntity = clienteEntityOptional.get();
 
-        return candidatoEntity.getCadastroBasicoRealizado();
+        return candidatoEntity.getNivelCadastroRealizado();
     }
 
-
-    public boolean cadastroAdicionalRealizado(Long id) {
-        Optional<CandidatoEntity> clienteEntityOptional = candidatoRepository.findById(id);
-
-        CandidatoEntity candidatoEntity = clienteEntityOptional.get();
-
-        return candidatoEntity.getCadastroAdicionalRealizado();
-    }
 }
