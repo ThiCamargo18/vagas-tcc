@@ -1,5 +1,6 @@
-package com.example.apicandidato.cargo.model;
+package com.example.apicandidato.framework.model;
 
+import com.example.apicandidato.cargo.model.CargoEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,8 +14,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "ferramenta")
-public class FerramentaEntity {
+@Entity(name = "framework")
+public class FrameworkEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +23,10 @@ public class FerramentaEntity {
     @Column(name = "nome")
     private String nome;
 
+    @Column(name = "idCandidato")
+    private Long idCandidato;
+
     @JsonIgnore
-    @ManyToMany(mappedBy = "ferramentas")
+    @ManyToMany(mappedBy = "frameworks")
     private List<CargoEntity> cargos;
 }

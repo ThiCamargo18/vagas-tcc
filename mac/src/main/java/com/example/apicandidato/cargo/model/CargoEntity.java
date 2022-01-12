@@ -1,5 +1,8 @@
 package com.example.apicandidato.cargo.model;
 
+import com.example.apicandidato.ferramenta.model.FerramentaEntity;
+import com.example.apicandidato.framework.model.FrameworkEntity;
+import com.example.apicandidato.tecnologia.model.TecnologiaEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,9 +29,6 @@ public class CargoEntity {
 
     @Column(name = "nivel")
     private String nivel;
-
-    @Column(name = "idUsuario")
-    private Long idUsuario;
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<TecnologiaEntity> tecnologias;

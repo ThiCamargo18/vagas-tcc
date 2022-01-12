@@ -16,7 +16,6 @@ public class CargoService {
     private CargoRepository cargoRepository;
 
     public CargoEntity criar(CargoEntity cargoEntity, Long idUsuario) {
-        cargoEntity.setIdUsuario(idUsuario);
 
         return cargoRepository.save(cargoEntity);
     }
@@ -43,9 +42,9 @@ public class CargoService {
         else
             cargoEntity = this.buscar(idCargo);
 
-        cargoSaida.setFerramentas(cargoEntity.getFerramentas());
-        cargoSaida.setTecnologias(cargoEntity.getTecnologias());
-        cargoSaida.setFrameworks(cargoEntity.getFrameworks());
+        cargoSaida.setFerramenta(cargoEntity.getFerramentas());
+        cargoSaida.setTecnologia(cargoEntity.getTecnologias());
+        cargoSaida.setFramework(cargoEntity.getFrameworks());
 
         return cargoSaida;
     }

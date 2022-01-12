@@ -1,4 +1,4 @@
-package com.example.apicandidato.cargo.model;
+package com.example.apicandidato.clienteCadastro.model;
 
 import com.example.apicandidato.ferramenta.model.FerramentaEntity;
 import com.example.apicandidato.framework.model.FrameworkEntity;
@@ -15,13 +15,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CargoSaida {
-    private Long id;
-    private String nome;
-    private String descricao;
-    private String nivel;
-    private Long idUsuario;
-    private List<TecnologiaEntity> tecnologias = new ArrayList<>();
-    private List<FrameworkEntity> frameworks = new ArrayList<>();
-    private List<FerramentaEntity> ferramentas = new ArrayList<>();
+public class CadastroAdicionalEntrada {
+    private List<TecnologiaEntity> tecnologia = new ArrayList<>();
+    private List<FrameworkEntity> framework = new ArrayList<>();
+    private List<FerramentaEntity> ferramenta = new ArrayList<>();
 }

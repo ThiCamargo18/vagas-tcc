@@ -2,14 +2,17 @@ package com.example.apicandidato.clienteCadastro.controller;
 
 import com.example.apicandidato.candidato.model.CandidatoSessao;
 import com.example.apicandidato.candidato.service.CandidatoService;
-import com.example.apicandidato.cargo.model.CargoEntity;
+import com.example.apicandidato.clienteCadastro.model.CadastroAdicionalEntrada;
 import com.example.apicandidato.cargo.service.CargoService;
 import com.example.apicandidato.clienteCadastro.model.ClienteCadastroEntrada;
 import com.example.apicandidato.clienteCadastro.model.ClienteCadastroSaida;
 import com.example.apicandidato.clienteCadastro.service.ClienteCadastroService;
 import com.example.apicandidato.experiencia.service.ExperienciaService;
+import com.example.apicandidato.ferramenta.service.FerramentaService;
+import com.example.apicandidato.framework.service.FrameworkService;
 import com.example.apicandidato.habilidades.service.HabilidadesService;
 import com.example.apicandidato.projetos.service.ProjetoService;
+import com.example.apicandidato.tecnologia.service.TecnologiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +37,12 @@ public class ClienteCadastroController {
     private ProjetoService projetoService;
     @Autowired
     private CargoService cargoService;
+    @Autowired
+    private TecnologiaService tecnologiaService;
+    @Autowired
+    private FrameworkService frameworkService;
+    @Autowired
+    private FerramentaService ferramentaService;
 
     @RequestMapping(value = "/criar")
     public ModelAndView criar() {
@@ -70,10 +79,7 @@ public class ClienteCadastroController {
     }
 
     @GetMapping("/criar/cadastroCargo")
-    public ModelAndView criarCadastroCargo(@RequestParam(value = "idCargo", required = false) long idCargo) {
-//        if (candidatoService.cadastroBasicoRealizado(CandidatoSessao.getId(request)) != 2)
-//            return "redirect:/cadastro/gerenciar";
-
+    public ModelAndView criarCadastroCargo(@RequestParam(value = "idCargo", required = false) Long idCargo) {
         ModelAndView modelAndView = new ModelAndView("/candidato/cadastro/cadastroCargo");
 
         modelAndView.addObject("cargo", cargoService.buscarEMapear(idCargo));
@@ -82,9 +88,12 @@ public class ClienteCadastroController {
     }
 
     @PostMapping("/criar/cadastroCargo")
-    public String salvarCadastroCargo(@Valid CargoEntity cargoEntity, HttpServletRequest request){
+    public String salvarCadastroCargo(@ModelAttribute CadastroAdicionalEntrada cadastroAdicionalEntrada, HttpServletRequest request){
+        tecnologiaService.criar(cadastroAdicionalEntrada.getTecnologia(), CandidatoSessao.getId(request));
+        frameworkService.criar(cadastroAdicionalEntrada.getFramework(), CandidatoSessao.getId(request));
+        ferramentaService.crar(cadastroAdicionalEntrada.getFerramenta(), CandidatoSessao.getId(request));
 
-        return "";
+        return "redirect:/";
     }
 
     @RequestMapping("/gerenciar")
