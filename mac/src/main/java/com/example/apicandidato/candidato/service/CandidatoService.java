@@ -98,4 +98,8 @@ public class CandidatoService {
 
         return candidatoRepository.findAll(example);
     }
+
+    public void salvar(CandidatoEntity candidatoEntity) {
+        candidatoRepository.save(candidatoEntity);
+    }
 }

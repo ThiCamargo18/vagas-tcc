@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 public interface CandidatoRepository extends JpaRepository<CandidatoEntity, Long> {
     public CandidatoEntity findByEmail(String email);
 
-    @Query("select s.email from cliente s where s.id = :idUsuario")
+    @Query("select s.email from candidato s where s.id = :idUsuario")
     Object getEmailByIdUser(@Param("idUsuario") Long idUsuario);
 }

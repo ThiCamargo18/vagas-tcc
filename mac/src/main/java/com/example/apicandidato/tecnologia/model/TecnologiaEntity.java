@@ -1,5 +1,6 @@
 package com.example.apicandidato.tecnologia.model;
 
+import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apicandidato.cargo.model.CargoEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -23,10 +24,11 @@ public class TecnologiaEntity {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "idCandidato")
-    private Long idCandidato;
-
     @JsonIgnore
     @ManyToMany(mappedBy = "tecnologias")
     private List<CargoEntity> cargos;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "tecnologias")
+    private List<CandidatoEntity> candidato;
 }

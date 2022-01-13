@@ -55,7 +55,7 @@
                                         <div class="list-group" th:each="tecnologia, itemStat : ${cargo.tecnologia}">
                                             <label class="list-group-item" >
                                                 <input class="form-check-input me-1" type="checkbox"
-                                                       th:field="*{tecnologia[__${itemStat.index}__].id}"
+                                                       th:field="*{tecnologia[__${itemStat.index}__]}"
                                                        th:value="${tecnologia.id}"
                                                        th:utext="${tecnologia.nome}">
                                             </label>
@@ -73,7 +73,7 @@
                                         <div class="list-group" th:each="framework, itemStat : ${cargo.framework}">
                                             <label class="list-group-item">
                                                 <input class="form-check-input me-1" type="checkbox"
-                                                       th:field="*{framework[__${itemStat.index}__].id}"
+                                                       th:field="*{framework[__${itemStat.index}__]}"
                                                        th:value="${framework.id}"
                                                        th:utext="${framework.nome}">
                                             </label>
@@ -91,7 +91,7 @@
                                         <div class="list-group" th:each="ferramenta, itemStat : ${cargo.ferramenta}">
                                             <label class="list-group-item">
                                                 <input class="form-check-input me-1" type="checkbox"
-                                                       th:field="*{ferramenta[__${itemStat.index}__].id}"
+                                                       th:field="*{ferramenta[__${itemStat.index}__]}"
                                                        th:value="${ferramenta.id}"
                                                        th:utext="${ferramenta.nome}">
                                             </label>
