@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,10 +24,10 @@ public class FrameworkEntity {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "idCandidato")
-    private Long idCandidato;
-
     @JsonIgnore
     @ManyToMany(mappedBy = "frameworks")
     private List<CargoEntity> cargos;
+
+    @OneToMany(mappedBy = "frameworkEntity")
+    Set<CandidatoFrameworkEntity> frameworks;
 }

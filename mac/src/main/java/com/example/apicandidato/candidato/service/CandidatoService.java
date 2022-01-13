@@ -9,8 +9,11 @@ import com.example.apicandidato.dadosPessoais.service.DadosPessoaisService;
 import com.example.apicandidato.exception.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,7 +23,7 @@ public class CandidatoService {
     @Autowired
     DadosPessoaisService dadosPessoaisService;
 
-    public CandidatoEntity buscarEVerificarExistenciaClientePorIdVaga(Long idUsuario) throws MyException {
+    public CandidatoEntity buscarPorId(Long idUsuario) throws MyException {
         Optional<CandidatoEntity> clienteEntity = candidatoRepository.findById(idUsuario);
 
         if(clienteEntity.isEmpty()){
@@ -87,4 +90,12 @@ public class CandidatoService {
         return candidatoEntity.getNivelCadastroRealizado();
     }
 
+    public List<CandidatoEntity> filtrar(CandidatoEntity candidatoEntity) {
+        Example<CandidatoEntity> example = Example.of(candidatoEntity,
+                ExampleMatcher.matching()
+                        .withIgnoreCase()
+                        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
+
+        return candidatoRepository.findAll(example);
+    }
 }

@@ -47,7 +47,7 @@ public class ClienteCadastroService {
     }
 
     public ClienteCadastroSaida buscar(Long id) throws Exception {
-        CandidatoEntity candidatoEntity = candidatoService.buscarEVerificarExistenciaClientePorIdVaga(id);
+        CandidatoEntity candidatoEntity = candidatoService.buscarPorId(id);
         DadosAdicionaisEntity dadosAdicionaisEntity = dadosAdicionaisService.buscarPorIdCliente(candidatoEntity.getId());
         DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisService.buscarPorIdCliente(candidatoEntity.getId());
 //        ExperienciaEntity experienciaEntity = experienciaService.buscarPorIdCliente(candidatoEntity.getId());

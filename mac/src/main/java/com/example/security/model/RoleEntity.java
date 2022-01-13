@@ -2,6 +2,7 @@ package com.example.security.model;
 
 import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apiempresa.empresa.model.EmpresaEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,9 +23,11 @@ public class RoleEntity {
 
     private String name;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Set<CandidatoEntity> users;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "roles")
     private Set<EmpresaEntity> empresas;
 

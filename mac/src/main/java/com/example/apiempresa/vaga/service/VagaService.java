@@ -59,7 +59,7 @@ public class VagaService {
             throw new Exception("Vaga não encontrada");
         }
 
-        CandidatoEntity candidatoEntity = candidatoService.buscarEVerificarExistenciaClientePorIdVaga(idUsuario);
+        CandidatoEntity candidatoEntity = candidatoService.buscarPorId(idUsuario);
         VagaEntity vagaEntity = vagaEntityOptional.get();
 
         List<CandidatoEntity> clientesCadastrados = vagaEntity.getClientes();
@@ -153,7 +153,7 @@ public class VagaService {
     }
 
     public VagaSaida validarInscricao(VagaSaida vagaSaida,Long idUsuario) throws Exception {
-        CandidatoEntity candidatoEntity = candidatoService.buscarEVerificarExistenciaClientePorIdVaga(idUsuario);
+        CandidatoEntity candidatoEntity = candidatoService.buscarPorId(idUsuario);
         VagaEntity vagaEntity = vagaRepository.findById(vagaSaida.getId()).get();
 
         List<CandidatoEntity> clientesCadastrados = vagaEntity.getClientes();

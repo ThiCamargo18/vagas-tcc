@@ -63,7 +63,7 @@ public class EntrevistaController {
     public ModelAndView criar(@PathVariable Long id) throws Exception {
         EntrevistaEntrada entrevistaEntrada = new EntrevistaEntrada();
         ModelAndView mv = new ModelAndView("/admin/entrevista/criar");
-        CandidatoEntity clienteSaida = candidatoService.buscarEVerificarExistenciaClientePorIdVaga(id);
+        CandidatoEntity clienteSaida = candidatoService.buscarPorId(id);
         String emailUsuario = dadosPessoaisService.buscarEmailUsuarioPorId(clienteSaida.getId());
         Mensagem dadosEmail = new Mensagem(null, Arrays.asList(emailUsuario),null,null);
         mv.addObject("cliente",clienteSaida);

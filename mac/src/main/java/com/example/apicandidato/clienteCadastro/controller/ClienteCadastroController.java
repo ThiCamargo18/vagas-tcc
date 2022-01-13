@@ -89,9 +89,7 @@ public class ClienteCadastroController {
 
     @PostMapping("/criar/cadastroCargo")
     public String salvarCadastroCargo(@ModelAttribute CadastroAdicionalEntrada cadastroAdicionalEntrada, HttpServletRequest request){
-        tecnologiaService.criar(cadastroAdicionalEntrada.getTecnologia(), CandidatoSessao.getId(request));
-        frameworkService.criar(cadastroAdicionalEntrada.getFramework(), CandidatoSessao.getId(request));
-        ferramentaService.crar(cadastroAdicionalEntrada.getFerramenta(), CandidatoSessao.getId(request));
+        frameworkService.atualizar(cadastroAdicionalEntrada.getFramework(), CandidatoSessao.getId(request));
 
         return "redirect:/";
     }

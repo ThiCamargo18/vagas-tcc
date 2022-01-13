@@ -1,5 +1,6 @@
 package com.example.apicandidato.candidato.model;
 
+import com.example.apicandidato.framework.model.CandidatoFrameworkEntity;
 import com.example.security.model.RoleEntity;
 import com.example.apiempresa.vaga.model.VagaEntity;
 import lombok.AllArgsConstructor;
@@ -41,4 +42,7 @@ public class CandidatoEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<RoleEntity> roles;
+
+    @OneToMany(mappedBy = "candidatoEntity")
+    private List<CandidatoFrameworkEntity> frameworks;
 }
