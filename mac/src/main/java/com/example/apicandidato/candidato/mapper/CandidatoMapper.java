@@ -8,6 +8,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper
 public interface CandidatoMapper {
     CandidatoMapper INSTANCE = Mappers.getMapper(CandidatoMapper.class);
@@ -24,4 +26,6 @@ public interface CandidatoMapper {
             @Mapping(source = "candidatoEntity.situacao",target = "situacao"),
     })
     CandidatoEntity mapToEntityAtualizar(CandidatoEntrada candidatoEntrada, CandidatoEntity candidatoEntity);
+
+    List<CandidatoSaida> mapAllToSaida(List<CandidatoEntity> candidatoEntities);
 }

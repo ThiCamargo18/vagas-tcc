@@ -2,8 +2,8 @@ package com.example.apicandidato.clienteCadastro.controller;
 
 import com.example.apicandidato.candidato.model.CandidatoSessao;
 import com.example.apicandidato.candidato.service.CandidatoService;
-import com.example.apicandidato.clienteCadastro.model.CadastroAdicionalEntrada;
 import com.example.apicandidato.cargo.service.CargoService;
+import com.example.apicandidato.clienteCadastro.model.CadastroAdicionalEntrada;
 import com.example.apicandidato.clienteCadastro.model.ClienteCadastroEntrada;
 import com.example.apicandidato.clienteCadastro.model.ClienteCadastroSaida;
 import com.example.apicandidato.clienteCadastro.service.ClienteCadastroService;
@@ -12,7 +12,6 @@ import com.example.apicandidato.ferramenta.service.FerramentaService;
 import com.example.apicandidato.framework.service.FrameworkService;
 import com.example.apicandidato.habilidades.service.HabilidadesService;
 import com.example.apicandidato.projetos.service.ProjetoService;
-import com.example.apicandidato.tecnologia.model.TecnologiaEntity;
 import com.example.apicandidato.tecnologia.service.TecnologiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,8 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping(path = "cadastro", produces = "application/json")
@@ -92,9 +89,10 @@ public class ClienteCadastroController {
 
     @PostMapping("/criar/cadastroCargo")
     public String salvarCadastroCargo(@ModelAttribute CadastroAdicionalEntrada cadastroAdicionalEntrada, HttpServletRequest request){
-//        frameworkService.atualizar(cadastroAdicionalEntrada.getFramework(), CandidatoSessao.getId(request));
-
         tecnologiaService.atualizar(cadastroAdicionalEntrada.getTecnologia(), CandidatoSessao.getId(request));
+        frameworkService.atualizar(cadastroAdicionalEntrada.getFramework(), CandidatoSessao.getId(request));
+        ferramentaService.atualizar(cadastroAdicionalEntrada.getFerramenta(), CandidatoSessao.getId(request));
+
 
         return "redirect:/";
     }

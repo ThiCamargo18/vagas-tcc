@@ -1,5 +1,6 @@
 package com.example.apicandidato.framework.model;
 
+import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apicandidato.cargo.model.CargoEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -28,6 +28,7 @@ public class FrameworkEntity {
     @ManyToMany(mappedBy = "frameworks")
     private List<CargoEntity> cargos;
 
-    @OneToMany(mappedBy = "frameworkEntity")
-    Set<CandidatoFrameworkEntity> frameworks;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "frameworks")
+    private List<CandidatoEntity> candidato;
 }

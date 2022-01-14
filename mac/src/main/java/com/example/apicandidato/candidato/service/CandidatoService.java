@@ -13,8 +13,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CandidatoService {
@@ -90,13 +89,13 @@ public class CandidatoService {
         return candidatoEntity.getNivelCadastroRealizado();
     }
 
-    public List<CandidatoEntity> filtrar(CandidatoEntity candidatoEntity) {
-        Example<CandidatoEntity> example = Example.of(candidatoEntity,
-                ExampleMatcher.matching()
-                        .withIgnoreCase()
-                        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
+    public List<CandidatoEntity> filtrar(List<CandidatoEntity> lista1, List<CandidatoEntity> lista2) {
+        if (lista2.isEmpty())
+            return lista1;
 
-        return candidatoRepository.findAll(example);
+        lista1.removeIf(candidato -> !lista2.contains(candidato));
+
+        return lista1;
     }
 
     public void salvar(CandidatoEntity candidatoEntity) {

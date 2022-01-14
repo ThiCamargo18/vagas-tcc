@@ -1,6 +1,7 @@
 package com.example.apicandidato.candidato.model;
 
-import com.example.apicandidato.framework.model.CandidatoFrameworkEntity;
+import com.example.apicandidato.ferramenta.model.FerramentaEntity;
+import com.example.apicandidato.framework.model.FrameworkEntity;
 import com.example.apicandidato.tecnologia.model.TecnologiaEntity;
 import com.example.security.model.RoleEntity;
 import com.example.apiempresa.vaga.model.VagaEntity;
@@ -44,9 +45,12 @@ public class CandidatoEntity {
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<RoleEntity> roles;
 
-//    @OneToMany(mappedBy = "candidatoEntity")
-//    private List<CandidatoFrameworkEntity> frameworks;
-
     @ManyToMany(cascade = CascadeType.ALL)
     private List<TecnologiaEntity> tecnologias;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<FrameworkEntity> frameworks;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<FerramentaEntity> ferramentas;
 }

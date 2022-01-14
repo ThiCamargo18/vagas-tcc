@@ -1,42 +1,50 @@
 package com.example.apicandidato.framework.service;
 
+import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apicandidato.candidato.service.CandidatoService;
-import com.example.apicandidato.framework.model.CandidatoFrameworkEntity;
-import com.example.apicandidato.framework.model.CandidatoFrameworkEntityKey;
+import com.example.apicandidato.ferramenta.model.FerramentaEntity;
 import com.example.apicandidato.framework.model.FrameworkEntity;
-import com.example.apicandidato.framework.repository.CandidatoFrameworkRepository;
 import com.example.apicandidato.framework.repository.FrameworkRepository;
-import lombok.extern.java.Log;
+import com.example.apicandidato.tecnologia.model.TecnologiaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FrameworkService {
     @Autowired
     private FrameworkRepository frameworkRepository;
     @Autowired
-    private CandidatoFrameworkRepository candidatoFrameworkRepository;
-    @Autowired
     private CandidatoService candidatoService;
 
-    public List<CandidatoFrameworkEntity> filtrar(List<Long> frameworksIds){
-        return candidatoFrameworkRepository.findByFrameworkEntityIdIn(frameworksIds);
+    public void atualizar(List<Long> frameworks, Long idCandidato) {
+        List<FrameworkEntity> allById = frameworkRepository.findAllById(frameworks);
+
+        CandidatoEntity candidatoEntity = candidatoService.buscarPorId(idCandidato);
+
+        candidatoEntity.setFrameworks(allById);
+
+        candidatoService.salvar(candidatoEntity);
     }
 
-    public void atualizar(List<FrameworkEntity> frameworkEntities, Long idCandidato) {
-        for (FrameworkEntity framework: frameworkEntities) {
-            if (framework.getId() != null) {
-                CandidatoFrameworkEntityKey key = new CandidatoFrameworkEntityKey(idCandidato, framework.getId());
+    public List<CandidatoEntity> buscarCandidatos(List<Long> frameworksLong) {
+        List<FrameworkEntity> frameworks = frameworkRepository.findAllById(frameworksLong);
 
-                CandidatoFrameworkEntity candidatoFrameworkEntity = new CandidatoFrameworkEntity(key);
+        if (frameworks.isEmpty())
+            return new ArrayList<>();
 
-                candidatoFrameworkEntity.setCandidatoEntity(candidatoService.buscarPorId(idCandidato));
-                candidatoFrameworkEntity.setFrameworkEntity(frameworkRepository.findById(framework.getId()).get());
+        List<CandidatoEntity> lista1 = frameworks.get(0).getCandidato();
 
-                candidatoFrameworkRepository.save(candidatoFrameworkEntity);
-            }
+        for (FrameworkEntity framework: frameworks) {
+            List<CandidatoEntity> lista2 = framework.getCandidato();
+
+            lista1.removeIf(candidato -> !lista2.contains(candidato));
         }
+
+        return lista1;
     }
 }

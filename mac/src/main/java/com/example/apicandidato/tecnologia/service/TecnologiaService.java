@@ -7,6 +7,7 @@ import com.example.apicandidato.tecnologia.repository.TecnologiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,19 +29,20 @@ public class TecnologiaService {
         candidatoService.salvar(candidatoEntity);
     }
 
-    public List<TecnologiaEntity> findAllById(List<Long> entrada) {
-        return tecnologiaRepository.findAllById(entrada);
-    }
+    public List<CandidatoEntity> buscarCandidatos(List<Long> tecnologiasLong) {
+        List<TecnologiaEntity> tecnologias = tecnologiaRepository.findAllById(tecnologiasLong);
 
-    public Set<CandidatoEntity> buscarCandidatos(List<TecnologiaEntity> tecnologias) {
-        Set<CandidatoEntity> retorno = new HashSet<>();
+        if (tecnologias.isEmpty())
+            return new ArrayList<>();
+
+        List<CandidatoEntity> lista1 = tecnologias.get(0).getCandidato();
 
         for (TecnologiaEntity tecnologia: tecnologias) {
-            HashSet<CandidatoEntity> candidatos = new HashSet<>(tecnologia.getCandidato()); //Remove duplicados
+            List<CandidatoEntity> lista2 = tecnologia.getCandidato();
 
-            retorno.addAll(candidatos);
+            lista1.removeIf(candidato -> !lista2.contains(candidato));
         }
 
-        return retorno;
+        return lista1;
     }
 }

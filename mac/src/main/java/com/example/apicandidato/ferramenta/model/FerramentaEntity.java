@@ -1,5 +1,6 @@
 package com.example.apicandidato.ferramenta.model;
 
+import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apicandidato.cargo.model.CargoEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -29,4 +30,8 @@ public class FerramentaEntity {
     @JsonIgnore
     @ManyToMany(mappedBy = "ferramentas")
     private List<CargoEntity> cargos;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "ferramentas")
+    private List<CandidatoEntity> candidato;
 }
