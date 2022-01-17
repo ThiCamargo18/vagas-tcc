@@ -5,6 +5,7 @@ import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apicandidato.candidato.model.CandidatoEntrada;
 import com.example.apicandidato.candidato.repository.CandidatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.HashSet;
 public class CandidatoAutenticacaoServiceImpl implements CandidatoAutenticacaoService {
     @Autowired
     private CandidatoRepository candidatoRepository;
+    @Qualifier("senha1")
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 

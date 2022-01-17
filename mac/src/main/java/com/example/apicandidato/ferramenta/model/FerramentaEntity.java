@@ -2,6 +2,7 @@ package com.example.apicandidato.ferramenta.model;
 
 import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apicandidato.cargo.model.CargoEntity;
+import com.example.apiempresa.vaga.model.VagaEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,9 +25,6 @@ public class FerramentaEntity {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "idCandidato")
-    private Long idCandidato;
-
     @JsonIgnore
     @ManyToMany(mappedBy = "ferramentas")
     private List<CargoEntity> cargos;
@@ -34,4 +32,8 @@ public class FerramentaEntity {
     @JsonIgnore
     @ManyToMany(mappedBy = "ferramentas")
     private List<CandidatoEntity> candidato;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "ferramentas")
+    private List<VagaEntity> vagas;
 }

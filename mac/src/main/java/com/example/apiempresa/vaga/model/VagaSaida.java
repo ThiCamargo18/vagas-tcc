@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -31,4 +32,7 @@ public class VagaSaida {
     private String inscrito = "NAO";
     private String status;
     private Long idEmpresa;
+    private List<Long> tecnologia = new ArrayList<>();
+    private List<Long> framework = new ArrayList<>();
+    private List<Long> ferramenta = new ArrayList<>();
 }

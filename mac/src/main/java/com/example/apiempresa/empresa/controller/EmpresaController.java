@@ -5,12 +5,13 @@ import com.example.apiempresa.empresa.model.EmpresaSaida;
 import com.example.apiempresa.empresa.service.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 
-@RestController
+@Controller
 @RequestMapping(path = "empresa", produces = "application/json")
 @Configuration
 @CrossOrigin
@@ -20,7 +21,7 @@ public class EmpresaController {
 
     @RequestMapping("/gerenciar")
     public void gerenciarCadastro(HttpServletResponse response) throws Exception {
-        boolean empresaEntityOptional = empresaService.verificarSeJaFoiCriadoAEmpresa();
+        boolean empresaEntityOptional = false; //TODO
         if (empresaEntityOptional) {
             response.sendRedirect("http://localhost:8088/empresa/obterAtualizar");
         } else {

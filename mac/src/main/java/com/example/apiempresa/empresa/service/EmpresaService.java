@@ -19,23 +19,9 @@ public class EmpresaService {
     public EmpresaSaida criar(EmpresaEntrada empresaEntrada) throws Exception {
         EmpresaEntity empresaEntity = EmpresaMapper.INSTANCE.mapToEntity(empresaEntrada);
 
-        if(verificarSeJaFoiCriadoAEmpresa().equals(true)){
-            throw new Exception("Só é possivel cadastrar 1 empresa no sistema");
-        }
-
         empresaRepository.save(empresaEntity);
 
         return EmpresaMapper.INSTANCE.mapToSaida(empresaEntity);
-    }
-
-    public Boolean verificarSeJaFoiCriadoAEmpresa() {
-        Optional<EmpresaEntity> empresaEntity = empresaRepository.findById("1");
-
-        if(empresaEntity.isPresent()){
-            return true;
-        }
-
-        return false;
     }
 
     public EmpresaSaida listar() {
@@ -46,8 +32,6 @@ public class EmpresaService {
 
     public EmpresaSaida atualizar(EmpresaEntrada empresaEntrada) {
         EmpresaEntity empresaEntity = EmpresaMapper.INSTANCE.mapToEntity(empresaEntrada);
-
-//        empresaEntity.setId("1");
 
         empresaRepository.save(empresaEntity);
 

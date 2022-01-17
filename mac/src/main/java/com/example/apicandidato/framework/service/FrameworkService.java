@@ -47,4 +47,8 @@ public class FrameworkService {
 
         return lista1;
     }
+
+    public List<FrameworkEntity> findAllById(List<Long> frameworks) {
+        return frameworkRepository.findAllById(frameworks);
+    }
 }

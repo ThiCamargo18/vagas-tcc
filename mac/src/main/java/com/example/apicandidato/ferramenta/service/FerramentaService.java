@@ -38,12 +38,16 @@ public class FerramentaService {
 
         List<CandidatoEntity> lista1 = ferramentas.get(0).getCandidato();
 
-        for (FerramentaEntity ferramenta: ferramentas) {
+        for (FerramentaEntity ferramenta : ferramentas) {
             List<CandidatoEntity> lista2 = ferramenta.getCandidato();
 
             lista1.removeIf(candidato -> !lista2.contains(candidato));
         }
 
         return lista1;
+    }
+
+    public List<FerramentaEntity> findAllById(List<Long> idFerramentas) {
+        return ferramentaRepository.findAllById(idFerramentas);
     }
 }

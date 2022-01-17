@@ -2,6 +2,9 @@ package com.example.apiempresa.vaga.model;
 
 import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apicandidato.enums.CategoriaEnum;
+import com.example.apicandidato.ferramenta.model.FerramentaEntity;
+import com.example.apicandidato.framework.model.FrameworkEntity;
+import com.example.apicandidato.tecnologia.model.TecnologiaEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,20 +39,12 @@ public class VagaEntity {
     @Column(name = "formacao")
     private String formacao;
 
-    @Column(name = "descricaoHabilidades")
-    @ElementCollection(targetClass=String.class)
-    private List<String> descricaoHabilidades;
-
     @Lob
     @Column(name = "responsabilidade")
     private String responsabilidade;
 
     @Column(name = "salario")
     private String salario;
-
-    @Column(name = "beneficios")
-    @ElementCollection(targetClass=String.class)
-    private List<String> beneficios;
 
     @Lob
     @Column(name = "observacao")
@@ -72,5 +67,14 @@ public class VagaEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<CandidatoEntity> clientes;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<TecnologiaEntity> tecnologias;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<FrameworkEntity> frameworks;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<FerramentaEntity> ferramentas;
 }
 

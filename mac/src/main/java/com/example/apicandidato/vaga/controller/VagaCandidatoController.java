@@ -1,12 +1,12 @@
-package com.example.apicandidato.vaga;
+package com.example.apicandidato.vaga.controller;
 
 import com.example.apicandidato.candidato.model.CandidatoSessao;
 import com.example.apicandidato.candidato.service.CandidatoService;
 import com.example.apicandidato.enums.CategoriaEnum;
+import com.example.apicandidato.vaga.service.VagaCandidatoService;
 import com.example.apiempresa.vaga.mapper.VagaMapper;
 import com.example.apiempresa.vaga.model.VagaEntity;
 import com.example.apiempresa.vaga.model.VagaSaida;
-import com.example.apiempresa.vaga.service.VagaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,15 +20,15 @@ import java.util.List;
 
 @Controller
 @RequestMapping(path = "candidato/vaga", produces = "application/json")
-public class Vaga {
+public class VagaCandidatoController {
     @Autowired
-    private VagaService vagaService;
+    private VagaCandidatoService vagaCandidatoService;
     @Autowired
     private CandidatoService candidatoService;
 
     @GetMapping("/listar")
     public ModelAndView listar(){
-        List<VagaSaida> vagaSaidaList = vagaService.listarVagasAtivas();
+        List<VagaSaida> vagaSaidaList = vagaCandidatoService.listarVagasAtivas();
 
         VagaSaida vagaSaida = new VagaSaida();
         vagaSaida.setNumeroVagasEncontradas(vagaSaidaList.size());
@@ -54,7 +54,7 @@ public class Vaga {
         vagaEntity.setFormacao(formacao);
         vagaEntity.setStatus("ATIVA");
 
-        List<VagaEntity> listaEntity = vagaService.filtrar(vagaEntity);
+        List<VagaEntity> listaEntity = vagaCandidatoService.filtrar(vagaEntity);
         List<VagaSaida> listSaida = VagaMapper.INSTANCE.mapToSaidaList(listaEntity);
 
         int numeroVagasEncontradas = listSaida.size();
@@ -73,16 +73,16 @@ public class Vaga {
         if (nivelCadastro < 3)
             return "redirect:cadastro/gerenciar";
 
-        vagaService.inscrever(CandidatoSessao.getId(request),idVaga);
+        vagaCandidatoService.inscrever(CandidatoSessao.getId(request),idVaga);
 
         return "redirect:/";
     }
 
     @GetMapping("/buscar/{id}")
     public ModelAndView buscar(@PathVariable Long id,HttpServletRequest request) throws Exception {
-        VagaSaida vagaSaida = vagaService.buscarVaga(id);
+        VagaSaida vagaSaida = vagaCandidatoService.buscarVaga(id);
 
-        vagaSaida = vagaService.validarInscricao(vagaSaida, CandidatoSessao.getId(request));
+        vagaSaida = vagaCandidatoService.validarInscricao(vagaSaida, CandidatoSessao.getId(request));
 
         List<String> listaHabilidades = vagaSaida.getDescricaoHabilidades();
         List<String> beneficios = vagaSaida.getBeneficios();
@@ -96,7 +96,7 @@ public class Vaga {
 
     @GetMapping("/buscarPorNome")
     public ModelAndView buscarPorNome (@RequestParam String nome) throws Exception {
-        List<VagaSaida> vagaSaidaList = vagaService.buscarPorNome(nome);
+        List<VagaSaida> vagaSaidaList = vagaCandidatoService.buscarPorNome(nome);
 
         VagaSaida vagaSaida = new VagaSaida();
         vagaSaida.setNumeroVagasEncontradas(vagaSaidaList.size());

@@ -85,8 +85,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
     }
 
-    @Bean
+    @Bean(name = "senha1")
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean(name = "senha2")
+    public BCryptPasswordEncoder bCryptPasswordEncoder2() {
         return new BCryptPasswordEncoder();
     }
 

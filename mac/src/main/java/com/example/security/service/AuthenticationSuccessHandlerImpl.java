@@ -3,6 +3,9 @@ package com.example.security.service;
 import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apicandidato.candidato.model.CandidatoSessao;
 import com.example.apicandidato.security.CandidatoAutenticacaoServiceImpl;
+import com.example.apiempresa.empresa.model.EmpresaEntity;
+import com.example.apiempresa.model.EmpresaSessao;
+import com.example.apiempresa.security.EmpresaAutenticacaoServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,6 +26,8 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
     private HttpSession session;
     @Autowired
     private CandidatoAutenticacaoServiceImpl candidatoAutenticacaoService;
+    @Autowired
+    private EmpresaAutenticacaoServiceImpl empresaAutenticacaoService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -30,12 +35,23 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 
         String userName = ((User) authentication.getPrincipal()).getUsername();
 
-        CandidatoEntity candidatoEntity = candidatoAutenticacaoService.findByEmail(userName);
-        CandidatoSessao candidatoSessao = new CandidatoSessao();
-        candidatoSessao.setId(candidatoEntity.getId());
-        candidatoSessao.setNome(candidatoEntity.getNome());
+        if (userName.contains("@")) {
+            CandidatoEntity candidatoEntity = candidatoAutenticacaoService.findByEmail(userName);
 
-        session.setAttribute("usuarioLogado", candidatoSessao);
+            CandidatoSessao candidatoSessao = new CandidatoSessao();
+            candidatoSessao.setId(candidatoEntity.getId());
+            candidatoSessao.setNome(candidatoEntity.getNome());
+
+            session.setAttribute("usuarioLogado", candidatoSessao);
+        } else {
+            EmpresaEntity empresaEntity = empresaAutenticacaoService.findByUsername(userName);
+
+            EmpresaSessao empresaSessao = new EmpresaSessao();
+            empresaSessao.setId(empresaSessao.getId());
+            empresaSessao.setNome(empresaEntity.getRazaoSocial());
+
+            session.setAttribute("empresaLogada", empresaSessao);
+        }
 
         response.sendRedirect("/");
     }

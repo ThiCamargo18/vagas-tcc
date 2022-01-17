@@ -1,12 +1,14 @@
 package com.example.apiempresa.vaga.service;
 
 import com.example.apicandidato.candidato.model.CandidatoEntity;
-import com.example.apicandidato.candidato.service.CandidatoService;
-import com.example.apicandidato.exception.MyException;
 import com.example.apicandidato.dadosPessoais.mapper.DadosPessoaisMapper;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisSaida;
 import com.example.apicandidato.dadosPessoais.service.DadosPessoaisService;
+import com.example.apicandidato.exception.MyException;
+import com.example.apicandidato.ferramenta.service.FerramentaService;
+import com.example.apicandidato.framework.service.FrameworkService;
+import com.example.apicandidato.tecnologia.service.TecnologiaService;
 import com.example.apiempresa.empresa.service.EmpresaService;
 import com.example.apiempresa.vaga.mapper.VagaMapper;
 import com.example.apiempresa.vaga.model.VagaEntity;
@@ -27,21 +29,28 @@ import java.util.Optional;
 @Service
 public class VagaService {
     @Autowired
-    VagaRepository vagaRepository;
+    private VagaRepository vagaRepository;
     @Autowired
-    EmpresaService empresaService;
+    private EmpresaService empresaService;
     @Autowired
-    CandidatoService candidatoService;
+    private DadosPessoaisService dadosPessoaisService;
     @Autowired
-    DadosPessoaisService dadosPessoaisService;
+    private TecnologiaService tecnologiaService;
+    @Autowired
+    private FerramentaService ferramentaService;
+    @Autowired
+    private FrameworkService frameworkService;
 
-    public void criar(VagaEntrada entrada) throws MyException {
+    public void criar(VagaEntrada entrada, Long idEmpresa) throws MyException {
         VagaEntity vagaEntity = VagaMapper.INSTANCE.mapToEntity(entrada);
 
         vagaEntity.setStatus("ATIVA");
         vagaEntity.setNumeroInscritos(0);
-        vagaEntity.setIdEmpresa(1L);
+        vagaEntity.setIdEmpresa(idEmpresa);
         vagaEntity.setDataLimite(dataParaDDMMAAA(vagaEntity.getDataLimite()));
+        vagaEntity.setTecnologias(tecnologiaService.findAllById(entrada.getTecnologia()));
+        vagaEntity.setFrameworks(frameworkService.findAllById(entrada.getFramework()));
+        vagaEntity.setFerramentas(ferramentaService.findAllById(entrada.getFerramenta()));
 
         vagaRepository.save(vagaEntity);
     }
@@ -52,38 +61,11 @@ public class VagaService {
         return VagaMapper.INSTANCE.mapToSaidaList(vagaEntities);
     }
 
-    public VagaSaida inscrever(Long idUsuario, Long idVaga) throws Exception {
-        Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(idVaga);
-
-        if(!vagaEntityOptional.isPresent()){
-            throw new Exception("Vaga não encontrada");
-        }
-
-        CandidatoEntity candidatoEntity = candidatoService.buscarPorId(idUsuario);
-        VagaEntity vagaEntity = vagaEntityOptional.get();
-
-        List<CandidatoEntity> clientesCadastrados = vagaEntity.getClientes();
-
-        for(CandidatoEntity cliente : clientesCadastrados){
-            if(cliente.getId()== candidatoEntity.getId()){
-                throw new Exception("Você já se inscreveu nessa vaga!");
-            }
-        }
-
-        clientesCadastrados.add(candidatoEntity);
-        vagaEntity.setClientes(clientesCadastrados);
-        vagaEntity.setNumeroInscritos(vagaEntity.getNumeroInscritos()+1);
-        vagaRepository.save(vagaEntity);
-
-        return VagaMapper.INSTANCE.mapToSaida(vagaEntity);
-    }
-
     public String deletar(Long id) {
         vagaRepository.deleteById(id);
 
         return "concluido";
     }
-
 
     public List<DadosPessoaisSaida> buscarInscritosPorVaga(Long id) throws Exception {
         List<DadosPessoaisEntity> dadosPessoaisEntityList = new ArrayList<>();
@@ -101,9 +83,7 @@ public class VagaService {
     public VagaSaida buscarVaga(Long id) throws Exception {
         Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(id);
 
-        if(!vagaEntityOptional.isPresent()){
-            throw new Exception("Vaga não encontrada!");
-        }
+        if(vagaEntityOptional.isEmpty()) throw new Exception("Vaga não encontrada!");
 
         return VagaMapper.INSTANCE.mapToSaida(vagaEntityOptional.get());
     }
@@ -115,7 +95,7 @@ public class VagaService {
     }
 
     public List<VagaEntity> filtrar(VagaEntity vagaEntity) {
-        Example example = Example.of( vagaEntity,
+        Example<VagaEntity> example = Example.of( vagaEntity,
                 ExampleMatcher.matching()
                         .withIgnoreCase()
                         .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING) );
@@ -125,46 +105,25 @@ public class VagaService {
     public void atualizar(VagaEntrada vagaEntrada) {
         VagaEntity vagaEntity = VagaMapper.INSTANCE.mapToEntity(vagaEntrada);
 
-        vagaEntity.setIdEmpresa(1L);
+        vagaEntity.setIdEmpresa(1L); //TODO
         vagaEntity.setDataLimite(dataParaDDMMAAA(vagaEntity.getDataLimite()));
 
         vagaRepository.save(vagaEntity);
     }
 
-    public String atualizarStatus(Long idVaga) throws Exception {
+    public void atualizarStatus(Long idVaga) throws Exception {
         Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(idVaga);
 
-        if(!vagaEntityOptional.isPresent()){
-            throw new Exception("Vaga não encontrada, busque novamente");
-        }
+        if(vagaEntityOptional.isEmpty()) throw new Exception("Vaga não encontrada, busque novamente");
+
         VagaEntity vagaEntity = vagaEntityOptional.get();
-        if(vagaEntity.getStatus().equals("ATIVA")) vagaEntity.setStatus("OCULTA");
-        else vagaEntity.setStatus("ATIVA");
+
+        if(vagaEntity.getStatus().equals("ATIVA"))
+            vagaEntity.setStatus("OCULTA");
+        else
+            vagaEntity.setStatus("ATIVA");
 
         vagaRepository.save(vagaEntity);
-
-        return "sucesso";
-    }
-
-    public List<VagaSaida> listarVagasAtivas() {
-        List<VagaEntity> vagaEntityList = vagaRepository.findAllByStatus("ATIVA");
-
-        return VagaMapper.INSTANCE.mapToSaidaList(vagaEntityList);
-    }
-
-    public VagaSaida validarInscricao(VagaSaida vagaSaida,Long idUsuario) throws Exception {
-        CandidatoEntity candidatoEntity = candidatoService.buscarPorId(idUsuario);
-        VagaEntity vagaEntity = vagaRepository.findById(vagaSaida.getId()).get();
-
-        List<CandidatoEntity> clientesCadastrados = vagaEntity.getClientes();
-
-        for(CandidatoEntity cliente : clientesCadastrados){
-            if(cliente.getId()== candidatoEntity.getId()){
-                vagaSaida.setInscrito("SIM");
-            }
-        }
-
-        return vagaSaida;
     }
 
     public String dataParaDDMMAAA(String data){
