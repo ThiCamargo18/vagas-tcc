@@ -30,5 +30,5 @@ public class RegistroEntity {
     private String numero;
 
     @Column(name = "idUsuario")
-    private Long idUsuario;
+    private Long idCandidato;
 }

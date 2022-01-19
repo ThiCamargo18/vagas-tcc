@@ -27,5 +27,5 @@ public class HabilidadesEntity {
     private String objetivos;
 
     @Column(name = "idUsuario")
-    private Long idUsuario;
+    private Long idCandidato;
 }

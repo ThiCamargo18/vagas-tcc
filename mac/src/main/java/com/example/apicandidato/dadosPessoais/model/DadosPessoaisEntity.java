@@ -59,11 +59,11 @@ public class DadosPessoaisEntity {
     @Column(name = "cpf",unique = true)
     private String cpf;
 
-    @Column(name = "idUsuario")
-    private Long idUsuario;
-
     @Column(name = "cidade")
     private String cidade;
+
+    @Column(name = "idUsuario")
+    private Long idCandidato;
 
     public void setIdade(LocalDate dataNascimento) {
         int anoAtual = LocalDate.now().getYear();

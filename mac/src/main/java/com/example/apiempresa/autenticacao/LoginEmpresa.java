@@ -4,22 +4,18 @@ import com.example.apiempresa.empresa.model.EmpresaEntity;
 import com.example.apiempresa.empresa.model.EmpresaEntrada;
 import com.example.apiempresa.security.EmpresaAutenticacaoService;
 import com.example.apiempresa.security.EmpresaSessao;
-import com.example.apiempresa.security.EmpresaValidacao;
 import com.example.security.model.RoleEntity;
 import com.example.security.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
-
 
 @Controller
 public class LoginEmpresa {
@@ -27,8 +23,6 @@ public class LoginEmpresa {
     private EmpresaAutenticacaoService empresaAutenticacaoService;
     @Autowired
     private SecurityService securityService;
-//    @Autowired
-//    private EmpresaValidacao empresaValidacao;
 
     @GetMapping("/registrarEmpresa")
     public String registration(Model model) {
@@ -42,13 +36,7 @@ public class LoginEmpresa {
     }
 
     @PostMapping("/registrarEmpresa")
-    public String registration(@ModelAttribute("userForm") EmpresaEntrada empresaEntrada, BindingResult bindingResult, HttpServletRequest request) {
-        //userValidator.validate(userForm, bindingResult);
-
-//        if (bindingResult.hasErrors()) {
-//            return "/empresa/registrar";
-//        }
-
+    public String registration(@ModelAttribute("userForm") EmpresaEntrada empresaEntrada, HttpServletRequest request) {
         empresaEntrada.setRoles(Collections.singletonList(new RoleEntity("EMPRESA")));
 
         EmpresaEntity empresaEntity = empresaAutenticacaoService.save(empresaEntrada);

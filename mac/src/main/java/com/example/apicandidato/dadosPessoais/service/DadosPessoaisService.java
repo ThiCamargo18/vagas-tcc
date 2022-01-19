@@ -7,7 +7,6 @@ import com.example.apicandidato.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisEntrada;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisSaida;
 import com.example.apicandidato.dadosPessoais.repository.DadosPessoaisRepository;
-import com.example.apicandidato.habilidades.model.HabilidadesEntrada;
 import com.example.apicandidato.habilidades.service.HabilidadesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,8 +14,6 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -32,7 +29,7 @@ public class DadosPessoaisService {
     public DadosPessoaisSaida criar(DadosPessoaisEntrada dadosPessoais, Long id, String cidade) throws Exception {
         DadosPessoaisEntity dadosPessoaisEntity = DadosPessoaisMapper.INSTANCE.mapToEntity(dadosPessoais);
 
-        dadosPessoaisEntity.setIdUsuario(id);
+        dadosPessoaisEntity.setIdCandidato(id);
         dadosPessoaisEntity.setCidade(cidade);
         dadosPessoaisEntity.setIdade(dadosPessoaisEntity.getDataNascimento());
 
@@ -78,7 +75,7 @@ public class DadosPessoaisService {
 
         DadosPessoaisEntity dadosPessoaisEntity = DadosPessoaisMapper.INSTANCE.mapToEntity(dadosPessoaisEntrada);
         dadosPessoaisEntity.setId(dadosRetornoEntity.getId());
-        dadosPessoaisEntity.setIdUsuario(dadosRetornoEntity.getIdUsuario());
+        dadosPessoaisEntity.setIdCandidato(dadosRetornoEntity.getIdCandidato());
 
         try {
             dadosPessoaisRepository.save(dadosPessoaisEntity);

@@ -18,7 +18,7 @@ public class DadosAdicionaisService {
 
     public DadosAdicionaisSaida criar(DadosAdicionaisEntrada dadosAdicionais,Long id) {
         DadosAdicionaisEntity dadosAdicionaisEntity = DadosAdicionaisMapper.INSTANCE.mapToEntity(dadosAdicionais);
-        dadosAdicionaisEntity.setIdUsuario(id);
+        dadosAdicionaisEntity.setIdCandidato(id);
         dadosAdicionaisRepository.save(dadosAdicionaisEntity);
 
         return DadosAdicionaisMapper.INSTANCE.mapToSaida(dadosAdicionaisEntity);
@@ -35,7 +35,7 @@ public class DadosAdicionaisService {
 
         DadosAdicionaisEntity dadosAdicionaisEntity = DadosAdicionaisMapper.INSTANCE.mapToEntity(dadosAdicionaisEntrada);
         dadosAdicionaisEntity.setId(entity.getId());
-        dadosAdicionaisEntity.setIdUsuario(entity.getIdUsuario());
+        dadosAdicionaisEntity.setIdCandidato(entity.getIdCandidato());
 
         dadosAdicionaisRepository.save(dadosAdicionaisEntity);
 

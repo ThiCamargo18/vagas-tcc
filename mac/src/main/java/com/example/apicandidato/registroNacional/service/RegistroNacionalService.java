@@ -20,7 +20,7 @@ public class RegistroNacionalService {
     public RegistroSaida criar(RegistroEntrada registroEntrada,Long id) throws Exception {
         RegistroEntity registroEntity = RegistroNacionalMapper.INSTANCE.mapToEntity(registroEntrada);
 
-        registroEntity.setIdUsuario(id);
+        registroEntity.setIdCandidato(id);
         try {
             registroNacionalRepository.save(registroEntity);
         }catch (DataIntegrityViolationException e){
@@ -41,7 +41,7 @@ public class RegistroNacionalService {
         RegistroEntity registroEntity = RegistroNacionalMapper.INSTANCE.mapToEntity(registroEntrada);
 
         registroEntity.setId(registroEntityBanco.getId());
-        registroEntity.setIdUsuario(registroEntityBanco.getIdUsuario());
+        registroEntity.setIdCandidato(registroEntityBanco.getIdCandidato());
         try {
             registroNacionalRepository.save(registroEntity);
         }catch (DataIntegrityViolationException e){

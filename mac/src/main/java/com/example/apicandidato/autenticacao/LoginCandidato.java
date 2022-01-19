@@ -23,12 +23,8 @@ import java.util.Collections;
 public class LoginCandidato {
     @Autowired
     private CandidatoAutenticacaoService userService;
-
     @Autowired
     private SecurityService securityService;
-
-    @Autowired
-    private CandidatoValidacao userValidator;
 
     @GetMapping("/registrar")
     public String registration(Model model) {
@@ -42,13 +38,7 @@ public class LoginCandidato {
     }
 
     @PostMapping("/registrar")
-    public String registration(@ModelAttribute("userForm") CandidatoEntrada userForm, BindingResult bindingResult, HttpServletRequest request) {
-        //userValidator.validate(userForm, bindingResult);
-
-//        if (bindingResult.hasErrors()) {
-//            return "registration";
-//        }
-
+    public String registration(@ModelAttribute("userForm") CandidatoEntrada userForm, HttpServletRequest request) {
         userForm.setRoles(Collections.singletonList(new RoleEntity("CANDIDATO")));
 
         CandidatoEntity save = userService.save(userForm);

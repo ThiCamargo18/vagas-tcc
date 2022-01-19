@@ -24,7 +24,7 @@ public class VagaCandidatoService {
     public VagaSaida buscarVaga(Long id) throws Exception {
         Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(id);
 
-        if(vagaEntityOptional.isEmpty()){
+        if (vagaEntityOptional.isEmpty()) {
             throw new Exception("Vaga não encontrada!");
         }
 
@@ -38,10 +38,10 @@ public class VagaCandidatoService {
     }
 
     public List<VagaEntity> filtrar(VagaEntity vagaEntity) {
-        Example<VagaEntity> example = Example.of( vagaEntity,
+        Example<VagaEntity> example = Example.of(vagaEntity,
                 ExampleMatcher.matching()
                         .withIgnoreCase()
-                        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING) );
+                        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
         return vagaRepository.findAll(example);
     }
 
@@ -51,14 +51,14 @@ public class VagaCandidatoService {
         return VagaMapper.INSTANCE.mapToSaidaList(vagaEntityList);
     }
 
-    public VagaSaida validarInscricao(VagaSaida vagaSaida,Long idUsuario) throws Exception {
+    public VagaSaida validarInscricao(VagaSaida vagaSaida, Long idUsuario) throws Exception {
         CandidatoEntity candidatoEntity = candidatoService.buscarPorId(idUsuario);
         VagaEntity vagaEntity = vagaRepository.findById(vagaSaida.getId()).get();
 
         List<CandidatoEntity> clientesCadastrados = vagaEntity.getClientes();
 
-        for(CandidatoEntity cliente : clientesCadastrados){
-            if(cliente.getId()== candidatoEntity.getId()){
+        for (CandidatoEntity cliente : clientesCadastrados) {
+            if (cliente.getId() == candidatoEntity.getId()) {
                 vagaSaida.setInscrito("SIM");
             }
         }
@@ -69,7 +69,7 @@ public class VagaCandidatoService {
     public void inscrever(Long idUsuario, Long idVaga) throws Exception {
         Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(idVaga);
 
-        if(vagaEntityOptional.isEmpty()){
+        if (vagaEntityOptional.isEmpty()) {
             throw new Exception("Vaga não encontrada");
         }
 
@@ -78,15 +78,17 @@ public class VagaCandidatoService {
 
         List<CandidatoEntity> clientesCadastrados = vagaEntity.getClientes();
 
-        for(CandidatoEntity cliente : clientesCadastrados){
-            if(cliente.getId()== candidatoEntity.getId()){
+        for (CandidatoEntity candidato : clientesCadastrados) {
+            if (candidato.getId().equals(candidatoEntity.getId())) {
                 throw new Exception("Você já se inscreveu nessa vaga!");
             }
         }
 
         clientesCadastrados.add(candidatoEntity);
+
         vagaEntity.setClientes(clientesCadastrados);
-        vagaEntity.setNumeroInscritos(vagaEntity.getNumeroInscritos()+1);
+        vagaEntity.setNumeroInscritos(vagaEntity.getNumeroInscritos() + 1);
+
         vagaRepository.save(vagaEntity);
 
         VagaMapper.INSTANCE.mapToSaida(vagaEntity);

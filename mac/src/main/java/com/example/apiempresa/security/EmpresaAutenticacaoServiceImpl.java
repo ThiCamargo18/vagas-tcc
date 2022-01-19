@@ -32,6 +32,7 @@ public class EmpresaAutenticacaoServiceImpl implements EmpresaAutenticacaoServic
     @Override
     public EmpresaEntity save(EmpresaEntrada empresaEntrada) {
         EmpresaEntity empresaEntity = EmpresaMapper.INSTANCE.mapToEntity(empresaEntrada);
+
         empresaEntity.setSenha(passwordEncoder.encode(empresaEntrada.getSenha()));
 
         return empresaRepository.save(empresaEntity);

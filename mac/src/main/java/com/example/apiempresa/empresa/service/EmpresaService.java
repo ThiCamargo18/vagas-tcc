@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class EmpresaService {
     @Autowired
-    EmpresaRepository empresaRepository;
+    private EmpresaRepository empresaRepository;
 
     public EmpresaSaida criar(EmpresaEntrada empresaEntrada) throws Exception {
         EmpresaEntity empresaEntity = EmpresaMapper.INSTANCE.mapToEntity(empresaEntrada);

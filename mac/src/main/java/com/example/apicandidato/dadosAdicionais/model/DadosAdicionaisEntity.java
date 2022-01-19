@@ -38,6 +38,6 @@ public class DadosAdicionaisEntity {
     @Column(name = "referencia")
     private String referencia;
 
-    @Column(name = "idUsuario")
-    private Long idUsuario;
+    @Column(name = "idCandidato")
+    private Long idCandidato;
 }

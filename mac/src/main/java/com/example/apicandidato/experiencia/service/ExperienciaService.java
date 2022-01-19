@@ -27,7 +27,7 @@ public class ExperienciaService {
         if (experienciaEntrada.getId() != null) {
             Optional<ExperienciaEntity> experienciaSalva = experienciaRepository.findById(experienciaEntrada.getId());
 
-            if (experienciaSalva.isPresent() && experienciaSalva.get().getIdUsuario().equals(idUsuario))
+            if (experienciaSalva.isPresent() && experienciaSalva.get().getIdCandidato().equals(idUsuario))
                 experienciaEntity.setId(experienciaSalva.get().getId());
             else
                 throw new Exception("Violação, esse ID de experiencia não pertence a esse usuario");

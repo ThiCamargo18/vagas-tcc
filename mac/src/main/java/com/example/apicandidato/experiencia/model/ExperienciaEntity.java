@@ -42,5 +42,5 @@ public class ExperienciaEntity {
     private CategoriaEnum categoria;
 
     @Column(name = "idUsuario")
-    private Long idUsuario;
+    private Long idCandidato;
 }

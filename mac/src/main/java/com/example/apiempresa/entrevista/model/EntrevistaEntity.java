@@ -35,5 +35,5 @@ public class EntrevistaEntity {
     private Presenca presenca;
 
     @Column(name = "idCliente")
-    private Long idCliente;
+    private Long idCandidato;
 }

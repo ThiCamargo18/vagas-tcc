@@ -17,7 +17,36 @@ import javax.servlet.http.HttpServletResponse;
 @CrossOrigin
 public class EmpresaController {
     @Autowired
-    EmpresaService empresaService;
+    private EmpresaService empresaService;
+
+    @RequestMapping("/obterCriar")
+    public ModelAndView obterCriar() {
+        return new ModelAndView("/admin/empresa/criar");
+    }
+
+    @PostMapping("/nova")
+    public EmpresaSaida criar(@RequestBody EmpresaEntrada empresaEntrada) throws Exception {
+        return empresaService.criar(empresaEntrada);
+    }
+
+    @RequestMapping("/obterAtualizar")
+    public ModelAndView obterAtualizar() {
+        ModelAndView mv = new ModelAndView("/admin/empresa/atualizar");
+
+        mv.addObject("empresa", empresaService.listar());
+
+        return mv;
+    }
+
+    @PostMapping("/atualizar")
+    public EmpresaSaida atualizar(@RequestBody EmpresaEntrada empresaEntrada) {
+        return empresaService.atualizar(empresaEntrada);
+    }
+
+    @GetMapping("/listar")
+    public EmpresaSaida listar() {
+        return empresaService.listar();
+    }
 
     @RequestMapping("/gerenciar")
     public void gerenciarCadastro(HttpServletResponse response) throws Exception {
@@ -27,40 +56,5 @@ public class EmpresaController {
         } else {
             response.sendRedirect("http://localhost:8088/empresa/obterCriar");
         }
-    }
-
-    @RequestMapping("/obterCriar")
-    public ModelAndView obterCriar(){
-        return new ModelAndView("/admin/empresa/criar");
-    }
-
-
-    @PostMapping("/nova")
-    public EmpresaSaida criar(@RequestBody EmpresaEntrada empresaEntrada) throws Exception {
-        EmpresaSaida empresaSaida = empresaService.criar(empresaEntrada);
-
-        return empresaSaida;
-    }
-
-    @RequestMapping("/obterAtualizar")
-    public ModelAndView obterAtualizar(){
-        ModelAndView mv = new ModelAndView("/admin/empresa/atualizar");
-        EmpresaSaida empresaSaida = empresaService.listar();
-        mv.addObject("empresa",empresaSaida);
-        return mv;
-    }
-
-    @PostMapping("/atualizar")
-    public EmpresaSaida atualizar(@RequestBody EmpresaEntrada empresaEntrada){
-        EmpresaSaida empresaSaida = empresaService.atualizar(empresaEntrada);
-
-        return empresaSaida;
-    }
-
-    @GetMapping("/listar")
-    public EmpresaSaida listar(){
-        EmpresaSaida empresaSaida = empresaService.listar();
-
-        return empresaSaida;
     }
 }
