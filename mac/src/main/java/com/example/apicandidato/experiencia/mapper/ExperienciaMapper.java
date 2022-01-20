@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 public interface ExperienciaMapper {
     ExperienciaMapper INSTANCE = Mappers.getMapper(ExperienciaMapper.class);
 
-    @Mapping(source = "idUsuario",target = "idUsuario")
+    @Mapping(source = "idUsuario",target = "idCandidato")
     ExperienciaEntity mapToEntity(ExperienciaEntrada experienciaEntrada, Long idUsuario);
 
     ExperienciaSaida mapToSaida(ExperienciaEntity experienciaEntity);

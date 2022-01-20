@@ -14,7 +14,7 @@ import java.util.List;
 public interface HabilidadesMapper {
     HabilidadesMapper INSTANCE = Mappers.getMapper(HabilidadesMapper.class);
 
-    @Mapping(source = "idUsuario",target = "idUsuario")
+    @Mapping(source = "idUsuario",target = "idCandidato")
     HabilidadesEntity mapToEntity(HabilidadesEntrada habilidadesEntrada, Long idUsuario);
 
     HabilidadesSaida mapToSaida(HabilidadesEntity habilidadesEntity);

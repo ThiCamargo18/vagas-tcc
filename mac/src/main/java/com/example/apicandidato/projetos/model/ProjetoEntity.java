@@ -24,6 +24,6 @@ public class ProjetoEntity {
     @Column(name = "descricao")
     private String descricao;
 
-    @Column(name = "idUsuario")
-    private Long idUsuario;
+    @Column(name = "idCandidato")
+    private Long idCandidato;
 }

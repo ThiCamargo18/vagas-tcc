@@ -2,8 +2,8 @@ package com.example.apiempresa.autenticacao;
 
 import com.example.apiempresa.empresa.model.EmpresaEntity;
 import com.example.apiempresa.empresa.model.EmpresaEntrada;
+import com.example.apiempresa.model.EmpresaSessao;
 import com.example.apiempresa.security.EmpresaAutenticacaoService;
-import com.example.apiempresa.security.EmpresaSessao;
 import com.example.security.model.RoleEntity;
 import com.example.security.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class LoginEmpresa {
 
         securityService.autoLogin(empresaEntrada.getLogin(), empresaEntrada.getSenha());
 
-        EmpresaSessao empresaSessao = new EmpresaSessao(empresaEntity.getLogin(), empresaEntity.getRazaoSocial());
+        EmpresaSessao empresaSessao = new EmpresaSessao(empresaEntity.getId(), empresaEntity.getLogin(), empresaEntity.getRazaoSocial());
 
         HttpSession session = request.getSession();
         session.setAttribute("empresaLogada", empresaSessao);

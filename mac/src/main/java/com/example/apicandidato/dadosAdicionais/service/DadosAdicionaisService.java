@@ -25,13 +25,13 @@ public class DadosAdicionaisService {
     }
 
     public DadosAdicionaisEntity buscarPorIdCliente(long id) {
-        return dadosAdicionaisRepository.findByIdUsuario(id);
+        return dadosAdicionaisRepository.findByIdCandidato(id);
     }
 
 
     public DadosAdicionaisSaida atualizar(DadosAdicionaisEntrada dadosAdicionaisEntrada, Long id) throws Exception {
         dadosPessoaisService.atualizarCidade(null,id,dadosAdicionaisEntrada.getCidade());
-        DadosAdicionaisEntity entity = dadosAdicionaisRepository.findByIdUsuario(id);
+        DadosAdicionaisEntity entity = dadosAdicionaisRepository.findByIdCandidato(id);
 
         DadosAdicionaisEntity dadosAdicionaisEntity = DadosAdicionaisMapper.INSTANCE.mapToEntity(dadosAdicionaisEntrada);
         dadosAdicionaisEntity.setId(entity.getId());

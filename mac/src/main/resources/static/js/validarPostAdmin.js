@@ -24,13 +24,13 @@
 $(document).ready(function () {
 
 
-    $("#formVaga").submit(function (event) {
-        event.preventDefault();
-        var resultado = document.getElementById("esconderVaga").value;
-        if (resultado == 'true') {
-            ajaxPost();
-        }
-    });
+    // $("#formVaga").submit(function (event) {
+    //     event.preventDefault();
+    //     var resultado = document.getElementById("esconderVaga").value;
+    //     if (resultado == 'true') {
+    //         ajaxPost();
+    //     }
+    // });
 
     $("#formCriarEntrevista").submit(function (event) {
         event.preventDefault();

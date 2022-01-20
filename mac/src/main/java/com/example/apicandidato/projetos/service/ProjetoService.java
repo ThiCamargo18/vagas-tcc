@@ -22,7 +22,7 @@ public class ProjetoService {
         if (projetoEntrada.getId() != null) {
             Optional<ProjetoEntity> projetoSalvo = projetoRepository.findById(projetoEntrada.getId());
 
-            if (projetoSalvo.isPresent() && projetoSalvo.get().getIdUsuario().equals(idUsuario))
+            if (projetoSalvo.isPresent() && projetoSalvo.get().getIdCandidato().equals(idUsuario))
                 projetoEntity.setId(projetoSalvo.get().getId());
             else
                 throw new Exception("Violação, esse ID de projeto não pertence a esse usuario");
@@ -34,6 +34,6 @@ public class ProjetoService {
     }
 
     public List<ProjetoEntity> buscarPorIdCLiente(long id) {
-        return projetoRepository.findAllByIdUsuario(id);
+        return projetoRepository.findAllByIdCandidato(id);
     }
 }

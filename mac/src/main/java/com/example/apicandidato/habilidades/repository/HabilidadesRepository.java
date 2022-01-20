@@ -4,5 +4,5 @@ import com.example.apicandidato.habilidades.model.HabilidadesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface HabilidadesRepository extends JpaRepository<HabilidadesEntity,Long> {
-    public HabilidadesEntity findByIdUsuario(long id);
+    public HabilidadesEntity findByIdCandidato(long id);
 }

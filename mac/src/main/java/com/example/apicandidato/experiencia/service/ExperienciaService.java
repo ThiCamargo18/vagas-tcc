@@ -39,6 +39,6 @@ public class ExperienciaService {
     }
 
     public List<ExperienciaEntity> buscarPorIdCliente(long id) {
-        return experienciaRepository.findAllByIdUsuario(id);
+        return experienciaRepository.findAllByIdCandidato(id);
     }
 }

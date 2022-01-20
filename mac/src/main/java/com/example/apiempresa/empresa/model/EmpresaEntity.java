@@ -11,6 +11,10 @@ import java.util.Set;
 @Entity(name = "empresa")
 public class EmpresaEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "login")
     private String login;
 
     @Column(name = "senha")
@@ -39,6 +43,14 @@ public class EmpresaEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<RoleEntity> roles;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;

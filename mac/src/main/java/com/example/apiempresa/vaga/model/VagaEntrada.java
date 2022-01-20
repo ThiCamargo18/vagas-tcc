@@ -1,6 +1,9 @@
 package com.example.apiempresa.vaga.model;
 
 import com.example.apicandidato.enums.CategoriaEnum;
+import com.example.apicandidato.ferramenta.model.FerramentaEntity;
+import com.example.apicandidato.framework.model.FrameworkEntity;
+import com.example.apicandidato.tecnologia.model.TecnologiaEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

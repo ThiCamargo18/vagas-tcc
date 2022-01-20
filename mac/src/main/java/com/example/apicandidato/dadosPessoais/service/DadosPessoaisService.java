@@ -61,7 +61,7 @@ public class DadosPessoaisService {
     }
 
     public DadosPessoaisEntity buscarPorIdCliente(long id) throws Exception {
-        DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisRepository.findByIdUsuario(id);
+        DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisRepository.findByIdCandidato(id);
 
         if (dadosPessoaisEntity == null) {
             throw new Exception("Candidato não encontrado!");
@@ -71,7 +71,7 @@ public class DadosPessoaisService {
     }
 
     public DadosPessoaisSaida atualizar(DadosPessoaisEntrada dadosPessoaisEntrada, Long id) throws Exception {
-        DadosPessoaisEntity dadosRetornoEntity = dadosPessoaisRepository.findByIdUsuario(id);
+        DadosPessoaisEntity dadosRetornoEntity = dadosPessoaisRepository.findByIdCandidato(id);
 
         DadosPessoaisEntity dadosPessoaisEntity = DadosPessoaisMapper.INSTANCE.mapToEntity(dadosPessoaisEntrada);
         dadosPessoaisEntity.setId(dadosRetornoEntity.getId());
@@ -101,7 +101,7 @@ public class DadosPessoaisService {
     }
 
     public void atualizarCidade(Object o, Long id, String cidade) throws Exception {
-        DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisRepository.findByIdUsuario(id);
+        DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisRepository.findByIdCandidato(id);
 
         if (dadosPessoaisEntity == null) {
             throw new Exception("Candidato não encontrado na base de dados!");

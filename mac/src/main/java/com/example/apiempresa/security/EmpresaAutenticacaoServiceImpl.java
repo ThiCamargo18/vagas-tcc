@@ -21,12 +21,7 @@ public class EmpresaAutenticacaoServiceImpl implements EmpresaAutenticacaoServic
 
     @Override
     public EmpresaEntity findByUsername(String id) {
-        Optional<EmpresaEntity> empresaEntity = empresaRepository.findById(id);
-
-        if (empresaEntity.isEmpty())
-            return null;
-        else
-            return empresaEntity.get();
+        return empresaRepository.findByLogin(id);
     }
 
     @Override

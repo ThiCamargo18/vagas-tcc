@@ -1,23 +1,26 @@
 package com.example.apiempresa.vaga.controller;
 
 import com.example.apicandidato.cargo.service.CargoService;
-import com.example.apicandidato.exception.MyException;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisSaida;
+import com.example.apicandidato.exception.MyException;
 import com.example.apiempresa.model.EmpresaSessao;
+import com.example.apiempresa.vaga.model.VagaEntity;
 import com.example.apiempresa.vaga.model.VagaEntrada;
 import com.example.apiempresa.vaga.model.VagaSaida;
 import com.example.apiempresa.vaga.service.VagaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping(path = "vaga", produces = "application/json")
 @Configuration
 @CrossOrigin
@@ -29,18 +32,35 @@ public class VagaController {
 
     @RequestMapping("/criar")
     public ModelAndView criar() {
-        ModelAndView modelAndView = new ModelAndView("/admin/vaga/criar");
+        return new ModelAndView("/admin/vaga/criar");
+    }
 
-        modelAndView.addObject("cargo", cargoService.buscar());
+    @PostMapping("/criar")
+    public String criar(@ModelAttribute VagaEntrada entrada, HttpServletRequest request, RedirectAttributes redirectAttributes) throws MyException {
+        VagaEntity vagaEntity = vagaService.criar(entrada, EmpresaSessao.getId(request));
+
+        redirectAttributes.addAttribute("idVaga", vagaEntity.getId());
+
+        return "redirect:/vaga/criar/criarAdiconal";
+    }
+
+    @GetMapping("/criar/criarAdiconal")
+    public ModelAndView criarCadastroCargo(@RequestParam(value = "idCargo", required = false) Long idCargo, @RequestParam(value = "idVaga") Long idVaga) throws Exception {
+        ModelAndView modelAndView = new ModelAndView("/admin/vaga/criarAdicional");
+
+        modelAndView.addObject("cargo", cargoService.buscarEMapear(idCargo));
+        modelAndView.addObject("vaga", vagaService.buscarVaga(idVaga));
 
         return modelAndView;
     }
 
-    @PostMapping("/criarVaga")
-    public HttpStatus criar(@RequestBody VagaEntrada entrada, HttpServletRequest request) throws MyException {
-        vagaService.criar(entrada, EmpresaSessao.getId(request));
+    @PostMapping("/criar/criarAdiconal")
+    public String salvarCadastroCargo(@ModelAttribute VagaEntrada vagaEntrada, @RequestParam(value = "idVaga") Long idVaga, HttpServletRequest request) throws Exception {
+        vagaService.validarSePertenceEmpresa(idVaga, EmpresaSessao.getId(request));
 
-        return HttpStatus.OK;
+        vagaService.atualizarInfomacoesAdicionais(vagaEntrada, idVaga);
+
+        return "redirect:/vaga/listar";
     }
 
     @RequestMapping("/atualizar/{id}")
@@ -59,10 +79,10 @@ public class VagaController {
     }
 
     @GetMapping("/listar")
-    public ModelAndView listar() {
+    public ModelAndView listar(HttpServletRequest request) {
         VagaSaida vagaSaida = new VagaSaida();
 
-        List<VagaSaida> vagaSaidaList = vagaService.listar();
+        List<VagaSaida> vagaSaidaList = vagaService.listar(EmpresaSessao.getId(request));
 
         vagaSaida.setNumeroVagasEncontradas(vagaSaidaList.size());
 
@@ -98,11 +118,11 @@ public class VagaController {
     }
 
     @GetMapping("/deletar")
-    public ModelAndView deletar(@RequestParam Long vaga) throws Exception {
+    public String deletar(@RequestParam Long vaga) throws Exception {
         String resultado = vagaService.deletar(vaga);
 
         if (resultado.equals("concluido")) {
-            return listar();
+            return "redirect:/vaga/listar";
         } else {
             throw new Exception("Não foi possivel excluir a vaga, tente novamente");
         }
@@ -122,9 +142,9 @@ public class VagaController {
     }
 
     @GetMapping("/status/{id}")
-    public ModelAndView atualizarStatus(@PathVariable Long id) throws Exception {
+    public String atualizarStatus(@PathVariable Long id) throws Exception {
         vagaService.atualizarStatus(id);
 
-        return listar();
+        return "redirect:/vaga/listar";
     }
 }

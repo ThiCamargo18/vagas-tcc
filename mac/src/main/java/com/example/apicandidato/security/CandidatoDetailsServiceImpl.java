@@ -39,17 +39,15 @@ public class CandidatoDetailsServiceImpl implements UserDetailsService {
 
             return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getSenha(), grantedAuthorities);
         } else {
-            Optional<EmpresaEntity> empresaEntityOptional = empresaRepository.findById(username);
-            if (empresaEntityOptional.isEmpty()) throw new UsernameNotFoundException(username);
-
-            EmpresaEntity empresaEntity = empresaEntityOptional.get();
+            EmpresaEntity empresaEntityOptional = empresaRepository.findByLogin(username);
+            if (empresaEntityOptional == null) throw new UsernameNotFoundException(username);
 
             Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-            for (RoleEntity role : empresaEntity.getRoles()){
+            for (RoleEntity role : empresaEntityOptional.getRoles()){
                 grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
             }
 
-            return new org.springframework.security.core.userdetails.User(empresaEntity.getLogin(), empresaEntity.getSenha(), grantedAuthorities);
+            return new org.springframework.security.core.userdetails.User(empresaEntityOptional.getLogin(), empresaEntityOptional.getSenha(), grantedAuthorities);
         }
     }
 }

@@ -23,7 +23,7 @@ public class HabilidadesService {
     VagaRepository vagaRepository;
 
     public HabilidadesSaida atualizar(HabilidadesEntrada habilidadesEntrada, Long idUsuario) {
-        HabilidadesEntity habilidadeSalva = habilidadesRepository.findByIdUsuario(idUsuario);
+        HabilidadesEntity habilidadeSalva = habilidadesRepository.findByIdCandidato(idUsuario);
 
         HabilidadesEntity habilidadesEntity = HabilidadesMapper.INSTANCE.mapToEntity(habilidadesEntrada, idUsuario);
 
@@ -36,7 +36,7 @@ public class HabilidadesService {
     }
 
     public HabilidadesEntity buscarPorIdCLiente(long id) {
-        return habilidadesRepository.findByIdUsuario(id);
+        return habilidadesRepository.findByIdCandidato(id);
     }
 
     public List<HabilidadesSaida> filtrarPorResumoProfissional(Long idVaga,String param,VagaEntity vaga) throws Exception {
@@ -48,7 +48,7 @@ public class HabilidadesService {
         List<CandidatoEntity> candidatoEntity = vaga.getClientes();
 
         for(CandidatoEntity cliente: candidatoEntity){
-            HabilidadesEntity habilidadesEntityOptional = habilidadesRepository.findByIdUsuario(cliente.getId());
+            HabilidadesEntity habilidadesEntityOptional = habilidadesRepository.findByIdCandidato(cliente.getId());
             habilidades.add(habilidadesEntityOptional);
         }
 

@@ -41,22 +41,19 @@ public class VagaService {
     @Autowired
     private FrameworkService frameworkService;
 
-    public void criar(VagaEntrada entrada, Long idEmpresa) throws MyException {
+    public VagaEntity criar(VagaEntrada entrada, Long idEmpresa) throws MyException {
         VagaEntity vagaEntity = VagaMapper.INSTANCE.mapToEntity(entrada);
 
-        vagaEntity.setStatus("ATIVA");
+        vagaEntity.setStatus("CRIADA");
         vagaEntity.setNumeroInscritos(0);
         vagaEntity.setIdEmpresa(idEmpresa);
         vagaEntity.setDataLimite(dataParaDDMMAAA(vagaEntity.getDataLimite()));
-        vagaEntity.setTecnologias(tecnologiaService.findAllById(entrada.getTecnologia()));
-        vagaEntity.setFrameworks(frameworkService.findAllById(entrada.getFramework()));
-        vagaEntity.setFerramentas(ferramentaService.findAllById(entrada.getFerramenta()));
 
-        vagaRepository.save(vagaEntity);
+        return vagaRepository.save(vagaEntity);
     }
 
-    public List<VagaSaida> listar() {
-        List<VagaEntity> vagaEntities = vagaRepository.findAll();
+    public List<VagaSaida> listar(Long idEmpresa) {
+        List<VagaEntity> vagaEntities = vagaRepository.findAllByIdEmpresa(idEmpresa);
 
         return VagaMapper.INSTANCE.mapToSaidaList(vagaEntities);
     }
@@ -140,5 +137,27 @@ public class VagaService {
         data = dateTimeFormatter.format(localDate);
 
         return data;
+    }
+
+    public void validarSePertenceEmpresa(Long idVaga, Long idEmpresa) throws Exception {
+        Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(idVaga);
+
+        if (vagaEntityOptional.isEmpty()) throw new Exception("Vaga nao pertence a essa empresa");
+
+        if (!vagaEntityOptional.get().getIdEmpresa().equals(idEmpresa)) throw new Exception("Vaga nao pertence a essa empresa");
+    }
+
+    public void atualizarInfomacoesAdicionais(VagaEntrada vagaEntrada, Long idVaga) throws Exception {
+        Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(idVaga);
+
+        if (vagaEntityOptional.isEmpty()) throw new Exception("Vaga Nao Encontrada");
+
+        VagaEntity vagaEntity = vagaEntityOptional.get();
+
+        vagaEntity.setTecnologias(tecnologiaService.findAllById(vagaEntrada.getTecnologia()));
+        vagaEntity.setFrameworks(frameworkService.findAllById(vagaEntrada.getFramework()));
+        vagaEntity.setFerramentas(ferramentaService.findAllById(vagaEntrada.getFerramenta()));
+
+        vagaRepository.save(vagaEntity);
     }
 }

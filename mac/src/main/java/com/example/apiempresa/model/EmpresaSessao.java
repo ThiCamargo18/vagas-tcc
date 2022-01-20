@@ -1,6 +1,5 @@
 package com.example.apiempresa.model;
 
-import com.example.apicandidato.candidato.model.CandidatoSessao;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpSession;
 @NoArgsConstructor
 public class EmpresaSessao {
     private Long id;
+    private String login;
     private String nome;
 
     public static Long getId(HttpServletRequest request){

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<div th:replace="admin/fragments/fragment :: cabecalho"></div>
+
+<body class="sb-nav-fixed">
+
+<div th:replace="admin/fragments/fragment :: navbar"></div>
+
+<div id="layoutSidenav">
+
+    <div th:replace="admin/fragments/fragment :: sidenav"></div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <div class="container-fluid">
+                <h1 class="mt-4">Cadastro Nova Vaga</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Dados necessários</li>
+                </ol>
+            </div>
+            <div class="container-fluid">
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="titulo">Título </label>
+                        <input type="text" class="form-control" th:field="*{vaga.titulo}" id="titulo" value="" readonly>
+                        <div class="valid-feedback">
+                            Ok!
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-2 mb-3">
+                        <label for="quantidade">Quantidade</label>
+                        <input type="text" class="form-control" th:field="*{vaga.quantidade}" id="quantidade" readonly>
+                        <div class="invalid-feedback">
+                            Digite a quantidade de vagas.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" class="form-control" th:field="*{vaga.cidade}" id="cidade" readonly>
+                        <div class="invalid-feedback">
+                            Necessário selecionar a cidade.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="categoria">Categoria</label>
+                        <select class="form-control" th:field="*{vaga.categoria}" id="categoria" readonly>
+                            <option selected disabled value="">Escolher...</option>
+                            <option value="CLT">CLT</option>
+                            <option value="ESTAGIO">ESTAGIO</option>
+                            <option value="JOVEMAPRENDIZ">JOVEM APRENDIZ</option>
+                            <option value="PCD">PCD</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a categoria.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Formação: </label>
+                        <select class="form-control" id="formacao" th:field="*{vaga.formacao}" readonly>
+                            <option selected disabled value="">Selecione..</option>
+                            <option value="Ensino Medio Incompleto">Ensino Médio Incompleto</option>
+                            <option value="Ensino Medio Completo">Ensino Médio Completo</option>
+                            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                            <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                            <option value="Pos-graduacao Incompleta">Pós-graduação Incompleta</option>
+                            <option value="Pos-graduacao Completa">Pós-graduação Completa</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a formação.
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationSalario">Salário</label>
+                        <input type="text" class="form-control" th:field="*{vaga.salario}" readonly id="validationSalario">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="observacao">Alguma observação? </label>
+                        <input type="text" class="form-control" th:field="*{vaga.observacao}" id="observacao" value="" readonly>
+                        <div class="valid-feedback">
+                            Ok!
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4" style="margin-left: 2px;">
+                        <label for="responsabilidades">Responsabilidades</label>
+                        <textarea class="form-control" th:field="*{vaga.responsabilidade}" id="responsabilidades" style="width: 40vh;margin-right: 3px;" readonly></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="dataLimite">Data limite para inscrição</label>
+                            <input type="date" class="form-control" th:field="*{vaga.dataLimite}" id="dataLimite" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="turno">Turno</label>
+                            <input type="text" class="form-control" th:field="*{vaga.turno}" id="turno" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <h1 class="mt-4">Cargo e Conhecimentos</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active"></li>
+                </ol>
+            </div>
+
+            <div class="container-fluid">
+                <div class="col-md-3 mb-3">
+                    <form th:action="@{/vaga/criar/criarAdiconal}" method="get">
+                        <label>Cargo</label>
+                        <select class="form-control" th:name="idCargo">
+                            <option selected disabled value="">Escolher...</option>
+                            <option th:each="cargo : ${cargo.cargo}" th:value="${cargo.id}" th:text="${cargo.nome}" ></option>
+                        </select>
+                        <input type="text" th:name="idVaga" th:value="*{vaga.id}" style="display: none">
+                        <button type="submit" class="btn btn-success" style="margin-top: 15px">Buscar</button>
+                    </form>
+                </div>
+
+                <form method="post" th:object="${cargo}">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-header">
+                                    <h5 class="card-title" >Tecnologias</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group" th:each="tecnologia, itemStat : ${cargo.tecnologia}">
+                                        <label class="list-group-item" >
+                                            <input class="form-check-input me-1" type="checkbox"
+                                                   th:field="*{tecnologia[__${itemStat.index}__]}"
+                                                   th:value="${tecnologia.id}"
+                                                   th:utext="${tecnologia.nome}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-header">
+                                    <h5 class="card-title" >Frameworks</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group" th:each="framework, itemStat : ${cargo.framework}">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox"
+                                                   th:field="*{framework[__${itemStat.index}__]}"
+                                                   th:value="${framework.id}"
+                                                   th:utext="${framework.nome}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-header">
+                                    <h5 class="card-title" >Ferramentas</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="list-group" th:each="ferramenta, itemStat : ${cargo.ferramenta}">
+                                        <label class="list-group-item">
+                                            <input class="form-check-input me-1" type="checkbox"
+                                                   th:field="*{ferramenta[__${itemStat.index}__]}"
+                                                   th:value="${ferramenta.id}"
+                                                   th:utext="${ferramenta.nome}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Atualizar</button>
+                </form>
+
+            </div>
+
+            <div class="col-sm-7" id="postResultDiv">
+            </div>
+            <div class="col" id="sucesso" style="display:none; color:green">
+
+            </div>
+            <div class="col" id="erro" style="display:none; color:red">
+
+            </div>
+        </main>
+
+        <div th:replace="admin/fragments/fragment :: footer"></div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/scripts.js"></script>
+<script type="text/javascript" src="/js/validarPostAdmin.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/chart-area-demo.js"></script>
+<script src="assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="/assets/demo/datatables-demo.js"></script>
+</body>
+</html>

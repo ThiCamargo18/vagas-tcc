@@ -110,7 +110,7 @@ public class EntrevistaService {
     }
 
     public EntrevistaSaida buscarPorIdCandidato(Long idCliente) throws Exception {
-        EntrevistaEntity entrevistaEntity = entrevistaRepository.findByIdCliente(idCliente);
+        EntrevistaEntity entrevistaEntity = entrevistaRepository.findByIdCandidato(idCliente);
 
         if(entrevistaEntity == null){
             throw new Exception("No momento ainda não possui nenhuma entrevista agendada no seu nome! " +

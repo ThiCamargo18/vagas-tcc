@@ -33,11 +33,11 @@ public class RegistroNacionalService {
     }
 
     public RegistroEntity buscarPorIdCliente(long id) {
-        return registroNacionalRepository.findByIdUsuario(id);
+        return registroNacionalRepository.findByIdCandidato(id);
     }
 
     public RegistroSaida atualizar(Long id, RegistroEntrada registroEntrada) throws Exception {
-        RegistroEntity registroEntityBanco = registroNacionalRepository.findByIdUsuario(id);
+        RegistroEntity registroEntityBanco = registroNacionalRepository.findByIdCandidato(id);
         RegistroEntity registroEntity = RegistroNacionalMapper.INSTANCE.mapToEntity(registroEntrada);
 
         registroEntity.setId(registroEntityBanco.getId());
