@@ -63,21 +63,6 @@ public class VagaController {
         return "redirect:/vaga/listar";
     }
 
-    @RequestMapping("/atualizar/{id}")
-    public ModelAndView atualizar(@PathVariable Long id) throws Exception {
-        VagaSaida vagaSaida = vagaService.buscarVaga(id);
-        ModelAndView mv = new ModelAndView("/admin/vaga/atualizar");
-        mv.addObject("vaga", vagaSaida);
-        return mv;
-    }
-
-    @PostMapping("/atualizar")
-    public HttpStatus atualizar(@RequestBody VagaEntrada vagaEntrada) { //Id ja vem do front
-        vagaService.atualizar(vagaEntrada);
-
-        return HttpStatus.OK;
-    }
-
     @GetMapping("/listar")
     public ModelAndView listar(HttpServletRequest request) {
         VagaSaida vagaSaida = new VagaSaida();
@@ -147,4 +132,19 @@ public class VagaController {
 
         return "redirect:/vaga/listar";
     }
+
+//    @RequestMapping("/atualizar/{id}")
+//    public ModelAndView atualizar(@PathVariable Long id) throws Exception {
+//        VagaSaida vagaSaida = vagaService.buscarVaga(id);
+//        ModelAndView mv = new ModelAndView("/admin/vaga/atualizar");
+//        mv.addObject("vaga", vagaSaida);
+//        return mv;
+//    }
+//
+//    @PostMapping("/atualizar")
+//    public HttpStatus atualizar(@RequestBody VagaEntrada vagaEntrada) { //Id ja vem do front
+//        vagaService.atualizar(vagaEntrada);
+//
+//        return HttpStatus.OK;
+//    }
 }

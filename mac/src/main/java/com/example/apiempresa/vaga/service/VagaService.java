@@ -154,6 +154,7 @@ public class VagaService {
 
         VagaEntity vagaEntity = vagaEntityOptional.get();
 
+        vagaEntity.setStatus("ATIVA");
         vagaEntity.setTecnologias(tecnologiaService.findAllById(vagaEntrada.getTecnologia()));
         vagaEntity.setFrameworks(frameworkService.findAllById(vagaEntrada.getFramework()));
         vagaEntity.setFerramentas(ferramentaService.findAllById(vagaEntrada.getFerramenta()));

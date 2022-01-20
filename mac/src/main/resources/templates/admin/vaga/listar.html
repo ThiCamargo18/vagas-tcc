@@ -25,67 +25,112 @@
                         </li>
                     </ol>
                     <div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="vaga : ${vaga}">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <a th:href="@{/vaga/buscar/{id}(id=${vaga.id})}">
-                                        <h4 class="card-title"
-                                            style="font-weight: bold; color: blue; padding-top: 3px;">
-                                            <span th:text="${vaga.titulo}"></span></h4>
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <svg class="bi bi-map" width="2em" height="2em" viewBox="0 0 16 16"
-                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-                                         style="margin-left: 200px;">
-                                        <path fill-rule="evenodd"
-                                              d="M15.817.613A.5.5 0 0 1 16 1v13a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 14.51l-4.902.98A.5.5 0 0 1 0 15V2a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0l4.902.98 4.902-.98a.5.5 0 0 1 .415.103zM10 2.41l-4-.8v11.98l4 .8V2.41zm1 11.98l4-.8V1.61l-4 .8v11.98zm-6-.8V1.61l-4 .8v11.98l4-.8z"/>
-                                    </svg>
-                                    <span style="color:#FF0000;"
-                                          th:utext="${#strings.abbreviate(vaga.cidade,400)} "></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <span style="color:#FF0000;" th:utext="${#strings.abbreviate(vaga.categoria,400)} ">categoria</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p th:utext="${vaga.responsabilidade}">
+<!--                        <div class="card-body">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col">-->
+<!--                                    <a th:href="@{/vaga/buscar/{id}(id=${vaga.id})}">-->
+<!--                                        <h4 class="card-title"-->
+<!--                                            style="font-weight: bold; color: blue; padding-top: 3px;">-->
+<!--                                            <span th:text="${vaga.titulo}"></span></h4>-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                                <div class="col">-->
+<!--                                    <svg class="bi bi-map" width="2em" height="2em" viewBox="0 0 16 16"-->
+<!--                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg"-->
+<!--                                         style="margin-left: 200px;">-->
+<!--                                        <path fill-rule="evenodd"-->
+<!--                                              d="M15.817.613A.5.5 0 0 1 16 1v13a.5.5 0 0 1-.402.49l-5 1a.502.502 0 0 1-.196 0L5.5 14.51l-4.902.98A.5.5 0 0 1 0 15V2a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0l4.902.98 4.902-.98a.5.5 0 0 1 .415.103zM10 2.41l-4-.8v11.98l4 .8V2.41zm1 11.98l4-.8V1.61l-4 .8v11.98zm-6-.8V1.61l-4 .8v11.98l4-.8z"/>-->
+<!--                                    </svg>-->
+<!--                                    <span style="color:#FF0000;"-->
+<!--                                          th:utext="${#strings.abbreviate(vaga.cidade,400)} "></span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="row">-->
+<!--                                <div class="col">-->
+<!--                                    <span style="color:#FF0000;" th:utext="${#strings.abbreviate(vaga.categoria,400)} ">categoria</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="row">-->
+<!--                                <div class="col">-->
+<!--                                    <p th:utext="${vaga.responsabilidade}"></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="row" style="margin-top: 8px;">-->
+<!--                                <div class="col">-->
+<!--                                    <a th:href="@{/vaga/inscritos/{id}(id=${vaga.id})}">-->
+<!--                                        <h5 class="card-title"-->
+<!--                                            style="font-weight: arial; color: blue; padding-top: 3px;">-->
+<!--                                            <p><span th:text="${vaga.numeroInscritos}"></span> Inscritos</p>-->
+<!--                                        </h5>-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                                <div class="col">-->
+<!--                                </div>-->
+<!--                                <div class="col">-->
+<!--                                    <button class="btn btn-danger"-->
+<!--                                            data-toggle="modal" data-target="#modalExcluir"-->
+<!--                                            th:onclick="'setaDadosModal('+${vaga.id}+')'">-->
+<!--                                        Excluir-->
+<!--                                    </button>-->
+<!--&lt;!&ndash;                                    <a style="margin-left: 5px;" class="btn btn-info" type="button"&ndash;&gt;-->
+<!--&lt;!&ndash;                                       th:href="@{/vaga/atualizar/{id}(id=${vaga.id})}">Atualizar&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </a>&ndash;&gt;-->
+<!--                                </div>-->
+<!--                                <div class="col" th:switch="${vaga.status}">-->
+<!--                                    <a th:case="'ATIVA'" id="vagaAtiva" type="button"-->
+<!--                                       th:href="@{/vaga/status/{id}(id=${vaga.id})}"-->
+<!--                                       class="btn btn-success">Ativa</a>-->
+<!--                                    <a th:case="'OCULTA'" id="vagaOculta" type="button"-->
+<!--                                       th:href="@{/vaga/status/{id}(id=${vaga.id})}"-->
+<!--                                       class="btn btn-danger">Oculta</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
-                                    </p>
-                                </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <a th:href="@{/vaga/buscar/{id}(id=${vaga.id})}">
+                                    <h4>Detalhes</h4>
+                                </a>
                             </div>
-                            <div class="row" style="margin-top: 8px;">
-                                <div class="col">
-                                    <a th:href="@{/vaga/inscritos/{id}(id=${vaga.id})}">
-                                        <h5 class="card-title"
-                                            style="font-weight: arial; color: blue; padding-top: 3px;">
-                                            <p><span th:text="${vaga.numeroInscritos}"></span> Inscritos</p>
-                                        </h5>
-                                    </a>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="card-title" th:text="${vaga.titulo}"></h5>
+                                    </div>
+                                    <div class="col" th:switch="${vaga.status}">
+                                        <a th:case="'ATIVA'" id="vagaAtiva" type="button"
+                                           th:href="@{/vaga/status/{id}(id=${vaga.id})}"
+                                           style="float: right;"
+                                           class="btn btn-success">Ativa</a>
+                                        <a th:case="'OCULTA'" id="vagaOculta" type="button"
+                                           th:href="@{/vaga/status/{id}(id=${vaga.id})}"
+                                           style="float: right;"
+                                           class="btn btn-danger">Oculta</a>
+                                    </div>
                                 </div>
-                                <div class="col">
+
+                                <p class="card-text" th:utext="${vaga.responsabilidade}"></p>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <a th:href="@{/vaga/inscritos/{id}(id=${vaga.id})}">
+                                            <h5 class="card-title"
+                                                style="font-weight: bold; color: #3e3ea7; padding-top: 3px;">
+                                                <p><span th:text="${vaga.numeroInscritos}"></span> Inscritos</p>
+                                            </h5>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-danger"
+                                                data-toggle="modal" data-target="#modalExcluir"
+                                                style="float: right;"
+                                                th:onclick="'setaDadosModal('+${vaga.id}+')'">
+                                            Excluir
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <button class="btn btn-danger"
-                                            data-toggle="modal" data-target="#modalExcluir"
-                                            th:onclick="'setaDadosModal('+${vaga.id}+')'">
-                                        Excluir
-                                    </button>
-                                    <a style="margin-left: 5px;" class="btn btn-info" type="button"
-                                       th:href="@{/vaga/atualizar/{id}(id=${vaga.id})}">Atualizar
-                                    </a>
-                                </div>
-                                <div class="col" th:switch="${vaga.status}">
-                                    <a th:case="'ATIVA'" id="vagaAtiva" type="button"
-                                       th:href="@{/vaga/status/{id}(id=${vaga.id})}"
-                                       class="btn btn-success">Ativa</a>
-                                    <a th:case="'OCULTA'" id="vagaOculta" type="button"
-                                       th:href="@{/vaga/status/{id}(id=${vaga.id})}"
-                                       class="btn btn-danger">Oculta</a>
-                                </div>
+
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,7 @@ package com.example.apicandidato.cargo.service;
 
 import com.example.apicandidato.cargo.mapper.CargoMapper;
 import com.example.apicandidato.cargo.model.CargoEntity;
+import com.example.apicandidato.cargo.model.CargoId;
 import com.example.apicandidato.cargo.model.CargoSaida;
 import com.example.apicandidato.cargo.model.CargoSaida2;
 import com.example.apicandidato.cargo.repository.CargoRepository;
@@ -33,13 +34,17 @@ public class CargoService {
     public CargoSaida2 buscarEMapear(Long idCargo) {
         CargoSaida2 cargoSaida = new CargoSaida2();
 
-        cargoSaida.setCargo(cargoRepository.findNomeCargos());
+        List<CargoId> nomeCargos = cargoRepository.findNomeCargos();
+
+        if (nomeCargos.isEmpty()) return cargoSaida;
+
+        cargoSaida.setCargo(nomeCargos);
 
         CargoEntity cargoEntity;
 
-        if (idCargo == null)
+        if (idCargo == null) {
             cargoEntity = this.buscar(cargoSaida.getCargo().get(0).getId());
-        else
+        } else
             cargoEntity = this.buscar(idCargo);
 
         cargoSaida.setFerramenta(cargoEntity.getFerramentas());
