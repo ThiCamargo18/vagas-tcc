@@ -14,5 +14,5 @@ import java.util.List;
 public class HabilidadesEntrada {
     private String resumoProfissional;
     private String objetivos;
-    private Long idUsuario;
+    private Long idCandidato;
 }

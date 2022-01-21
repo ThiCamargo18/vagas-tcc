@@ -62,7 +62,7 @@ public class DadosPessoaisEntity {
     @Column(name = "cidade")
     private String cidade;
 
-    @Column(name = "idUsuario")
+    @Column(name = "idCandidato")
     private Long idCandidato;
 
     public void setIdade(LocalDate dataNascimento) {

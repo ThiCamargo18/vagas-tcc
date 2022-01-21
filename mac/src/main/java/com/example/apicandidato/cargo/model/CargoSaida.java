@@ -20,7 +20,7 @@ public class CargoSaida {
     private String nome;
     private String descricao;
     private String nivel;
-    private Long idUsuario;
+    private Long idCandidato;
     private List<TecnologiaEntity> tecnologias = new ArrayList<>();
     private List<FrameworkEntity> frameworks = new ArrayList<>();
     private List<FerramentaEntity> ferramentas = new ArrayList<>();

@@ -57,7 +57,6 @@ public class VagaController {
     @PostMapping("/criar/criarAdiconal")
     public String salvarCadastroCargo(@ModelAttribute VagaEntrada vagaEntrada, @RequestParam(value = "idVaga") Long idVaga, HttpServletRequest request) throws Exception {
         vagaService.validarSePertenceEmpresa(idVaga, EmpresaSessao.getId(request));
-
         vagaService.atualizarInfomacoesAdicionais(vagaEntrada, idVaga);
 
         return "redirect:/vaga/listar";
@@ -79,14 +78,14 @@ public class VagaController {
     }
 
     @GetMapping("/buscar/{id}")
-    public ModelAndView buscar(@PathVariable Long id) throws Exception {
+    public ModelAndView buscar(@PathVariable Long id, HttpServletRequest request) throws Exception {
+        vagaService.validarSePertenceEmpresa(id, EmpresaSessao.getId(request));
+
         VagaSaida vagaSaida = vagaService.buscarVaga(id);
 
         ModelAndView mv = new ModelAndView("/admin/vaga/buscar");
 
         mv.addObject("vaga", vagaSaida);
-        mv.addObject("listaHabilidades", vagaSaida.getDescricaoHabilidades());
-        mv.addObject("beneficios", vagaSaida.getBeneficios());
         return mv;
     }
 

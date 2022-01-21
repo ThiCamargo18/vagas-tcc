@@ -146,4 +146,10 @@ public class DadosPessoaisService {
 
         return candidatoEntity;
     }
+
+    public List<DadosPessoaisSaida> findAllByIdCandidato(List<Long> idCandidatos) {
+        List<DadosPessoaisEntity> dadosPessoaisEntityList = dadosPessoaisRepository.findAllByIdCandidatoIn(idCandidatos);
+
+        return DadosPessoaisMapper.INSTANCE.mapToSaidaList(dadosPessoaisEntityList);
+    }
 }

@@ -20,5 +20,5 @@ public class ExperienciaSaida {
     private String nomeEmpresa;
     private String descricao;
     private CategoriaEnum categoria;
-    private Long idUsuario;
+    private Long idCandidato;
 }

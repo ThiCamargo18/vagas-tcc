@@ -13,5 +13,5 @@ public class ProjetoEntrada {
     private Long id;
     private String nome;
     private String descricao;
-    private Long idUsuario;
+    private Long idCandidato;
 }

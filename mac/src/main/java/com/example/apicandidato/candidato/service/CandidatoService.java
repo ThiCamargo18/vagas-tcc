@@ -101,4 +101,8 @@ public class CandidatoService {
     public void salvar(CandidatoEntity candidatoEntity) {
         candidatoRepository.save(candidatoEntity);
     }
+
+    public List<CandidatoEntity> findAllById(List<Long> idCandidatos) {
+        return candidatoRepository.findAllById(idCandidatos);
+    }
 }

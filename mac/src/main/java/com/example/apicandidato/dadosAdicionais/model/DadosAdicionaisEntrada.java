@@ -18,5 +18,5 @@ public class DadosAdicionaisEntrada {
     private String endereco;
     private Integer numero;
     private String referencia;
-    private Long idUsuario;
+    private Long idCandidato;
 }

@@ -86,7 +86,7 @@
                     </div>
                     <div class="col-md-6 mb-4" style="margin-left: 2px;">
                         <label for="responsabilidades">Responsabilidades</label>
-                        <textarea class="form-control" th:field="*{vaga.responsabilidade}" id="responsabilidades" style="width: 40vh;margin-right: 3px;" readonly></textarea>
+                        <textarea class="form-control" th:field="*{vaga.responsabilidade}" id="responsabilidades" style="margin-right: 3px;" readonly></textarea>
                     </div>
 
                     <div class="row">
@@ -103,16 +103,16 @@
             </div>
 
             <div class="container-fluid">
-                <h1 class="mt-4">Cargo e Conhecimentos</h1>
+                <h1 class="mt-4">Conhecimento para essa Vaga</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active"></li>
                 </ol>
             </div>
 
             <div class="container-fluid">
+                <h5>Cargo - Selecione algum cargo exemplo para receber sugestões de conhecimentos para essa vaga.</h5>
                 <div class="col-md-3 mb-3">
                     <form th:action="@{/vaga/criar/criarAdiconal}" method="get">
-                        <label>Cargo</label>
                         <select class="form-control" th:name="idCargo">
                             <option selected disabled value="">Escolher...</option>
                             <option th:each="cargo : ${cargo.cargo}" th:value="${cargo.id}" th:text="${cargo.nome}" ></option>
@@ -179,6 +179,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success">Atualizar</button>
+                    <h5>Se deseja sugerir outras opções, enviar e-mail para sugestão@gmail.com</h5>
                 </form>
 
             </div>

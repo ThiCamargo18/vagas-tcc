@@ -13,7 +13,7 @@ import java.util.List;
 public interface ProjetoMapper {
     ProjetoMapper INSTANCE = Mappers.getMapper(ProjetoMapper.class);
 
-    @Mapping(source = "idUsuario",target = "idUsuario")
+    @Mapping(source = "idUsuario",target = "idCandidato")
     ProjetoEntity mapToEntity(ProjetoEntrada projetoEntrada, Long idUsuario);
 
     ProjetoSaida mapToSaida(ProjetoEntity projetoEntity);

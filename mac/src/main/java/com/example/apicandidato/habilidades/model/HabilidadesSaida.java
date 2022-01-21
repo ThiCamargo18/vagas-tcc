@@ -15,5 +15,5 @@ public class HabilidadesSaida {
     private Long id;
     private String resumoProfissional;
     private String objetivos;
-    private Long idUsuario;
+    private Long idCandidato;
 }

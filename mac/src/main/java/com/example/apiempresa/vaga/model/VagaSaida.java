@@ -1,6 +1,9 @@
 package com.example.apiempresa.vaga.model;
 
 import com.example.apicandidato.enums.CategoriaEnum;
+import com.example.apicandidato.ferramenta.model.FerramentaEntity;
+import com.example.apicandidato.framework.model.FrameworkEntity;
+import com.example.apicandidato.tecnologia.model.TecnologiaEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +26,7 @@ public class VagaSaida {
     private List<String> descricaoHabilidades;
     private String responsabilidade;
     private String salario;
-    private List<String> beneficios; //mudar para lista
+    private List<String> beneficios;
     private String observacao;
     private String turno;
     private String dataLimite;
@@ -32,7 +35,7 @@ public class VagaSaida {
     private String inscrito = "NAO";
     private String status;
     private Long idEmpresa;
-    private List<Long> tecnologia = new ArrayList<>();
-    private List<Long> framework = new ArrayList<>();
-    private List<Long> ferramenta = new ArrayList<>();
+    private List<TecnologiaEntity> tecnologias;
+    private List<FrameworkEntity> frameworks;
+    private List<FerramentaEntity> ferramentas;
 }

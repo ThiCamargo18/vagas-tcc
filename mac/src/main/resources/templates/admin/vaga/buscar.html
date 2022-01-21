@@ -14,77 +14,144 @@
     <div id="layoutSidenav_content">
         <main>
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <section>
-                <div class="container-md" style="width: 100%;">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
-                            <li class="breadcrumb-item"><a href="/vaga/listar">Vagas</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Vaga atual</li>
-                        </ol>
-                    </nav>
-                    <div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="vaga : ${vaga}">
-                        <div class="card-body" th:each="vaga : ${vaga}">
-                            <div class="row">
-                                <div class="col">
-                                    <p class="card-text">Título : <span style="color:#FF0000;"
-                                                                        th:utext="${#strings.abbreviate(vaga.titulo,400)} "></span>
-                                    </p>
-                                </div>
-                                <div class="col">
-                                    <p class="card-text">Quantidade de vagas : <span style="color:#FF0000;"
-                                                                                     th:utext="${#strings.abbreviate(vaga.quantidade,400)} "></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 8px;">
-                                <div class="col">
-                                    <p class="card-text">Cidade : <span style="color:#FF0000;"
-                                                                        th:utext="${#strings.abbreviate(vaga.cidade,400)} "></span>
-                                    </p>
-                                </div>
-                                <div class="col">
-                                    <p class="card-text">Categoria : <span style="color:#FF0000;"
-                                                                           th:utext="${#strings.abbreviate(vaga.categoria,400)} "></span>
-                                    </p>
-                                </div>
-                            </div>
-                            <br>
-                            <p class="card-text">Formação : <span style="color:#FF0000;"
-                                                                  th:utext="${#strings.abbreviate(vaga.formacao,400)} "></span>
-                            </p>
-                            <p class="card-text">Responsabilidades : <span style="color:#FF0000;"
-                                                                           th:utext="${vaga.responsabilidade} "></span>
-                            </p>
-                            <p class="card-text">Salário : <span style="color:#FF0000;"
-                                                                 th:utext="${#strings.abbreviate(vaga.salario,400)} "></span>
-                            </p>
-                            <p>Benefícios :
-                            <div th:each="beneficios : ${beneficios}">
-
-                                <p class="card-text">º <span style="color:#FF0000;" th:utext="${beneficios} "></span>
-                                </p>
-                            </div>
-                            </p>
-                            <p class="card-text">Observação : <span style="color:#FF0000;"
-                                                                    th:utext="${#strings.abbreviate(vaga.observacao,400)} "></span>
-                            </p>
-                            <p class="card-text">Data limite para inscrição : <span style="color:#FF0000;"
-                                                                                    th:utext="${#strings.abbreviate(vaga.dataLimite,400)} "></span>
-                            </p>
-                            <p class="card-text">Número inscritos : <span style="color:#FF0000;"
-                                                                          th:utext="${#strings.abbreviate(vaga.numeroInscritos,400)} "></span>
-                            </p>
-                            <p>Habilidades :
-                            <div th:each="listaHabilidades : ${listaHabilidades}">
-
-                                <p class="card-text">º <span style="color:#FF0000;"
-                                                             th:utext="${listaHabilidades} "></span></p>
-                            </div>
-                            </p>
+            <div class="container-fluid">
+                <h1 class="mt-4">Vaga</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Dados necessários</li>
+                </ol>
+            </div>
+            <div class="container-fluid">
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label for="titulo">Título </label>
+                        <input type="text" class="form-control" th:field="*{vaga.titulo}" id="titulo" value="" readonly>
+                        <div class="valid-feedback">
+                            Ok!
                         </div>
                     </div>
                 </div>
-            </section>
+                <div class="form-row">
+                    <div class="col-md-2 mb-3">
+                        <label for="quantidade">Quantidade</label>
+                        <input type="text" class="form-control" th:field="*{vaga.quantidade}" id="quantidade" readonly>
+                        <div class="invalid-feedback">
+                            Digite a quantidade de vagas.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" class="form-control" th:field="*{vaga.cidade}" id="cidade" readonly>
+                        <div class="invalid-feedback">
+                            Necessário selecionar a cidade.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="categoria">Categoria</label>
+                        <select class="form-control" th:field="*{vaga.categoria}" id="categoria" readonly>
+                            <option selected disabled value="">Escolher...</option>
+                            <option value="CLT">CLT</option>
+                            <option value="ESTAGIO">ESTAGIO</option>
+                            <option value="JOVEMAPRENDIZ">JOVEM APRENDIZ</option>
+                            <option value="PCD">PCD</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a categoria.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Formação: </label>
+                        <select class="form-control" id="formacao" th:field="*{vaga.formacao}" readonly>
+                            <option selected disabled value="">Selecione..</option>
+                            <option value="Ensino Medio Incompleto">Ensino Médio Incompleto</option>
+                            <option value="Ensino Medio Completo">Ensino Médio Completo</option>
+                            <option value="Ensino Superior Incompleto">Ensino Superior Incompleto</option>
+                            <option value="Ensino Superior Completo">Ensino Superior Completo</option>
+                            <option value="Pos-graduacao Incompleta">Pós-graduação Incompleta</option>
+                            <option value="Pos-graduacao Completa">Pós-graduação Completa</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione a formação.
+                        </div>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="validationSalario">Salário</label>
+                        <input type="text" class="form-control" th:field="*{vaga.salario}" readonly id="validationSalario">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="observacao">Alguma observação? </label>
+                        <input type="text" class="form-control" th:field="*{vaga.observacao}" id="observacao" value="" readonly>
+                        <div class="valid-feedback">
+                            Ok!
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4" style="margin-left: 2px;">
+                        <label for="responsabilidades">Responsabilidades</label>
+                        <textarea class="form-control" th:field="*{vaga.responsabilidade}" id="responsabilidades" style="margin-right: 3px;" readonly></textarea>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="dataLimite">Data limite para inscrição</label>
+                            <input type="date" class="form-control" th:field="*{vaga.dataLimite}" id="dataLimite" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="turno">Turno</label>
+                            <input type="text" class="form-control" th:field="*{vaga.turno}" id="turno" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid">
+                <h1 class="mt-4">Conhecimentos para essa Vaga</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active"></li>
+                </ol>
+            </div>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-header">
+                                <h5 class="card-title" >Tecnologias</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush" th:each="tecnologia, itemStat : ${vaga.tecnologias}">
+                                    <li class="list-group-item" th:text="${tecnologia.nome}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-header">
+                                <h5 class="card-title" >Frameworks</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush" th:each="framework, itemStat : ${vaga.frameworks}">
+                                    <li class="list-group-item" th:text="${framework.nome}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-header">
+                                <h5 class="card-title" >Ferramentas</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-group list-group-flush" th:each="ferramenta, itemStat : ${vaga.ferramentas}">
+                                    <li class="list-group-item" th:text="${ferramenta.nome}"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         </main>
 

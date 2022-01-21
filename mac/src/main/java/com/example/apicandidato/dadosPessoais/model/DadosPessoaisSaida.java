@@ -28,5 +28,5 @@ public class DadosPessoaisSaida {
     private String pretensaoSalarial;
     private String cpf;
     private String cidade;
-    private Long idUsuario;
+    private Long idCandidato;
 }

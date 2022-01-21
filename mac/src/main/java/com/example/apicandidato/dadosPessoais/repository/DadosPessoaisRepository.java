@@ -14,4 +14,6 @@ public interface DadosPessoaisRepository extends JpaRepository<DadosPessoaisEnti
 
     @Query("select s.idCandidato,s.nomeCompleto from dadosPessoais s where s.cpf = :cpf")
     String getCandidatoByCpf(@Param("cpf") String cpf);
+
+    List<DadosPessoaisEntity> findAllByIdCandidatoIn(List<Long> idCandidatos);
 }

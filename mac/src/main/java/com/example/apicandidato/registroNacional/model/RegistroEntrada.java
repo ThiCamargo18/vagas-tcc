@@ -15,5 +15,5 @@ public class RegistroEntrada {
     private String estado;
     private String dataExpedicao;
     private String numero;
-    private Long idUsuario;
+    private Long idCandidato;
 }
