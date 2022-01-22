@@ -39,14 +39,12 @@ public class VagaEntity {
     @Column(name = "formacao")
     private String formacao;
 
-    @Lob
     @Column(name = "responsabilidade")
     private String responsabilidade;
 
     @Column(name = "salario")
     private String salario;
 
-    @Lob
     @Column(name = "observacao")
     private String observacao;
 

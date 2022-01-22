@@ -20,7 +20,6 @@ public class ProjetoEntity {
     @Column(name = "nome")
     private String nome;
 
-    @Lob
     @Column(name = "descricao")
     private String descricao;
 

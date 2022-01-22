@@ -4,6 +4,7 @@ import com.example.apicandidato.cargo.service.CargoService;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisSaida;
 import com.example.apicandidato.exception.MyException;
 import com.example.apiempresa.model.EmpresaSessao;
+import com.example.apiempresa.model.FiltroEntrada;
 import com.example.apiempresa.vaga.model.VagaEntity;
 import com.example.apiempresa.vaga.model.VagaEntrada;
 import com.example.apiempresa.vaga.model.VagaSaida;
@@ -56,7 +57,6 @@ public class VagaController {
 
     @PostMapping("/criar/criarAdiconal")
     public String salvarCadastroCargo(@ModelAttribute VagaEntrada vagaEntrada, @RequestParam(value = "idVaga") Long idVaga, HttpServletRequest request) throws Exception {
-        vagaService.validarSePertenceEmpresa(idVaga, EmpresaSessao.getId(request));
         vagaService.atualizarInfomacoesAdicionais(vagaEntrada, idVaga);
 
         return "redirect:/vaga/listar";
@@ -92,12 +92,16 @@ public class VagaController {
     @GetMapping("/inscritos/{id}")
     public ModelAndView inscritos(@PathVariable Long id) throws Exception {
         List<DadosPessoaisSaida> dadosPessoaisSaida = vagaService.buscarInscritosPorVaga(id);
+
         VagaSaida vagaSaida = new VagaSaida();
         vagaSaida.setId(id);
 
         ModelAndView mv = new ModelAndView("/admin/vaga/filtroInscritos");
         mv.addObject("cliente", dadosPessoaisSaida);
         mv.addObject("vaga", vagaSaida);
+        mv.addObject("cargo", cargoService.buscarEMapear(null));
+        mv.addObject("filtro", new FiltroEntrada());
+
         return mv;
     }
 

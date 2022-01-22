@@ -54,7 +54,7 @@ public class LoginEmpresa {
     @GetMapping("/loginEmpresa")
     public String login(Model model, String error, String logout) {
         if (securityService.isAuthenticated()) {
-            return "redirect:/";
+            return "redirect:/admin";
         }
 
         if (error != null)

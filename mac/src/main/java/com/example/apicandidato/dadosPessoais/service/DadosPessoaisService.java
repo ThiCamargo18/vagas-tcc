@@ -89,11 +89,13 @@ public class DadosPessoaisService {
     }
 
     public List<DadosPessoaisSaida> filtrar(DadosPessoaisEntity entrada) {
-        Example example = Example.of(entrada,
+        Example<DadosPessoaisEntity> example = Example.of(entrada,
                 ExampleMatcher.matching()
                         .withIgnoreCase()
                         .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
-        return dadosPessoaisRepository.findAll(example);
+        List<DadosPessoaisEntity> saida = dadosPessoaisRepository.findAll(example);
+
+        return DadosPessoaisMapper.INSTANCE.mapToSaidaList(saida);
     }
 
     public List<DadosPessoaisEntity> buscarPorNome(String nome) {

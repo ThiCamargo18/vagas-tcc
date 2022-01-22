@@ -1,6 +1,5 @@
 package com.example.apiempresa.model;
 
-import com.example.apicandidato.enums.CategoriaEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,12 +12,12 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FiltoEntrada {
+public class FiltroEntrada {
     private String formacao;
     private String endereco;
-    private CategoriaEnum categoria;
+    private String categoria;
     private Long idCargo;
-    private List<Long> tecnologias = new ArrayList<>();
-    private List<Long> frameworks = new ArrayList<>();
-    private List<Long> ferramentas = new ArrayList<>();
+    private List<Long> tecnologia = new ArrayList<>();
+    private List<Long> framework = new ArrayList<>();
+    private List<Long> ferramenta = new ArrayList<>();
 }

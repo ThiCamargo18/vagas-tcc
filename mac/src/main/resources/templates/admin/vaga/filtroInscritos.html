@@ -15,59 +15,153 @@
         <main>
             <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <div class="container-fluid">
-                <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active">Filtrar resumo profissional por palavra chave</li>
-                </ol>
-                <form method="get" th:action="@{/filtro/palavraChave/{id}(id=${vaga.id})}">
-                    <fieldset>
-                        <div class="form-group">
-                            <label>Você pode enviar mais de uma palvra, mas separe por vírgula (sem espaço) e utilize
-                                pontução (Ç,~,´)</label>
-                            <input type="text" name="chave1" class="form-control" placeholder="Digite a palavra chave 1"
-                                   style="margin-top: 4px;">
-                            <div class="form-group" style="margin-top: 7px; margin-left: 30%;">
-                                <button class="btn btn-success" type="submit">Filtrar pelas palavras-chave</button>
-                            </div>
+            <div class="container-sm">
+                <div class="  ">
+                    <div class="card mb-3">
+                        <h3 class="card-header">Filtrar inscritos dessa vaga</h3>
+                        <div class="card-body">
+                            <form th:action="@{/filtro/buscarCargo}" method="get">
+                                <div class="input-group">
+                                    <select class="custom-select" th:name="idCargo">
+                                        <option th:each="cargo : ${cargo.cargo}" th:value="${cargo.id}" th:text="${cargo.nome}" ></option>
+                                    </select>
+                                    <input type="text" th:name="idVaga" th:value="${vaga.id}" style="display: none">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <br>
+                            <form action="/filtro/filtroInscritos" method="post">
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="col">
+                                            <label >Formação: </label>
+                                            <select class="form-control" id="exampleSelect2" name="formacao">
+                                                <option selected disabled value="">Selecione...</option>
+                                                <option value="Ensino Medio Incompleto" th:selected="('Ensino Medio Incompleto' == *{filtro.formacao})">Ensino Médio Incompleto</option>
+                                                <option value="Ensino Medio Completo" th:selected="('Ensino Medio Completo' == *{filtro.formacao})">Ensino Médio Completo</option>
+                                                <option value="Ensino Superior Incompleto" th:selected="('Ensino Superior Incompleto' == *{filtro.formacao})">Ensino Superior Incompleto</option>
+                                                <option value="Ensino Superior Completo" th:selected="('Ensino Superior Completo' == *{filtro.formacao})" >Ensino Superior Completo</option>
+                                                <option value="Pos-graduacao Incompleta" th:selected="('Pos-graduacao Incompleta' == *{filtro.formacao})">Pós-graduação Incompleta</option>
+                                                <option value="Pos-graduacao Completa" th:selected="('Pos-graduacao Completa' == *{filtro.formacao})">Pós-graduação Completa</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <label >Endereço: </label>
+                                            <select class="form-control" id="exampleSelect3" name="endereco">
+                                                <option selected disabled value="">Selecione...</option>
+                                                <option value="Campinas" th:selected="('Campinas' == *{filtro.endereco})">Campinas</option>
+                                                <option value="Hortolandia" th:selected="('Hortolandia' == *{filtro.endereco})">Hortolândia</option>
+                                                <option value="Sumare" th:selected="('Sumare' == *{filtro.endereco})">Sumaré</option>
+                                                <option value="Valinhos" th:selected="('Valinhos' == *{filtro.endereco})">Valinhos</option>
+                                                <option value="Vinhedo" th:selected="('Vinhedo' == *{filtro.endereco})">Vinhedo</option>
+                                                <option value="Louveira" th:selected="('Louveira' == *{filtro.endereco})">Louveira</option>
+                                                <option value="Monte-mor" th:selected="('Monte-mor' == *{filtro.endereco})">Monte-mor</option>
+                                                <option value="Paulinia" th:selected="('Paulinia' == *{filtro.endereco})">Paulínia</option>
+                                                <option value="Indaiatuba" th:selected="('Indaiatuba' == *{filtro.endereco})">Indaiatuba</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <label >Categoria</label>
+                                            <select class="form-control" id="exampleSelect4" name="categoria">
+                                                <option selected disabled value="">Selecione...</option>
+                                                <option value="CLT" th:selected="('CLT' == *{filtro.categoria})">CLT</option>
+                                                <option value="ESTAGIO" th:selected="('ESTAGIO' == *{filtro.categoria})">ESTAGIO</option>
+                                                <option value="JOVEMAPRENDIZ" th:selected="('JOVEMAPRENDIZ' == *{filtro.categoria})">JOVEM APRENDIZ</option>
+                                                <option value="PCD" th:selected="('PCD' == *{filtro.categoria})">PCD</option>
+                                                <option value="PJ" th:selected="('PJ' == *{filtro.categoria})">PCD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-4">
+                                                <div class="form-group">
+                                                    <label for="tecnologia">Tecnologias </label>
+                                                    <select class="selectpicker" id="tecnologia" th:name="tecnologia" multiple>
+                                                        <option th:each="tecnologia, itemStat : ${cargo.tecnologia}"
+                                                                th:selected="${#lists.contains(filtro.tecnologia, tecnologia.id)}"
+                                                                th:value="${tecnologia.id}"
+                                                                th:utext="${tecnologia.nome}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 mb-4">
+                                                <div class="form-group">
+                                                    <label for="framework">Frameworks </label>
+                                                    <select class="selectpicker" id="framework" th:name="framework" multiple>
+                                                        <option th:each="framework, itemStat : ${cargo.framework}"
+                                                                th:checked="${#lists.contains(filtro.framework, framework.id)}"
+                                                                th:value="${framework.id}"
+                                                                th:utext="${framework.nome}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4 mb-4">
+                                                <div class="form-group">
+                                                    <label for="ferramenta">Ferramentas </label>
+                                                    <select class="selectpicker" id="ferramenta" th:name="ferramenta" multiple>
+                                                        <option th:each="ferramenta, itemStat : ${cargo.ferramenta}"
+                                                                th:selected="${#lists.contains(filtro.ferramenta, ferramenta.id)}"
+                                                                th:value="${ferramenta.id}"
+                                                                th:utext="${ferramenta.nome}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success">Filtrar</button>
+                                </fieldset>
+                            </form>
                         </div>
-                    </fieldset>
-                </form>
-                <h1 class="mt-4">Inscritos</h1>
-                <div class="card mb-4">
-                    <div class="card-header"><i class="fas fa-table mr-1"></i>Tabela Inscritos</div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Idade</th>
-                                    <th>Curso</th>
-                                    <th>Categoria</th>
-                                    <th>Cidade</th>
-                                    <th>Cadastro</th>
-                                    <th>Entrevista</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="cliente : ${cliente}">
-                                    <td th:utext="${#strings.abbreviate(cliente.nomeCompleto,400)} "></td>
-                                    <td th:utext="${#strings.abbreviate(cliente.idade,400)} "></td>
-                                    <td th:utext="${#strings.abbreviate(cliente.curso,400)} "></td>
-                                    <td th:utext="${#strings.abbreviate(cliente.categoria,400)} "></td>
-                                    <td th:utext="${#strings.abbreviate(cliente.cidade,400)} "></td>
-                                    <td><a class="btn btn-info"
-                                           th:href="@{/cadastro/buscar/{id}(id=${cliente.idUsuario})}"
-                                           role="button"
-                                           target="_blank">Mais
-                                    </a></td>
-                                    <td><a class="btn btn-info"
-                                           th:href="@{/entrevista/criar/{id}(id=${cliente.idUsuario})}"
-                                           role="button">Agendar
-                                    </a></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                    </div>
+                    <br />
+                    <div class="">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="page-header">
+                                    <h1 id="tables"></h1>
+                                </div>
+
+                                <div class="bs-component">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">Nome</th>
+                                            <th scope="col">Idade</th>
+                                            <th scope="col">Curso</th>
+                                            <th scope="col">Categoria</th>
+                                            <th scope="col">Cidade</th>
+                                            <th scope="col">Cadastro</th>
+                                            <th scope="col">Entrevista</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="cliente : ${cliente}">
+                                            <th th:utext="${#strings.abbreviate(cliente.nomeCompleto,400)} "></th>
+                                            <td th:utext="${#strings.abbreviate(cliente.idade,400)} "></td>
+                                            <td th:utext="${#strings.abbreviate(cliente.curso,400)} "></td>
+                                            <td th:utext="${#strings.abbreviate(cliente.categoria,400)} "></td>
+                                            <td th:utext="${#strings.abbreviate(cliente.cidade,400)} "></td>
+                                            <td> <a class="btn btn-info"
+                                                    th:href="@{/cadastro/buscar/{id}(id=${cliente.idCandidato})}"
+                                                    role="button"
+                                                    target="_blank">Mais
+                                            </a></td>
+                                            <td><a class="btn btn-info"
+                                                   th:href="@{/entrevista/criar/{id}(id=${cliente.idCandidato})}"
+                                                   role="button" >Agendar
+                                            </a></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

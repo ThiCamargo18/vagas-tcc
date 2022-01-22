@@ -65,6 +65,14 @@ public class DadosPessoaisEntity {
     @Column(name = "idCandidato")
     private Long idCandidato;
 
+    public DadosPessoaisEntity(String formacao, String categoria, String endereco) {
+        this.formacao = formacao;
+        if (categoria != null)
+            this.categoria = CategoriaEnum.valueOf(categoria);
+
+        this.cidade = endereco;
+    }
+
     public void setIdade(LocalDate dataNascimento) {
         int anoAtual = LocalDate.now().getYear();
         int anoNascimentoCandidato = dataNascimento.getYear();

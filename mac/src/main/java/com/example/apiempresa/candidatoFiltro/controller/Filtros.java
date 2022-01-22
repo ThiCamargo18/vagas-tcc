@@ -1,8 +1,8 @@
-package com.example.apiempresa.endpoints;
+package com.example.apiempresa.candidatoFiltro.controller;
 
 import com.example.apicandidato.candidato.model.CandidatoEntity;
-import com.example.apicandidato.candidato.model.CandidatoSaida;
 import com.example.apicandidato.candidato.service.CandidatoService;
+import com.example.apicandidato.cargo.model.CargoSaida2;
 import com.example.apicandidato.cargo.service.CargoService;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisSaida;
@@ -13,8 +13,10 @@ import com.example.apicandidato.framework.service.FrameworkService;
 import com.example.apicandidato.habilidades.model.HabilidadesSaida;
 import com.example.apicandidato.habilidades.service.HabilidadesService;
 import com.example.apicandidato.tecnologia.service.TecnologiaService;
-import com.example.apiempresa.model.FiltoEntrada;
+import com.example.apiempresa.candidatoFiltro.service.CandidatoFiltroService;
+import com.example.apiempresa.model.FiltroEntrada;
 import com.example.apiempresa.vaga.model.VagaEntity;
+import com.example.apiempresa.vaga.model.VagaSaida;
 import com.example.apiempresa.vaga.repository.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -37,13 +39,7 @@ public class Filtros {
     @Autowired
     private VagaRepository vagaRepository;
     @Autowired
-    private CandidatoService candidatoService;
-    @Autowired
-    private FrameworkService frameworkService;
-    @Autowired
-    private TecnologiaService tecnologiaService;
-    @Autowired
-    private FerramentaService ferramentaService;
+    private CandidatoFiltroService candidatoFiltroService;
     @Autowired
     private CargoService cargoService;
 
@@ -51,7 +47,7 @@ public class Filtros {
     public ModelAndView buscarCandidato() {
         ModelAndView modelAndView = new ModelAndView("/admin/candidato/selecionar");
 
-        modelAndView.addObject("filtro", new FiltoEntrada());
+        modelAndView.addObject("filtro", new FiltroEntrada());
         modelAndView.addObject("cargo", cargoService.buscarEMapear(null));
 
         return modelAndView;
@@ -71,44 +67,38 @@ public class Filtros {
         return mv;
     }
 
+    @GetMapping("/buscarCargo")
+    public ModelAndView buscarCargo(@RequestParam(value = "idCargo", required = false) Long idCargo) {
+        ModelAndView modelAndView = new ModelAndView("/admin/candidato/selecionar");
+
+        modelAndView.addObject("cargo", cargoService.buscarEMapear(idCargo));
+        modelAndView.addObject("filtro", new FiltroEntrada());
+
+        return modelAndView;
+    }
+
+    @GetMapping("/buscarCargoVaga")
+    public ModelAndView buscarCargo2(@RequestParam(value = "idCargo", required = false) Long idCargo, @RequestParam Long idVaga) {
+        ModelAndView modelAndView = new ModelAndView("/admin/vaga/filtroInscritos");
+
+        VagaSaida vagaSaida = new VagaSaida();
+        vagaSaida.setId(idVaga);
+
+        modelAndView.addObject("cargo", cargoService.buscarEMapear(idCargo));
+        modelAndView.addObject("filtro", new FiltroEntrada());
+        modelAndView.addObject("vaga", vagaSaida);
+
+        return modelAndView;
+    }
+
     @PostMapping("/buscar")
-    public ModelAndView filtrar(@ModelAttribute FiltoEntrada filtoEntrada) {
-        DadosPessoaisEntity entity = new DadosPessoaisEntity();
-        entity.setFormacao(filtoEntrada.getFormacao());
-        entity.setCategoria(filtoEntrada.getCategoria());
-        entity.setCidade(filtoEntrada.getEndereco());
+    public ModelAndView filtrar(@ModelAttribute FiltroEntrada filtroEntrada) {
+        return candidatoFiltroService.filtrar(filtroEntrada);
+    }
 
-        List<DadosPessoaisSaida> listaSaida = dadosPessoaisService.filtrar(entity);
-
-        ModelAndView mv = new ModelAndView("/admin/candidato/perfil");
-
-        if (!filtoEntrada.getTecnologias().isEmpty() && !filtoEntrada.getFrameworks().isEmpty() && !filtoEntrada.getFerramentas().isEmpty()) {
-            List<CandidatoEntity> filtro;
-            List<Long> idCandidatos = new ArrayList<>();
-
-            for (DadosPessoaisSaida dadosPessoaisSaida : listaSaida) idCandidatos.add(dadosPessoaisSaida.getIdCandidato());
-
-            List<CandidatoEntity> listaCandidatosBase = candidatoService.findAllById(idCandidatos);
-            List<CandidatoEntity> candidatoTecnologia = tecnologiaService.buscarCandidatos(filtoEntrada.getTecnologias());
-            List<CandidatoEntity> candidatoFramework = frameworkService.buscarCandidatos(filtoEntrada.getFrameworks());
-            List<CandidatoEntity> candidatoFerramenta = ferramentaService.buscarCandidatos(filtoEntrada.getFerramentas());
-
-            filtro = candidatoService.filtrar(listaCandidatosBase, candidatoTecnologia);
-            filtro = candidatoService.filtrar(filtro, candidatoFramework);
-            filtro = candidatoService.filtrar(filtro, candidatoFerramenta);
-
-            idCandidatos = new ArrayList<>();
-
-            for (CandidatoEntity candidatoEntity : filtro) idCandidatos.add(candidatoEntity.getId());
-
-            listaSaida = dadosPessoaisService.findAllByIdCandidato(idCandidatos);
-        }
-
-        mv.addObject("cliente", listaSaida);
-        mv.addObject("filtro", filtoEntrada);
-        mv.addObject("cargo", cargoService.buscarEMapear(filtoEntrada.getIdCargo()));
-
-        return mv;
+    @PostMapping("/filtroInscritos")
+    public ModelAndView filtrarInscritos(@ModelAttribute FiltroEntrada filtroEntrada, @RequestParam Long idVaga) throws Exception {
+        return candidatoFiltroService.filtrarInscritos(filtroEntrada, idVaga);
     }
 
     @GetMapping("/palavraChave/{id}")

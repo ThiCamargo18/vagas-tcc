@@ -10,5 +10,5 @@ public interface VagaRepository extends JpaRepository<VagaEntity,Long> {
 
     List<VagaEntity> findAllByStatus(String status);
 
-    List<VagaEntity> findAllByIdEmpresa(Long idEmpresa);
+    List<VagaEntity> findAllByIdEmpresaAndStatus(Long idEmpresa, String status);
 }

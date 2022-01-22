@@ -18,11 +18,9 @@ public class HabilidadesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
     @Column(name = "resumoProfissional")
     private String resumoProfissional;
 
-    @Lob
     @Column(name = "objetivos")
     private String objetivos;
 

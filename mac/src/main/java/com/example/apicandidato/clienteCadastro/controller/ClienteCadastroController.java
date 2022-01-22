@@ -93,6 +93,8 @@ public class ClienteCadastroController {
         frameworkService.atualizar(cadastroAdicionalEntrada.getFramework(), CandidatoSessao.getId(request));
         ferramentaService.atualizar(cadastroAdicionalEntrada.getFerramenta(), CandidatoSessao.getId(request));
 
+        candidatoService.atualizarCadastro(CandidatoSessao.getId(request), 3);
+
         return "redirect:/";
     }
 

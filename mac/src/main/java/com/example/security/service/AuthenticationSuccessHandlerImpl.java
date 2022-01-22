@@ -43,6 +43,8 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
             candidatoSessao.setNome(candidatoEntity.getNome());
 
             session.setAttribute("usuarioLogado", candidatoSessao);
+
+            response.sendRedirect("/");
         } else {
             EmpresaEntity empresaEntity = empresaAutenticacaoService.findByUsername(userName);
 
@@ -51,9 +53,9 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
             empresaSessao.setNome(empresaEntity.getRazaoSocial());
 
             session.setAttribute("empresaLogada", empresaSessao);
-        }
 
-        response.sendRedirect("/");
+            response.sendRedirect("/admin");
+        }
     }
 
 }

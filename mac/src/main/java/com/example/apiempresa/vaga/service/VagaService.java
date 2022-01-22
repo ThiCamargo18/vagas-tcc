@@ -53,13 +53,17 @@ public class VagaService {
     }
 
     public List<VagaSaida> listar(Long idEmpresa) {
-        List<VagaEntity> vagaEntities = vagaRepository.findAllByIdEmpresa(idEmpresa);
+        List<VagaEntity> vagaEntities = vagaRepository.findAllByIdEmpresaAndStatus(idEmpresa, "ATIVA");
 
         return VagaMapper.INSTANCE.mapToSaidaList(vagaEntities);
     }
 
-    public String deletar(Long id) {
-        vagaRepository.deleteById(id);
+    public String deletar(Long id) throws Exception {
+        VagaEntity vagaEntity = this.buscarVagaEntity(id);
+
+        vagaEntity.setStatus("EXLCUIDA");
+
+        vagaRepository.save(vagaEntity);
 
         return "concluido";
     }
@@ -160,5 +164,13 @@ public class VagaService {
         vagaEntity.setFerramentas(ferramentaService.findAllById(vagaEntrada.getFerramenta()));
 
         vagaRepository.save(vagaEntity);
+    }
+
+    public VagaEntity buscarVagaEntity(Long idVaga) throws Exception {
+        Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(idVaga);
+
+        if (vagaEntityOptional.isPresent()) return vagaEntityOptional.get();
+
+        else throw new Exception("Vaga nao encontrada");
     }
 }
