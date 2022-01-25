@@ -42,18 +42,4 @@ public class EndpointAdmin {
     public String sair(){
         return "Sair";
     }
-
-    @RequestMapping("index2")
-    public ModelAndView index2() {
-        long numeroClientes = candidatoRepository.count();
-        long numeroEntrevistas = entrevistaRepository.count();
-        long numeroVagas = vagaRepository.count();
-        ModelAndView mv = new ModelAndView("/admin/fragments/fragment");
-        AdminIndex adminIndex = new AdminIndex();
-        adminIndex.setNumeroEntrevistas(numeroEntrevistas);
-        adminIndex.setNumeroVagas(numeroVagas);
-        adminIndex.setNumeroClientes(numeroClientes);
-        mv.addObject("filtro",adminIndex);
-        return mv;
-    }
 }

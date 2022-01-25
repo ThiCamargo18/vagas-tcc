@@ -1,31 +1,19 @@
 package com.example.apiempresa.candidatoFiltro.controller;
 
-import com.example.apicandidato.candidato.model.CandidatoEntity;
-import com.example.apicandidato.candidato.service.CandidatoService;
-import com.example.apicandidato.cargo.model.CargoSaida2;
 import com.example.apicandidato.cargo.service.CargoService;
+import com.example.apicandidato.clienteCadastro.model.ClienteCadastroSaida;
+import com.example.apicandidato.clienteCadastro.service.ClienteCadastroService;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisEntity;
-import com.example.apicandidato.dadosPessoais.model.DadosPessoaisSaida;
 import com.example.apicandidato.dadosPessoais.service.DadosPessoaisService;
-import com.example.apicandidato.enums.CategoriaEnum;
-import com.example.apicandidato.ferramenta.service.FerramentaService;
-import com.example.apicandidato.framework.service.FrameworkService;
-import com.example.apicandidato.habilidades.model.HabilidadesSaida;
-import com.example.apicandidato.habilidades.service.HabilidadesService;
-import com.example.apicandidato.tecnologia.service.TecnologiaService;
 import com.example.apiempresa.candidatoFiltro.service.CandidatoFiltroService;
 import com.example.apiempresa.model.FiltroEntrada;
-import com.example.apiempresa.vaga.model.VagaEntity;
 import com.example.apiempresa.vaga.model.VagaSaida;
-import com.example.apiempresa.vaga.repository.VagaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "filtro", produces = "application/json")
@@ -35,9 +23,7 @@ public class Filtros {
     @Autowired
     private DadosPessoaisService dadosPessoaisService;
     @Autowired
-    private HabilidadesService habilidadesService;
-    @Autowired
-    private VagaRepository vagaRepository;
+    private ClienteCadastroService clienteCadastroService;
     @Autowired
     private CandidatoFiltroService candidatoFiltroService;
     @Autowired
@@ -71,8 +57,11 @@ public class Filtros {
     public ModelAndView buscarCargo(@RequestParam(value = "idCargo", required = false) Long idCargo) {
         ModelAndView modelAndView = new ModelAndView("/admin/candidato/selecionar");
 
+        FiltroEntrada filtroEntrada = new FiltroEntrada();
+        filtroEntrada.setIdCargo(idCargo);
+
         modelAndView.addObject("cargo", cargoService.buscarEMapear(idCargo));
-        modelAndView.addObject("filtro", new FiltroEntrada());
+        modelAndView.addObject("filtro", filtroEntrada);
 
         return modelAndView;
     }
@@ -84,8 +73,11 @@ public class Filtros {
         VagaSaida vagaSaida = new VagaSaida();
         vagaSaida.setId(idVaga);
 
+        FiltroEntrada filtroEntrada = new FiltroEntrada();
+        filtroEntrada.setIdCargo(idCargo);
+
         modelAndView.addObject("cargo", cargoService.buscarEMapear(idCargo));
-        modelAndView.addObject("filtro", new FiltroEntrada());
+        modelAndView.addObject("filtro", filtroEntrada);
         modelAndView.addObject("vaga", vagaSaida);
 
         return modelAndView;
@@ -101,34 +93,19 @@ public class Filtros {
         return candidatoFiltroService.filtrarInscritos(filtroEntrada, idVaga);
     }
 
-    @GetMapping("/palavraChave/{id}")
-    public ModelAndView filtrarPorPalavraChaveResumoProfissional(@RequestParam(value = "chave1", required = false) String chave1,
-                                                                 @PathVariable(value = "id", required = true) Long idVaga) throws Exception {
-        String parametro = null;
+    @GetMapping("/buscarCandidato/{id}")
+    public ModelAndView buscarCadastroCompleto(@PathVariable Long id) throws Exception {
 
-        if (chave1 != "") {
-            parametro = chave1;
-        }
+        ModelAndView mv = new ModelAndView("/admin/candidato/cadastroCompleto");
 
-        Optional<VagaEntity> vagaEntityOptional = vagaRepository.findById(idVaga);
+        ClienteCadastroSaida saida = clienteCadastroService.buscar(id);
 
-        if (!vagaEntityOptional.isPresent()) {
-            throw new Exception("Vaga não encontrada, busque novamente!");
-        }
+        mv.addObject("cliente", saida.getCliente());
+        mv.addObject("dadosPessoais", saida.getDadosPessoais());
+        mv.addObject("dadosAdicionais", saida.getDadosAdicionais());
+        mv.addObject("registro", saida.getRegistro());
 
-        List<HabilidadesSaida> cliente = habilidadesService.filtrarPorResumoProfissional(idVaga, parametro, vagaEntityOptional.get());
-
-        if (cliente == null) {
-            HabilidadesSaida clienteNull = new HabilidadesSaida();
-            ModelAndView mv = new ModelAndView("/admin/candidato/buscarPorPalavraChave");
-            mv.addObject("cliente", clienteNull);
-            mv.addObject("vaga", vagaEntityOptional.get());
-            return mv;
-        }
-
-        ModelAndView mv = new ModelAndView("/admin/candidato/buscarPorPalavraChave");
-        mv.addObject("cliente", cliente);
-        mv.addObject("vaga", vagaEntityOptional.get());
         return mv;
     }
+
 }

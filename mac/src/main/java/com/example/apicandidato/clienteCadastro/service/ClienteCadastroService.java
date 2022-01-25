@@ -24,20 +24,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClienteCadastroService {
     @Autowired
-    CandidatoService candidatoService;
+    private CandidatoService candidatoService;
     @Autowired
-    DadosAdicionaisService dadosAdicionaisService;
+    private DadosAdicionaisService dadosAdicionaisService;
     @Autowired
-    DadosPessoaisService dadosPessoaisService;
+    private DadosPessoaisService dadosPessoaisService;
     @Autowired
-    ExperienciaService experienciaService;
+    private ExperienciaService experienciaService;
     @Autowired
-    HabilidadesService habilidadesService;
+    private HabilidadesService habilidadesService;
     @Autowired
-    RegistroNacionalService registroNacionalService;
+    private RegistroNacionalService registroNacionalService;
 
     public ClienteCadastroSaida criar(ClienteCadastroEntrada entrada, Long idCliente) throws Exception {
         CandidatoSaida candidatoSaida = candidatoService.atualizarCadastro(idCliente, 1);
+
         DadosAdicionaisSaida dadosAdicionaisSaida = dadosAdicionaisService.criar(entrada.getDadosAdicionais(), idCliente);
         DadosPessoaisSaida dadosPessoaisSaida = dadosPessoaisService.criar(entrada.getDadosPessoais(), idCliente, dadosAdicionaisSaida.getCidade());
         RegistroSaida registroSaida = registroNacionalService.criar(entrada.getRegistro(), idCliente);
@@ -48,14 +49,12 @@ public class ClienteCadastroService {
 
     public ClienteCadastroSaida buscar(Long id) throws Exception {
         CandidatoEntity candidatoEntity = candidatoService.buscarPorId(id);
-        DadosAdicionaisEntity dadosAdicionaisEntity = dadosAdicionaisService.buscarPorIdCliente(candidatoEntity.getId());
-        DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisService.buscarPorIdCliente(candidatoEntity.getId());
-//        ExperienciaEntity experienciaEntity = experienciaService.buscarPorIdCliente(candidatoEntity.getId());
-        HabilidadesEntity habilidadesEntity = habilidadesService.buscarPorIdCLiente(candidatoEntity.getId());
-        RegistroEntity registroEntity = registroNacionalService.buscarPorIdCliente(candidatoEntity.getId());
 
-        return ClienteCadastroMapper.INSTANCE.mapToSaidaFromEntity(candidatoEntity, dadosAdicionaisEntity,
-                dadosPessoaisEntity, null, habilidadesEntity, registroEntity);
+        DadosAdicionaisEntity dadosAdicionaisEntity = dadosAdicionaisService.buscarPorIdCliente(id);
+        DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisService.buscarPorIdCliente(id);
+        RegistroEntity registroEntity = registroNacionalService.buscarPorIdCliente(id);
+
+        return ClienteCadastroMapper.INSTANCE.mapToSaidaFromEntity(candidatoEntity, dadosAdicionaisEntity, dadosPessoaisEntity, registroEntity);
     }
 
 }

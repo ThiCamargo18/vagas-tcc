@@ -111,22 +111,6 @@ public class ClienteCadastroController {
         return "redirect:procurar";
     }
 
-    @GetMapping("/buscar/{id}")
-    public ModelAndView buscar(@PathVariable Long id) throws Exception {
-        ModelAndView mv = new ModelAndView("/admin/candidato/cadastroCompleto");
-
-        ClienteCadastroSaida saida = clienteCadastroService.buscar(id);
-
-        mv.addObject("cliente", saida.getCliente());
-        mv.addObject("dadosPessoais", saida.getDadosPessoais());
-        mv.addObject("dadosAdicionais", saida.getDadosAdicionais());
-        mv.addObject("registro", saida.getRegistro());
-        mv.addObject("habilidades", saida.getHabilidades());
-        mv.addObject("experiencia", saida.getExperiencia());
-
-        return mv;
-    }
-
     @GetMapping("/procurar")
     public ModelAndView procurar(HttpServletRequest request) throws Exception {
         ModelAndView mv = new ModelAndView("/candidato/cadastro/buscar");
@@ -137,8 +121,6 @@ public class ClienteCadastroController {
         mv.addObject("dadosPessoais", saida.getDadosPessoais());
         mv.addObject("dadosAdicionais", saida.getDadosAdicionais());
         mv.addObject("registro", saida.getRegistro());
-        mv.addObject("habilidades", saida.getHabilidades());
-        mv.addObject("experiencia", saida.getExperiencia());
 
         return mv;
     }

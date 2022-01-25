@@ -53,7 +53,7 @@ public class VagaService {
     }
 
     public List<VagaSaida> listar(Long idEmpresa) {
-        List<VagaEntity> vagaEntities = vagaRepository.findAllByIdEmpresaAndStatus(idEmpresa, "ATIVA");
+        List<VagaEntity> vagaEntities = vagaRepository.findAllByIdEmpresaAndStatusNot(idEmpresa, "EXCLUIDA");
 
         return VagaMapper.INSTANCE.mapToSaidaList(vagaEntities);
     }
@@ -61,7 +61,7 @@ public class VagaService {
     public String deletar(Long id) throws Exception {
         VagaEntity vagaEntity = this.buscarVagaEntity(id);
 
-        vagaEntity.setStatus("EXLCUIDA");
+        vagaEntity.setStatus("EXCLUIDA");
 
         vagaRepository.save(vagaEntity);
 
@@ -89,8 +89,8 @@ public class VagaService {
         return VagaMapper.INSTANCE.mapToSaida(vagaEntityOptional.get());
     }
 
-    public List<VagaSaida> buscarPorNome(String nome) throws Exception {
-        List<VagaEntity> vagaEntities = vagaRepository.findByTituloContainingIgnoreCase(nome);
+    public List<VagaSaida> buscarPorNome(String nome, Long idEmpresa) throws Exception {
+        List<VagaEntity> vagaEntities = vagaRepository.findByTituloContainingIgnoreCaseAndIdEmpresa(nome, idEmpresa);
 
         return VagaMapper.INSTANCE.mapToSaidaList(vagaEntities);
     }

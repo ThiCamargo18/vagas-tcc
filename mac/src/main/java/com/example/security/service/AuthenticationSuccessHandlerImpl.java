@@ -49,7 +49,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
             EmpresaEntity empresaEntity = empresaAutenticacaoService.findByUsername(userName);
 
             EmpresaSessao empresaSessao = new EmpresaSessao();
-            empresaSessao.setId(empresaSessao.getId());
+            empresaSessao.setId(empresaEntity.getId());
             empresaSessao.setNome(empresaEntity.getRazaoSocial());
 
             session.setAttribute("empresaLogada", empresaSessao);

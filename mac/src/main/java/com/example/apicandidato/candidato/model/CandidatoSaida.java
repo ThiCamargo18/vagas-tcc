@@ -12,4 +12,5 @@ import lombok.Setter;
 public class CandidatoSaida {
     private Long id;
     private String nome;
+    private String email;
 }

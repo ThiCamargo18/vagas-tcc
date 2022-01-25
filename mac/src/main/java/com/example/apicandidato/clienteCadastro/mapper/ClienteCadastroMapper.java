@@ -7,9 +7,7 @@ import com.example.apicandidato.dadosAdicionais.model.DadosAdicionaisEntity;
 import com.example.apicandidato.dadosAdicionais.model.DadosAdicionaisSaida;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisSaida;
-import com.example.apicandidato.experiencia.model.ExperienciaEntity;
 import com.example.apicandidato.experiencia.model.ExperienciaSaida;
-import com.example.apicandidato.habilidades.model.HabilidadesEntity;
 import com.example.apicandidato.habilidades.model.HabilidadesSaida;
 import com.example.apicandidato.registroNacional.model.RegistroEntity;
 import com.example.apicandidato.registroNacional.model.RegistroSaida;
@@ -26,8 +24,6 @@ public interface ClienteCadastroMapper {
             @Mapping(source = "candidatoSaida",target = "cliente"),
             @Mapping(source = "dadosAdicionaisSaida",target = "dadosAdicionais"),
             @Mapping(source = "dadosPessoaisSaida",target = "dadosPessoais"),
-            @Mapping(source = "experienciaSaida",target = "experiencia"),
-            @Mapping(source = "habilidadesSaida",target = "habilidades"),
             @Mapping(source = "registroSaida",target = "registro"),
     })
     ClienteCadastroSaida mapToSaida(CandidatoSaida candidatoSaida, DadosAdicionaisSaida dadosAdicionaisSaida,
@@ -37,11 +33,8 @@ public interface ClienteCadastroMapper {
             @Mapping(source = "candidatoEntity",target = "cliente"),
             @Mapping(source = "dadosAdicionaisEntity",target = "dadosAdicionais"),
             @Mapping(source = "dadosPessoaisEntity",target = "dadosPessoais"),
-            @Mapping(source = "experienciaEntity",target = "experiencia"),
-            @Mapping(source = "habilidadesEntity",target = "habilidades"),
             @Mapping(source = "registroEntity",target = "registro"),
     })
     ClienteCadastroSaida mapToSaidaFromEntity(CandidatoEntity candidatoEntity, DadosAdicionaisEntity dadosAdicionaisEntity,
-                                              DadosPessoaisEntity dadosPessoaisEntity, ExperienciaEntity experienciaEntity,
-                                              HabilidadesEntity habilidadesEntity, RegistroEntity registroEntity);
+                                              DadosPessoaisEntity dadosPessoaisEntity, RegistroEntity registroEntity);
 }

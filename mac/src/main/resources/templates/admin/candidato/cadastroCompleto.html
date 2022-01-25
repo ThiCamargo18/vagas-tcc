@@ -24,27 +24,26 @@
                             <ol class="breadcrumb mb-4"><li class="breadcrumb-item active">Dados Pessoais</li>
                             </ol>
                         </nav>
-                        <br>
                         <div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="dadosPessoais : ${dadosPessoais}">
                             <div class="card-body">
                                 <p class="card-text">Nome Completo : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.nomeCompleto,400)} "></span></p>
-                                <p class="card-text">E-mail : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.email,400)} "></span></p>
+                                <p class="card-text">E-mail : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(cliente.email,400)} "></span></p>
                                 <br>
                                 <p class="card-text">Idade : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.idade,400)} "></span></p>
                                 <p class="card-text">Data Nascimento : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.dataNascimento,400)} "></span></p>
                                 <p class="card-text">Sexo : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.sexo,400)} "></span></p>
                                 <p class="card-text">Nome social : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.nomeSocial,400)} "></span></p>
-                                <p class="card-text">Estado Cívil : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.estadoCivil,400)} "></span></p>
-                                <p class="card-text">Nome da mãe : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.nomeMae,400)} "></span></p>
+<!--                                <p class="card-text">Estado Cívil : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.estadoCivil,400)} "></span></p>-->
+<!--                                <p class="card-text">Nome da mãe : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.nomeMae,400)} "></span></p>-->
                                 <p class="card-text">Naturalidade : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.naturalidade,400)} "></span></p>
-                                <p class="card-text">Telefone : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.telefone,400)} "></span></p>
+<!--                                <p class="card-text">Telefone : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.telefone,400)} "></span></p>-->
                                 <p class="card-text">Celular : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.celular,400)} "></span></p>
                                 <p class="card-text">Formação : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.formacao,400)} "></span></p>
                                 <p class="card-text">Curso : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.curso,400)} "></span></p>
-                                <p class="card-text">Experiência : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.experiencia,400)} "></span></p>
+<!--                                <p class="card-text">Experiência : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.experiencia,400)} "></span></p>-->
                                 <p class="card-text">Categoria : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.categoria,400)} "></span></p>
                                 <p class="card-text">Pretensão Salarial : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.pretensaoSalarial,400)} "></span></p>
-                                <p class="card-text">Tipo Condução : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.tipoConducao,400)} "></span></p>
+<!--                                <p class="card-text">Tipo Condução : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.tipoConducao,400)} "></span></p>-->
                                 <p class="card-text">Cidade : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosPessoais.cidade,400)} "></span></p>
                             </div>
                         </div>
@@ -62,33 +61,33 @@
                                 <p class="card-text">Referência : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(dadosAdicionais.referencia,400)} "></span></p>
                             </div>
                         </div>
-                        <br>
-                        <ol class="breadcrumb mb-4"><li class="breadcrumb-item active">Experiência</li>
-                        </ol>
-                        <div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="experiencia : ${experiencia}">
-                            <div class="card-body">
-                                <p class="card-text">Possui : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.possui,400)} "></span></p>
-                                <p class="card-text">Cargo : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.cargo,400)} "></span></p>
-                                <p class="card-text">Data Inicio : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.dataInicio,400)} "></span></p>
-                                <p class="card-text">Data Fim : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.dataFim,400)} "></span></p>
-                                <p class="card-text">Salário : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.salario,400)} "></span></p>
-                                <p class="card-text">Categoria : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.categoria,400)} "></span></p>
-                            </div>
-                        </div>
-                        <br>
-                        <ol class="breadcrumb mb-4"><li class="breadcrumb-item active">Resumo Profissional</li>
-                        </ol>
-                        <div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="habilidades : ${habilidades}">
-                            <div class="card-body">
-                                <p class="card-text">Resumo : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(habilidades.resumoProfissional,400)} "></span></p>
-                                <p class="card-text">Cargo : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(habilidades.objetivos,400)} "></span></p>
-                                <p>Habilidades :
-                                    <div th:each="listaHabilidades : ${listaHabilidades}">
+<!--                        <br>-->
+<!--                        <ol class="breadcrumb mb-4"><li class="breadcrumb-item active">Experiência</li>-->
+<!--                        </ol>-->
+<!--                        <div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="experiencia : ${experiencia}">-->
+<!--                            <div class="card-body">-->
+<!--                                <p class="card-text">Possui : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.possui,400)} "></span></p>-->
+<!--                                <p class="card-text">Cargo : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.cargo,400)} "></span></p>-->
+<!--                                <p class="card-text">Data Inicio : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.dataInicio,400)} "></span></p>-->
+<!--                                <p class="card-text">Data Fim : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.dataFim,400)} "></span></p>-->
+<!--                                <p class="card-text">Salário : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.salario,400)} "></span></p>-->
+<!--                                <p class="card-text">Categoria : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(experiencia.categoria,400)} "></span></p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <br>-->
+<!--                        <ol class="breadcrumb mb-4"><li class="breadcrumb-item active">Resumo Profissional</li>-->
+<!--                        </ol>-->
+<!--                        <div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="habilidades : ${habilidades}">-->
+<!--                            <div class="card-body">-->
+<!--                                <p class="card-text">Resumo : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(habilidades.resumoProfissional,400)} "></span></p>-->
+<!--                                <p class="card-text">Cargo : <span style="color:#FF0000;" th:utext="${#strings.abbreviate(habilidades.objetivos,400)} "></span></p>-->
+<!--                                <p>Habilidades :-->
+<!--                                    <div th:each="listaHabilidades : ${listaHabilidades}">-->
 
-                                <p class="card-text">º <span style="color:#FF0000;" th:utext="${#strings.abbreviate(listaHabilidades,400)} "></span></p></div>
-                                </p>
-                            </div>
-                        </div>
+<!--                                <p class="card-text">º <span style="color:#FF0000;" th:utext="${#strings.abbreviate(listaHabilidades,400)} "></span></p></div>-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <br>
                         <ol class="breadcrumb mb-4"><li class="breadcrumb-item active">RG</li>
                         </ol>

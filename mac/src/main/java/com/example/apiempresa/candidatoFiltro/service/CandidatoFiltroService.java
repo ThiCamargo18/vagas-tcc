@@ -49,11 +49,11 @@ public class CandidatoFiltroService {
 
         List<Long> idCandidatos = this.buscarIdCandidatos(listaSaida);
 
-        listaSaida = this.filtroTecnologias(filtroEntrada, idCandidatos,  null);
+        listaSaida = this.filtroTecnologias(filtroEntrada, idCandidatos, listaSaida);
 
         ModelAndView mv;
 
-        if (filtroEntrada.getIdCargo() == null)
+        if (!listaSaida.isEmpty())
             mv = new ModelAndView("/admin/candidato/perfil");
         else
             mv = new ModelAndView("/admin/candidato/selecionar");
@@ -78,7 +78,7 @@ public class CandidatoFiltroService {
 
         List<Long> idCandidatos = this.buscarIdCandidatos(listaSaida);
 
-        listaSaida = this.filtroTecnologias(filtroEntrada, idCandidatos, candidatosVaga);
+        listaSaida = this.filtroTecnologiasVagas(filtroEntrada, idCandidatos, candidatosVaga, listaSaida);
 
         ModelAndView mv = new ModelAndView("/admin/vaga/filtroInscritos");
 
@@ -101,25 +101,18 @@ public class CandidatoFiltroService {
         return idCandidatos;
     }
 
-    private List<DadosPessoaisSaida> filtroTecnologias(FiltroEntrada filtroEntrada, List<Long> idCandidatosFiltrados, List<CandidatoEntity> candidatosVaga) {
-        if (!filtroEntrada.getTecnologia().isEmpty() || !filtroEntrada.getFramework().isEmpty() || !filtroEntrada.getFerramenta().isEmpty()) {
-            List<CandidatoEntity> filtro;
+    private List<DadosPessoaisSaida> filtroTecnologias(FiltroEntrada filtroEntrada, List<Long> idCandidatosFiltrados, List<DadosPessoaisSaida> listaSaida) {
+        List<CandidatoEntity> filtro;
 
+        if (!filtroEntrada.getTecnologia().isEmpty() || !filtroEntrada.getFramework().isEmpty() || !filtroEntrada.getFerramenta().isEmpty()) {
             List<CandidatoEntity> listaCandidatosFiltrados = candidatoService.findAllById(idCandidatosFiltrados);
             List<CandidatoEntity> candidatoTecnologia = tecnologiaService.buscarCandidatos(filtroEntrada.getTecnologia());
             List<CandidatoEntity> candidatoFramework = frameworkService.buscarCandidatos(filtroEntrada.getFramework());
             List<CandidatoEntity> candidatoFerramenta = ferramentaService.buscarCandidatos(filtroEntrada.getFerramenta());
 
-            if (candidatosVaga != null && !candidatosVaga.isEmpty()) {
-                filtro = candidatoService.filtrar(candidatosVaga, listaCandidatosFiltrados);
-                filtro = candidatoService.filtrar(filtro, candidatoTecnologia);
-                filtro = candidatoService.filtrar(filtro, candidatoFramework);
-                filtro = candidatoService.filtrar(filtro, candidatoFerramenta);
-            } else {
-                filtro = candidatoService.filtrar(listaCandidatosFiltrados, candidatoTecnologia);
-                filtro = candidatoService.filtrar(filtro, candidatoFramework);
-                filtro = candidatoService.filtrar(filtro, candidatoFerramenta);
-            }
+            filtro = candidatoService.filtrar(listaCandidatosFiltrados, candidatoTecnologia, filtroEntrada.getTecnologia().isEmpty());
+            filtro = candidatoService.filtrar(filtro, candidatoFramework, filtroEntrada.getFramework().isEmpty());
+            filtro = candidatoService.filtrar(filtro, candidatoFerramenta, filtroEntrada.getFerramenta().isEmpty());
 
             idCandidatosFiltrados = new ArrayList<>();
 
@@ -128,6 +121,28 @@ public class CandidatoFiltroService {
             return dadosPessoaisService.findAllByIdCandidato(idCandidatosFiltrados);
         }
 
-        return new ArrayList<>();
+        return listaSaida;
+    }
+
+    private List<DadosPessoaisSaida> filtroTecnologiasVagas(FiltroEntrada filtroEntrada, List<Long> idCandidatosFiltrados,
+                                                       List<CandidatoEntity> candidatosVaga, List<DadosPessoaisSaida> listaSaida) {
+        List<CandidatoEntity> filtro;
+
+        List<CandidatoEntity> listaCandidatosFiltrados = candidatoService.findAllById(idCandidatosFiltrados);
+
+        List<CandidatoEntity> candidatoTecnologia = tecnologiaService.buscarCandidatos(filtroEntrada.getTecnologia());
+        List<CandidatoEntity> candidatoFramework = frameworkService.buscarCandidatos(filtroEntrada.getFramework());
+        List<CandidatoEntity> candidatoFerramenta = ferramentaService.buscarCandidatos(filtroEntrada.getFerramenta());
+
+        filtro = candidatoService.filtrar(candidatosVaga, listaCandidatosFiltrados, idCandidatosFiltrados.isEmpty());
+        filtro = candidatoService.filtrar(filtro, candidatoTecnologia, filtroEntrada.getTecnologia().isEmpty());
+        filtro = candidatoService.filtrar(filtro, candidatoFramework, filtroEntrada.getFramework().isEmpty());
+        filtro = candidatoService.filtrar(filtro, candidatoFerramenta, filtroEntrada.getFerramenta().isEmpty());
+
+        idCandidatosFiltrados = new ArrayList<>();
+
+        for (CandidatoEntity candidatoEntity : filtro) idCandidatosFiltrados.add(candidatoEntity.getId());
+
+        return dadosPessoaisService.findAllByIdCandidato(idCandidatosFiltrados);
     }
 }

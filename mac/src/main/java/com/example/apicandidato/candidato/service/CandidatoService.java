@@ -89,8 +89,8 @@ public class CandidatoService {
         return candidatoEntity.getNivelCadastroRealizado();
     }
 
-    public List<CandidatoEntity> filtrar(List<CandidatoEntity> lista1, List<CandidatoEntity> lista2) {
-        if (lista2.isEmpty())
+    public List<CandidatoEntity> filtrar(List<CandidatoEntity> lista1, List<CandidatoEntity> lista2, boolean filtroVazio) {
+        if (filtroVazio)
             return lista1;
 
         lista1.removeIf(candidato -> !lista2.contains(candidato));

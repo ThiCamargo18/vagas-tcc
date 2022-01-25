@@ -56,7 +56,7 @@ public class VagaController {
     }
 
     @PostMapping("/criar/criarAdiconal")
-    public String salvarCadastroCargo(@ModelAttribute VagaEntrada vagaEntrada, @RequestParam(value = "idVaga") Long idVaga, HttpServletRequest request) throws Exception {
+    public String salvarCadastroCargo(@ModelAttribute VagaEntrada vagaEntrada, @RequestParam(value = "idVaga") Long idVaga) throws Exception {
         vagaService.atualizarInfomacoesAdicionais(vagaEntrada, idVaga);
 
         return "redirect:/vaga/listar";
@@ -90,7 +90,9 @@ public class VagaController {
     }
 
     @GetMapping("/inscritos/{id}")
-    public ModelAndView inscritos(@PathVariable Long id) throws Exception {
+    public ModelAndView inscritos(@PathVariable Long id, HttpServletRequest request) throws Exception {
+        vagaService.validarSePertenceEmpresa(id, EmpresaSessao.getId(request));
+
         List<DadosPessoaisSaida> dadosPessoaisSaida = vagaService.buscarInscritosPorVaga(id);
 
         VagaSaida vagaSaida = new VagaSaida();
@@ -99,14 +101,16 @@ public class VagaController {
         ModelAndView mv = new ModelAndView("/admin/vaga/filtroInscritos");
         mv.addObject("cliente", dadosPessoaisSaida);
         mv.addObject("vaga", vagaSaida);
-        mv.addObject("cargo", cargoService.buscarEMapear(null));
+        mv.addObject("cargo", cargoService.buscarEMapear(1L));
         mv.addObject("filtro", new FiltroEntrada());
 
         return mv;
     }
 
     @GetMapping("/deletar")
-    public String deletar(@RequestParam Long vaga) throws Exception {
+    public String deletar(@RequestParam Long vaga, HttpServletRequest request) throws Exception {
+        vagaService.validarSePertenceEmpresa(vaga, EmpresaSessao.getId(request));
+
         String resultado = vagaService.deletar(vaga);
 
         if (resultado.equals("concluido")) {
@@ -117,11 +121,11 @@ public class VagaController {
     }
 
     @GetMapping("/buscarPorNome")
-    public ModelAndView buscarPorNome(@RequestParam String nome) throws Exception {
+    public ModelAndView buscarPorNome(@RequestParam String nome, HttpServletRequest request) throws Exception {
         VagaSaida vagaSaida = new VagaSaida();
 
         ModelAndView mv = new ModelAndView("/admin/vaga/buscarPorNome");
-        List<VagaSaida> vagaSaidaList = vagaService.buscarPorNome(nome);
+        List<VagaSaida> vagaSaidaList = vagaService.buscarPorNome(nome, EmpresaSessao.getId(request));
 
         vagaSaida.setNumeroVagasEncontradas(vagaSaidaList.size());
         mv.addObject("vagaFiltro", vagaSaida);
@@ -130,24 +134,11 @@ public class VagaController {
     }
 
     @GetMapping("/status/{id}")
-    public String atualizarStatus(@PathVariable Long id) throws Exception {
+    public String atualizarStatus(@PathVariable Long id, HttpServletRequest request) throws Exception {
+        vagaService.validarSePertenceEmpresa(id, EmpresaSessao.getId(request));
+
         vagaService.atualizarStatus(id);
 
         return "redirect:/vaga/listar";
     }
-
-//    @RequestMapping("/atualizar/{id}")
-//    public ModelAndView atualizar(@PathVariable Long id) throws Exception {
-//        VagaSaida vagaSaida = vagaService.buscarVaga(id);
-//        ModelAndView mv = new ModelAndView("/admin/vaga/atualizar");
-//        mv.addObject("vaga", vagaSaida);
-//        return mv;
-//    }
-//
-//    @PostMapping("/atualizar")
-//    public HttpStatus atualizar(@RequestBody VagaEntrada vagaEntrada) { //Id ja vem do front
-//        vagaService.atualizar(vagaEntrada);
-//
-//        return HttpStatus.OK;
-//    }
 }

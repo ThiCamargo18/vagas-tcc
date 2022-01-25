@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface VagaRepository extends JpaRepository<VagaEntity,Long> {
-    public  List<VagaEntity> findByTituloContainingIgnoreCase(String nome);
+    public  List<VagaEntity> findByTituloContainingIgnoreCaseAndIdEmpresa(String nome, Long idEmpresa);
 
     List<VagaEntity> findAllByStatus(String status);
 
-    List<VagaEntity> findAllByIdEmpresaAndStatus(Long idEmpresa, String status);
+    List<VagaEntity> findAllByIdEmpresaAndStatusNot(Long idEmpresa, String status);
 }

@@ -23,6 +23,7 @@
                             <div class="input-group">
                                 <select class="custom-select" th:name="idCargo">
                                     <option th:each="cargo : ${cargo.cargo}" th:value="${cargo.id}"
+                                            th:selected="(${cargo.id} == *{filtro.idCargo})"
                                             th:text="${cargo.nome}"></option>
                                 </select>
                                 <div class="input-group-append">
@@ -95,7 +96,7 @@
                                                 <label for="framework">Frameworks </label>
                                                 <select class="selectpicker" id="framework" th:name="framework" multiple>
                                                     <option th:each="framework, itemStat : ${cargo.framework}"
-                                                            th:checked="${#lists.contains(filtro.framework, framework.id)}"
+                                                            th:selected="${#lists.contains(filtro.framework, framework.id)}"
                                                             th:value="${framework.id}"
                                                             th:utext="${framework.nome}"></option>
                                                 </select>
@@ -115,7 +116,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <input type="text" th:field="*{filtro.idCargo}" style="display: none">
                                 <button type="submit" class="btn btn-success">Filtrar</button>
                             </fieldset>
                         </form>

@@ -23,7 +23,10 @@
                             <form th:action="@{/filtro/buscarCargo}" method="get">
                                 <div class="input-group">
                                     <select class="custom-select" th:name="idCargo">
-                                        <option th:each="cargo : ${cargo.cargo}" th:value="${cargo.id}" th:text="${cargo.nome}" ></option>
+                                        <option th:each="cargo : ${cargo.cargo}"
+                                                th:value="${cargo.id}"
+                                                th:text="${cargo.nome}"
+                                                th:selected="(${cargo.id} == *{filtro.idCargo})"></option>
                                     </select>
                                     <div class="input-group-append">
                                         <button class="btn btn-outline-secondary" type="submit">Buscar</button>
@@ -93,7 +96,7 @@
                                                     <label for="framework">Frameworks </label>
                                                     <select class="selectpicker" id="framework" th:name="framework" multiple>
                                                         <option th:each="framework, itemStat : ${cargo.framework}"
-                                                                th:checked="${#lists.contains(filtro.framework, framework.id)}"
+                                                                th:selected="${#lists.contains(filtro.framework, framework.id)}"
                                                                 th:value="${framework.id}"
                                                                 th:utext="${framework.nome}"></option>
                                                     </select>
@@ -113,7 +116,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <input type="text" th:field="*{filtro.idCargo}" style="display: none">
                                     <button type="submit" class="btn btn-success">Filtrar</button>
                                 </fieldset>
                             </form>
@@ -137,7 +140,7 @@
                                             <th scope="col">Categoria</th>
                                             <th scope="col">Cidade</th>
                                             <th scope="col">Cadastro</th>
-                                            <th scope="col">Entrevista</th>
+<!--                                            <th scope="col">Entrevista</th>-->
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -148,14 +151,14 @@
                                             <td th:utext="${#strings.abbreviate(cliente.categoria,400)} "></td>
                                             <td th:utext="${#strings.abbreviate(cliente.cidade,400)} "></td>
                                             <td> <a class="btn btn-info"
-                                                    th:href="@{/cadastro/buscar/{id}(id=${cliente.idCandidato})}"
+                                                    th:href="@{/filtro/buscarCandidato/{id}(id=${cliente.idCandidato})}"
                                                     role="button"
                                                     target="_blank">Mais
                                             </a></td>
-                                            <td><a class="btn btn-info"
-                                                   th:href="@{/entrevista/criar/{id}(id=${cliente.idCandidato})}"
-                                                   role="button" >Agendar
-                                            </a></td>
+<!--                                            <td><a class="btn btn-info"-->
+<!--                                                   th:href="@{/entrevista/criar/{id}(id=${cliente.idCandidato})}"-->
+<!--                                                   role="button" >Agendar-->
+<!--                                            </a></td>-->
                                         </tr>
                                         </tbody>
                                     </table>

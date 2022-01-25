@@ -41,16 +41,4 @@ public class CargoController {
     public CargoEntity buscar(@RequestParam("id") Long idCargo){
         return cargoService.buscar(idCargo);
     }
-
-    @PostMapping("/teste")
-    public List<CandidatoSaida> teste(@RequestBody CadastroAdicionalEntrada cadastroAdicionalEntrada){
-        List<CandidatoEntity> candidatoTecnologia = tecnologiaService.buscarCandidatos(cadastroAdicionalEntrada.getTecnologia());
-        List<CandidatoEntity> candidatoFramework = frameworkService.buscarCandidatos(cadastroAdicionalEntrada.getFramework());
-        List<CandidatoEntity> candidatoFerramenta = ferramentaService.buscarCandidatos(cadastroAdicionalEntrada.getFerramenta());
-
-        List<CandidatoEntity> saida = candidatoService.filtrar(candidatoTecnologia, candidatoFramework);
-        saida = candidatoService.filtrar(saida, candidatoFerramenta);
-
-        return CandidatoMapper.INSTANCE.mapAllToSaida(saida);
-    }
 }

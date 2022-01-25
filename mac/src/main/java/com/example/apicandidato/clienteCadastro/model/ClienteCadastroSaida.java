@@ -16,10 +16,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClienteCadastroSaida {
-    CandidatoSaida cliente;
-    DadosAdicionaisSaida dadosAdicionais;
-    DadosPessoaisSaida dadosPessoais;
-    ExperienciaSaida experiencia;
-    HabilidadesSaida habilidades;
-    RegistroSaida registro;
+    private CandidatoSaida cliente;
+    private DadosAdicionaisSaida dadosAdicionais;
+    private DadosPessoaisSaida dadosPessoais;
+    private RegistroSaida registro;
 }
