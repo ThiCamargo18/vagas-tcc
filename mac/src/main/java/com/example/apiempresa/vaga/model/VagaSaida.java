@@ -23,10 +23,8 @@ public class VagaSaida {
     private String cidade;
     private CategoriaEnum categoria;
     private String formacao;
-    private List<String> descricaoHabilidades;
     private String responsabilidade;
     private String salario;
-    private List<String> beneficios;
     private String observacao;
     private String turno;
     private String dataLimite;

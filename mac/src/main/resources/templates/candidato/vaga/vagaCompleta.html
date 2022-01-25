@@ -99,19 +99,38 @@
                                 <p class="font-weight-bold" style="color:#1055e9;" th:utext="${vaga.responsabilidade} "></p>
                             </div>
                         </div>
-                        <hr class="sidebar-divider">
 
-                            <p class="font-weight-bold">Benefícios:
-                                <div th:each="beneficios : ${beneficios}">
+                        <div class="row">
+                            <div class="col">
+                                <hr class="sidebar-divider">
+                            </div>
+                            <div class="col">
+                                <p class="font-weight-bold">Conhecimentos necessários para essa vaga</p>
+                            </div>
+                            <div class="col">
+                                <hr class="sidebar-divider">
+                            </div>
+                        </div>
 
-                            <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:utext="${beneficios} "></span></p>
+
+                            <p class="font-weight-bold">Tecnologias:
+                                <div th:each="tecnologia : ${vaga.tecnologias}">
+
+                            <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:text="${tecnologia.nome} "></span></p>
                                 </div>
 
                         <hr class="sidebar-divider">
-                            <p class="font-weight-bold">Requisitos:
-                                <div th:each="listaHabilidades : ${listaHabilidades}">
+                            <p class="font-weight-bold">Frameworks:
+                                <div th:each="framework : ${vaga.frameworks}">
 
-                            <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:utext="${listaHabilidades} "></span></p>
+                            <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:text="${framework.nome} "></span></p>
+                            </div>
+
+                        <hr class="sidebar-divider">
+                            <p class="font-weight-bold">Ferramentas:
+                            <div th:each="ferramenta : ${vaga.ferramentas}">
+
+                                <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:text="${ferramenta.nome} "></span></p>
                             </div>
 
                     </div>

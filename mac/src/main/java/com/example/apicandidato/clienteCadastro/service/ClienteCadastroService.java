@@ -12,14 +12,25 @@ import com.example.apicandidato.dadosAdicionais.service.DadosAdicionaisService;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisSaida;
 import com.example.apicandidato.dadosPessoais.service.DadosPessoaisService;
+import com.example.apicandidato.experiencia.model.ExperienciaEntity;
 import com.example.apicandidato.experiencia.service.ExperienciaService;
+import com.example.apicandidato.ferramenta.model.FerramentaEntity;
+import com.example.apicandidato.ferramenta.service.FerramentaService;
+import com.example.apicandidato.framework.model.FrameworkEntity;
+import com.example.apicandidato.framework.service.FrameworkService;
 import com.example.apicandidato.habilidades.model.HabilidadesEntity;
 import com.example.apicandidato.habilidades.service.HabilidadesService;
+import com.example.apicandidato.projetos.model.ProjetoEntity;
+import com.example.apicandidato.projetos.service.ProjetoService;
 import com.example.apicandidato.registroNacional.model.RegistroEntity;
 import com.example.apicandidato.registroNacional.model.RegistroSaida;
 import com.example.apicandidato.registroNacional.service.RegistroNacionalService;
+import com.example.apicandidato.tecnologia.model.TecnologiaEntity;
+import com.example.apicandidato.tecnologia.service.TecnologiaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ClienteCadastroService {
@@ -33,6 +44,8 @@ public class ClienteCadastroService {
     private ExperienciaService experienciaService;
     @Autowired
     private HabilidadesService habilidadesService;
+    @Autowired
+    private ProjetoService projetoService;
     @Autowired
     private RegistroNacionalService registroNacionalService;
 
@@ -53,8 +66,16 @@ public class ClienteCadastroService {
         DadosAdicionaisEntity dadosAdicionaisEntity = dadosAdicionaisService.buscarPorIdCliente(id);
         DadosPessoaisEntity dadosPessoaisEntity = dadosPessoaisService.buscarPorIdCliente(id);
         RegistroEntity registroEntity = registroNacionalService.buscarPorIdCliente(id);
+        List<ExperienciaEntity> experiencias = experienciaService.buscarPorIdCliente(id);
+        HabilidadesEntity habilidade = habilidadesService.buscarPorIdCLiente(id);
+        List<ProjetoEntity> projetos = projetoService.buscarPorIdCLiente(id);
+        List<TecnologiaEntity> tecnologias = candidatoEntity.getTecnologias();
+        List<FrameworkEntity> frameworks = candidatoEntity.getFrameworks();
+        List<FerramentaEntity> ferramentas = candidatoEntity.getFerramentas();
 
-        return ClienteCadastroMapper.INSTANCE.mapToSaidaFromEntity(candidatoEntity, dadosAdicionaisEntity, dadosPessoaisEntity, registroEntity);
+
+        return ClienteCadastroMapper.INSTANCE.mapToSaidaFromEntity(candidatoEntity, dadosAdicionaisEntity, dadosPessoaisEntity,
+                registroEntity, experiencias, habilidade, projetos, tecnologias, frameworks, ferramentas);
     }
 
 }

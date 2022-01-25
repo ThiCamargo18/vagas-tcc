@@ -84,13 +84,9 @@ public class VagaCandidatoController {
 
         vagaSaida = vagaCandidatoService.validarInscricao(vagaSaida, CandidatoSessao.getId(request));
 
-        List<String> listaHabilidades = vagaSaida.getDescricaoHabilidades();
-        List<String> beneficios = vagaSaida.getBeneficios();
-
         ModelAndView mv = new ModelAndView("/candidato/vaga/vagaCompleta");
         mv.addObject("vaga",vagaSaida);
-        mv.addObject("listaHabilidades",listaHabilidades);
-        mv.addObject("beneficios",beneficios);
+
         return mv;
     }
 

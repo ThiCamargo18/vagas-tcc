@@ -76,6 +76,7 @@ public class DadosPessoaisService {
         DadosPessoaisEntity dadosPessoaisEntity = DadosPessoaisMapper.INSTANCE.mapToEntity(dadosPessoaisEntrada);
         dadosPessoaisEntity.setId(dadosRetornoEntity.getId());
         dadosPessoaisEntity.setIdCandidato(dadosRetornoEntity.getIdCandidato());
+        dadosPessoaisEntity.setIdade(dadosPessoaisEntrada.getDataNascimento());
 
         try {
             dadosPessoaisRepository.save(dadosPessoaisEntity);

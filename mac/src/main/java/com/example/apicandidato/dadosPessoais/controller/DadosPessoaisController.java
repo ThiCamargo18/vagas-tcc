@@ -8,6 +8,7 @@ import com.example.apicandidato.dadosPessoais.model.DadosPessoaisSaida;
 import com.example.apicandidato.dadosPessoais.service.DadosPessoaisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,30 +17,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-@RestController
+@Controller
 @RequestMapping(path = "dadosPessoais", produces = "application/json")
 @Configuration
 @CrossOrigin
 public class DadosPessoaisController {
     @Autowired
-    DadosPessoaisService dadosPessoaisService;
-    @Autowired
-    ClienteCadastroController clienteCadastroController;
+    private DadosPessoaisService dadosPessoaisService;
 
     @PostMapping("/atualizar")
-    public ModelAndView atualizar(@Valid DadosPessoaisEntrada dadosPessoaisEntrada,
-                                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String atualizar(@Valid DadosPessoaisEntrada dadosPessoaisEntrada, HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
 
         CandidatoSessao candidatoSessao = (CandidatoSessao) session.getAttribute("usuarioLogado");
 
-        if(candidatoSessao.equals(null)){
-            throw new Exception("Você ainda não fez login, faça por gentileza!");
-        }
+        dadosPessoaisService.atualizar(dadosPessoaisEntrada, candidatoSessao.getId());
 
-        DadosPessoaisSaida saida = dadosPessoaisService.atualizar(dadosPessoaisEntrada, candidatoSessao.getId());
-
-        return clienteCadastroController.procurar(request);
+        return "redirect:/cadastro/procurar";
     }
-
 }

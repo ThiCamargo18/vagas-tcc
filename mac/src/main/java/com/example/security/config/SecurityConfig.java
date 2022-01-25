@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] LISTA_AUTORIZACAO_CANDIDATO = {
             "/cliente/**",
+            "/registro/**",
             "/experiencia/**",
             "/habilidades/**",
             "/projeto/**",

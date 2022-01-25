@@ -7,14 +7,22 @@ import com.example.apicandidato.dadosAdicionais.model.DadosAdicionaisEntity;
 import com.example.apicandidato.dadosAdicionais.model.DadosAdicionaisSaida;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisEntity;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisSaida;
+import com.example.apicandidato.experiencia.model.ExperienciaEntity;
 import com.example.apicandidato.experiencia.model.ExperienciaSaida;
+import com.example.apicandidato.ferramenta.model.FerramentaEntity;
+import com.example.apicandidato.framework.model.FrameworkEntity;
+import com.example.apicandidato.habilidades.model.HabilidadesEntity;
 import com.example.apicandidato.habilidades.model.HabilidadesSaida;
+import com.example.apicandidato.projetos.model.ProjetoEntity;
 import com.example.apicandidato.registroNacional.model.RegistroEntity;
 import com.example.apicandidato.registroNacional.model.RegistroSaida;
+import com.example.apicandidato.tecnologia.model.TecnologiaEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 @Mapper
 public interface ClienteCadastroMapper {
@@ -36,5 +44,8 @@ public interface ClienteCadastroMapper {
             @Mapping(source = "registroEntity",target = "registro"),
     })
     ClienteCadastroSaida mapToSaidaFromEntity(CandidatoEntity candidatoEntity, DadosAdicionaisEntity dadosAdicionaisEntity,
-                                              DadosPessoaisEntity dadosPessoaisEntity, RegistroEntity registroEntity);
+                                              DadosPessoaisEntity dadosPessoaisEntity, RegistroEntity registroEntity,
+                                              List<ExperienciaEntity> experiencias, HabilidadesEntity habilidade,
+                                              List<ProjetoEntity> projetos, List<TecnologiaEntity> tecnologias,
+                                              List<FrameworkEntity> frameworks, List<FerramentaEntity> ferramentas);
 }

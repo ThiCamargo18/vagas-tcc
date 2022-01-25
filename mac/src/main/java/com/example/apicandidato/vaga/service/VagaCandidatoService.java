@@ -58,7 +58,7 @@ public class VagaCandidatoService {
         List<CandidatoEntity> clientesCadastrados = vagaEntity.getClientes();
 
         for (CandidatoEntity cliente : clientesCadastrados) {
-            if (cliente.getId() == candidatoEntity.getId()) {
+            if (cliente.getId().equals(candidatoEntity.getId())) {
                 vagaSaida.setInscrito("SIM");
             }
         }

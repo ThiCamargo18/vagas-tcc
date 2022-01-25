@@ -16,25 +16,26 @@ public class EmpresaService {
     @Autowired
     private EmpresaRepository empresaRepository;
 
-    public EmpresaSaida criar(EmpresaEntrada empresaEntrada) throws Exception {
+    public EmpresaSaida atualizar(EmpresaEntrada empresaEntrada, Long idEmpresa) {
+        Optional<EmpresaEntity> empresaEntityOptional = empresaRepository.findById(idEmpresa);
+
+        EmpresaEntity empresaSalva = empresaEntityOptional.get();
+
         EmpresaEntity empresaEntity = EmpresaMapper.INSTANCE.mapToEntity(empresaEntrada);
+
+        empresaEntity.setId(idEmpresa);
+        empresaEntity.setLogin(empresaSalva.getLogin());
+        empresaEntity.setSenha(empresaSalva.getSenha());
+        empresaEntity.setRoles(empresaSalva.getRoles());
 
         empresaRepository.save(empresaEntity);
 
         return EmpresaMapper.INSTANCE.mapToSaida(empresaEntity);
     }
 
-    public EmpresaSaida listar() {
-        List<EmpresaEntity> empresaEntity = empresaRepository.findAll();
+    public EmpresaSaida buscarPorId(Long idEmpresa) {
+        Optional<EmpresaEntity> empresaEntityOptional = empresaRepository.findById(idEmpresa);
 
-        return EmpresaMapper.INSTANCE.mapToSaida(empresaEntity.get(0));
-    }
-
-    public EmpresaSaida atualizar(EmpresaEntrada empresaEntrada) {
-        EmpresaEntity empresaEntity = EmpresaMapper.INSTANCE.mapToEntity(empresaEntrada);
-
-        empresaRepository.save(empresaEntity);
-
-        return EmpresaMapper.INSTANCE.mapToSaida(empresaEntity);
+        return EmpresaMapper.INSTANCE.mapToSaida(empresaEntityOptional.get());
     }
 }

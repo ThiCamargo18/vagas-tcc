@@ -258,94 +258,153 @@
                         </button>
                     </div>
                 </form>
-                <div class="container-fluid">
+
+                <div class="container-sm">
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Experiência</li>
+                        <li class="breadcrumb-item active">Experiências</li>
                         <div class="col">
-                            <i type="button" class="editarVerde" id="enableExperiencia"></i>
+<!--                            <i type="button" class="editarVerde" id="enableExperiencia"></i>-->
                             <text class="card-text" id="labelExperiencia">Editar</text>
                         </div>
                     </ol>
                 </div>
-                <form class="form-row" action="/experiencia/atualizar" method="POST">
 
-                    <div class="col-md-5 mb-3" >
-                        <label for="validationServer01">Cargo </label>
-                        <input type="text" class="form-control" th:field="*{experiencia.cargo}" id="cargo" value="" disabled>
-                    </div>
-
-                    <div class="col-md-2 mb-3" >
-                        <label for="validationServer01">Data Inicio </label>
-                        <input type="text" class="form-control"  onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" th:field="*{experiencia.dataInicio}" id="dataInicio" value="" disabled>
-                    </div>
-                    <div class="col-md-2 mb-3" >
-                        <label for="validationServer01">Data Fim </label>
-                        <input type="text" class="form-control"  onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" th:field="*{experiencia.dataFim}" id="dataFim" value="" disabled>
-                    </div>
-                    <div class="col-md-2 mb-3" >
-                        <label for="validationServer01">Salário </label>
-                        <input type="text" class="form-control" onkeypress="mascarar(this,moeda)" placeholder="0.000" th:field="*{experiencia.salario}" id="salario" value="" disabled>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="validationServer01">Categoria</label>
-                        <select class="form-control" th:field="*{experiencia.categoria}" id="categoriaExperiencia" disabled>
-                            <option selected disabled value="">Escolher...</option>
-                            <option value="CLT">CLT</option>
-                            <option value="ESTAGIO">ESTAGIO</option>
-                            <option value="JOVEMAPRENDIZ">JOVEM APRENDIZ</option>
-                            <option value="PCD">PCD</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Por favor, selecione a categoria.
+                <div class="container-sm">
+                    <div class="card shadow mb-3" style="margin-top: 20px;" th:each="experiencia : ${experiencias}">
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <h6 class="m-0 font-weight-bold text-primary" th:utext="${experiencia.cargo}"></h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold" th:utext="${experiencia.dataInicio}"></span>
+                                    <span class="font-weight-bold"> - </span>
+                                    <span class="font-weight-bold" th:utext="${experiencia.dataFim}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold">Empresa: </span>
+                                    <span class="font-weight-bold" th:utext="${experiencia.nomeEmpresa}"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold">Descrição cargo: </span>
+                                    <span class="font-weight-bold" th:utext="${experiencia.descricao}"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div id="divDadosExperiencia" style="display: none; ">
-                        <button type="submit" class="btn btn-success" id="botaoAtualizar5">
-                            Atualizar
-                        </button>
-                    </div>
-                </form>
-                <div class="container-fluid">
+                </div>
+
+                <div class="container-sm">
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Sobre suas habilidades</li>
+                        <li class="breadcrumb-item active">Resumo Profissional</li>
                         <div class="col">
-                            <i type="button" class="editarVerde" id="enableHabilidades"></i>
+<!--                            <i type="button" class="editarVerde" id="enableHabilidades"></i>-->
                             <text class="card-text" id="labelHabilidades">Editar</text>
                         </div>
                     </ol>
                 </div>
-                <form class="form-row" action="/habilidades/atualizar" method="POST">
-                    <div class="form-group">
-                        <label for="validationServer04">Resumo profissional</label>
-                        <textarea class="form-control" th:field="*{habilidades.resumoProfissional}" id="resumoProfissional" style="width: 40vh;margin-right: 3px;" rows="3" required disabled></textarea>
-                        <div class="invalid-feedback">
-                            Resumo profissional obrigatório, digite uma valor.
+
+                <div class="container-sm">
+                    <div class="card shadow mb-3" style="margin-top: 20px;" th:each="habilidade : ${habilidade}">
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <h6 class="m-0 font-weight-bold text-primary">Resumo Profissional</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold" th:utext="${habilidade.resumoProfissional}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <h6 class="m-0 font-weight-bold text-primary">Objetivos</h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold" th:utext="${habilidade.objetivos}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-sm">
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Projetos</li>
+                        <div class="col">
+<!--                            <i type="button" class="editarVerde" id="enableProjetos"></i>-->
+                            <text class="card-text" id="labelExperiencia">Editar</text>
+                        </div>
+                    </ol>
+                </div>
+
+                <div class="container-sm">
+                    <div class="card shadow mb-3" style="margin-top: 20px;" th:each="projeto : ${projetos}">
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <h6 class="m-0 font-weight-bold text-primary" th:utext="${projeto.nome}"></h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <span class="font-weight-bold" th:utext="${projeto.descricao}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-sm">
+                    <div class="row">
+                        <div class="col">
+                            <hr class="sidebar-divider">
+                        </div>
+                        <div class="col">
+                            <p class="font-weight-bold">Seus conhecimentos</p>
+                        </div>
+                        <div class="col">
+                            <hr class="sidebar-divider">
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="validationServer04">Objetivos</label>
-                        <textarea class="form-control" th:field="*{habilidades.objetivos}" id="objetivos" style="width: 40vh;" rows="3" required disabled></textarea>
-                        <div class="invalid-feedback">
-                            Objetivos obrigatório, digite uma valor.
-                        </div>
+                    <p class="font-weight-bold">Tecnologias:
+                    <div th:each="tecnologia : ${tecnologias}">
+
+                        <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:text="${tecnologia.nome} "></span></p>
                     </div>
 
-                    <div class="col-md-6 mb-3" >
-                        <label for="validationServer01">Adidione até 5 habilidades - Conhecimentos/Cursos/Treinamentos</label>
-                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{habilidades.descricao[0]}" id="validationServer01" value="" disabled>
-                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{habilidades.descricao[1]}" id="validationServer02" value="" disabled>
-                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{habilidades.descricao[2]}" id="validationServer03" value="" disabled>
-                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{habilidades.descricao[3]}" id="validationServer04" value="" disabled>
-                        <input style="margin-top: 3px;"type="text" class="form-control" th:field="*{habilidades.descricao[4]}" id="validationServer05" value="" disabled>
+                    <hr class="sidebar-divider">
+                    <p class="font-weight-bold">Frameworks:
+                    <div th:each="framework : ${frameworks}">
+
+                        <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:text="${framework.nome} "></span></p>
                     </div>
-                    <div id="divDadosHabilidades" style="display: none; ">
-                        <button type="submit" class="btn btn-success" id="botaoAtualizar">
-                            Atualizar
-                        </button>
+
+                    <hr class="sidebar-divider">
+                    <p class="font-weight-bold">Ferramentas:
+                    <div th:each="ferramenta : ${ferramentas}">
+
+                        <p class="card-text">º <span class="font-weight-bold" style="color:#1055e9;" th:text="${ferramenta.nome} "></span></p>
                     </div>
-                </form>
+                </div>
             </div>
+
+            <br>
+            <br>
+            <br>
+
 
         </div>
         <!-- End of Main Content -->

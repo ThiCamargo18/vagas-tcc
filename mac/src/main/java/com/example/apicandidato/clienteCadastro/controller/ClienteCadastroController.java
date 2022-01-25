@@ -102,13 +102,13 @@ public class ClienteCadastroController {
     public String gerenciarCadastro(HttpServletRequest request) throws Exception {
         int nivelCadastroRealizado = candidatoService.cadastroBasicoRealizado(CandidatoSessao.getId(request));
 
-        if (nivelCadastroRealizado == 0) return "redirect:criar";
+        if (nivelCadastroRealizado == 0) return "redirect:/cadastro/criar";
 
-        if (nivelCadastroRealizado == 1) return "redirect:criar/cadastroAdicional";
+        if (nivelCadastroRealizado == 1) return "redirect:/cadastro/criar/cadastroAdicional";
 
-        if (nivelCadastroRealizado == 2) return "redirect:criar/cadastroCargo";
+        if (nivelCadastroRealizado == 2) return "redirect:/cadastro/criar/cadastroCargo";
 
-        return "redirect:procurar";
+        return "redirect:/cadastro/procurar";
     }
 
     @GetMapping("/procurar")
@@ -121,6 +121,12 @@ public class ClienteCadastroController {
         mv.addObject("dadosPessoais", saida.getDadosPessoais());
         mv.addObject("dadosAdicionais", saida.getDadosAdicionais());
         mv.addObject("registro", saida.getRegistro());
+        mv.addObject("experiencias", saida.getExperiencias());
+        mv.addObject("habilidade", saida.getHabilidade());
+        mv.addObject("projetos", saida.getProjetos());
+        mv.addObject("tecnologias", saida.getTecnologias());
+        mv.addObject("frameworks", saida.getFrameworks());
+        mv.addObject("ferramentas", saida.getFerramentas());
 
         return mv;
     }

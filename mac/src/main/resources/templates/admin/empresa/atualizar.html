@@ -20,70 +20,64 @@
                     <li class="breadcrumb-item active">Dados necessários</li>
                 </ol>
             </div>
-            <form method="post" class="needs-validation"
-                  novalidate style="margin-left: 20px;margin-right: 20px; margin-top: 20px;" id="formAtualizarEmpresa">
-                <div class="form-row">
-                    <div class="col-md-6 mb-3" >
-                        <label for="validationServer01">Razão Social </label>
-                        <input type="text" class="form-control" th:field="*{empresa.razaoSocial}" id="razaoSocial" value="">
-                        <div class="valid-feedback">
-                            Ok!
+            <div class="container-fluid">
+                <form method="post" class="needs-validation">
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3" >
+                            <label for="razaoSocial">Razão Social </label>
+                            <input type="text" class="form-control" name="razaoSocial" th:value="*{empresa.razaoSocial}" id="razaoSocial">
+                            <div class="valid-feedback">
+                                Ok!
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3" >
-                        <label for="validationServer01">Cnpj </label>
-                        <input type="text" class="form-control" th:field="*{empresa.cnpj}" id="cnpj" value="">
-                        <div class="valid-feedback">
-                            Ok!
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3" >
+                            <label for="cnpj">Cnpj </label>
+                            <input type="text" class="form-control" name="cnpj" th:value="*{empresa.cnpj}" id="cnpj">
+                            <div class="valid-feedback">
+                                Ok!
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3" >
-                        <label for="validationServer01">Representante </label>
-                        <input type="text" class="form-control" th:field="*{empresa.representante}" id="representante" value="">
-                        <div class="valid-feedback">
-                            Ok!
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3" >
+                            <label for="representante">Representante </label>
+                            <input type="text" class="form-control" name="representante" th:value="*{empresa.representante}" id="representante">
+                            <div class="valid-feedback">
+                                Ok!
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3" >
-                        <label for="validationServer01">Telefone </label>
-                        <input type="text" class="form-control" th:field="*{empresa.telefone}" id="telefone" value="">
-                        <div class="valid-feedback">
-                            Ok!
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3" >
+                            <label for="telefone">Telefone </label>
+                            <input type="text" class="form-control" name="telefone" th:value="*{empresa.telefone}" id="telefone">
+                            <div class="valid-feedback">
+                                Ok!
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3" >
-                        <label for="validationServer01">Rua </label>
-                        <input type="text" class="form-control" th:field="*{empresa.rua}" id="rua" value="">
-                        <div class="valid-feedback">
-                            Ok!
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3" >
+                            <label for="rua">Rua </label>
+                            <input type="text" class="form-control" name="rua" th:value="*{empresa.rua}" id="rua">
+                            <div class="valid-feedback">
+                                Ok!
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3" >
-                        <label for="validationServer01">Bairro </label>
-                        <input type="text" class="form-control" th:field="*{empresa.bairro}" id="bairro" value="">
-                        <div class="valid-feedback">
-                            Ok!
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3" >
+                            <label for="bairro">Bairro </label>
+                            <input type="text" class="form-control" name="bairro" th:value="*{empresa.bairro}" id="bairro">
+                            <div class="valid-feedback">
+                                Ok!
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div style="display:none">
-                    <input id="esconderVaga" value="false">
-                </div>
-                <button class="btn btn-primary" style="margin-top: 10px;"
-                        type="submit">Salvar
-                </button>
-            </form>
-            <div class="col-sm-7" id="postResultDiv">
+                    <button class="btn btn-primary" style="margin-top: 10px;" type="submit">Salvar</button>
+                </form>
             </div>
         </main>
 

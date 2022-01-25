@@ -46,10 +46,10 @@
             <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/configuracao/alterar">Configurações</a>
-                <a class="dropdown-item" href="/empresa/gerenciar">Meu perfil</a>
+<!--                <a class="dropdown-item" href="/configuracao/alterar">Configurações</a>-->
+                <a class="dropdown-item" href="/empresa/obterAtualizar">Meu perfil</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/sair">Sair</a>
+                <a class="dropdown-item" href="/logout">Sair</a>
             </div>
         </li>
     </ul>
@@ -136,7 +136,7 @@
 
             <div class="sb-sidenav-footer">
                 <div class="small">Login por:</div>
-                MAC Barbosa
+                <span th:utext="${session.empresaLogada.nome}"></span>
             </div>
 
         </nav>
@@ -213,7 +213,7 @@
         <footer class="py-4 bg-light mt-auto" th:fragment="footer" style="margin-top: 30px">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Copyright &copy; Feito por Thiago Camargo 2020</div>
+                    <div class="text-muted">Copyright &copy; Feito por Thiago Camargo 2022</div>
                     <div>
                         <a href="#">Privacy Policy</a>
                         &middot;
