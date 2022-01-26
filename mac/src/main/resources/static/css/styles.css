@@ -10212,3 +10212,23 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
 }
+
+.bg-register-image-empresa {
+  background: url("../assets/img/a-empresa.png") center;
+  background-size: cover;
+}
+
+.bg-login-image-empresa {
+  background: url("../assets/img/a-empresa.png") center;
+  background-size: cover;
+}
+
+.bg-login-image-candidato {
+  background: url("../assets/img/image-55.png") center;
+  background-size: cover;
+}
+
+.bg-login-image-candidato {
+  background: url("../assets/img/image-55.png") center;
+  background-size: cover;
+}

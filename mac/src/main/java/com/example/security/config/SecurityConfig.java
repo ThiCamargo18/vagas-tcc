@@ -55,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/empresa**",
             "/registrar**",
             "/assets/**",
+            "/img/**",
             "/css/**",
             "/js/**",
             "/scss/**",
