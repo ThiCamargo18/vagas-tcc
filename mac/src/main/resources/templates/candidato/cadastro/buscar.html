@@ -102,6 +102,16 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
+                        <label for="whatsApp">Possui Whats App?</label>
+                        <select class="form-control" th:field="*{dadosPessoais.whatsApp}" id="whatsApp" required disabled>
+                            <option value="SIM">Sim</option>
+                            <option value="NAO">Não</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Por favor, selecione essa opção.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
                         <label for="validationServer04">Data Nascimento</label>
                         <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" th:field="*{dadosPessoais.dataNascimento}" id="dataNascimento" required disabled>
                         <div class="invalid-feedback">

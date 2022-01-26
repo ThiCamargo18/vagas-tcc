@@ -98,6 +98,16 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
+                            <label for="wpp">Possui Whats App?</label>
+                            <select class="form-control" name="dadosPessoais.whatsApp" id="wpp" required>
+                                <option value="SIM">Sim</option>
+                                <option value="NAO">Não</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Por favor, selecione essa opção.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
                             <label for="validationData">Data Nascimento</label>
                             <input type="text" class="form-control" onkeypress="mascarar(this,data)" placeholder="dd/mm/aaaa" maxlength="10" name="dadosPessoais.dataNascimento" id="validationData" required>
                             <div class="invalid-feedback">

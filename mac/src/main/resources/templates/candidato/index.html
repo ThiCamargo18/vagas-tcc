@@ -29,13 +29,25 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4" th:if="${alertaCadastro}">
                         <div class="card border-left-warning shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Ações pendentes</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Você precisa completar seu cadastro</div>
+                                        <a class="h5 mb-0 font-weight-bold text-gray-800" href="/cadastro/gerenciar">Ir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4" th:if="${alertaEntrevista}">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Você foi selecionado para uma entrevista</div>
+                                        <a class="h5 mb-0 font-weight-bold text-gray-800" href="/candidato/entrevista/buscar">Ir</a>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-comments fa-2x text-gray-300"></i>

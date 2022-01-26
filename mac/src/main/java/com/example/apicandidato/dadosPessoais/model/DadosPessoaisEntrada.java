@@ -19,6 +19,7 @@ public class DadosPessoaisEntrada {
     private String nomeSocial;
     private String naturalidade;
     private String celular;
+    private String whatsApp;
     private String formacao;
     private String curso;
     private CategoriaEnum categoria;

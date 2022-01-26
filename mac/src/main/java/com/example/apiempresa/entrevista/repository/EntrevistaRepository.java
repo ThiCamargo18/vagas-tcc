@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface EntrevistaRepository extends JpaRepository<EntrevistaEntity,Long> {
     List<EntrevistaEntity> findAllByIdEmpresa(Long idEmpresa);
+
     List<EntrevistaEntity> findAllByIdCandidato(Long idCliente);
+
+    List<EntrevistaEntity> findAllByIdCandidatoAndVizualizado(Long idCliente, String vizualizado);
 }

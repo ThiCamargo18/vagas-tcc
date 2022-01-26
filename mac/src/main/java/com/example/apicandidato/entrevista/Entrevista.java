@@ -35,6 +35,8 @@ public class Entrevista {
             entrevistaSaida.get(index).setEmpresaSaida(empresaService.buscarPorId(entrevista.getIdEmpresa()));
 
             index++;
+
+            entrevistaService.atualizarVizualizacao(entrevista.getId());
         }
 
         ModelAndView mv = new ModelAndView("/candidato/entrevista/buscar");

@@ -42,6 +42,9 @@ public class DadosPessoaisEntity {
     @Column(name = "celular")
     private String celular;
 
+    @Column(name = "whatsApp")
+    private String whatsApp;
+
     @Column(name = "formacao")
     private String formacao;
 
@@ -55,7 +58,6 @@ public class DadosPessoaisEntity {
     @Column(name = "pretensaoSalarial")
     private String pretensaoSalarial;
 
-    @CPF(message = "Esse CPF não é válido")
     @Column(name = "cpf",unique = true)
     private String cpf;
 

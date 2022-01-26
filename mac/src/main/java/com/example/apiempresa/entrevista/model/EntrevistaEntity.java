@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -25,6 +27,12 @@ public class EntrevistaEntity {
 
     @Column(name = "local")
     private String local;
+
+    @Column(name = "presenca")
+    private String vizualizado;
+
+    @Column(name = "dataHoraInclusaoRegistro")
+    private LocalDateTime dataHoraInclusaoRegistro;
 
     @Column(name = "idCandidato")
     private Long idCandidato;

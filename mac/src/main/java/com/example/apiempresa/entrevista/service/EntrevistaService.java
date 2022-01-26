@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +30,8 @@ public class EntrevistaService {
         entrevistaEntity.setData(dataParaDDMMAAA(entrevistaEntity.getData()));
         entrevistaEntity.setIdEmpresa(idEmpresa);
         entrevistaEntity.setIdCandidato(entrevistaEntrada.getIdCliente());
+        entrevistaEntity.setVizualizado("NAO");
+        entrevistaEntity.setDataHoraInclusaoRegistro(LocalDateTime.now());
 
         entrevistaRepository.save(entrevistaEntity);
 
@@ -54,7 +57,21 @@ public class EntrevistaService {
         return "concluido";
     }
 
-    public String dataParaDDMMAAA(String data){
+    public List<EntrevistaSaida> buscarPorIdCandidato(Long idCliente) {
+        List<EntrevistaEntity> entrevistaEntity = entrevistaRepository.findAllByIdCandidato(idCliente);
+
+        return EntrevistaMapper.INSTANCE.mapToSaidaList(entrevistaEntity);
+    }
+
+    public boolean validarSeCandidatoVizualizouTodosAgendamentos(Long idCandidato) {
+        List<EntrevistaEntity> entrevistaEntity = entrevistaRepository.findAllByIdCandidatoAndVizualizado(idCandidato, "NAO");
+
+        if (entrevistaEntity != null && !entrevistaEntity.isEmpty()) return false;
+
+        return true;
+    }
+
+    private String dataParaDDMMAAA(String data){
         if(data.equals("")) return data;
 
         String validador1 = String.valueOf(data.charAt(2));
@@ -70,29 +87,12 @@ public class EntrevistaService {
         return data;
     }
 
-    public EntrevistaSaida atualizar(long id, EntrevistaEntrada entrevistaEntrada) throws Exception {
-        EntrevistaEntity entrevistaEntity = EntrevistaMapper.INSTANCE.mapToEntity(entrevistaEntrada);
-        entrevistaEntity.setId(id);
-        entrevistaEntity.setData(dataParaDDMMAAA(entrevistaEntity.getData()));
+    public void atualizarVizualizacao(Long id) {
+        Optional<EntrevistaEntity> byId = entrevistaRepository.findById(id);
+
+        EntrevistaEntity entrevistaEntity = byId.get();
+        entrevistaEntity.setVizualizado("SIM");
 
         entrevistaRepository.save(entrevistaEntity);
-
-        return EntrevistaMapper.INSTANCE.mapToSaida(entrevistaEntity);
-    }
-
-    public EntrevistaSaida buscar(long id) throws Exception {
-        Optional<EntrevistaEntity> entrevistaEntity = entrevistaRepository.findById(id);
-
-        if(!entrevistaEntity.isPresent()){
-            throw new Exception("Entrevista não encontrada");
-        }
-
-        return EntrevistaMapper.INSTANCE.mapToSaida(entrevistaEntity.get());
-    }
-
-    public List<EntrevistaSaida> buscarPorIdCandidato(Long idCliente) throws Exception {
-        List<EntrevistaEntity> entrevistaEntity = entrevistaRepository.findAllByIdCandidato(idCliente);
-
-        return EntrevistaMapper.INSTANCE.mapToSaidaList(entrevistaEntity);
     }
 }

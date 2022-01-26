@@ -9,11 +9,13 @@ import com.example.apiempresa.vaga.model.VagaEntity;
 import com.example.apiempresa.vaga.model.VagaSaida;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -80,15 +82,23 @@ public class VagaCandidatoController {
     }
 
     @GetMapping("/inscrever/{idVaga}")
-    public String inscrever(@PathVariable Long idVaga, HttpServletRequest request) throws Exception {
+    public String inscrever(@PathVariable Long idVaga, HttpServletRequest request, Model model) throws Exception {
         int nivelCadastro = candidatoService.cadastroBasicoRealizado(CandidatoSessao.getId(request));
 
-        if (nivelCadastro < 3)
-            return "redirect:cadastro/gerenciar";
+        if (nivelCadastro < 3) {
+            VagaSaida vagaSaida = vagaCandidatoService.buscarVaga(idVaga);
+
+            vagaSaida = vagaCandidatoService.validarInscricao(vagaSaida, CandidatoSessao.getId(request));
+
+            model.addAttribute("vaga",vagaSaida);
+            model.addAttribute("message", "Você precisar completar todo seu cadastro antes de se inscrever nesse vaga.");
+
+            return "/candidato/vaga/vagaCompleta";
+        }
 
         vagaCandidatoService.inscrever(CandidatoSessao.getId(request),idVaga);
 
-        return "redirect:/";
+        return "redirect:/candidato/vaga/listar";
     }
 
     @GetMapping("/buscar/{id}")
