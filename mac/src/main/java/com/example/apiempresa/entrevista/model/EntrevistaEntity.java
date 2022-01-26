@@ -1,6 +1,5 @@
 package com.example.apiempresa.entrevista.model;
 
-import com.example.apicandidato.enums.Presenca;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,9 +17,6 @@ public class EntrevistaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nomeCliente")
-    private String nomeCliente;
-
     @Column(name = "horario")
     private String horario;
 
@@ -30,10 +26,9 @@ public class EntrevistaEntity {
     @Column(name = "local")
     private String local;
 
-    @Column(name = "presenca")
-    @Enumerated(EnumType.STRING)
-    private Presenca presenca;
-
-    @Column(name = "idCliente")
+    @Column(name = "idCandidato")
     private Long idCandidato;
+
+    @Column(name = "idEmpresa")
+    private Long idEmpresa;
 }

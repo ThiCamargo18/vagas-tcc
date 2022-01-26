@@ -36,6 +36,8 @@ public class VagaCandidatoController {
         ModelAndView mv = new ModelAndView("/candidato/vaga/listar");
         mv.addObject("vaga",vagaSaidaList);
         mv.addObject("vagaFiltro",vagaSaida);
+        mv.addObject("filtro", new VagaSaida());
+
         return mv;
     }
 
@@ -45,24 +47,35 @@ public class VagaCandidatoController {
     }
 
     @GetMapping("/filtrar")
-    public ModelAndView filtrar(
+    public ModelAndView filtrar(@RequestParam(value = "cidade", required = false) String cidade,
                                 @RequestParam(value = "formacao", required = false) String formacao,
-                                @RequestParam(value = "categoria", required = false) CategoriaEnum categoria){
+                                @RequestParam(value = "categoria", required = false) CategoriaEnum categoria) {
+
         VagaSaida vagaSaida = new VagaSaida();
+        vagaSaida.setCategoriaFiltro(String.valueOf(categoria));
+        vagaSaida.setFormacao(formacao);
+        vagaSaida.setCidade(cidade);
+
+
         VagaEntity vagaEntity = new VagaEntity();
         vagaEntity.setCategoria(categoria);
         vagaEntity.setFormacao(formacao);
+        vagaEntity.setCidade(cidade);
         vagaEntity.setStatus("ATIVA");
 
         List<VagaEntity> listaEntity = vagaCandidatoService.filtrar(vagaEntity);
+
         List<VagaSaida> listSaida = VagaMapper.INSTANCE.mapToSaidaList(listaEntity);
 
         int numeroVagasEncontradas = listSaida.size();
         vagaSaida.setNumeroVagasEncontradas(numeroVagasEncontradas);
         
         ModelAndView mv = new ModelAndView("/candidato/vaga/listar");
+
         mv.addObject("vaga",listSaida);
         mv.addObject("vagaFiltro",vagaSaida);
+        mv.addObject("filtro", vagaSaida);
+
         return mv;
     }
 
@@ -100,6 +113,8 @@ public class VagaCandidatoController {
         ModelAndView mv = new ModelAndView("/candidato/vaga/listar");
         mv.addObject("vagaFiltro",vagaSaida);
         mv.addObject("vaga",vagaSaidaList);
+        mv.addObject("filtro", vagaSaida);
+
         return mv;
     }
 }

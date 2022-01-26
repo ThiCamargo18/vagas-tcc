@@ -40,11 +40,19 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="cidade">Cidade</label>
-                        <input type="text" class="form-control" name="cidade" id="cidade" required>
-                        <div class="invalid-feedback">
-                            Necessário selecionar a cidade.
-                        </div>
+                        <label >Cidade: </label>
+                        <select class="form-control" id="cidade" name="cidade" required>
+                            <option selected disabled value="">Selecione...</option>
+                            <option value="Campinas">Campinas</option>
+                            <option value="Hortolandia">Hortolândia</option>
+                            <option value="Sumare">Sumaré</option>
+                            <option value="Valinhos">Valinhos</option>
+                            <option value="Vinhedo">Vinhedo</option>
+                            <option value="Louveira">Louveira</option>
+                            <option value="Monte-mor">Monte-mor</option>
+                            <option value="Paulinia">Paulínia</option>
+                            <option value="Indaiatuba">Indaiatuba</option>
+                        </select>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="categoria">Categoria</label>
@@ -54,7 +62,6 @@
                             <option value="ESTAGIO">ESTAGIO</option>
                             <option value="JOVEMAPRENDIZ">JOVEM APRENDIZ</option>
                             <option value="PCD">PCD</option>
-                            <option value="PJ">PCD</option>
                         </select>
                         <div class="invalid-feedback">
                             Por favor, selecione a categoria.

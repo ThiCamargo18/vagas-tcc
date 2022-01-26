@@ -24,6 +24,56 @@
 
             <!-- Begin Page Content -->
             <div class="container-md" style="width: 100%;">
+
+                <form action="/candidato/vaga/filtrar" method="get">
+                    <div class="row">
+                        <div class="col">
+                            <label >Formação: </label>
+                            <select class="form-control" id="exampleSelect2" name="formacao">
+                                <option selected disabled value="">Selecione..</option>
+                                <option value="Ensino Medio Incompleto" th:selected="('Ensino Medio Incompleto' == *{filtro.formacao})">Ensino Médio Incompleto</option>
+                                <option value="Ensino Medio Completo" th:selected="('Ensino Medio Completo' == *{filtro.formacao})">Ensino Médio Completo</option>
+                                <option value="Ensino Superior Incompleto" th:selected="('Ensino Superior Incompleto' == *{filtro.formacao})">Ensino Superior Incompleto</option>
+                                <option value="Ensino Superior Completo" th:selected="('Ensino Superior Completo' == *{filtro.formacao})" >Ensino Superior Completo</option>
+                                <option value="Pos-graduacao Incompleta" th:selected="('Pos-graduacao Incompleta' == *{filtro.formacao})">Pós-graduação Incompleta</option>
+                                <option value="Pos-graduacao Completa" th:selected="('Pos-graduacao Completa' == *{filtro.formacao})">Pós-graduação Completa</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="validationServer04">Categoria</label>
+                            <select class="form-control" name="categoria" id="validationServer04" >
+                                <option selected disabled value="">Selecione...</option>
+                                <option value="CLT" th:selected="('CLT' == *{filtro.categoriaFiltro})">CLT</option>
+                                <option value="ESTAGIO" th:selected="('ESTAGIO' == *{filtro.categoriaFiltro})">ESTAGIO</option>
+                                <option value="JOVEMAPRENDIZ" th:selected="('JOVEMAPRENDIZ' == *{filtro.categoriaFiltro})">JOVEM APRENDIZ</option>
+                                <option value="PCD" th:selected="('PCD' == *{filtro.categoriaFiltro})">PCD</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label >Endereço: </label>
+                            <select class="form-control" id="exampleSelect3" name="cidade">
+                                <option selected disabled value="">Selecione...</option>
+                                <option value="Campinas" th:selected="('Campinas' == *{filtro.cidade})">Campinas</option>
+                                <option value="Hortolandia" th:selected="('Hortolandia' == *{filtro.cidade})">Hortolândia</option>
+                                <option value="Sumare" th:selected="('Sumare' == *{filtro.cidade})">Sumaré</option>
+                                <option value="Valinhos" th:selected="('Valinhos' == *{filtro.cidade})">Valinhos</option>
+                                <option value="Vinhedo" th:selected="('Vinhedo' == *{filtro.cidade})">Vinhedo</option>
+                                <option value="Louveira" th:selected="('Louveira' == *{filtro.cidade})">Louveira</option>
+                                <option value="Monte-mor" th:selected="('Monte-mor' == *{filtro.cidade})">Monte-mor</option>
+                                <option value="Paulinia" th:selected="('Paulinia' == *{filtro.cidade})">Paulínia</option>
+                                <option value="Indaiatuba" th:selected="('Indaiatuba' == *{filtro.cidade})">Indaiatuba</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" style="margin-top: 15px">Filtrar</button>
+                </form>
+
+                <br>
                 <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item active">
                             <div class="row">
@@ -32,6 +82,7 @@
                             </div>
                         </li>
                 </ol>
+
                 <div class="card shadow mb-4" style="margin-top: 20px;" th:each="vaga : ${vaga}">
                     <div class="card-header py-3">
                         <div class="row">

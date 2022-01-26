@@ -20,21 +20,20 @@
                     <li class="breadcrumb-item active">Dados necessários</li>
                 </ol>
             </div>
-            <form method="post" class="needs-validation" novalidate
-                  style="margin-left: 20px;margin-right: 20px; margin-top: 20px;" id="formCriarEntrevista">
-                <div class="container-fluid" style="width: 100%;">
+            <div class="container-fluid">
+                <form method="post" class="needs-validation" action="/entrevista/criar">
                     <div class="input-group mb-3" style="width: 100%;">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default">Candidato</span>
                             </div>
-                            <input type="text" th:value="${cliente.nome}" name="nomeCliente" id="nomeCliente"
+                            <input type="text" th:value="${nomeCandidato}" name="nomeCliente" id="nomeCliente"
                                    class="form-control" aria-label="Default"
                                    aria-describedby="inputGroup-sizing-default" readonly="readonly">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-default2">ID</span>
                             </div>
-                            <input type="text" th:value="${cliente.id}" name="idCliente" id="idCliente"
+                            <input type="text" th:value="${idCandidato}" name="idCliente" id="idCliente"
                                    class="form-control" aria-label="Default"
                                    aria-describedby="inputGroup-sizing-default" readonly="readonly">
                         </div>
@@ -99,11 +98,9 @@
                                readonly="readonly">
                     </div>
 
-                    <button class="btn btn-primary" style="margin-top: 10px;"
-                            type="submit">Salvar
-                    </button>
-                </div>
-            </form>
+                    <button class="btn btn-primary" style="margin-top: 10px;" type="submit">Salvar</button>
+                </form>
+            </div>
 
         </main>
 

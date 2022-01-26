@@ -12,5 +12,5 @@ public interface VagaRepository extends JpaRepository<VagaEntity,Long> {
 
     List<VagaEntity> findAllByIdEmpresaAndStatusNot(Long idEmpresa, String status);
 
-    List<VagaEntity> findByTituloContainingIgnoreCase(String nome);
+    List<VagaEntity> findByTituloContainingIgnoreCaseAndStatus(String nome, String status);
 }

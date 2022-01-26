@@ -32,7 +32,7 @@ public class VagaCandidatoService {
     }
 
     public List<VagaSaida> buscarPorNome(String nome) throws Exception {
-        List<VagaEntity> vagaEntities = vagaRepository.findByTituloContainingIgnoreCase(nome);
+        List<VagaEntity> vagaEntities = vagaRepository.findByTituloContainingIgnoreCaseAndStatus(nome, "ATIVA");
 
         return VagaMapper.INSTANCE.mapToSaidaList(vagaEntities);
     }

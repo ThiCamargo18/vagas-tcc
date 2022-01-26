@@ -20,5 +20,6 @@ public class EntrevistaEntrada {
     private Presenca presenca;
     private String cpfCliente;
     private Long idCliente;
+    private Long idCandidato;
     private Mensagem mensagemEmail;
 }

@@ -22,6 +22,7 @@ public class VagaSaida {
     private Integer quantidade;
     private String cidade;
     private CategoriaEnum categoria;
+    private String categoriaFiltro;
     private String formacao;
     private String responsabilidade;
     private String salario;

@@ -77,8 +77,8 @@ public class CandidatoService {
         return CandidatoMapper.INSTANCE.mapToSaida(candidatoEntity);
     }
 
-    public Object buscarEmailUsuarioPorId(Long id){
-        return candidatoRepository.getEmailByIdUser(id);
+    public String buscarEmailUsuarioPorId(Long id){
+        return candidatoRepository.getEmailByIdUser(id).toString();
     }
 
     public Integer cadastroBasicoRealizado(long id) {

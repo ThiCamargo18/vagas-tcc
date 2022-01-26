@@ -1,6 +1,5 @@
 package com.example.apicandidato.dadosPessoais.service;
 
-import com.example.apicandidato.candidato.model.CandidatoEntity;
 import com.example.apicandidato.candidato.service.CandidatoService;
 import com.example.apicandidato.dadosPessoais.mapper.DadosPessoaisMapper;
 import com.example.apicandidato.dadosPessoais.model.DadosPessoaisEntity;
@@ -77,6 +76,7 @@ public class DadosPessoaisService {
         dadosPessoaisEntity.setId(dadosRetornoEntity.getId());
         dadosPessoaisEntity.setIdCandidato(dadosRetornoEntity.getIdCandidato());
         dadosPessoaisEntity.setIdade(dadosPessoaisEntrada.getDataNascimento());
+        dadosPessoaisEntity.setCidade(dadosRetornoEntity.getCidade());
 
         try {
             dadosPessoaisRepository.save(dadosPessoaisEntity);
@@ -111,43 +111,6 @@ public class DadosPessoaisService {
         }
         dadosPessoaisEntity.setCidade(cidade);
         dadosPessoaisRepository.save(dadosPessoaisEntity);
-    }
-
-    public String buscarEmailUsuarioPorId(Long idUsuario) throws Exception {
-        Object dadosPessoaisEntity = candidatoService.buscarEmailUsuarioPorId(idUsuario);
-
-        if (dadosPessoaisEntity == null) {
-            throw new Exception("Não foi possivel localizar o e-mail do usuario!");
-        }
-
-        return dadosPessoaisEntity.toString();
-    }
-
-    public String buscarEmailUsuarioPorIdNovaVaga(long idUsuario) throws Exception {
-        Object dadosPessoaisEntity = candidatoService.buscarEmailUsuarioPorId(idUsuario);
-
-        if (dadosPessoaisEntity == null) {
-            throw new Exception("Não foi possivel localizar o e-mail do usuario! Pois o mesmo ainda não fez o cadastro completo.");
-        }
-
-        String emailUsuario = dadosPessoaisEntity.toString();
-
-        return emailUsuario;
-    }
-
-    public CandidatoEntity buscarEVerificarExistenciaClientePorCpf(String cpf) throws Exception {
-        String resultado = dadosPessoaisRepository.getCandidatoByCpf(cpf);
-
-        if (resultado == null) {
-            throw new Exception("CPF não encontrado");
-        }
-
-        String[] split = resultado.split(",");
-        CandidatoEntity candidatoEntity = new CandidatoEntity();
-        candidatoEntity.setId(Long.parseLong(split[0]));
-        candidatoEntity.setNome(split[1]);
-
-        return candidatoEntity;
     }
 
     public List<DadosPessoaisSaida> findAllByIdCandidato(List<Long> idCandidatos) {
